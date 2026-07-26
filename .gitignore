@@ -1,0 +1,8 @@
+build/*
+!build/.gitkeep
+*.log
+.DS_Store
+._*
+
+# Reassembled from the tracked GitHub-safe NAND parts.
+firmware/nand.us-stitched.bin
