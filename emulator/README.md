@@ -53,13 +53,8 @@ ADPCM, and ADPCM36, including pitch, pan, volume/envelopes, looping, FIFO
 status, and IRQ/FIQ refill signaling. Silent and headless runs still advance
 audio hardware state without opening a host device or throttling execution.
 
-To test an MBA as the main-menu application without editing `nand.bin`, use:
+Do not use `--mba` it doesnt work.
 
-```sh
-./mobigo2_emu --mba /absolute/path/to/program.MBA
-```
-
-`--mba` creates an in-memory NAND overlay at startup. It replaces every
 `MM.MBA` copy in both recoverable MOBIGOFS snapshots, including `/DEFAULT/MM.MBA`
 and the active language directory. If the MBA exceeds the original allocation,
 the overlay maps additional erased NAND blocks in memory. The source NAND and
