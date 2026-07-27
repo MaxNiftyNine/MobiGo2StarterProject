@@ -66,16 +66,7 @@ cmake --build emulator/build
 
 Run with the included firmware images:
 
-```sh
-emulator/build/mobigo2_emu \
-  --rom firmware/internalrom.bin \
-  --spi firmware/spi.bin \
-  --nand firmware/nand.us-stitched.bin \
-  --mba /path/to/COLOR_CYCLE_G1.MBA
-```
-
-The `--mba` option substitutes an MBA in memory; it does not modify the source
-NAND. For a G1 application, create a separate edited NAND instead:
+Create a separate edited NAND instead:
 
 ```sh
 python3 tools/replace_g1_in_nand.py \
