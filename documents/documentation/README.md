@@ -1,8 +1,9 @@
 # MobiGo 2 Homebrew Developer Pack
 
 This is a community reverse-engineering pack for writing Generalplus unSP C
-programs, placing them in the MobiGo 2's G1 MBA application slot, and testing
-them in the included emulator before trying them on hardware.
+programs and testing them in the included emulator before trying them on
+hardware. The starter build-and-run commands target the boot-time SY slot;
+older samples and confirmed hardware research also cover G1.
 
 Start with [QUICKSTART.md](QUICKSTART.md), then read
 [docs/CONFIRMED_HARDWARE_RULES.md](docs/CONFIRMED_HARDWARE_RULES.md). The
@@ -11,13 +12,17 @@ long-form July 14 reverse-engineering snapshot is
 where its older status statements conflict, the status matrix and confirmed
 hardware rules take precedence.
 
+For installing an MBA on real hardware, toggling developer mode, or checking
+device storage on macOS and Windows, see the
+[MobiGo 2 USB tools README](../../tools/mobigo_usb/README.md).
+
 ## What is included
 
 - A real-hardware-confirmed color-cycle C example.
 - Experimental Bad Apple video/audio source without copyrighted media.
 - An emulator-verified Pong experiment, clearly labeled as such.
 - A donor-preserving G1 MBA packer and MBA inspector.
-- A MOBIGOFS NAND editor and safe G1 replacement wrapper.
+- SY support in the donor-preserving packer and MOBIGOFS replacement wrapper.
 - The MobiGo 2 emulator source, including the hardware behaviors discovered
   while getting homebrew to run on a physical unit.
 - An experimental C/C++ hardware-abstraction layer.
@@ -39,7 +44,16 @@ redistribute them before publicly mirroring the ZIP. See
 
 ## Known-good target
 
-The confirmed workflow targets a retail `135804G1.MBA`-layout donor:
+The default starter automation targets the included SY layout:
+
+- MBA entry: `0x0DFC1D`
+- File offset corresponding to the entry: `0x2F83A`
+- Next protected callback: `0x0F3E60`
+- Runtime-to-file word-address bias: `0x0C8000`
+- Maximum replacement window: 164,998 bytes
+
+The real-hardware-confirmed sample workflow targets a retail
+`135804G1.MBA`-layout donor:
 
 - MBA entry: `0x0E1A55`
 - File offset corresponding to the entry: `0x334AA`

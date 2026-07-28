@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Insert a compiled payload into the verified code window of a retail G1 MBA.
+"""Insert a compiled payload into a verified retail G1 or SY MBA.
 
 This does not create an MBA from nothing. It preserves the donor's header,
 loader tables, callbacks, and overall length, replacing only the code window
-between the G1 entry point and the next protected callback.
+between the selected slot's entry point and the next protected callback.
 """
 
 from __future__ import annotations
@@ -16,8 +16,10 @@ from pathlib import Path
 
 MAGIC = b"bM_gbMQa"
 RUNTIME_FILE_BIAS = 0x0C8000
-EXPECTED_G1_ENTRY = 0x0E1A55
-EXPECTED_G1_FILE_OFFSET = 0x334AA
+SLOTS = {
+    "G1": (0x0E1A55, 0x334AA),
+    "SY": (0x0DFC1D, 0x2F83A),
+}
 
 
 def u32(data: bytes | bytearray, offset: int) -> int:
@@ -26,8 +28,9 @@ def u32(data: bytes | bytearray, offset: int) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Place an unSP payload in a verified retail G1 MBA donor"
+        description="Place an unSP payload in a verified retail G1 or SY donor"
     )
+    parser.add_argument("--slot", choices=tuple(SLOTS), default="G1")
     parser.add_argument("--donor", type=Path, required=True)
     parser.add_argument("--payload", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -60,9 +63,10 @@ def main() -> int:
     entry = u32(donor, 0x14)
     start = (entry - RUNTIME_FILE_BIAS) * 2
     safe_end = (callback - RUNTIME_FILE_BIAS) * 2
-    if entry != EXPECTED_G1_ENTRY or start != EXPECTED_G1_FILE_OFFSET:
+    expected_entry, expected_offset = SLOTS[args.slot]
+    if entry != expected_entry or start != expected_offset:
         raise SystemExit(
-            "donor does not match the verified 135804G1 layout: "
+            f"donor does not match the verified {args.slot} layout: "
             f"entry={entry:#x}, file offset={start:#x}"
         )
     if not (start < safe_end <= len(donor)):
@@ -88,7 +92,7 @@ def main() -> int:
     if check[start : start + len(payload)] != payload:
         raise SystemExit("payload read-back verification failed")
 
-    print(f"PASS G1 entry: {entry:#x} (file offset {start:#x})")
+    print(f"PASS {args.slot} entry: {entry:#x} (file offset {start:#x})")
     print(f"PASS payload: {len(payload)} / {safe_end - start} safe bytes")
     print(f"PASS donor length retained: {len(check)} bytes")
     print(f"Wrote {output_path}")

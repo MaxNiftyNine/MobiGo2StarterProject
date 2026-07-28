@@ -1,7 +1,7 @@
 # Included MobiGo 2 firmware set
 
-These files make the emulator and verified G1 packaging workflow usable without
-locating separate dumps:
+These files make the emulator and verified G1/SY packaging workflows usable
+without locating separate dumps:
 
 | File | Size | SHA-256 |
 |---|---:|---|
@@ -12,6 +12,11 @@ locating separate dumps:
 
 `G1-stock.MBA` has the verified entry at `0x0E1A55`, corresponding to byte
 offset `0x334AA`, and a 149,518-byte safe replacement window.
+
+The build-and-run scripts extract the region-specific SY donor directly from
+the assembled NAND into the ignored `build/SY-stock.MBA`. In the included NAND
+it is `/BUNDLE/SY/135804SY.MBA`, with entry `0x0DFC1D`; other US devices may
+name the slot `135800SY.MBA`.
 
 ## Reassemble the NAND before use
 

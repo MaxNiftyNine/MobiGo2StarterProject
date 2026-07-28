@@ -1,4 +1,4 @@
-/* Minimal MobiGo 2 G1 hardware demo: cycle a full-screen RGB565 color.
+/* Minimal MobiGo 2 SY hardware demo: cycle a full-screen RGB565 color.
  *
  * This bare MBA intentionally bypasses the compiler's normal C startup. Keep
  * everything in one function and use no initialized global/static data.

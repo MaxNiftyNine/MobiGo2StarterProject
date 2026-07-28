@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replace every G1 bundle copy in a raw MobiGo NAND image.
+"""Replace every selected G1 or SY bundle copy in a raw MobiGo NAND image.
 
 The input image is never modified. The result is written to a separate path
 and read back through the filesystem parser before the command succeeds.
@@ -119,7 +119,7 @@ def write_expanded_file(editor, fs, logical: bytearray,
         halves.extend((block * editor.FS_BLOCK, block * editor.FS_BLOCK + editor.FS_HALF))
     capacity = len(halves) * editor.HALF_PAYLOAD
     if len(data) > capacity:
-        raise RuntimeError("expanded G1 allocation is unexpectedly too small")
+        raise RuntimeError("expanded MBA allocation is unexpectedly too small")
     padded = data + b"\xff" * (capacity - len(data))
     first_new_half = 1 + len(index.data_blocks) * 2
     for half_number, half_offset in enumerate(halves):
@@ -131,36 +131,40 @@ def write_expanded_file(editor, fs, logical: bytearray,
         )
 
 
-def g1_files(editor, nand) -> list[tuple[int, str, int]]:
+def slot_files(editor, nand, slot: str) -> list[tuple[int, str, int]]:
     result: list[tuple[int, str, int]] = []
+    directory = f"/BUNDLE/{slot}"
+    suffix = f"{slot}.MBA"
     snapshots = sorted(editor.MobigoFS(nand).snapshots, key=lambda item: item.base)
     for snapshot in snapshots:
         fs = editor.MobigoFS(nand, snapshot.base)
         try:
-            children = fs.children("/BUNDLE/G1")
+            children = fs.children(directory)
         except FileNotFoundError:
             continue
         candidates = [entry for entry in children
-                      if not entry.is_dir and entry.name.upper().endswith("G1.MBA")]
+                      if not entry.is_dir and entry.name.upper().endswith(suffix)]
         if not candidates:
             continue
         if len(candidates) != 1:
             raise RuntimeError(
-                f"snapshot {snapshot.base:#x}: expected one G1 MBA, found {len(candidates)}"
+                f"snapshot {snapshot.base:#x}: expected one {slot} MBA, "
+                f"found {len(candidates)}"
             )
         entry = candidates[0]
         result.append((snapshot.base, str(entry.path), entry.target))
     if not result:
-        raise RuntimeError("no /BUNDLE/G1/*G1.MBA file was found")
+        raise RuntimeError(f"no {directory}/*{suffix} file was found")
     return result
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Replace all /BUNDLE/G1/*G1.MBA copies in a raw NAND image"
+        description="Replace all selected G1 or SY MBA copies in a raw NAND image"
     )
+    parser.add_argument("--slot", choices=("G1", "SY"), default="G1")
     parser.add_argument("nand", type=Path, help="source raw NAND image")
-    parser.add_argument("mba", type=Path, help="MBA file to install as bundle G1")
+    parser.add_argument("mba", type=Path, help="MBA file to install in the selected slot")
     parser.add_argument("output", type=Path, help="new raw NAND image to write")
     parser.add_argument(
         "--editor",
@@ -189,7 +193,7 @@ def main() -> int:
     editor = load_editor(editor_path)
     source = editor.RawNand(source_nand)
     original_hash = hashlib.sha256(source.raw).hexdigest()
-    targets = g1_files(editor, source)
+    targets = slot_files(editor, source, args.slot)
 
     unique_targets = sorted({target for _base, _path, target in targets})
     existing_fs = editor.MobigoFS(source)

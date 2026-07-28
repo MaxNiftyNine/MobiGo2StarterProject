@@ -12,8 +12,8 @@ $Ide = if ($env:UNSP_IDE) {
 $Toolchain = Join-Path $Ide 'toolchain'
 $Library = Join-Path $Ide 'library\CMacro\CMacro1232.lib'
 $Build = Join-Path $Root 'build'
-$ProgramBase = [uint32]0x0E1A55
-$Body = Join-Path $Root 'project\MobiGo2StarterG1.bdy'
+$ProgramBase = [uint32]0x0DFC1D
+$Body = Join-Path $Root 'project\MobiGo2StarterSY.bdy'
 
 foreach ($required in @(
     (Join-Path $Toolchain 'udocc.exe'),
@@ -109,7 +109,7 @@ $mainLine = Select-String -Path $map -Pattern '^_main\s+([0-9A-F]+)'
 if (-not $mainLine) { throw 'Could not find _main in linker map' }
 $mainAddress = [Convert]::ToUInt32($mainLine.Matches[0].Groups[1].Value, 16)
 
-# The G1 handoff is an application callback, not a reset vector. Preserve
+# The SY handoff is an application callback, not a reset vector. Preserve
 # inherited interrupts and jump directly into the hardware-safe resident main.
 $gotoOpcode = [uint16](0xfe80 -bor (($mainAddress -shr 16) -band 0x3f))
 $stubWords = [uint16[]]@(
@@ -123,4 +123,3 @@ for ($i = 0; $i -lt $stubWords.Length; $i++) {
 [IO.File]::WriteAllBytes((Join-Path $Build 'app.bin'), $programBytes)
 Set-Content (Join-Path $Build 'entry.txt') ('0x{0:X}' -f $ProgramBase) -Encoding Ascii
 Write-Host "PASS main=0x$($mainAddress.ToString('X')) payload_bytes=$($programBytes.Length)"
-

@@ -1,5 +1,11 @@
 # Quick start
 
+The project-root `build_and_run.command`, `.ps1`, and `.bat` workflows now
+target the boot-time SY slot. They link at `0x0DFC1D`, extract the existing
+region-specific `*SY.MBA` donor from the NAND, replace SY in a copy, and launch
+without scripted menu presses. The G1 instructions below remain available for
+the older confirmed G1 sample workflow.
+
 ## 1. Install the verified compiler
 
 On Windows, install Generalplus unSP IDE 4.1.1. If it is not at the default
@@ -80,9 +86,17 @@ Boot the edited image, choose **Hamster Highway**, then **Easy**.
 ## 6. Hardware
 
 Work only from verified backups and retain an unmodified recovery image. The
-pack does not include a universal flasher. Install the MBA through a filesystem
-method appropriate to your own device, preserving both MOBIGOFS snapshots when
-required. Never overwrite your only NAND/SPI backup.
+pack includes macOS and Windows USB filesystem scripts. From the project root,
+install the default SY-linked MBA with:
+
+```sh
+./mobigo_install_mba.command --system build/MobiGo2Starter.MBA
+```
+
+On Windows, run `mobigo_install_mba.bat` as Administrator with the same
+arguments. Interactive use, developer-mode toggling, root and SY installs,
+remote deletion, storage reporting, dependencies, and safety notes are covered in
+[`tools/mobigo_usb/README.md`](../../tools/mobigo_usb/README.md).
 
 Emulator success is necessary but not sufficient. Before hardware testing,
 check every rule in `docs/CONFIRMED_HARDWARE_RULES.md`.

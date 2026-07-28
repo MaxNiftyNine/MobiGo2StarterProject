@@ -3,38 +3,35 @@ im sorry, not sorry.
 anyways so that means that this project is not meant for humans, its meant for you to say something crazy to codex like "make me minecraft for mobigo" and it just does it without any work you lazy shit
 
 
-For testing on a real mobigo2 see https://github.com/MaxNiftyNine/VTech-MobiGo2-Reverse-Engineering-Dump
-(currently homebrew runs by replacing hampster highway so if you want it back Learning Lodge should automatically repair it)
+For testing on a real MobiGo 2, use the included
+[USB tools](tools/mobigo_usb/README.md).
 
 # MobiGo 2 starter project
 
-This folder is a self-contained starting point for a retail-menu-loadable
-MobiGo 2 application. The default program is the hardware-confirmed color-cycle
-demo. One command builds it with the Generalplus u'nSP compiler, packages the
-payload inside a verified retail G1 donor MBA, creates a new edited NAND
-without changing the source NAND, boots Emulator2, selects **Hamster Highway**
-and **Easy** automatically, and opens the emulator window after the two menu
-presses.
+This folder is a self-contained starting point for a boot-time MobiGo 2
+application. The default program is the color-cycle demo. One command builds it
+with the Generalplus u'nSP compiler, extracts and preserves the retail SY donor
+from the included NAND, creates a separate edited NAND, and boots Emulator2.
+The firmware invokes SY automatically, so no Hamster Highway or Easy menu
+presses are needed. The emulator window opens immediately after the SY handoff.
 
 ## Start on macOS
 
-Make sure the Windows build computer is reachable over SSH, then double-click
-`build_and_run.command` or run:
+Install Wine and Python 3, then double-click `build_and_run.command` or run:
 
 ```sh
 ./build_and_run.command --no-audio
 ```
 
-The default SSH destination is `max@DESKTOP-BTTG0A6.local`. Override it with:
+With Homebrew, Wine can be installed with:
 
 ```sh
-MOBIGO_BUILD_HOST=user@windows-pc.local ./build_and_run.command
+brew install --cask wine-stable
 ```
 
-SSH keys are recommended. If necessary, install `sshpass` and provide
-`MOBIGO_SSH_PASSWORD` in the environment; the script never stores a password.
-The Mac handles MBA packaging, verified NAND replacement, and emulation. SSH is
-used only for the proprietary Generalplus compilation step.
+The bundled Generalplus Windows compiler, assembler, and linker run locally
+through Wine. Set `MOBIGO_WINE` only if the Wine executable is not named
+`wine`; set `WINEPREFIX` if you keep a non-default Wine prefix.
 The large NAND dump is stored as GitHub-safe parts; the script reassembles and
 verifies it automatically before use. To use emulator tools directly, first run
 `python3 tools/assemble_nand.py`.
@@ -71,7 +68,7 @@ Start with:
 src/main.c
 ```
 
-The starter deliberately avoids initialized global/static data because the G1
+The starter deliberately avoids initialized global/static data because the SY
 entry jumps directly into `main()` without normal C runtime initialization.
 Keep inherited IRQ/FIQ enabled, service the watchdog, use the launcher-selected
 FBI/FBO buffers, and do not return from a resident application. Read
@@ -86,8 +83,24 @@ MobiGo2Starter.MBA
 nand.edited.bin
 ```
 
-The original donor and NAND under `firmware/` are read-only inputs to the
-scripts and are verified after replacement.
+The original NAND under `firmware/` is a read-only input. Its region-specific
+SY donor is extracted to `build/SY-stock.MBA`, and the source NAND is verified
+after replacement.
+
+## Write to a real MobiGo 2 over USB
+
+After building, use `mobigo_install_mba.command` on macOS or
+`mobigo_install_mba.bat` on Windows. The interactive script asks for the MBA
+and whether to install it as G1, SY, or at root. The default build is linked
+for SY, so install it with:
+
+```sh
+./mobigo_install_mba.command --system build/MobiGo2Starter.MBA
+```
+
+Developer mode and storage have matching launchers. Setup, Windows
+dependencies, remote deletion, non-interactive flags, and recovery warnings are in the
+[MobiGo 2 USB tools README](tools/mobigo_usb/README.md).
 
 ## Included material
 
@@ -96,7 +109,8 @@ scripts and are verified after replacement.
   corrected full input matrix.
 - `documents/samples`: color cycle, MobiPong, and Bad Apple sample projects.
 - `documents/api`: the experimental MobiGo 2 C/C++ abstraction layer.
-- `firmware`: internal ROM, SPI image, US stitched NAND, and verified G1 donor.
+- `firmware`: internal ROM, SPI image, US stitched NAND, and verified G1 donor;
+  the SY donor is extracted from the NAND during each build.
 - `emulator`: Emulator2 source, tests, macOS binary, and Windows binary.
 - `compiler/windows`: the Generalplus compiler files required by the build.
 
@@ -112,14 +126,15 @@ host binding, and scripted key name.
 The automation never edits `firmware/nand.us-stitched.bin`. It creates
 `build/nand.edited.bin`. Emulator success does not guarantee hardware success;
 keep verified recovery dumps and do not overwrite the only copy of a real
-device's NAND or SPI.
+device's NAND or SPI. SY is loaded during startup, so a broken SY replacement
+can prevent normal boot and may require recovery.
 
 ## Validation performed on this template
 
-- macOS SSH compilation, MBA packaging, NAND replacement, and read-back: pass;
+- macOS Wine compilation, MBA packaging, NAND replacement, and read-back: pass;
 - Windows-local compilation using the bundled compiler: pass;
 - Windows x64 emulator startup with the included DLLs: pass;
-- automated Hamster Highway/Easy launch to the resident color demo: pass;
+- automatic SY boot into the resident color demo with no touch events: pass;
 - emulator audio, watchdog, and hardware-accuracy unit tests: 3/3 pass;
 - all documented `--key-event` matrix names: parse and execute successfully.
 
