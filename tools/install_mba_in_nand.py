@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replace every selected G1 or SY bundle copy in a raw MobiGo NAND image.
+"""Install an MBA into every selected G1 or SY slot in a raw MobiGo NAND image.
 
 The input image is never modified. The result is written to a separate path
 and read back through the filesystem parser before the command succeeds.
@@ -25,7 +25,7 @@ def load_editor(editor_path: Path):
         raise RuntimeError(
             f"required NAND filesystem module is missing: {editor_path}"
         )
-    spec = importlib.util.spec_from_file_location("g1_nand_editor", editor_path)
+    spec = importlib.util.spec_from_file_location("mba_nand_editor", editor_path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot import {editor_path}")
     module = importlib.util.module_from_spec(spec)
@@ -160,7 +160,7 @@ def slot_files(editor, nand, slot: str) -> list[tuple[int, str, int]]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Replace all selected G1 or SY MBA copies in a raw NAND image"
+        description="Install an MBA into all selected G1 or SY copies in a raw NAND image"
     )
     parser.add_argument("--slot", choices=("G1", "SY"), default="G1")
     parser.add_argument("nand", type=Path, help="source raw NAND image")

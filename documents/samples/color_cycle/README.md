@@ -20,5 +20,5 @@ startup. Color timing uses loop-local state, so no OS-owned RAM is claimed for
 persistent state and behavior does not depend on RTC emulation.
 
 `tools/build.ps1` is intended for the Windows machine with Generalplus unSP IDE
-4.1.1 installed. The compiled binary is embedded at the verified G1 entry point
-inside the stock `135804G1.MBA` container by the toolkit's MBA packer.
+4.1.1 installed. Package its G1-linked output with the project-root
+`tools/build_mba.py --slot G1` generator.

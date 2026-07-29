@@ -10,8 +10,8 @@ For testing on a real MobiGo 2, use the included
 
 This folder is a self-contained starting point for a boot-time MobiGo 2
 application. The default program is the color-cycle demo. One command builds it
-with the Generalplus u'nSP compiler, extracts and preserves the retail SY donor
-from the included NAND, creates a separate edited NAND, and boots Emulator2.
+with the Generalplus u'nSP compiler, generates a complete SY MBA from source,
+creates a separate edited NAND, and boots Emulator2.
 The firmware invokes SY automatically, so no Hamster Highway or Easy menu
 presses are needed. The emulator window opens immediately after the SY handoff.
 
@@ -83,9 +83,9 @@ MobiGo2Starter.MBA
 nand.edited.bin
 ```
 
-The original NAND under `firmware/` is a read-only input. Its region-specific
-SY donor is extracted to `build/SY-stock.MBA`, and the source NAND is verified
-after replacement.
+The original NAND under `firmware/` is a read-only input. The generated MBA is
+installed only into `build/nand.edited.bin`, and the source NAND is verified
+after installation.
 
 ## Write to a real MobiGo 2 over USB
 
@@ -105,12 +105,15 @@ dependencies, remote deletion, non-interactive flags, and recovery warnings are 
 ## Included material
 
 - `documents/documentation`: programmer guide, MBA development guide,
+  [MBA/GAM format specification](documents/documentation/mobigo_mba_format.md),
   confirmed hardware rules, u'nSP 2.0 manual, GPL16250VA datasheet, and the
   corrected full input matrix.
+- `ghidra/MobiGoMbaLoader`: source and installable ZIP for the MBA/GAM Ghidra
+  loader, including documented hardware-register labels.
 - `documents/samples`: color cycle, MobiPong, and Bad Apple sample projects.
 - `documents/api`: the experimental MobiGo 2 C/C++ abstraction layer.
-- `firmware`: internal ROM, SPI image, US stitched NAND, and verified G1 donor;
-  the SY donor is extracted from the NAND during each build.
+- `firmware`: internal ROM, SPI image, and US stitched NAND used by the
+  emulator.
 - `emulator`: Emulator2 source, tests, macOS binary, and Windows binary.
 - `compiler/windows`: the Generalplus compiler files required by the build.
 
@@ -131,7 +134,8 @@ can prevent normal boot and may require recovery.
 
 ## Validation performed on this template
 
-- macOS Wine compilation, MBA packaging, NAND replacement, and read-back: pass;
+- macOS Wine compilation, from-scratch MBA generation, NAND installation, and
+  read-back: pass;
 - Windows-local compilation using the bundled compiler: pass;
 - Windows x64 emulator startup with the included DLLs: pass;
 - automatic SY boot into the resident color demo with no touch events: pass;

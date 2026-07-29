@@ -21,17 +21,11 @@ python3 "$ROOT/tools/build_payload_wine.py"
 
 python3 "$ROOT/tools/assemble_nand.py" \
     --output "$ROOT/firmware/nand.us-stitched.bin"
-python3 "$ROOT/tools/extract_slot_mba.py" \
-    "$ROOT/firmware/nand.us-stitched.bin" \
-    "$ROOT/build/SY-stock.MBA" \
+python3 "$ROOT/tools/build_mba.py" \
     --slot SY \
-    --editor "$ROOT/tools/mobigo2_nandfs_editor_v2.py"
-python3 "$ROOT/tools/pack_g1_mba.py" \
-    --slot SY \
-    --donor "$ROOT/build/SY-stock.MBA" \
     --payload "$ROOT/build/app.bin" \
     --output "$ROOT/build/MobiGo2Starter.MBA"
-python3 "$ROOT/tools/replace_g1_in_nand.py" \
+python3 "$ROOT/tools/install_mba_in_nand.py" \
     "$ROOT/firmware/nand.us-stitched.bin" \
     "$ROOT/build/MobiGo2Starter.MBA" \
     "$ROOT/build/nand.edited.bin" \
@@ -39,7 +33,7 @@ python3 "$ROOT/tools/replace_g1_in_nand.py" \
     --editor "$ROOT/tools/mobigo2_nandfs_editor_v2.py"
 
 if [[ "${MOBIGO_NO_LAUNCH:-0}" == "1" ]]; then
-    echo "PASS build, SY MBA packaging, and NAND replacement completed."
+    echo "PASS build, from-scratch SY MBA packaging, and NAND installation completed."
     exit 0
 fi
 

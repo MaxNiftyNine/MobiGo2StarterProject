@@ -22,7 +22,8 @@ powershell -ExecutionPolicy Bypass -File .\tools\build.ps1
 The script prefers the toolkit's bundled Generalplus u'nSP IDE, then honors
 `UNSP_IDE`, and finally tries the standard IDE installation path. It writes
 the payload to `build\app.bin`. Package that payload with the top-level MBA
-tools and a verified G1 donor to launch it on the emulator or hardware.
+generator using `tools/build_mba.py --slot G1` to launch it on the emulator or
+hardware.
 
 `src/assets.h` is the checked-in, compiler-ready asset header. To regenerate
 it after editing `reference/gfx.bmp`, `reference/font.bmp`, or

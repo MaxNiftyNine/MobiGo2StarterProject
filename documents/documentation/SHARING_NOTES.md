@@ -6,10 +6,10 @@ product rather than an official SDK.
 - VTech and MobiGo are trademarks of their respective owner.
 - Generalplus IDE/compiler files and confidential/proprietary datasheets are
   not redistributed here.
-- Firmware dumps, NAND/SPI images, and one retail MBA donor are included at the
-  user's request because they are needed for the documented development flow.
-  They are vendor/device data; confirm redistribution rights before sharing.
-- Donor-derived patched homebrew MBA outputs are still excluded.
+- Firmware dumps and NAND/SPI images are included at the user's request for
+  emulator testing. They are vendor/device data; confirm redistribution rights
+  before sharing.
+- Homebrew MBA outputs are generated from source and profile constants.
 - Bad Apple media is not included. Users must provide media they have permission
   to process.
 - `tools/mobigo2_nandfs_editor_v2.py` and some historical files arrived without

@@ -5,7 +5,7 @@ failed, froze white, or repeatedly returned to the loader on real hardware.
 
 ## The G1 MBA entry is an application callback
 
-For the verified donor, execution enters at word address `0x0E1A55`. It is not
+For the verified G1 profile, execution enters at word address `0x0E1A55`. It is not
 a reset vector. A top-level `RETF` returns to the LD loader, which may relaunch
 the slot. A resident program must deliberately remain active; a callback-style
 program must return only when it intends to exit.
@@ -30,10 +30,10 @@ Read the launcher-selected FBI/FBO state and use the physical SDRAM display
 buffer it configured. The confirmed color-cycle and Bad Apple paths use system
 DMA for scanline/fill transfer.
 
-## Keep the donor's structure
+## Generate the complete slot profile
 
-The working method does not synthesize an entire MBA. It preserves a verified
-retail G1 MBA and replaces only the code window:
+The builder synthesizes the complete MBA. Keep the selected profile's
+addresses, size, role, and launcher footer consistent:
 
 ```text
 entry runtime word address     0x0E1A55
@@ -43,7 +43,9 @@ next protected callback        0x0F3E5C
 safe replacement bytes         149,518
 ```
 
-The packer rejects a donor that does not have this exact entry layout.
+The builder rejects payloads that do not fit this layout. SY uses its own
+entry, footer, and size profile; changing a header entry does not relocate the
+payload.
 
 ## Do not rely on C startup
 

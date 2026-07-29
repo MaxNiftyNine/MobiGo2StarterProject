@@ -1,6 +1,6 @@
 # Included MobiGo 2 firmware set
 
-These files make the emulator and verified G1/SY packaging workflows usable
+These files make the emulator and G1/SY packaging workflows usable
 without locating separate dumps:
 
 | File | Size | SHA-256 |
@@ -8,15 +8,10 @@ without locating separate dumps:
 | `internalrom.bin` | 131,072 | `883e2d2111bf978af1b98fcf34f577c46739da8778c1cec592be79a6f6b4d5d5` |
 | `spi.bin` | 2,097,152 | `13c8b101afe2e04cccdc0e42d3134d2d06657057d8d6f6a84954dce4d6c230d3` |
 | `nand.us-stitched.bin.part00` + `nand.us-stitched.bin.part01` | 138,412,032 combined | `66e686225f709e07ca0d76b78b82374cb6fd27296c7a3d8b98c765da66442e7a` |
-| `G1-stock.MBA` | 2,179,072 | `2b7a85324a29c5feed346342455f5cd87264656ebd9fd66295e0e144d343ca73` |
-
-`G1-stock.MBA` has the verified entry at `0x0E1A55`, corresponding to byte
-offset `0x334AA`, and a 149,518-byte safe replacement window.
-
-The build-and-run scripts extract the region-specific SY donor directly from
-the assembled NAND into the ignored `build/SY-stock.MBA`. In the included NAND
-it is `/BUNDLE/SY/135804SY.MBA`, with entry `0x0DFC1D`; other US devices may
-name the slot `135800SY.MBA`.
+The build-and-run scripts create `build/MobiGo2Starter.MBA` entirely from the
+compiled payload and deterministic slot-profile metadata. No application
+container is extracted from the NAND. In the edited image, the generated MBA
+is installed at the existing SY slot filename.
 
 ## Reassemble the NAND before use
 

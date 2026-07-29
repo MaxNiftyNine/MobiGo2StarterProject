@@ -14,8 +14,14 @@ python tools\encode_audio.py assets\source.mp4 assets\badapple.pcm
 powershell -ExecutionPolicy Bypass -File tools\build.ps1
 ```
 
-The output `build/bad_apple.bin` is a payload, not an MBA. Package it using the
-top-level `tools/pack_g1_mba.py` and your own verified G1 donor.
+The output `build/bad_apple.bin` is a payload, not an MBA. From the project
+root, package it with:
+
+```sh
+python3 tools/build_mba.py --slot G1 \
+  --payload documents/samples/bad_apple_player/build/bad_apple.bin \
+  --output build/BadAppleG1.MBA
+```
 
 The player is linked at the verified G1 application entry `0x0E1A55`. Its entry
 stub only jumps to `main`; it deliberately preserves the IRQ/FIQ state inherited

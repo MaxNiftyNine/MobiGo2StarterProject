@@ -6,4 +6,4 @@
 - `mobigo_celeste` — an optimized, full Celeste Classic port demonstrating a
   packed framebuffer, DMA staging, and an assembly nearest-neighbor scaler.
 
-All build outputs and donor-derived MBA files are intentionally excluded.
+All generated build outputs and MBA files are intentionally excluded.
