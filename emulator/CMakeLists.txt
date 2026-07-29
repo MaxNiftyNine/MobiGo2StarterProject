@@ -13,8 +13,16 @@ endif()
 
 option(MOBIGO2_NATIVE_OPTIMIZATIONS "Build with host-native CPU optimizations" ON)
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(SDL2 REQUIRED sdl2)
+if(EMSCRIPTEN)
+  set(MOBIGO2_NATIVE_OPTIMIZATIONS OFF CACHE BOOL "" FORCE)
+  set(SDL2_INCLUDE_DIRS "")
+  set(SDL2_LIBRARY_DIRS "")
+  set(SDL2_LIBRARIES "")
+  set(SDL2_CFLAGS_OTHER "")
+else()
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(SDL2 REQUIRED sdl2)
+endif()
 
 add_executable(mobigo2_emu
   src/main.cpp
@@ -32,6 +40,20 @@ target_include_directories(mobigo2_emu PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_directories(mobigo2_emu PRIVATE ${SDL2_LIBRARY_DIRS})
 target_link_libraries(mobigo2_emu PRIVATE ${SDL2_LIBRARIES})
 target_compile_options(mobigo2_emu PRIVATE ${SDL2_CFLAGS_OTHER} -Wall -Wextra -Wpedantic)
+if(EMSCRIPTEN)
+  target_compile_options(mobigo2_emu PRIVATE -sUSE_SDL=2)
+  target_link_options(mobigo2_emu PRIVATE
+    -sUSE_SDL=2
+    -sALLOW_MEMORY_GROWTH=1
+    -sINITIAL_MEMORY=134217728
+    -sASSERTIONS=1
+    -sNO_EXIT_RUNTIME=1
+    -sFORCE_FILESYSTEM=1
+    --preload-file=${CMAKE_SOURCE_DIR}/../firmware/internalrom.bin@/internalrom.bin
+    --preload-file=${CMAKE_SOURCE_DIR}/../firmware/spi.bin@/spi.bin
+    --preload-file=${CMAKE_SOURCE_DIR}/../firmware/nand.us-stitched.bin.part00@/nand.bin.part00
+  )
+endif()
 if(MOBIGO2_NATIVE_OPTIMIZATIONS AND CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
   target_compile_options(mobigo2_emu PRIVATE $<$<CONFIG:Release>:-march=native>)
 endif()

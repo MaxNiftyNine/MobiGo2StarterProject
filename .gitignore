@@ -8,3 +8,4 @@ __pycache__/
 
 # Reassembled from the tracked GitHub-safe NAND parts.
 firmware/nand.us-stitched.bin
+web/dist/

@@ -4,6 +4,10 @@
 #include "usb_panel.hpp"
 #include "video.hpp"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 using namespace mobigo;
 
 int main(int argc, char **argv) {
@@ -146,7 +150,8 @@ int main(int argc, char **argv) {
             if (g_log) g_log << "WINDOW OPENED insns=" << cpu.insns << "\n";
         };
         const auto run_started = std::chrono::steady_clock::now();
-        while (!quit && !cpu.halted) {
+        auto run_iteration = [&]() -> bool {
+            if (quit || cpu.halted) return false;
             if (opt.log && !logging_started && cpu.insns >= opt.start_logging_at) {
                 g_log.open(opt.log_path, std::ios::out | std::ios::trunc);
                 if (!g_log) die("failed to open log file " + opt.log_path.string());
@@ -379,7 +384,20 @@ int main(int argc, char **argv) {
                           << std::dec << " path=" << path << "\n";
                 }
             }
-        }
+            return !quit && !cpu.halted;
+        };
+
+#ifdef __EMSCRIPTEN__
+        // The browser must regain control after each emulation slice so SDL
+        // can present the canvas and dispatch keyboard/touch events.
+        emscripten_set_main_loop_arg([](void *arg) {
+            auto *runner = static_cast<decltype(run_iteration) *>(arg);
+            if (!(*runner)()) emscripten_cancel_main_loop();
+        }, &run_iteration, 0, true);
+        return 0;
+#else
+        while (run_iteration()) {}
+#endif
 
         if (!opt.dump_frame.empty()) {
             video.compose(bus, cpu);

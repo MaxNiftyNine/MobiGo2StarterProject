@@ -136,6 +136,21 @@ can prevent normal boot and may require recovery.
 - Windows x64 emulator startup with the included DLLs: pass;
 - automatic SY boot into the resident color demo with no touch events: pass;
 - emulator audio, watchdog, and hardware-accuracy unit tests: 3/3 pass;
+
+## Browser build
+
+The emulator can also be compiled to WebAssembly and deployed as a static
+GitHub Pages site. Install and activate [Emscripten](https://emscripten.org/),
+then run:
+
+```sh
+./scripts/build-web.sh
+```
+
+The deployable site is written to `web/dist`. It includes the firmware as two
+files because GitHub Pages rejects individual files larger than 100 MiB. The
+included `.github/workflows/pages.yml` builds and deploys it automatically from
+the `main` branch after GitHub Pages is enabled for the repository.
 - all documented `--key-event` matrix names: parse and execute successfully.
 
 Generated files were removed after testing so the checked-in `build/` directory

@@ -68,6 +68,25 @@ inline uint32_t ppu_frame_addr(uint16_t low, uint16_t high) {
 
 inline std::vector<uint8_t> read_file_bytes(const std::filesystem::path &path) {
     std::ifstream f(path, std::ios::binary);
+#ifdef __EMSCRIPTEN__
+    // GitHub Pages has a 100 MiB per-file limit.  The stock NAND image is
+    // shipped as two preloaded Emscripten files and joined at startup.
+    if (!f && path.filename() == "nand.bin") {
+        std::vector<uint8_t> out;
+        for (const char *suffix : {".part00", ".part01"}) {
+            std::ifstream part(path.string() + suffix, std::ios::binary);
+            if (!part) die("failed to open " + path.string() + suffix);
+            part.seekg(0, std::ios::end);
+            const auto size = part.tellg();
+            part.seekg(0, std::ios::beg);
+            const size_t old_size = out.size();
+            out.resize(old_size + static_cast<size_t>(size));
+            part.read(reinterpret_cast<char *>(out.data() + old_size),
+                      static_cast<std::streamsize>(size));
+        }
+        return out;
+    }
+#endif
     if (!f) die("failed to open " + path.string());
     f.seekg(0, std::ios::end);
     const auto size = f.tellg();
