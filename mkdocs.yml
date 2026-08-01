@@ -1,0 +1,43 @@
+site_name: MobiGo 2 Homebrew SDK
+site_description: Build, test, reverse engineer, and install MobiGo 2 homebrew.
+site_url: https://maxniftynine.github.io/mobigo/
+repo_url: https://github.com/MaxNiftyNine/MobiGo2StarterProject
+repo_name: MaxNiftyNine/MobiGo2StarterProject
+docs_dir: docs
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.sections
+    - content.code.copy
+  palette:
+    primary: deep purple
+    accent: cyan
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - SDK guide: sdk.md
+  - Sample projects: samples.md
+  - Graphics and audio: assets-audio.md
+  - MBA and GAM: mba.md
+  - Emulator and hardware: emulator-hardware.md
+  - Hardware test suite: hardware-test-suite.md
+  - Reverse engineering: reverse-engineering.md
+  - Project status: status.md
+  - Detailed evidence ledger: project-status.md
+  - Technical reference:
+      - MBA format: reference/mobigo_mba_format.md
+      - Development guide: reference/mobigo2_mba_development_guide.md
+      - Programmer guide: reference/mobigo2_programmers_guide.md
+      - Hardware rules: reference/CONFIRMED_HARDWARE_RULES.md
+      - Input matrix: reference/INPUT_MATRIX.md
+      - Status matrix: reference/STATUS_MATRIX.md
+      - Sharing and licensing: reference/SHARING_NOTES.md

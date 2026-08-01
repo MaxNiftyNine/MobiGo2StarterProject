@@ -1,6 +1,7 @@
 #include "boot.hpp"
 #include "audio.hpp"
 #include "mba_overlay.hpp"
+#include "realtime_throttle.hpp"
 #include "usb_panel.hpp"
 #include "video.hpp"
 
@@ -97,9 +98,16 @@ int main(int argc, char **argv) {
         Video video;
         bool window_active = opt.window && opt.open_window_at == 0;
         if (window_active) video.init(opt.vsync);
+#ifdef __EMSCRIPTEN__
+        RealtimeThrottle realtime(false);
+#else
+        // Headless runs are intentionally uncapped. Windowed runs follow the
+        // emulated GPL16250 clock unless --no-cap was requested.
+        RealtimeThrottle realtime(opt.window && opt.realtime_cap);
+#endif
         Audio audio;
         // Host playback is opt-in. Headless and silent runs still advance the
-        // emulated DAC/SPU below, without real-time throttling.
+        // emulated DAC/SPU without opening a host audio device.
         if (opt.audio && opt.window) audio.init();
         UsbPanel usb_panel;
         if (!opt.dump_frame_dir.empty()) {
@@ -126,18 +134,11 @@ int main(int argc, char **argv) {
                                             0, Video::W - 1);
             const int screen_y = std::clamp(window_y * Video::H / std::max(1, window_h),
                                             0, Video::H - 1);
-            // Retail calibration values recovered from the live firmware's
-            // board-input state. Supplying the full 0..4095 converter range
-            // puts edge clicks outside the physical panel's accepted bounds.
-            static constexpr uint16_t x_min = 0x0186;
-            static constexpr uint16_t x_max = 0x0e80;
-            static constexpr uint16_t y_min = 0x02b6;
-            static constexpr uint16_t y_max = 0x0d5c;
-            const uint16_t adc_x = uint16_t(x_max -
-                screen_x * (x_max - x_min) / (Video::W - 1));
-            const uint16_t adc_y = uint16_t(y_max -
-                screen_y * (y_max - y_min) / (Video::H - 1));
-            bus.set_touch(pressed, adc_x, adc_y);
+            // Supplying the full 0..4095 converter range puts edge clicks
+            // outside the physical panel's accepted calibration bounds.
+            const TouchAdcPoint adc = screen_to_touch_adc(
+                screen_x, screen_y, Video::W, Video::H);
+            bus.set_touch(pressed, adc.x, adc.y);
         };
         auto open_window_if_due = [&]() {
             if (window_active || !opt.window || opt.open_window_at == 0 || cpu.insns < opt.open_window_at) {
@@ -196,6 +197,7 @@ int main(int argc, char **argv) {
                         ev.window.event == SDL_WINDOWEVENT_FOCUS_LOST) {
                         // SDL may not deliver key-up events after focus moves away.
                         bus.matrix_pressed.fill(0);
+                        bus.accelerometer.clear_directions();
                         bus.set_touch(false, bus.touch_adc_x, bus.touch_adc_y);
                     }
                     if (ev.type == SDL_MOUSEBUTTONDOWN && ev.button.button == SDL_BUTTON_LEFT) {
@@ -208,6 +210,16 @@ int main(int argc, char **argv) {
                         set_touch_from_window(true, ev.motion.x, ev.motion.y);
                     }
                     if ((ev.type == SDL_KEYDOWN || ev.type == SDL_KEYUP) && !ev.key.repeat) {
+                        const bool pressed = ev.type == SDL_KEYDOWN;
+                        // Host arrow keys deliberately drive both the physical
+                        // D-pad matrix and the MobiGo 2 motion sensor.
+                        switch (ev.key.keysym.sym) {
+                        case SDLK_LEFT: bus.set_motion_direction(0, pressed); break;
+                        case SDLK_RIGHT: bus.set_motion_direction(1, pressed); break;
+                        case SDLK_UP: bus.set_motion_direction(2, pressed); break;
+                        case SDLK_DOWN: bus.set_motion_direction(3, pressed); break;
+                        default: break;
+                        }
                         unsigned row = 0;
                         unsigned column = 0;
                         bool mapped = true;
@@ -270,7 +282,7 @@ int main(int argc, char **argv) {
                         default: mapped = false; break;
                         }
                         if (mapped) {
-                            bus.set_matrix_key(row, column, ev.type == SDL_KEYDOWN);
+                            bus.set_matrix_key(row, column, pressed);
                         }
                     }
                 }
@@ -278,6 +290,20 @@ int main(int argc, char **argv) {
 
             if (opt.usb) usb_panel.protocol.poll(bus);
             if (usb_panel.win) usb_panel.render();
+
+            uint64_t pace_segment_cycles = bus.cycles;
+            uint64_t pace_segment_clock = bus.system_clock_hz();
+            uint64_t pace_clock_generation = bus.clock_change_generation;
+            auto account_pace_segment = [&]() {
+                if (!realtime.enabled) return;
+                if (bus.cycles >= pace_segment_cycles) {
+                    realtime.advance_cycles(
+                        bus.cycles - pace_segment_cycles, pace_segment_clock);
+                }
+                pace_segment_cycles = bus.cycles;
+                pace_segment_clock = bus.system_clock_hz();
+                pace_clock_generation = bus.clock_change_generation;
+            };
 
             for (int i = 0; i < kDefaultInstructionBatch && !quit; ++i) {
                 if (opt.max_steps && cpu.insns >= opt.max_steps) { quit = true; break; }
@@ -301,6 +327,14 @@ int main(int argc, char **argv) {
                     const ScriptedKeyTransition &key =
                         opt.scripted_key_transitions[scripted_key_transition_index++];
                     bus.set_matrix_key(key.row, key.column, key.pressed);
+                    if (key.row == 3 && key.column == 3)
+                        bus.set_motion_direction(0, key.pressed);
+                    else if (key.row == 4 && key.column == 3)
+                        bus.set_motion_direction(1, key.pressed);
+                    else if (key.row == 3 && key.column == 4)
+                        bus.set_motion_direction(2, key.pressed);
+                    else if (key.row == 4 && key.column == 4)
+                        bus.set_motion_direction(3, key.pressed);
                     if (g_log) {
                         g_log << "SCRIPTED KEY " << (key.pressed ? "DOWN" : "UP")
                               << " insns=" << cpu.insns << " key=" << key.name
@@ -308,8 +342,14 @@ int main(int argc, char **argv) {
                     }
                 }
                 cpu.step();
-                bus.update_periodic_events();
+                if (realtime.enabled &&
+                    bus.clock_change_generation != pace_clock_generation) {
+                    // The clock-writing instruction completes under the old
+                    // clock; subsequent instructions use the new selection.
+                    account_pace_segment();
+                }
                 if (bus.system_reset_requested) {
+                    account_pace_segment();
                     const uint32_t reset_from = cpu.lpc();
                     const bool cpu_only_reset = bus.system_reset_preserve_memory;
                     if (cpu_only_reset) {
@@ -320,6 +360,9 @@ int main(int argc, char **argv) {
                     }
                     const uint32_t start = bus.read(0x00fff7);
                     cpu.reset_core(start);
+                    pace_segment_cycles = bus.cycles;
+                    pace_segment_clock = bus.system_clock_hz();
+                    pace_clock_generation = bus.clock_change_generation;
                     if (g_log) {
                         g_log << "SYSTEM RESET APPLIED insns=" << cpu.insns
                               << " from=0x" << std::hex << reset_from
@@ -335,7 +378,11 @@ int main(int argc, char **argv) {
                 }
                 if (bus.sleep_requested) {
                     if (opt.auto_power_wake) {
+                        account_pace_segment();
                         power_key_wake_reset(bus, cpu);
+                        pace_segment_cycles = bus.cycles;
+                        pace_segment_clock = bus.system_clock_hz();
+                        pace_clock_generation = bus.clock_change_generation;
                     } else {
                         if (g_log) g_log << "POWER sleeping; automatic wake disabled\n";
                         cpu.halted = true;
@@ -344,6 +391,7 @@ int main(int argc, char **argv) {
                 }
             }
 
+            account_pace_segment();
             audio.pump(bus);
 
             open_window_if_due();
@@ -354,7 +402,7 @@ int main(int argc, char **argv) {
                 last_render_insn = cpu.insns;
                 // SDL_RenderPresent can block in the desktop compositor even
                 // without vsync. Cap presentation work at the LCD's useful
-                // refresh rate while letting emulation run at host speed.
+                // refresh rate independently from CPU real-time pacing.
                 if (opt.max_present_hz != 0) {
                     next_present = now + std::chrono::microseconds(
                         1000000 / opt.max_present_hz);
@@ -384,6 +432,7 @@ int main(int argc, char **argv) {
                           << std::dec << " path=" << path << "\n";
                 }
             }
+            realtime.wait_until_current();
             return !quit && !cpu.halted;
         };
 

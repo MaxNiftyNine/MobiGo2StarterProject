@@ -14,6 +14,9 @@ struct Video {
     uint32_t ppu_page_diag_count = 0;
     uint32_t ppu_page_late_diag_count = 0;
     uint32_t mba_scanout_stall_log_count = 0;
+    std::array<uint32_t, 0x8000> rgb555_effect_lut{};
+    uint16_t effect_fade = 0xffff;
+    uint16_t effect_saturation = 0xffff;
 
     void init(bool vsync) {
         if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) die(SDL_GetError());
@@ -67,11 +70,60 @@ struct Video {
         return uint16_t((r << 11) | (g << 5) | b);
     }
 
+    static uint8_t global_blend_alpha(const Bus &bus) {
+        // P_Blending (0x702a) selects 25%, 50%, 75%, or 100% top-layer
+        // opacity. The level is only consulted when a tile/sprite requests
+        // blending.
+        static constexpr std::array<uint8_t, 4> levels{8, 16, 24, 32};
+        return levels[bus.mmio[0x702a - kMmioBase] & 3];
+    }
+
+    static uint16_t blend_rgb555(uint16_t bottom, uint16_t top, uint8_t alpha) {
+        if (bottom & 0x8000) return top;
+        const auto mix = [alpha](uint16_t a, uint16_t b) -> uint16_t {
+            return uint16_t(((32u - alpha) * a + alpha * b) >> 5);
+        };
+        return uint16_t(
+            (mix((bottom >> 10) & 31, (top >> 10) & 31) << 10) |
+            (mix((bottom >> 5) & 31, (top >> 5) & 31) << 5) |
+            mix(bottom & 31, top & 31));
+    }
+
+    void update_effect_lut(const Bus &bus) {
+        const uint16_t fade = bus.mmio[0x7030 - kMmioBase];
+        const uint16_t saturation = bus.mmio[0x703c - kMmioBase] & 0x00ff;
+        if (fade == effect_fade && saturation == effect_saturation) return;
+        effect_fade = fade;
+        effect_saturation = saturation;
+        const double saturation_scale =
+            double(0xff - saturation) / double(0xff - 0x20);
+        for (uint32_t value = 0; value < rgb555_effect_lut.size(); ++value) {
+            const uint32_t raw = rgb555_to_argb(uint16_t(value));
+            const double red = double((raw >> 16) & 0xff);
+            const double green = double((raw >> 8) & 0xff);
+            const double blue = double(raw & 0xff);
+            const double luma = red * 0.299 + green * 0.587 + blue * 0.114;
+            auto adjust = [&](double channel) -> uint32_t {
+                const double saturated = saturation == 0x20
+                    ? channel : luma + (channel - luma) * saturation_scale;
+                const int faded = int(std::floor(saturated)) - int(fade);
+                return uint32_t(std::clamp(faded, 0, 255));
+            };
+            rgb555_effect_lut[value] = 0xff000000u |
+                (adjust(red) << 16) | (adjust(green) << 8) | adjust(blue);
+        }
+    }
+
     static uint32_t tile_palette_base(uint16_t attr, uint32_t nc_bpp) {
         uint32_t palette_offset = (attr & 0x0f00) >> 4;
         palette_offset >>= nc_bpp;
         palette_offset <<= nc_bpp;
         return palette_offset;
+    }
+
+    static int signed_sprite_coord(uint16_t raw) {
+        const int value = int(raw & 0x03ff);
+        return (value & 0x0200) ? value - 0x0400 : value;
     }
 
     template <typename ArrayT>
@@ -132,7 +184,8 @@ struct Video {
                          uint32_t tile, uint32_t tile_scanline, int drawx,
                          uint32_t tile_w, uint32_t tile_h, uint32_t nc_bpp,
                          uint32_t bits_per_row, uint32_t words_per_tile,
-                         bool flip_x, bool flip_y, uint32_t palette_offset, bool blend) {
+                         bool flip_x, bool flip_y, uint32_t palette_offset,
+                         bool blend, uint8_t blend_alpha, bool wrap_x = true) {
         const uint32_t yflipmask = flip_y ? tile_h - 1 : 0;
         uint32_t src = tilegfxbase + words_per_tile * tile + bits_per_row * (tile_scanline ^ yflipmask);
         uint32_t bits = 0;
@@ -150,16 +203,16 @@ struct Video {
 
             const uint32_t color_index = bits >> 16;
             bits &= 0xffff;
-            const uint32_t x = uint32_t(drawx + px) & 0x1ff;
-            if (x >= W) continue;
+            const int unwrapped_x = drawx + px;
+            const uint32_t x = wrap_x
+                ? (uint32_t(unwrapped_x) & 0x1ff)
+                : uint32_t(unwrapped_x);
+            if ((!wrap_x && unwrapped_x < 0) || x >= W) continue;
 
             const uint16_t rgb = bus.palette_ram[(palette_offset + color_index) & 0x0fff];
             if (rgb & 0x8000) continue;
             if (blend) {
-                // ASSUMPTION: use the top colour for now. GPL blending levels
-                // are documented in MAME, but exact compositing is less
-                // important than exposing the firmware's layer contents.
-                line[x] = rgb;
+                line[x] = blend_rgb555(line[x], rgb, blend_alpha);
             } else {
                 line[x] = rgb;
             }
@@ -177,7 +230,7 @@ struct Video {
              flip_x ? --px : ++px) {
             const uint32_t x = uint32_t(drawx + px) & 0x1ff;
             const uint16_t rgb1555 = bus.dma_read(source++);
-            if (x < W) line[x] = rgb1555 & 0x7fff;
+            if (x < W && !(rgb1555 & 0x8000)) line[x] = rgb1555;
         }
     }
 
@@ -327,7 +380,8 @@ struct Video {
             const int drawx = int(x0 * tile_w) - (realxscroll & int(tile_w - 1));
             draw_tile_strip(bus, line, tilegfxbase, tile, tile_scanline, drawx,
                             tile_w, tile_h, nc_bpp, bits_per_row, words_per_tile, tileattr & 0x0004,
-                            tileattr & 0x0008, palette_offset, tilectrl & 0x0100);
+                            tileattr & 0x0008, palette_offset, tilectrl & 0x0100,
+                            global_blend_alpha(bus));
         }
     }
 
@@ -345,29 +399,27 @@ struct Video {
             const uint32_t base = n * 4;
             uint32_t tile = bus.sprite_ram[base + 0];
             if (!tile) continue;
-            int16_t sx = int16_t(bus.sprite_ram[base + 1]);
-            int16_t sy = int16_t(bus.sprite_ram[base + 2]);
+            int sx = signed_sprite_coord(bus.sprite_ram[base + 1]);
+            int sy = signed_sprite_coord(bus.sprite_ram[base + 2]);
             uint16_t attr = bus.sprite_ram[base + 3];
             if (((attr >> 12) & 3) != uint32_t(priority)) continue;
 
             const uint32_t tile_h = 8u << ((attr >> 6) & 3);
             const uint32_t tile_w = 8u << ((attr >> 4) & 3);
             if (!(extra & 0x0002)) {
-                sx = int16_t((W / 2 + sx) - int(tile_w / 2));
-                sy = int16_t((256 / 2 - sy) - int(tile_h / 2));
+                sx = (W / 2 + sx) - int(tile_w / 2);
+                sy = (256 / 2 - sy) - int(tile_h / 2);
             }
-            sx &= 0x1ff;
-            sy &= 0x1ff;
             const int firstline = sy;
-            const int lastline = int((sy + tile_h - 1) & 0x1ff);
-            int scanline = -1;
-            if (firstline <= lastline) {
-                if (y >= firstline && y <= lastline) scanline = y - firstline;
-            } else {
-                if (y <= lastline) scanline = y + 512 - firstline;
-                else if (y >= firstline) scanline = y - firstline;
-            }
-            if (scanline < 0) continue;
+            const int lastline = sy + int(tile_h) - 1;
+            // Real MobiGo 2 evidence from SY's centered Family-B animation:
+            // vertical sprite positions are clipped as signed screen-space
+            // coordinates. Masking Y to nine bits makes an object moving off
+            // the top re-enter from the LCD's bottom, which hardware does not
+            // do. The same signed clipping rule is applied horizontally by
+            // the sprite-specific draw call below.
+            if (y < firstline || y > lastline) continue;
+            const int scanline = y - firstline;
 
             if (ppu & 0x0200) {
                 tile |= uint32_t(bus.sprite_ram[base + 0x400] & 0x00ff) << 16;
@@ -384,9 +436,17 @@ struct Video {
             if (attr & 0x8000) palette_offset |= 0x200;
 
             if (extra & 0x0010) words_per_tile = 8;
+            uint8_t blend_alpha = global_blend_alpha(bus);
+            if (extra & 0x0004) {
+                const uint16_t extended = (ppu & 0x0200)
+                    ? bus.sprite_ram[base + 0x400]
+                    : bus.sprite_ram[(base / 4) + 0x400];
+                blend_alpha = uint8_t(((extended >> 8) & 0x3f) >> 1);
+            }
             draw_tile_strip(bus, line, gfxbase, tile, uint32_t(scanline), sx,
                             tile_w, tile_h, nc_bpp, bits_per_row, words_per_tile, attr & 0x0004,
-                            attr & 0x0008, palette_offset, attr & 0x4000);
+                            attr & 0x0008, palette_offset, attr & 0x4000,
+                            blend_alpha, false);
         }
     }
 
@@ -399,6 +459,7 @@ struct Video {
         // above. Bit 0 is not a global PPU enable on this chip.
         if (!any_layer && !any_sprite) return false;
 
+        update_effect_lut(bus);
         std::array<uint16_t, W> line{};
         for (int y = 0; y < H; ++y) {
             if (preserve_background) {
@@ -431,7 +492,9 @@ struct Video {
                 }
                 draw_sprites(bus, line, pri, y);
             }
-            for (int x = 0; x < W; ++x) pixels[y * W + x] = rgb555_to_argb(line[x]);
+            for (int x = 0; x < W; ++x) {
+                pixels[y * W + x] = rgb555_effect_lut[line[x] & 0x7fff];
+            }
         }
         return true;
     }

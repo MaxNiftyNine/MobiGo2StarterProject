@@ -18,6 +18,7 @@
 #include <array>
 #include <bit>
 #include <chrono>
+#include <cmath>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -55,6 +56,27 @@ constexpr int kDefaultInstructionBatch = 20000;
 // side effect. Give firmware enough elapsed device time to observe the busy
 // bit and service intervening video/timer IRQs before completion latches.
 constexpr uint64_t kPpuJobCycles = 160000;
+
+struct TouchAdcPoint {
+    uint16_t x;
+    uint16_t y;
+};
+
+constexpr TouchAdcPoint screen_to_touch_adc(int screen_x, int screen_y,
+                                             int width = 320, int height = 240) {
+    // Retail calibration recovered from the firmware's board-input state.
+    // Both panel electrodes are reversed relative to LCD coordinates.
+    constexpr uint16_t x_min = 0x0186;
+    constexpr uint16_t x_max = 0x0e80;
+    constexpr uint16_t y_min = 0x02b6;
+    constexpr uint16_t y_max = 0x0d5c;
+    const int x = std::clamp(screen_x, 0, width - 1);
+    const int y = std::clamp(screen_y, 0, height - 1);
+    return {
+        uint16_t(x_max - x * (x_max - x_min) / (width - 1)),
+        uint16_t(y_max - y * (y_max - y_min) / (height - 1)),
+    };
+}
 
 inline uint32_t ppu_frame_addr(uint16_t low, uint16_t high) {
     // Verified SDK examples require FBI_ADDR[26:0] to be 16-word aligned;
@@ -203,6 +225,7 @@ struct Options {
     uint16_t gpio_e = 0x0000;
     uint16_t battery_adc = 0x0500;
     bool window = true;
+    bool realtime_cap = true;
     bool audio = false;
     bool usb = false;
     std::filesystem::path log_path = "emulator.log";
@@ -368,6 +391,7 @@ inline Options parse_args(int argc, char **argv) {
         else if (a == "--log-file") { opt.log = true; opt.log_path = need("--log-file"); }
         else if (a == "--vsync") opt.vsync = true;
         else if (a == "--no-window") opt.window = false;
+        else if (a == "--no-cap") opt.realtime_cap = false;
         else if (a == "--audio") opt.audio = true;
         else if (a == "--usb") opt.usb = true;
         else if (a == "--rom-fetch-mirror64") opt.rom_fetch_mirror64 = true;
@@ -391,6 +415,7 @@ inline Options parse_args(int argc, char **argv) {
                          "[--touch-event at,duration,x,y] "
                          "[--key-event at,duration,key] [--usb] [--audio] "
                          "[--render-interval N] [--max-present-hz N] "
+                         "[--no-window] [--no-cap] "
                          "[--open-window-at N] [--start-logging-at N] [--log] "
                          "[--log-file path] ...\n";
             std::exit(0);

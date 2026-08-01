@@ -1,0 +1,317 @@
+{
+  "schema": 1,
+  "mba": "../MBAs/BUNDLE_G1_135800G1.MBA",
+  "runtime_base": "0x000c8000",
+  "header_word_address": "0x000e2160",
+  "header_file_offset": "0x000342c0",
+  "header_words": [
+    "0x0002",
+    "0x8000",
+    "0xc5e0",
+    "0x8001",
+    "0xc7e0",
+    "0x8001",
+    "0x0000",
+    "0xc000",
+    "0x0100",
+    "0xc000",
+    "0x0713",
+    "0x0000",
+    "0x0090",
+    "0x0000",
+    "0x0000",
+    "0x0000",
+    "0x47d6",
+    "0x0001",
+    "0x0008",
+    "0x0000",
+    "0x47d6",
+    "0x0001",
+    "0x0032",
+    "0x0000",
+    "0x4826",
+    "0x0001",
+    "0x4a7e",
+    "0x0001",
+    "0x0000",
+    "0x0000",
+    "0x0000",
+    "0x0000"
+  ],
+  "state": "0x80000002",
+  "lookup_count": 1811,
+  "lookup_table_relative": "0x00000090",
+  "lookup_table_word_address": "0x000e2210",
+  "ui_family_a_count": 8,
+  "ui_family_a_table_relative": "0x000147d6",
+  "ui_family_a_table_word_address": "0x000f6956",
+  "ui_family_b_count": 50,
+  "ui_family_b_table_relative": "0x00014826",
+  "ui_family_b_table_word_address": "0x000f69a6",
+  "ui_family_b_descriptors": {
+    "settings": {
+      "index": 14,
+      "word_address": "0x000f6a4e",
+      "words": [
+        "0x0001",
+        "0x0000",
+        "0x0000",
+        "0x0000",
+        "0x0000",
+        "0x0000",
+        "0x0000",
+        "0x0040",
+        "0xffff",
+        "0xffff",
+        "0x0ac6",
+        "0x0001"
+      ],
+      "nested_relative": "0x00010ac6",
+      "nested_word_address": "0x000f2c46"
+    },
+    "poweroff": {
+      "index": 48,
+      "word_address": "0x000f6be6",
+      "words": [
+        "0x0001",
+        "0x0000",
+        "0x0000",
+        "0x0000",
+        "0x0000",
+        "0x0000",
+        "0x0000",
+        "0x0040",
+        "0xffff",
+        "0xffff",
+        "0x3352",
+        "0x0001"
+      ],
+      "nested_relative": "0x00013352",
+      "nested_word_address": "0x000f54d2"
+    }
+  },
+  "ui_family_a_descriptor": {
+    "index": 7,
+    "word_address": "0x000f699c",
+    "words": [
+      "0x0001",
+      "0x0000",
+      "0x0000",
+      "0x0000",
+      "0x0000",
+      "0x0040",
+      "0xffff",
+      "0xffff",
+      "0x007e",
+      "0x0000"
+    ],
+    "nested_relative": "0x0000007e",
+    "nested_word_address": "0x000e21fe",
+    "image_record": {
+      "relative": "0x0000007e",
+      "word_address": "0x000e21fe",
+      "words": [
+        "0x0140",
+        "0x00f0",
+        "0x0010",
+        "0x0010",
+        "0x0000",
+        "0x0000",
+        "0x00ef",
+        "0x0000",
+        "0x013f",
+        "0x0000",
+        "0xc5a0",
+        "0x8001",
+        "0xc490",
+        "0x8001",
+        "0x000a",
+        "0x0000",
+        "0x3580",
+        "0x0001"
+      ],
+      "width": 320,
+      "height": 240,
+      "cell_width": 16,
+      "cell_height": 16,
+      "format": 0,
+      "graphics_base_pointer": "0x8001c5a0",
+      "tilemap_source_pointer": "0x8001c490",
+      "palette_selector": 10,
+      "runtime_slot_relative": "0x00013580",
+      "runtime_slot_word_address": "0x000f5700",
+      "runtime_slot_words": [
+        "0x0000",
+        "0x0000"
+      ]
+    }
+  },
+  "standard_settings": {
+    "mode_count": 5,
+    "modes": [
+      {
+        "index": 0,
+        "relative": "0x000108d2",
+        "word_address": "0x000f2a52",
+        "record_count": 1
+      },
+      {
+        "index": 1,
+        "relative": "0x000108e2",
+        "word_address": "0x000f2a62",
+        "record_count": 4,
+        "first_record_graph": {
+          "record_word_address": "0x000f2a64",
+          "component_list_relative": "0x000107fa",
+          "component_list_word_address": "0x000f297a",
+          "component_count": 2,
+          "components": [
+            {
+              "value": 20,
+              "reserved": "0x0000",
+              "bitmap": {
+                "relative": "0x00002b12",
+                "word_address": "0x000e4c92",
+                "format": "0x0b00",
+                "width": 48,
+                "height": 32,
+                "reserved": "0x0000",
+                "chunk_table_relative": "0x000014b4",
+                "chunks": [
+                  {
+                    "word_address": "0x000e3634",
+                    "width": 32,
+                    "height": 32,
+                    "flags": "0x0000",
+                    "data_pointer": "0x800422e0"
+                  },
+                  {
+                    "word_address": "0x000e3638",
+                    "width": 16,
+                    "height": 32,
+                    "flags": "0x0000",
+                    "data_pointer": "0x80042360"
+                  }
+                ]
+              }
+            },
+            {
+              "value": -20,
+              "reserved": "0x0000",
+              "bitmap": {
+                "relative": "0x00002b2a",
+                "word_address": "0x000e4caa",
+                "format": "0x0b00",
+                "width": 32,
+                "height": 32,
+                "reserved": "0x0000",
+                "chunk_table_relative": "0x000014d4",
+                "chunks": [
+                  {
+                    "word_address": "0x000e3654",
+                    "width": 32,
+                    "height": 32,
+                    "flags": "0x0000",
+                    "data_pointer": "0x800424e0"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "index": 2,
+        "relative": "0x0001091c",
+        "word_address": "0x000f2a9c",
+        "record_count": 9
+      },
+      {
+        "index": 3,
+        "relative": "0x0001099c",
+        "word_address": "0x000f2b1c",
+        "record_count": 11
+      },
+      {
+        "index": 4,
+        "relative": "0x00010a38",
+        "word_address": "0x000f2bb8",
+        "record_count": 10,
+        "first_record_graph": {
+          "record_word_address": "0x000f2bba",
+          "component_list_relative": "0x00010846",
+          "component_list_word_address": "0x000f29c6",
+          "component_count": 3,
+          "components": [
+            {
+              "value": 25,
+              "reserved": "0x0000",
+              "bitmap": {
+                "relative": "0x00002b42",
+                "word_address": "0x000e4cc2",
+                "format": "0x0b00",
+                "width": 64,
+                "height": 32,
+                "reserved": "0x0000",
+                "chunk_table_relative": "0x000014e0",
+                "chunks": [
+                  {
+                    "word_address": "0x000e3660",
+                    "width": 64,
+                    "height": 32,
+                    "flags": "0x0000",
+                    "data_pointer": "0x800426e0"
+                  }
+                ]
+              }
+            },
+            {
+              "value": 75,
+              "reserved": "0x0000",
+              "bitmap": {
+                "relative": "0x00002b3c",
+                "word_address": "0x000e4cbc",
+                "format": "0x0b00",
+                "width": 64,
+                "height": 32,
+                "reserved": "0x0000",
+                "chunk_table_relative": "0x000014dc",
+                "chunks": [
+                  {
+                    "word_address": "0x000e365c",
+                    "width": 64,
+                    "height": 32,
+                    "flags": "0x0000",
+                    "data_pointer": "0x800425e0"
+                  }
+                ]
+              }
+            },
+            {
+              "value": -20,
+              "reserved": "0x0000",
+              "bitmap": {
+                "relative": "0x00002b60",
+                "word_address": "0x000e4ce0",
+                "format": "0x0b00",
+                "width": 32,
+                "height": 32,
+                "reserved": "0x0000",
+                "chunk_table_relative": "0x000014f4",
+                "chunks": [
+                  {
+                    "word_address": "0x000e3674",
+                    "width": 32,
+                    "height": 32,
+                    "flags": "0x0000",
+                    "data_pointer": "0x80042be0"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

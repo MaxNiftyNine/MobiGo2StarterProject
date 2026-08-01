@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "address_unit": "16-bit word",
+  "relative_pointer_base": "bundle_header + 0x20 words",
+  "header_words": 32,
+  "ui_family_a_descriptor_words": 10,
+  "ui_family_b_descriptor_words": 12,
+  "setting_record_words": 14,
+  "samples": {
+    "G1": {
+      "bundle_header_word_address": "0x0e2160",
+      "mba_file_offset": "0x000342c0",
+      "lookup_count": 1811,
+      "ui_family_a_count": 8,
+      "ui_family_b_count": 50,
+      "ui_family_b_table_relative": "0x00014826",
+      "ui_family_b_table_word_address": "0x0f69a6",
+      "settings_descriptor_index": 14,
+      "poweroff_descriptor_index": 48,
+      "settings_nested_relative": "0x00010ac6",
+      "poweroff_nested_relative": "0x00013352",
+      "settings_nested_word_address": "0x0f2c46",
+      "poweroff_nested_word_address": "0x0f54d2",
+      "brightness_mode_relative": "0x000108e2",
+      "volume_mode_relative": "0x00010a38"
+    },
+    "SY": {
+      "bundle_header_word_address": "0x0f30ba",
+      "mba_file_offset": "0x00056174",
+      "lookup_count": 725,
+      "ui_family_a_count": 12,
+      "ui_family_b_count": 29,
+      "ui_family_b_table_relative": "0x000060ec",
+      "ui_family_b_table_word_address": "0x0f91c6",
+      "settings_descriptor_index": 1,
+      "poweroff_descriptor_index": 23,
+      "settings_nested_relative": "0x000018a8",
+      "poweroff_nested_relative": "0x00004540",
+      "settings_nested_word_address": "0x0f4982",
+      "poweroff_nested_word_address": "0x0f761a",
+      "brightness_mode_relative": "0x000016c4",
+      "volume_mode_relative": "0x0000181a"
+    }
+  },
+  "common_family_b_template": [
+    "0x0001",
+    "0x0000",
+    "0x0000",
+    "0x0000",
+    "0x0000",
+    "0x0000",
+    "0x0000",
+    "0x0040",
+    "0xffff",
+    "0xffff",
+    "<nested pointer low>",
+    "<nested pointer high>"
+  ],
+  "standard_settings": {
+    "mode_count": 5,
+    "record_counts_by_mode": [1, 4, 9, 11, 10],
+    "brightness_mode": 1,
+    "brightness_records": 4,
+    "volume_mode": 4,
+    "volume_records": 10
+  },
+  "standard_bitmap_graph": {
+    "component_reference_words": 4,
+    "bitmap_descriptor_words": 6,
+    "bitmap_chunk_words": 4,
+    "brightness_component_values": [20, -20],
+    "volume_component_values": [25, 75, -20],
+    "first_brightness_bitmap": {
+      "width": 48,
+      "height": 32,
+      "chunks": [
+        {"width": 32, "height": 32},
+        {"width": 16, "height": 32}
+      ],
+      "G1_format_word": "0x0b00",
+      "SY_format_word": "0x0800"
+    }
+  }
+}

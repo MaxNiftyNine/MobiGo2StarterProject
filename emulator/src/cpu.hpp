@@ -639,7 +639,6 @@ struct Cpu {
         // PPU/TFT video sources to IRQ5, and scheduler/timebase to IRQ6. The
         // GPL16200x guide routes manual-ADC events to IRQ1 unless its
         // P_INT_Priority1 bit selects FIQ.
-        bus.update_periodic_events();
         if (bus.audio_irq0_asserted_no_update()) return 0;
         if (bus.adc_irq1_asserted_no_update()) return 1;
         if (bus.dma_irq3_asserted_no_update() || bus.usb_irq3_asserted_no_update()) return 3;
@@ -736,7 +735,6 @@ struct Cpu {
             suppress_interrupt_check = false;
             return;
         }
-        bus.update_periodic_events();
         if (enable_fiq && !in_fiq && bus.audio_fiq_asserted_no_update()) {
             service_fiq();
             return;
@@ -998,6 +996,12 @@ struct Cpu {
             next_progress_print += kProgressPrintInterval;
         }
         bus.cycles += instruction_cycles(op, jump_taken, pre_ine);
+        // Peripheral latches become visible at the instruction boundary. The
+        // main loop used to update here and again before interrupt dispatch,
+        // making every instruction run the complete timer/RTC/video scheduler
+        // twice. Keeping the single synchronization inside Cpu::step also
+        // ensures tests and alternate frontends cannot accidentally omit it.
+        bus.update_periodic_events(false);
     }
 };
 

@@ -599,7 +599,7 @@ incomplete hardware knowledge, not as verified behavior.
     over the frame-base background instead of treating frame-base mode as
     mutually exclusive with tile rendering. This exposes a real firmware
     tilemap copied to `0x2800/0x2000` from source rows starting at `0x109810`.
-  - The post-logo visible state is now a stable white loading-style tile screen
+- The post-logo visible state is now a stable white loading-style tile screen
     with small blue glyph fragments and a lower-right swirl, sourced from page 2
     registers `attr=0x1052`, `ctrl=0xfc2a`, tilemap `0x2800`, and graphics base
     `0x10cd98`. The same frame hash is produced from 1B through 8B
@@ -663,8 +663,56 @@ incomplete hardware knowledge, not as verified behavior.
   behavior, RTC rollover/status, MBA-header discovery, and the official
   fixed-source DMA completion/W1C path.
 
+## Event scheduler and PPU effects (2026-08-01)
+
+- Peripheral state is synchronized once at the end of each CPU instruction.
+  Timer, timebase, RTC, watchdog, ADC, USB-suspend, SPU-beat, and video-edge
+  deadlines let the common path return immediately until an event is due.
+  Live MMIO counter reads still force synchronization at the read cycle.
+- Counter timestamps use `UINT64_MAX` as their uninitialized state. Cycle zero
+  is therefore a valid timestamp and no longer discards the first interval
+  after reset.
+- Video frame comparison and wrap status are scheduled at programmed TFT cycle
+  boundaries instead of recomputing division/modulo state every instruction.
+- GPL16250 PPU compositing now applies documented 25/50/75/100-percent global
+  blending, individual 6-bit sprite alpha, RGB1555 transparency, output fade,
+  and saturation. The blend equation and register interpretation were checked
+  against the GPL16250 hardware documentation and MAME's GPL renderer.
+- Real-hardware comparison of SY found that a centered Family-B object leaving
+  the top edge must be clipped; treating its coordinate as a 9-bit ring made it
+  reappear at the bottom. Live SY sprite tables independently show ten-bit
+  signed coordinates (`0x39a == -102`, for example). The renderer now decodes
+  that signed field before the centered transform and clips the transformed
+  sprite on both LCD axes.
+- Regression tests cover exact timer overflow/reload, lazy counter reads,
+  exact video edges, blend values, direct-color transparency, fade, and SY's
+  signed/clipped centered-sprite behavior.
+- A deterministic 10-million-instruction retail boot run retained the same
+  23,405,111 cycles, PC, and register state while improving locally from 26.7
+  to 35.3 MIPS. A 10-million-instruction Clang PGO training profile reached
+  about 44 MIPS. These are machine-specific development measurements.
+
+## Retail cartridge SPU completion (2026-08-01)
+
+- Cartridge `mobigo_252800.bin` accepted touch-down and touch-up on both its
+  saved-profile and Guest buttons but remained on the profile overlay. The CPU
+  was still running; this was a game state wait rather than a crash or halt.
+- Decompilation of the cartridge's profile update at `0x21b528` showed that the
+  selection was accepted and its advance flag was set. The update then waited
+  on the resident sound query at `0x27ba6c` before invoking the next scene.
+- The query distinguishes the programmed `P_SPU_CH_ENABLE` mask from live
+  `P_SPU_CH_STATUS`. A naturally completed one-shot clears `CH_STATUS` but
+  leaves `CH_ENABLE` programmed. The emulator incorrectly cleared both, which
+  made the resident report the voice as permanently stopping.
+- Natural channel completion now clears only live status, latches the channel
+  end/stop events, and routes enabled SPU channel, envelope, and beat sources
+  through IRQ4 or FIQ according to `P_INT_Priority3`. `audio_test` covers the
+  enable/status distinction, W1C channel event, and both interrupt routes.
+- Deterministic integration runs now advance Guest to the title screen and the
+  saved profile into the following animated scene.
+
 - Remaining accuracy work: exact E-Fuse meanings, complete timer/counter slot
-  behavior, advanced PPU tile/sprite effects, exact SPU ADPCM36/envelope edge
+  behavior, row-zoom/transform effects, exact SPU ADPCM36/envelope edge
   behavior and analog output characteristics, controls, and touchscreen are
   still incomplete.
 

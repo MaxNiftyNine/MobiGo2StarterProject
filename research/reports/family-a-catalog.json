@@ -1,0 +1,1774 @@
+{
+  "schema": 1,
+  "address_unit": "16-bit word",
+  "family_a_descriptor_words": 10,
+  "family_a_image_record_words": 18,
+  "proven_fields": {
+    "0": "pixel/source width",
+    "1": "pixel/source height",
+    "2": "cell width",
+    "3": "cell height",
+    "4": "resident background format selector",
+    "10..11": "tagged background graphics-base pointer",
+    "12..13": "tagged tilemap/index source pointer",
+    "14": "resident background palette selector",
+    "16..17": "bundle-relative private two-word runtime slot"
+  },
+  "unnamed_fields": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    15
+  ],
+  "summary": {
+    "descriptor_count": 34,
+    "non_null_descriptor_count": 28,
+    "unique_non_null_record_count": 24
+  },
+  "samples": [
+    {
+      "file": "BUNDLE_G1_135800G1.MBA",
+      "title": "MGB_G1",
+      "sha256": "e2ae552854d5a9e91c7f66f88dcc867f61b777bf34b3e5887d98bb43cb2bdcf5",
+      "runtime_base": "0x000c8000",
+      "bundles": [
+        {
+          "header_word_address": "0x000e2160",
+          "family_a_count": 8,
+          "family_a_table_relative": "0x000147d6",
+          "family_a_table_word_address": "0x000f6956",
+          "descriptors": [
+            {
+              "index": 0,
+              "word_address": "0x000f6956",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0000",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000000"
+            },
+            {
+              "index": 1,
+              "word_address": "0x000f6960",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0012",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000012",
+              "image_record": {
+                "relative": "0x00000012",
+                "word_address": "0x000e2192",
+                "words": [
+                  "0x0440",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0001",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x043f",
+                  "0x0000",
+                  "0x24c0",
+                  "0x8001",
+                  "0x2100",
+                  "0x8001",
+                  "0x0005",
+                  "0x0000",
+                  "0x3574",
+                  "0x0001"
+                ],
+                "width": 1088,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 1,
+                "graphics_base_pointer": "0x800124c0",
+                "tilemap_source_pointer": "0x80012100",
+                "palette_selector": 5,
+                "runtime_slot_relative": "0x00013574",
+                "runtime_slot_word_address": "0x000f56f4",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 2,
+              "word_address": "0x000f696a",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0024",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000024",
+              "image_record": {
+                "relative": "0x00000024",
+                "word_address": "0x000e21a4",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0002",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x3650",
+                  "0x8001",
+                  "0x3580",
+                  "0x8001",
+                  "0x0000",
+                  "0x0000",
+                  "0x3576",
+                  "0x0001"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 2,
+                "graphics_base_pointer": "0x80013650",
+                "tilemap_source_pointer": "0x80013580",
+                "palette_selector": 0,
+                "runtime_slot_relative": "0x00013576",
+                "runtime_slot_word_address": "0x000f56f6",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 3,
+              "word_address": "0x000f6974",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0036",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000036",
+              "image_record": {
+                "relative": "0x00000036",
+                "word_address": "0x000e21b6",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x76c0",
+                  "0x8001",
+                  "0x75b0",
+                  "0x8001",
+                  "0x0008",
+                  "0x0000",
+                  "0x3578",
+                  "0x0001"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x800176c0",
+                "tilemap_source_pointer": "0x800175b0",
+                "palette_selector": 8,
+                "runtime_slot_relative": "0x00013578",
+                "runtime_slot_word_address": "0x000f56f8",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 4,
+              "word_address": "0x000f697e",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0048",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000048",
+              "image_record": {
+                "relative": "0x00000048",
+                "word_address": "0x000e21c8",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0001",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x89f0",
+                  "0x8001",
+                  "0x8900",
+                  "0x8001",
+                  "0x0006",
+                  "0x0000",
+                  "0x357a",
+                  "0x0001"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 1,
+                "graphics_base_pointer": "0x800189f0",
+                "tilemap_source_pointer": "0x80018900",
+                "palette_selector": 6,
+                "runtime_slot_relative": "0x0001357a",
+                "runtime_slot_word_address": "0x000f56fa",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 5,
+              "word_address": "0x000f6988",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x005a",
+                "0x0000"
+              ],
+              "nested_relative": "0x0000005a",
+              "image_record": {
+                "relative": "0x0000005a",
+                "word_address": "0x000e21da",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xa900",
+                  "0x8001",
+                  "0xa7f0",
+                  "0x8001",
+                  "0x0009",
+                  "0x0000",
+                  "0x357c",
+                  "0x0001"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x8001a900",
+                "tilemap_source_pointer": "0x8001a7f0",
+                "palette_selector": 9,
+                "runtime_slot_relative": "0x0001357c",
+                "runtime_slot_word_address": "0x000f56fc",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 6,
+              "word_address": "0x000f6992",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x006c",
+                "0x0000"
+              ],
+              "nested_relative": "0x0000006c",
+              "image_record": {
+                "relative": "0x0000006c",
+                "word_address": "0x000e21ec",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0001",
+                  "0x0000",
+                  "0x012f",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xbdd0",
+                  "0x8001",
+                  "0xbce0",
+                  "0x8001",
+                  "0x0007",
+                  "0x0000",
+                  "0x357e",
+                  "0x0001"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 1,
+                "graphics_base_pointer": "0x8001bdd0",
+                "tilemap_source_pointer": "0x8001bce0",
+                "palette_selector": 7,
+                "runtime_slot_relative": "0x0001357e",
+                "runtime_slot_word_address": "0x000f56fe",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 7,
+              "word_address": "0x000f699c",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x007e",
+                "0x0000"
+              ],
+              "nested_relative": "0x0000007e",
+              "image_record": {
+                "relative": "0x0000007e",
+                "word_address": "0x000e21fe",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xc5a0",
+                  "0x8001",
+                  "0xc490",
+                  "0x8001",
+                  "0x000a",
+                  "0x0000",
+                  "0x3580",
+                  "0x0001"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x8001c5a0",
+                "tilemap_source_pointer": "0x8001c490",
+                "palette_selector": 10,
+                "runtime_slot_relative": "0x00013580",
+                "runtime_slot_word_address": "0x000f5700",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_G2_135800G2.MBA",
+      "title": "MGB_G2",
+      "sha256": "4feee848636f8248c35546e4efa1818e19d40f959c9f69d538335660a544dd5c",
+      "runtime_base": "0x000c8000",
+      "bundles": [
+        {
+          "header_word_address": "0x000df074",
+          "family_a_count": 6,
+          "family_a_table_relative": "0x00006f9a",
+          "family_a_table_word_address": "0x000e602e",
+          "descriptors": [
+            {
+              "index": 0,
+              "word_address": "0x000e602e",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0000",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000000"
+            },
+            {
+              "index": 1,
+              "word_address": "0x000e6038",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0012",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000012",
+              "image_record": {
+                "relative": "0x00000012",
+                "word_address": "0x000df0a6",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x0300",
+                  "0x8000",
+                  "0x01f0",
+                  "0x8000",
+                  "0x0003",
+                  "0x0000",
+                  "0x6cea",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x80000300",
+                "tilemap_source_pointer": "0x800001f0",
+                "palette_selector": 3,
+                "runtime_slot_relative": "0x00006cea",
+                "runtime_slot_word_address": "0x000e5d7e",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 2,
+              "word_address": "0x000e6042",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0024",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000024",
+              "image_record": {
+                "relative": "0x00000024",
+                "word_address": "0x000df0b8",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0001",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x1630",
+                  "0x8000",
+                  "0x1540",
+                  "0x8000",
+                  "0x0001",
+                  "0x0000",
+                  "0x6cec",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 1,
+                "graphics_base_pointer": "0x80001630",
+                "tilemap_source_pointer": "0x80001540",
+                "palette_selector": 1,
+                "runtime_slot_relative": "0x00006cec",
+                "runtime_slot_word_address": "0x000e5d80",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 3,
+              "word_address": "0x000e604c",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0036",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000036",
+              "image_record": {
+                "relative": "0x00000036",
+                "word_address": "0x000df0ca",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x3540",
+                  "0x8000",
+                  "0x3430",
+                  "0x8000",
+                  "0x0004",
+                  "0x0000",
+                  "0x6cee",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x80003540",
+                "tilemap_source_pointer": "0x80003430",
+                "palette_selector": 4,
+                "runtime_slot_relative": "0x00006cee",
+                "runtime_slot_word_address": "0x000e5d82",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 4,
+              "word_address": "0x000e6056",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0048",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000048",
+              "image_record": {
+                "relative": "0x00000048",
+                "word_address": "0x000df0dc",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0001",
+                  "0x0000",
+                  "0x012f",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x4a10",
+                  "0x8000",
+                  "0x4920",
+                  "0x8000",
+                  "0x0002",
+                  "0x0000",
+                  "0x6cf0",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 1,
+                "graphics_base_pointer": "0x80004a10",
+                "tilemap_source_pointer": "0x80004920",
+                "palette_selector": 2,
+                "runtime_slot_relative": "0x00006cf0",
+                "runtime_slot_word_address": "0x000e5d84",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 5,
+              "word_address": "0x000e6060",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x005a",
+                "0x0000"
+              ],
+              "nested_relative": "0x0000005a",
+              "image_record": {
+                "relative": "0x0000005a",
+                "word_address": "0x000df0ee",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x51e0",
+                  "0x8000",
+                  "0x50d0",
+                  "0x8000",
+                  "0x0005",
+                  "0x0000",
+                  "0x6cf2",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x800051e0",
+                "tilemap_source_pointer": "0x800050d0",
+                "palette_selector": 5,
+                "runtime_slot_relative": "0x00006cf2",
+                "runtime_slot_word_address": "0x000e5d86",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_G3_135800G3.MBA",
+      "title": "MGB_G3",
+      "sha256": "d1247344a34b0738076feed6547b533509780c4e73de8eb1347f8ecd34ae5b33",
+      "runtime_base": "0x000c8000",
+      "bundles": [
+        {
+          "header_word_address": "0x001f2d11",
+          "family_a_count": 3,
+          "family_a_table_relative": "0x00004024",
+          "family_a_table_word_address": "0x001f6d55",
+          "descriptors": [
+            {
+              "index": 0,
+              "word_address": "0x001f6d55",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0000",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000000"
+            },
+            {
+              "index": 1,
+              "word_address": "0x001f6d5f",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0012",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000012",
+              "image_record": {
+                "relative": "0x00000012",
+                "word_address": "0x001f2d43",
+                "words": [
+                  "0x0440",
+                  "0x00f0",
+                  "0x0001",
+                  "0x0001",
+                  "0x0005",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x043f",
+                  "0x0000",
+                  "0x0550",
+                  "0x8000",
+                  "0x0370",
+                  "0x8000",
+                  "0x0000",
+                  "0x0000",
+                  "0x3cfe",
+                  "0x0000"
+                ],
+                "width": 1088,
+                "height": 240,
+                "cell_width": 1,
+                "cell_height": 1,
+                "format": 5,
+                "graphics_base_pointer": "0x80000550",
+                "tilemap_source_pointer": "0x80000370",
+                "palette_selector": 0,
+                "runtime_slot_relative": "0x00003cfe",
+                "runtime_slot_word_address": "0x001f6a2f",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 2,
+              "word_address": "0x001f6d69",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0024",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000024",
+              "image_record": {
+                "relative": "0x00000024",
+                "word_address": "0x001f2d55",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x0260",
+                  "0x8004",
+                  "0x0150",
+                  "0x8004",
+                  "0x0001",
+                  "0x0000",
+                  "0x3d00",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x80040260",
+                "tilemap_source_pointer": "0x80040150",
+                "palette_selector": 1,
+                "runtime_slot_relative": "0x00003d00",
+                "runtime_slot_word_address": "0x001f6a31",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_G4_135800G4.MBA",
+      "title": "MGB_G4",
+      "sha256": "7d0b55ee02e296cda08ea4cc9d74c97371e262cec9dda0a17343c41e71a8ef07",
+      "runtime_base": "0x000c8000",
+      "bundles": [
+        {
+          "header_word_address": "0x0016fd39",
+          "family_a_count": 4,
+          "family_a_table_relative": "0x000059b6",
+          "family_a_table_word_address": "0x0017570f",
+          "descriptors": [
+            {
+              "index": 0,
+              "word_address": "0x0017570f",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0000",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000000"
+            },
+            {
+              "index": 1,
+              "word_address": "0x00175719",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0012",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000012",
+              "image_record": {
+                "relative": "0x00000012",
+                "word_address": "0x0016fd6b",
+                "words": [
+                  "0x0500",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x04ff",
+                  "0x0000",
+                  "0x3270",
+                  "0x8001",
+                  "0x2de0",
+                  "0x8001",
+                  "0x0000",
+                  "0x0000",
+                  "0x5610",
+                  "0x0000"
+                ],
+                "width": 1280,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x80013270",
+                "tilemap_source_pointer": "0x80012de0",
+                "palette_selector": 0,
+                "runtime_slot_relative": "0x00005610",
+                "runtime_slot_word_address": "0x00175369",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 2,
+              "word_address": "0x00175723",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0024",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000024",
+              "image_record": {
+                "relative": "0x00000024",
+                "word_address": "0x0016fd7d",
+                "words": [
+                  "0x03c0",
+                  "0x00f0",
+                  "0x0001",
+                  "0x0001",
+                  "0x0005",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x03bf",
+                  "0x0000",
+                  "0x4830",
+                  "0x8001",
+                  "0x4650",
+                  "0x8001",
+                  "0x0000",
+                  "0x0000",
+                  "0x5612",
+                  "0x0000"
+                ],
+                "width": 960,
+                "height": 240,
+                "cell_width": 1,
+                "cell_height": 1,
+                "format": 5,
+                "graphics_base_pointer": "0x80014830",
+                "tilemap_source_pointer": "0x80014650",
+                "palette_selector": 0,
+                "runtime_slot_relative": "0x00005612",
+                "runtime_slot_word_address": "0x0017536b",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 3,
+              "word_address": "0x0017572d",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0036",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000036",
+              "image_record": {
+                "relative": "0x00000036",
+                "word_address": "0x0016fd8f",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xcd40",
+                  "0x8004",
+                  "0xcc30",
+                  "0x8004",
+                  "0x0001",
+                  "0x0000",
+                  "0x5614",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x8004cd40",
+                "tilemap_source_pointer": "0x8004cc30",
+                "palette_selector": 1,
+                "runtime_slot_relative": "0x00005614",
+                "runtime_slot_word_address": "0x0017536d",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_SY_135800SY.MBA",
+      "title": "MGB_SYS",
+      "sha256": "233eb01522c2654c48bf579539661aa4892f560c391100c98bd931edf2beb67a",
+      "runtime_base": "0x000c8000",
+      "bundles": [
+        {
+          "header_word_address": "0x000f30ba",
+          "family_a_count": 12,
+          "family_a_table_relative": "0x00006074",
+          "family_a_table_word_address": "0x000f914e",
+          "descriptors": [
+            {
+              "index": 0,
+              "word_address": "0x000f914e",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0000",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000000"
+            },
+            {
+              "index": 1,
+              "word_address": "0x000f9158",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0012",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000012",
+              "image_record": {
+                "relative": "0x00000012",
+                "word_address": "0x000f30ec",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0002",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x8400",
+                  "0x8000",
+                  "0x8330",
+                  "0x8000",
+                  "0x0010",
+                  "0x0000",
+                  "0x5c26",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 2,
+                "graphics_base_pointer": "0x80008400",
+                "tilemap_source_pointer": "0x80008330",
+                "palette_selector": 16,
+                "runtime_slot_relative": "0x00005c26",
+                "runtime_slot_word_address": "0x000f8d00",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 2,
+              "word_address": "0x000f9162",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0024",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000024",
+              "image_record": {
+                "relative": "0x00000024",
+                "word_address": "0x000f30fe",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xef30",
+                  "0x8000",
+                  "0xee20",
+                  "0x8000",
+                  "0x001a",
+                  "0x0000",
+                  "0x5c28",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x8000ef30",
+                "tilemap_source_pointer": "0x8000ee20",
+                "palette_selector": 26,
+                "runtime_slot_relative": "0x00005c28",
+                "runtime_slot_word_address": "0x000f8d02",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 3,
+              "word_address": "0x000f916c",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0024",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000024",
+              "duplicate_record_of": 2,
+              "image_record": {
+                "relative": "0x00000024",
+                "word_address": "0x000f30fe",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xef30",
+                  "0x8000",
+                  "0xee20",
+                  "0x8000",
+                  "0x001a",
+                  "0x0000",
+                  "0x5c28",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x8000ef30",
+                "tilemap_source_pointer": "0x8000ee20",
+                "palette_selector": 26,
+                "runtime_slot_relative": "0x00005c28",
+                "runtime_slot_word_address": "0x000f8d02",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 4,
+              "word_address": "0x000f9176",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0036",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000036",
+              "image_record": {
+                "relative": "0x00000036",
+                "word_address": "0x000f3110",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xf080",
+                  "0x8000",
+                  "0xef70",
+                  "0x8000",
+                  "0x001b",
+                  "0x0000",
+                  "0x5c2a",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x8000f080",
+                "tilemap_source_pointer": "0x8000ef70",
+                "palette_selector": 27,
+                "runtime_slot_relative": "0x00005c2a",
+                "runtime_slot_word_address": "0x000f8d04",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 5,
+              "word_address": "0x000f9180",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0048",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000048",
+              "image_record": {
+                "relative": "0x00000048",
+                "word_address": "0x000f3122",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0001",
+                  "0x0000",
+                  "0x012f",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x0550",
+                  "0x8001",
+                  "0x0460",
+                  "0x8001",
+                  "0x0018",
+                  "0x0000",
+                  "0x5c2c",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 1,
+                "graphics_base_pointer": "0x80010550",
+                "tilemap_source_pointer": "0x80010460",
+                "palette_selector": 24,
+                "runtime_slot_relative": "0x00005c2c",
+                "runtime_slot_word_address": "0x000f8d06",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 6,
+              "word_address": "0x000f918a",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x005a",
+                "0x0000"
+              ],
+              "nested_relative": "0x0000005a",
+              "image_record": {
+                "relative": "0x0000005a",
+                "word_address": "0x000f3134",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0001",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x0d80",
+                  "0x8001",
+                  "0x0c90",
+                  "0x8001",
+                  "0x0019",
+                  "0x0000",
+                  "0x5c2e",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 1,
+                "graphics_base_pointer": "0x80010d80",
+                "tilemap_source_pointer": "0x80010c90",
+                "palette_selector": 25,
+                "runtime_slot_relative": "0x00005c2e",
+                "runtime_slot_word_address": "0x000f8d08",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 7,
+              "word_address": "0x000f9194",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0024",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000024",
+              "duplicate_record_of": 2,
+              "image_record": {
+                "relative": "0x00000024",
+                "word_address": "0x000f30fe",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xef30",
+                  "0x8000",
+                  "0xee20",
+                  "0x8000",
+                  "0x001a",
+                  "0x0000",
+                  "0x5c28",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x8000ef30",
+                "tilemap_source_pointer": "0x8000ee20",
+                "palette_selector": 26,
+                "runtime_slot_relative": "0x00005c28",
+                "runtime_slot_word_address": "0x000f8d02",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 8,
+              "word_address": "0x000f919e",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0024",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000024",
+              "duplicate_record_of": 2,
+              "image_record": {
+                "relative": "0x00000024",
+                "word_address": "0x000f30fe",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0xef30",
+                  "0x8000",
+                  "0xee20",
+                  "0x8000",
+                  "0x001a",
+                  "0x0000",
+                  "0x5c28",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x8000ef30",
+                "tilemap_source_pointer": "0x8000ee20",
+                "palette_selector": 26,
+                "runtime_slot_relative": "0x00005c28",
+                "runtime_slot_word_address": "0x000f8d02",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 9,
+              "word_address": "0x000f91a8",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x005a",
+                "0x0000"
+              ],
+              "nested_relative": "0x0000005a",
+              "duplicate_record_of": 6,
+              "image_record": {
+                "relative": "0x0000005a",
+                "word_address": "0x000f3134",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0001",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x0d80",
+                  "0x8001",
+                  "0x0c90",
+                  "0x8001",
+                  "0x0019",
+                  "0x0000",
+                  "0x5c2e",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 1,
+                "graphics_base_pointer": "0x80010d80",
+                "tilemap_source_pointer": "0x80010c90",
+                "palette_selector": 25,
+                "runtime_slot_relative": "0x00005c2e",
+                "runtime_slot_word_address": "0x000f8d08",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 10,
+              "word_address": "0x000f91b2",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x006c",
+                "0x0000"
+              ],
+              "nested_relative": "0x0000006c",
+              "image_record": {
+                "relative": "0x0000006c",
+                "word_address": "0x000f3146",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0000",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x1590",
+                  "0x8001",
+                  "0x1480",
+                  "0x8001",
+                  "0x001a",
+                  "0x0000",
+                  "0x5c30",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 0,
+                "graphics_base_pointer": "0x80011590",
+                "tilemap_source_pointer": "0x80011480",
+                "palette_selector": 26,
+                "runtime_slot_relative": "0x00005c30",
+                "runtime_slot_word_address": "0x000f8d0a",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            },
+            {
+              "index": 11,
+              "word_address": "0x000f91bc",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x007e",
+                "0x0000"
+              ],
+              "nested_relative": "0x0000007e",
+              "image_record": {
+                "relative": "0x0000007e",
+                "word_address": "0x000f3158",
+                "words": [
+                  "0x0140",
+                  "0x00f0",
+                  "0x0010",
+                  "0x0010",
+                  "0x0002",
+                  "0x0000",
+                  "0x00ef",
+                  "0x0000",
+                  "0x013f",
+                  "0x0000",
+                  "0x16a0",
+                  "0x8001",
+                  "0x15d0",
+                  "0x8001",
+                  "0x0014",
+                  "0x0000",
+                  "0x5c32",
+                  "0x0000"
+                ],
+                "width": 320,
+                "height": 240,
+                "cell_width": 16,
+                "cell_height": 16,
+                "format": 2,
+                "graphics_base_pointer": "0x800116a0",
+                "tilemap_source_pointer": "0x800115d0",
+                "palette_selector": 20,
+                "runtime_slot_relative": "0x00005c32",
+                "runtime_slot_word_address": "0x000f8d0c",
+                "runtime_slot_words": [
+                  "0x0000",
+                  "0x0000"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_TM_135800TM.MBA",
+      "title": "MGB_TM",
+      "sha256": "9d22007875c00793b84ff3a55b4c3bfdf859b61d365107b87344fab06c3739b4",
+      "runtime_base": "0x000c8000",
+      "bundles": [
+        {
+          "header_word_address": "0x000cf1af",
+          "family_a_count": 1,
+          "family_a_table_relative": "0x00000064",
+          "family_a_table_word_address": "0x000cf233",
+          "descriptors": [
+            {
+              "index": 0,
+              "word_address": "0x000cf233",
+              "words": [
+                "0x0001",
+                "0x0000",
+                "0x0000",
+                "0x00c8",
+                "0x0000",
+                "0x0040",
+                "0xffff",
+                "0xffff",
+                "0x0000",
+                "0x0000"
+              ],
+              "nested_relative": "0x00000000"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

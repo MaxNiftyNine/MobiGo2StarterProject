@@ -61,6 +61,7 @@ struct Audio {
         uint16_t adpcm36_header = 0;
         uint8_t adpcm36_remaining = 0;
         std::array<int16_t, 2> adpcm36_previous{};
+        uint32_t start_sequence = 0;
     };
 
     SDL_AudioDeviceID device = 0;
@@ -195,6 +196,7 @@ struct Audio {
         Channel &state = channels[index];
         state = Channel{};
         state.playing = true;
+        state.start_sequence = bus.spu_channel_start_sequence[index];
         state.wave_addr = wave_address(bus, index);
         state.envelope_addr = uint32_t(channel_reg(bus, index, 8)) |
                               (uint32_t(channel_reg(bus, index, 7) & 0x003f) << 16);
@@ -209,6 +211,7 @@ struct Audio {
                   << " pitch=0x" << pitch(bus, index)
                   << " panvol=0x" << channel_reg(bus, index, 3)
                   << " env=0x" << channel_reg(bus, index, 5)
+                  << " format=0x" << channel_reg(bus, index, 0x0d)
                   << " mainvol=0x" << spu_ctrl(bus, 0, 0x01)
                   << " spuctrl=0x" << spu_ctrl(bus, 0, 0x0d)
                   << " dac=0x" << bus.mmio[0x78f0 - kMmioBase]
@@ -222,12 +225,32 @@ struct Audio {
 
     void stop_channel(Bus &bus, unsigned index, bool natural_end) {
         Channel &state = channels[index];
+        if (g_log && state.playing) {
+            g_log << "SPU stop channel=" << index
+                  << " natural=" << (natural_end ? 1 : 0)
+                  << " wave=0x" << std::hex << state.wave_addr
+                  << " cycles=0x" << bus.cycles << std::dec << "\n";
+        }
         state.playing = false;
         active_channels &= ~(uint32_t(1) << index);
         const uint16_t mask = channel_mask(index);
+        // CH_ENABLE is a programmed enable mask, not the live playback
+        // bitmap. A hardware one-shot leaves it set when it reaches its end;
+        // CH_STATUS is what falls. Software-requested stops have already
+        // cleared CH_ENABLE and retain that state here.
+        if (!natural_end)
+            spu_ctrl(bus, channel_bank(index), 0x00) &= uint16_t(~mask);
         uint16_t &status = spu_ctrl(bus, channel_bank(index), 0x0f);
         status &= uint16_t(~mask);
-        if (natural_end) spu_ctrl(bus, channel_bank(index), 0x0b) |= mask;
+        if (natural_end) {
+            // A tone/end-marker completion raises the per-channel SPU event.
+            // The resident sound manager uses this interrupt to retire its
+            // software voice; merely clearing CH_STATUS leaves that voice in
+            // an eternal "stopping" state even though the hardware channel is
+            // already idle.
+            spu_ctrl(bus, channel_bank(index), 0x03) |= mask;
+            spu_ctrl(bus, channel_bank(index), 0x0b) |= mask;
+        }
     }
 
     void sync_channels(Bus &bus) {
@@ -236,7 +259,10 @@ struct Audio {
             const bool stopped = channel_bit(bus, index, 0x0b);
             if (!enabled) {
                 if (channels[index].playing) stop_channel(bus, index, false);
-            } else if (!stopped && !channels[index].playing) {
+            } else if (!stopped &&
+                       (!channels[index].playing ||
+                        channels[index].start_sequence !=
+                            bus.spu_channel_start_sequence[index])) {
                 start_channel(bus, index);
             }
         }

@@ -1,0 +1,2584 @@
+{
+  "schema": 1,
+  "input": {
+    "path": "research/resident_trampolines_075c00.bin",
+    "sha256": "288597afb39ee7ace5ba95c881e67931fbe68d558c5d6c7de70d541e6f172b79",
+    "bytes": 1984,
+    "base_word_address": 482304
+  },
+  "encoding": {
+    "mask": 65472,
+    "opcode": 65152,
+    "target": "((word0 & 0x3f) << 16) | word1"
+  },
+  "table_range": [
+    482304,
+    483296
+  ],
+  "entry_count": 496,
+  "active_count": 285,
+  "self_loop_placeholder_count": 211,
+  "invalid_count": 0,
+  "entries": [
+    {
+      "service": 482304,
+      "target": 442652,
+      "active": true
+    },
+    {
+      "service": 482306,
+      "target": 442723,
+      "active": true
+    },
+    {
+      "service": 482308,
+      "target": 442792,
+      "active": true
+    },
+    {
+      "service": 482310,
+      "target": 443014,
+      "active": true
+    },
+    {
+      "service": 482312,
+      "target": 443020,
+      "active": true
+    },
+    {
+      "service": 482314,
+      "target": 443029,
+      "active": true
+    },
+    {
+      "service": 482316,
+      "target": 443051,
+      "active": true
+    },
+    {
+      "service": 482318,
+      "target": 443060,
+      "active": true
+    },
+    {
+      "service": 482320,
+      "target": 443072,
+      "active": true
+    },
+    {
+      "service": 482322,
+      "target": 443139,
+      "active": true
+    },
+    {
+      "service": 482324,
+      "target": 443324,
+      "active": true
+    },
+    {
+      "service": 482326,
+      "target": 443357,
+      "active": true
+    },
+    {
+      "service": 482328,
+      "target": 446187,
+      "active": true
+    },
+    {
+      "service": 482330,
+      "target": 446251,
+      "active": true
+    },
+    {
+      "service": 482332,
+      "target": 446321,
+      "active": true
+    },
+    {
+      "service": 482334,
+      "target": 446523,
+      "active": true
+    },
+    {
+      "service": 482336,
+      "target": 446529,
+      "active": true
+    },
+    {
+      "service": 482338,
+      "target": 446538,
+      "active": true
+    },
+    {
+      "service": 482340,
+      "target": 446560,
+      "active": true
+    },
+    {
+      "service": 482342,
+      "target": 446569,
+      "active": true
+    },
+    {
+      "service": 482344,
+      "target": 446581,
+      "active": true
+    },
+    {
+      "service": 482346,
+      "target": 446623,
+      "active": true
+    },
+    {
+      "service": 482348,
+      "target": 446808,
+      "active": true
+    },
+    {
+      "service": 482350,
+      "target": 446841,
+      "active": true
+    },
+    {
+      "service": 482352,
+      "target": 354841,
+      "active": true
+    },
+    {
+      "service": 482354,
+      "target": 354869,
+      "active": true
+    },
+    {
+      "service": 482356,
+      "target": 445793,
+      "active": true
+    },
+    {
+      "service": 482358,
+      "target": 445805,
+      "active": true
+    },
+    {
+      "service": 482360,
+      "target": 443464,
+      "active": true
+    },
+    {
+      "service": 482362,
+      "target": 443476,
+      "active": true
+    },
+    {
+      "service": 482364,
+      "target": 381353,
+      "active": true
+    },
+    {
+      "service": 482366,
+      "target": 389667,
+      "active": true
+    },
+    {
+      "service": 482368,
+      "target": 378818,
+      "active": true
+    },
+    {
+      "service": 482370,
+      "target": 357276,
+      "active": true
+    },
+    {
+      "service": 482372,
+      "target": 445817,
+      "active": true
+    },
+    {
+      "service": 482374,
+      "target": 443488,
+      "active": true
+    },
+    {
+      "service": 482376,
+      "target": 379470,
+      "active": true
+    },
+    {
+      "service": 482378,
+      "target": 482378,
+      "active": false
+    },
+    {
+      "service": 482380,
+      "target": 482380,
+      "active": false
+    },
+    {
+      "service": 482382,
+      "target": 482382,
+      "active": false
+    },
+    {
+      "service": 482384,
+      "target": 482384,
+      "active": false
+    },
+    {
+      "service": 482386,
+      "target": 354494,
+      "active": true,
+      "working_name": "register_dynamic_asset_bundle"
+    },
+    {
+      "service": 482388,
+      "target": 354571,
+      "active": true,
+      "working_name": "unregister_dynamic_asset_bundle"
+    },
+    {
+      "service": 482390,
+      "target": 482390,
+      "active": false
+    },
+    {
+      "service": 482392,
+      "target": 355452,
+      "active": true,
+      "working_name": "create_dynamic_ui_family_b_object"
+    },
+    {
+      "service": 482394,
+      "target": 355938,
+      "active": true
+    },
+    {
+      "service": 482396,
+      "target": 389714,
+      "active": true
+    },
+    {
+      "service": 482398,
+      "target": 379541,
+      "active": true
+    },
+    {
+      "service": 482400,
+      "target": 354366,
+      "active": true
+    },
+    {
+      "service": 482402,
+      "target": 371272,
+      "active": true
+    },
+    {
+      "service": 482404,
+      "target": 388996,
+      "active": true
+    },
+    {
+      "service": 482406,
+      "target": 379605,
+      "active": true
+    },
+    {
+      "service": 482408,
+      "target": 482408,
+      "active": false
+    },
+    {
+      "service": 482410,
+      "target": 482410,
+      "active": false
+    },
+    {
+      "service": 482412,
+      "target": 482412,
+      "active": false
+    },
+    {
+      "service": 482414,
+      "target": 482414,
+      "active": false
+    },
+    {
+      "service": 482416,
+      "target": 482416,
+      "active": false
+    },
+    {
+      "service": 482418,
+      "target": 482418,
+      "active": false
+    },
+    {
+      "service": 482420,
+      "target": 482420,
+      "active": false
+    },
+    {
+      "service": 482422,
+      "target": 482422,
+      "active": false
+    },
+    {
+      "service": 482424,
+      "target": 482424,
+      "active": false
+    },
+    {
+      "service": 482426,
+      "target": 482426,
+      "active": false
+    },
+    {
+      "service": 482428,
+      "target": 482428,
+      "active": false
+    },
+    {
+      "service": 482430,
+      "target": 482430,
+      "active": false
+    },
+    {
+      "service": 482432,
+      "target": 482432,
+      "active": false
+    },
+    {
+      "service": 482434,
+      "target": 482434,
+      "active": false
+    },
+    {
+      "service": 482436,
+      "target": 482436,
+      "active": false
+    },
+    {
+      "service": 482438,
+      "target": 482438,
+      "active": false
+    },
+    {
+      "service": 482440,
+      "target": 482440,
+      "active": false
+    },
+    {
+      "service": 482442,
+      "target": 482442,
+      "active": false
+    },
+    {
+      "service": 482444,
+      "target": 482444,
+      "active": false
+    },
+    {
+      "service": 482446,
+      "target": 482446,
+      "active": false
+    },
+    {
+      "service": 482448,
+      "target": 482448,
+      "active": false
+    },
+    {
+      "service": 482450,
+      "target": 482450,
+      "active": false
+    },
+    {
+      "service": 482452,
+      "target": 482452,
+      "active": false
+    },
+    {
+      "service": 482454,
+      "target": 482454,
+      "active": false
+    },
+    {
+      "service": 482456,
+      "target": 482456,
+      "active": false
+    },
+    {
+      "service": 482458,
+      "target": 482458,
+      "active": false
+    },
+    {
+      "service": 482460,
+      "target": 482460,
+      "active": false
+    },
+    {
+      "service": 482462,
+      "target": 482462,
+      "active": false
+    },
+    {
+      "service": 482464,
+      "target": 482464,
+      "active": false
+    },
+    {
+      "service": 482466,
+      "target": 482466,
+      "active": false
+    },
+    {
+      "service": 482468,
+      "target": 482468,
+      "active": false
+    },
+    {
+      "service": 482470,
+      "target": 482470,
+      "active": false
+    },
+    {
+      "service": 482472,
+      "target": 482472,
+      "active": false
+    },
+    {
+      "service": 482474,
+      "target": 482474,
+      "active": false
+    },
+    {
+      "service": 482476,
+      "target": 482476,
+      "active": false
+    },
+    {
+      "service": 482478,
+      "target": 482478,
+      "active": false
+    },
+    {
+      "service": 482480,
+      "target": 482480,
+      "active": false
+    },
+    {
+      "service": 482482,
+      "target": 482482,
+      "active": false
+    },
+    {
+      "service": 482484,
+      "target": 482484,
+      "active": false
+    },
+    {
+      "service": 482486,
+      "target": 482486,
+      "active": false
+    },
+    {
+      "service": 482488,
+      "target": 482488,
+      "active": false
+    },
+    {
+      "service": 482490,
+      "target": 482490,
+      "active": false
+    },
+    {
+      "service": 482492,
+      "target": 482492,
+      "active": false
+    },
+    {
+      "service": 482494,
+      "target": 482494,
+      "active": false
+    },
+    {
+      "service": 482496,
+      "target": 482496,
+      "active": false
+    },
+    {
+      "service": 482498,
+      "target": 482498,
+      "active": false
+    },
+    {
+      "service": 482500,
+      "target": 482500,
+      "active": false
+    },
+    {
+      "service": 482502,
+      "target": 482502,
+      "active": false
+    },
+    {
+      "service": 482504,
+      "target": 482504,
+      "active": false
+    },
+    {
+      "service": 482506,
+      "target": 482506,
+      "active": false
+    },
+    {
+      "service": 482508,
+      "target": 482508,
+      "active": false
+    },
+    {
+      "service": 482510,
+      "target": 482510,
+      "active": false
+    },
+    {
+      "service": 482512,
+      "target": 482512,
+      "active": false
+    },
+    {
+      "service": 482514,
+      "target": 482514,
+      "active": false
+    },
+    {
+      "service": 482516,
+      "target": 482516,
+      "active": false
+    },
+    {
+      "service": 482518,
+      "target": 482518,
+      "active": false
+    },
+    {
+      "service": 482520,
+      "target": 482520,
+      "active": false
+    },
+    {
+      "service": 482522,
+      "target": 482522,
+      "active": false
+    },
+    {
+      "service": 482524,
+      "target": 482524,
+      "active": false
+    },
+    {
+      "service": 482526,
+      "target": 482526,
+      "active": false
+    },
+    {
+      "service": 482528,
+      "target": 482528,
+      "active": false
+    },
+    {
+      "service": 482530,
+      "target": 482530,
+      "active": false
+    },
+    {
+      "service": 482532,
+      "target": 482532,
+      "active": false
+    },
+    {
+      "service": 482534,
+      "target": 482534,
+      "active": false
+    },
+    {
+      "service": 482536,
+      "target": 482536,
+      "active": false
+    },
+    {
+      "service": 482538,
+      "target": 482538,
+      "active": false
+    },
+    {
+      "service": 482540,
+      "target": 482540,
+      "active": false
+    },
+    {
+      "service": 482542,
+      "target": 482542,
+      "active": false
+    },
+    {
+      "service": 482544,
+      "target": 482544,
+      "active": false
+    },
+    {
+      "service": 482546,
+      "target": 482546,
+      "active": false
+    },
+    {
+      "service": 482548,
+      "target": 482548,
+      "active": false
+    },
+    {
+      "service": 482550,
+      "target": 482550,
+      "active": false
+    },
+    {
+      "service": 482552,
+      "target": 482552,
+      "active": false
+    },
+    {
+      "service": 482554,
+      "target": 482554,
+      "active": false
+    },
+    {
+      "service": 482556,
+      "target": 482556,
+      "active": false
+    },
+    {
+      "service": 482558,
+      "target": 482558,
+      "active": false
+    },
+    {
+      "service": 482560,
+      "target": 482560,
+      "active": false
+    },
+    {
+      "service": 482562,
+      "target": 482562,
+      "active": false
+    },
+    {
+      "service": 482564,
+      "target": 482564,
+      "active": false
+    },
+    {
+      "service": 482566,
+      "target": 482566,
+      "active": false
+    },
+    {
+      "service": 482568,
+      "target": 482568,
+      "active": false
+    },
+    {
+      "service": 482570,
+      "target": 482570,
+      "active": false
+    },
+    {
+      "service": 482572,
+      "target": 482572,
+      "active": false
+    },
+    {
+      "service": 482574,
+      "target": 482574,
+      "active": false
+    },
+    {
+      "service": 482576,
+      "target": 482576,
+      "active": false
+    },
+    {
+      "service": 482578,
+      "target": 482578,
+      "active": false
+    },
+    {
+      "service": 482580,
+      "target": 482580,
+      "active": false
+    },
+    {
+      "service": 482582,
+      "target": 482582,
+      "active": false
+    },
+    {
+      "service": 482584,
+      "target": 482584,
+      "active": false
+    },
+    {
+      "service": 482586,
+      "target": 482586,
+      "active": false
+    },
+    {
+      "service": 482588,
+      "target": 482588,
+      "active": false
+    },
+    {
+      "service": 482590,
+      "target": 482590,
+      "active": false
+    },
+    {
+      "service": 482592,
+      "target": 482592,
+      "active": false
+    },
+    {
+      "service": 482594,
+      "target": 482594,
+      "active": false
+    },
+    {
+      "service": 482596,
+      "target": 482596,
+      "active": false
+    },
+    {
+      "service": 482598,
+      "target": 482598,
+      "active": false
+    },
+    {
+      "service": 482600,
+      "target": 482600,
+      "active": false
+    },
+    {
+      "service": 482602,
+      "target": 482602,
+      "active": false
+    },
+    {
+      "service": 482604,
+      "target": 482604,
+      "active": false
+    },
+    {
+      "service": 482606,
+      "target": 482606,
+      "active": false
+    },
+    {
+      "service": 482608,
+      "target": 482608,
+      "active": false
+    },
+    {
+      "service": 482610,
+      "target": 482610,
+      "active": false
+    },
+    {
+      "service": 482612,
+      "target": 482612,
+      "active": false
+    },
+    {
+      "service": 482614,
+      "target": 482614,
+      "active": false
+    },
+    {
+      "service": 482616,
+      "target": 482616,
+      "active": false
+    },
+    {
+      "service": 482618,
+      "target": 482618,
+      "active": false
+    },
+    {
+      "service": 482620,
+      "target": 482620,
+      "active": false
+    },
+    {
+      "service": 482622,
+      "target": 482622,
+      "active": false
+    },
+    {
+      "service": 482624,
+      "target": 482624,
+      "active": false
+    },
+    {
+      "service": 482626,
+      "target": 482626,
+      "active": false
+    },
+    {
+      "service": 482628,
+      "target": 482628,
+      "active": false
+    },
+    {
+      "service": 482630,
+      "target": 482630,
+      "active": false
+    },
+    {
+      "service": 482632,
+      "target": 482632,
+      "active": false
+    },
+    {
+      "service": 482634,
+      "target": 482634,
+      "active": false
+    },
+    {
+      "service": 482636,
+      "target": 482636,
+      "active": false
+    },
+    {
+      "service": 482638,
+      "target": 482638,
+      "active": false
+    },
+    {
+      "service": 482640,
+      "target": 482640,
+      "active": false
+    },
+    {
+      "service": 482642,
+      "target": 482642,
+      "active": false
+    },
+    {
+      "service": 482644,
+      "target": 482644,
+      "active": false
+    },
+    {
+      "service": 482646,
+      "target": 482646,
+      "active": false
+    },
+    {
+      "service": 482648,
+      "target": 482648,
+      "active": false
+    },
+    {
+      "service": 482650,
+      "target": 482650,
+      "active": false
+    },
+    {
+      "service": 482652,
+      "target": 482652,
+      "active": false
+    },
+    {
+      "service": 482654,
+      "target": 482654,
+      "active": false
+    },
+    {
+      "service": 482656,
+      "target": 482656,
+      "active": false
+    },
+    {
+      "service": 482658,
+      "target": 482658,
+      "active": false
+    },
+    {
+      "service": 482660,
+      "target": 482660,
+      "active": false
+    },
+    {
+      "service": 482662,
+      "target": 482662,
+      "active": false
+    },
+    {
+      "service": 482664,
+      "target": 482664,
+      "active": false
+    },
+    {
+      "service": 482666,
+      "target": 482666,
+      "active": false
+    },
+    {
+      "service": 482668,
+      "target": 482668,
+      "active": false
+    },
+    {
+      "service": 482670,
+      "target": 482670,
+      "active": false
+    },
+    {
+      "service": 482672,
+      "target": 482672,
+      "active": false
+    },
+    {
+      "service": 482674,
+      "target": 482674,
+      "active": false
+    },
+    {
+      "service": 482676,
+      "target": 482676,
+      "active": false
+    },
+    {
+      "service": 482678,
+      "target": 482678,
+      "active": false
+    },
+    {
+      "service": 482680,
+      "target": 482680,
+      "active": false
+    },
+    {
+      "service": 482682,
+      "target": 482682,
+      "active": false
+    },
+    {
+      "service": 482684,
+      "target": 482684,
+      "active": false
+    },
+    {
+      "service": 482686,
+      "target": 482686,
+      "active": false
+    },
+    {
+      "service": 482688,
+      "target": 482688,
+      "active": false
+    },
+    {
+      "service": 482690,
+      "target": 482690,
+      "active": false
+    },
+    {
+      "service": 482692,
+      "target": 482692,
+      "active": false
+    },
+    {
+      "service": 482694,
+      "target": 482694,
+      "active": false
+    },
+    {
+      "service": 482696,
+      "target": 482696,
+      "active": false
+    },
+    {
+      "service": 482698,
+      "target": 482698,
+      "active": false
+    },
+    {
+      "service": 482700,
+      "target": 482700,
+      "active": false
+    },
+    {
+      "service": 482702,
+      "target": 482702,
+      "active": false
+    },
+    {
+      "service": 482704,
+      "target": 482704,
+      "active": false
+    },
+    {
+      "service": 482706,
+      "target": 482706,
+      "active": false
+    },
+    {
+      "service": 482708,
+      "target": 482708,
+      "active": false
+    },
+    {
+      "service": 482710,
+      "target": 482710,
+      "active": false
+    },
+    {
+      "service": 482712,
+      "target": 482712,
+      "active": false
+    },
+    {
+      "service": 482714,
+      "target": 482714,
+      "active": false
+    },
+    {
+      "service": 482716,
+      "target": 482716,
+      "active": false
+    },
+    {
+      "service": 482718,
+      "target": 482718,
+      "active": false
+    },
+    {
+      "service": 482720,
+      "target": 482720,
+      "active": false
+    },
+    {
+      "service": 482722,
+      "target": 482722,
+      "active": false
+    },
+    {
+      "service": 482724,
+      "target": 482724,
+      "active": false
+    },
+    {
+      "service": 482726,
+      "target": 482726,
+      "active": false
+    },
+    {
+      "service": 482728,
+      "target": 482728,
+      "active": false
+    },
+    {
+      "service": 482730,
+      "target": 482730,
+      "active": false
+    },
+    {
+      "service": 482732,
+      "target": 482732,
+      "active": false
+    },
+    {
+      "service": 482734,
+      "target": 482734,
+      "active": false
+    },
+    {
+      "service": 482736,
+      "target": 482736,
+      "active": false
+    },
+    {
+      "service": 482738,
+      "target": 482738,
+      "active": false
+    },
+    {
+      "service": 482740,
+      "target": 482740,
+      "active": false
+    },
+    {
+      "service": 482742,
+      "target": 482742,
+      "active": false
+    },
+    {
+      "service": 482744,
+      "target": 482744,
+      "active": false
+    },
+    {
+      "service": 482746,
+      "target": 482746,
+      "active": false
+    },
+    {
+      "service": 482748,
+      "target": 482748,
+      "active": false
+    },
+    {
+      "service": 482750,
+      "target": 482750,
+      "active": false
+    },
+    {
+      "service": 482752,
+      "target": 482752,
+      "active": false
+    },
+    {
+      "service": 482754,
+      "target": 482754,
+      "active": false
+    },
+    {
+      "service": 482756,
+      "target": 482756,
+      "active": false
+    },
+    {
+      "service": 482758,
+      "target": 482758,
+      "active": false
+    },
+    {
+      "service": 482760,
+      "target": 482760,
+      "active": false
+    },
+    {
+      "service": 482762,
+      "target": 482762,
+      "active": false
+    },
+    {
+      "service": 482764,
+      "target": 482764,
+      "active": false
+    },
+    {
+      "service": 482766,
+      "target": 482766,
+      "active": false
+    },
+    {
+      "service": 482768,
+      "target": 482768,
+      "active": false
+    },
+    {
+      "service": 482770,
+      "target": 482770,
+      "active": false
+    },
+    {
+      "service": 482772,
+      "target": 482772,
+      "active": false
+    },
+    {
+      "service": 482774,
+      "target": 482774,
+      "active": false
+    },
+    {
+      "service": 482776,
+      "target": 482776,
+      "active": false
+    },
+    {
+      "service": 482778,
+      "target": 482778,
+      "active": false
+    },
+    {
+      "service": 482780,
+      "target": 482780,
+      "active": false
+    },
+    {
+      "service": 482782,
+      "target": 482782,
+      "active": false
+    },
+    {
+      "service": 482784,
+      "target": 482784,
+      "active": false
+    },
+    {
+      "service": 482786,
+      "target": 482786,
+      "active": false
+    },
+    {
+      "service": 482788,
+      "target": 482788,
+      "active": false
+    },
+    {
+      "service": 482790,
+      "target": 482790,
+      "active": false
+    },
+    {
+      "service": 482792,
+      "target": 482792,
+      "active": false
+    },
+    {
+      "service": 482794,
+      "target": 482794,
+      "active": false
+    },
+    {
+      "service": 482796,
+      "target": 482796,
+      "active": false
+    },
+    {
+      "service": 482798,
+      "target": 482798,
+      "active": false
+    },
+    {
+      "service": 482800,
+      "target": 482800,
+      "active": false
+    },
+    {
+      "service": 482802,
+      "target": 482802,
+      "active": false
+    },
+    {
+      "service": 482804,
+      "target": 482804,
+      "active": false
+    },
+    {
+      "service": 482806,
+      "target": 482806,
+      "active": false
+    },
+    {
+      "service": 482808,
+      "target": 482808,
+      "active": false
+    },
+    {
+      "service": 482810,
+      "target": 482810,
+      "active": false
+    },
+    {
+      "service": 482812,
+      "target": 482812,
+      "active": false
+    },
+    {
+      "service": 482814,
+      "target": 482814,
+      "active": false
+    },
+    {
+      "service": 482816,
+      "target": 387795,
+      "active": true
+    },
+    {
+      "service": 482818,
+      "target": 387976,
+      "active": true
+    },
+    {
+      "service": 482820,
+      "target": 388016,
+      "active": true
+    },
+    {
+      "service": 482822,
+      "target": 388889,
+      "active": true,
+      "working_name": "register_audio_resources"
+    },
+    {
+      "service": 482824,
+      "target": 389600,
+      "active": true
+    },
+    {
+      "service": 482826,
+      "target": 389606,
+      "active": true,
+      "working_name": "apply_master_volume"
+    },
+    {
+      "service": 482828,
+      "target": 389618,
+      "active": true
+    },
+    {
+      "service": 482830,
+      "target": 390136,
+      "active": true,
+      "working_name": "play_sound"
+    },
+    {
+      "service": 482832,
+      "target": 390171,
+      "active": true
+    },
+    {
+      "service": 482834,
+      "target": 390944,
+      "active": true
+    },
+    {
+      "service": 482836,
+      "target": 391172,
+      "active": true
+    },
+    {
+      "service": 482838,
+      "target": 391215,
+      "active": true
+    },
+    {
+      "service": 482840,
+      "target": 391258,
+      "active": true
+    },
+    {
+      "service": 482842,
+      "target": 391439,
+      "active": true,
+      "working_name": "get_sound_state"
+    },
+    {
+      "service": 482844,
+      "target": 391524,
+      "active": true
+    },
+    {
+      "service": 482846,
+      "target": 391624,
+      "active": true
+    },
+    {
+      "service": 482848,
+      "target": 391719,
+      "active": true
+    },
+    {
+      "service": 482850,
+      "target": 391766,
+      "active": true
+    },
+    {
+      "service": 482852,
+      "target": 391813,
+      "active": true
+    },
+    {
+      "service": 482854,
+      "target": 391860,
+      "active": true
+    },
+    {
+      "service": 482856,
+      "target": 391907,
+      "active": true
+    },
+    {
+      "service": 482858,
+      "target": 391954,
+      "active": true
+    },
+    {
+      "service": 482860,
+      "target": 392001,
+      "active": true,
+      "working_name": "play_music"
+    },
+    {
+      "service": 482862,
+      "target": 392032,
+      "active": true
+    },
+    {
+      "service": 482864,
+      "target": 392499,
+      "active": true
+    },
+    {
+      "service": 482866,
+      "target": 392522,
+      "active": true,
+      "working_name": "pause_music"
+    },
+    {
+      "service": 482868,
+      "target": 392545,
+      "active": true,
+      "working_name": "resume_music"
+    },
+    {
+      "service": 482870,
+      "target": 392568,
+      "active": true,
+      "working_name": "stop_music"
+    },
+    {
+      "service": 482872,
+      "target": 392672,
+      "active": true,
+      "working_name": "get_music_state"
+    },
+    {
+      "service": 482874,
+      "target": 392704,
+      "active": true
+    },
+    {
+      "service": 482876,
+      "target": 392731,
+      "active": true,
+      "working_name": "set_music_repeat"
+    },
+    {
+      "service": 482878,
+      "target": 392760,
+      "active": true,
+      "working_name": "get_music_level"
+    },
+    {
+      "service": 482880,
+      "target": 392787,
+      "active": true,
+      "working_name": "set_music_level"
+    },
+    {
+      "service": 482882,
+      "target": 392816,
+      "active": true
+    },
+    {
+      "service": 482884,
+      "target": 392844,
+      "active": true
+    },
+    {
+      "service": 482886,
+      "target": 392871,
+      "active": true
+    },
+    {
+      "service": 482888,
+      "target": 392900,
+      "active": true
+    },
+    {
+      "service": 482890,
+      "target": 392933,
+      "active": true
+    },
+    {
+      "service": 482892,
+      "target": 433448,
+      "active": true
+    },
+    {
+      "service": 482894,
+      "target": 433531,
+      "active": true
+    },
+    {
+      "service": 482896,
+      "target": 433577,
+      "active": true
+    },
+    {
+      "service": 482898,
+      "target": 434229,
+      "active": true
+    },
+    {
+      "service": 482900,
+      "target": 434285,
+      "active": true
+    },
+    {
+      "service": 482902,
+      "target": 434394,
+      "active": true
+    },
+    {
+      "service": 482904,
+      "target": 415508,
+      "active": true
+    },
+    {
+      "service": 482906,
+      "target": 415607,
+      "active": true
+    },
+    {
+      "service": 482908,
+      "target": 415687,
+      "active": true
+    },
+    {
+      "service": 482910,
+      "target": 378810,
+      "active": true,
+      "working_name": "request_poweroff"
+    },
+    {
+      "service": 482912,
+      "target": 416809,
+      "active": true,
+      "working_name": "get_system_keys"
+    },
+    {
+      "service": 482914,
+      "target": 416818,
+      "active": true,
+      "working_name": "system_key_down"
+    },
+    {
+      "service": 482916,
+      "target": 416835,
+      "active": true,
+      "working_name": "system_key_pressed"
+    },
+    {
+      "service": 482918,
+      "target": 416859,
+      "active": true,
+      "working_name": "system_key_released"
+    },
+    {
+      "service": 482920,
+      "target": 416883,
+      "active": true
+    },
+    {
+      "service": 482922,
+      "target": 417006,
+      "active": true
+    },
+    {
+      "service": 482924,
+      "target": 417077,
+      "active": true
+    },
+    {
+      "service": 482926,
+      "target": 417095,
+      "active": true
+    },
+    {
+      "service": 482928,
+      "target": 417111,
+      "active": true
+    },
+    {
+      "service": 482930,
+      "target": 417296,
+      "active": true
+    },
+    {
+      "service": 482932,
+      "target": 417329,
+      "active": true
+    },
+    {
+      "service": 482934,
+      "target": 427600,
+      "active": true
+    },
+    {
+      "service": 482936,
+      "target": 427683,
+      "active": true
+    },
+    {
+      "service": 482938,
+      "target": 427790,
+      "active": true
+    },
+    {
+      "service": 482940,
+      "target": 427954,
+      "active": true,
+      "working_name": "create_context"
+    },
+    {
+      "service": 482942,
+      "target": 428130,
+      "active": true,
+      "working_name": "destroy_context"
+    },
+    {
+      "service": 482944,
+      "target": 428246,
+      "active": true
+    },
+    {
+      "service": 482946,
+      "target": 428318,
+      "active": true,
+      "working_name": "get_context_pointer"
+    },
+    {
+      "service": 482948,
+      "target": 428362,
+      "active": true,
+      "working_name": "release_context"
+    },
+    {
+      "service": 482950,
+      "target": 428408,
+      "active": true
+    },
+    {
+      "service": 482952,
+      "target": 428444,
+      "active": true
+    },
+    {
+      "service": 482954,
+      "target": 428553,
+      "active": true,
+      "working_name": "post_framework_event"
+    },
+    {
+      "service": 482956,
+      "target": 428620,
+      "active": true
+    },
+    {
+      "service": 482958,
+      "target": 428723,
+      "active": true
+    },
+    {
+      "service": 482960,
+      "target": 428772,
+      "active": true
+    },
+    {
+      "service": 482962,
+      "target": 428831,
+      "active": true
+    },
+    {
+      "service": 482964,
+      "target": 428880,
+      "active": true
+    },
+    {
+      "service": 482966,
+      "target": 380716,
+      "active": true
+    },
+    {
+      "service": 482968,
+      "target": 378824,
+      "active": true
+    },
+    {
+      "service": 482970,
+      "target": 379256,
+      "active": true
+    },
+    {
+      "service": 482972,
+      "target": 392955,
+      "active": true
+    },
+    {
+      "service": 482974,
+      "target": 392971,
+      "active": true
+    },
+    {
+      "service": 482976,
+      "target": 381604,
+      "active": true
+    },
+    {
+      "service": 482978,
+      "target": 382329,
+      "active": true
+    },
+    {
+      "service": 482980,
+      "target": 380958,
+      "active": true
+    },
+    {
+      "service": 482982,
+      "target": 381496,
+      "active": true
+    },
+    {
+      "service": 482984,
+      "target": 381510,
+      "active": true
+    },
+    {
+      "service": 482986,
+      "target": 381524,
+      "active": true,
+      "working_name": "get_volume"
+    },
+    {
+      "service": 482988,
+      "target": 381536,
+      "active": true,
+      "working_name": "set_volume"
+    },
+    {
+      "service": 482990,
+      "target": 381552,
+      "active": true
+    },
+    {
+      "service": 482992,
+      "target": 381564,
+      "active": true
+    },
+    {
+      "service": 482994,
+      "target": 381580,
+      "active": true,
+      "working_name": "get_brightness"
+    },
+    {
+      "service": 482996,
+      "target": 381586,
+      "active": true,
+      "working_name": "set_brightness"
+    },
+    {
+      "service": 482998,
+      "target": 381598,
+      "active": true
+    },
+    {
+      "service": 483000,
+      "target": 383142,
+      "active": true
+    },
+    {
+      "service": 483002,
+      "target": 383441,
+      "active": true
+    },
+    {
+      "service": 483004,
+      "target": 483004,
+      "active": false
+    },
+    {
+      "service": 483006,
+      "target": 483006,
+      "active": false
+    },
+    {
+      "service": 483008,
+      "target": 447295,
+      "active": true
+    },
+    {
+      "service": 483010,
+      "target": 447317,
+      "active": true
+    },
+    {
+      "service": 483012,
+      "target": 447383,
+      "active": true
+    },
+    {
+      "service": 483014,
+      "target": 447573,
+      "active": true,
+      "working_name": "get_game_keys"
+    },
+    {
+      "service": 483016,
+      "target": 447582,
+      "active": true,
+      "working_name": "game_key_down"
+    },
+    {
+      "service": 483018,
+      "target": 447599,
+      "active": true,
+      "working_name": "game_key_pressed"
+    },
+    {
+      "service": 483020,
+      "target": 447623,
+      "active": true,
+      "working_name": "game_key_released"
+    },
+    {
+      "service": 483022,
+      "target": 447647,
+      "active": true
+    },
+    {
+      "service": 483024,
+      "target": 447832,
+      "active": true
+    },
+    {
+      "service": 483026,
+      "target": 447865,
+      "active": true
+    },
+    {
+      "service": 483028,
+      "target": 443859,
+      "active": true
+    },
+    {
+      "service": 483030,
+      "target": 443932,
+      "active": true
+    },
+    {
+      "service": 483032,
+      "target": 443998,
+      "active": true
+    },
+    {
+      "service": 483034,
+      "target": 444217,
+      "active": true
+    },
+    {
+      "service": 483036,
+      "target": 444226,
+      "active": true
+    },
+    {
+      "service": 483038,
+      "target": 444238,
+      "active": true
+    },
+    {
+      "service": 483040,
+      "target": 444255,
+      "active": true,
+      "working_name": "get_input_event_pointer"
+    },
+    {
+      "service": 483042,
+      "target": 444264,
+      "active": true,
+      "working_name": "get_input_event_count"
+    },
+    {
+      "service": 483044,
+      "target": 444275,
+      "active": true
+    },
+    {
+      "service": 483046,
+      "target": 444291,
+      "active": true,
+      "working_name": "test_special_key"
+    },
+    {
+      "service": 483048,
+      "target": 444303,
+      "active": true
+    },
+    {
+      "service": 483050,
+      "target": 444315,
+      "active": true
+    },
+    {
+      "service": 483052,
+      "target": 444321,
+      "active": true
+    },
+    {
+      "service": 483054,
+      "target": 444333,
+      "active": true
+    },
+    {
+      "service": 483056,
+      "target": 444345,
+      "active": true
+    },
+    {
+      "service": 483058,
+      "target": 444351,
+      "active": true
+    },
+    {
+      "service": 483060,
+      "target": 444363,
+      "active": true
+    },
+    {
+      "service": 483062,
+      "target": 444548,
+      "active": true
+    },
+    {
+      "service": 483064,
+      "target": 444581,
+      "active": true
+    },
+    {
+      "service": 483066,
+      "target": 351724,
+      "active": true,
+      "working_name": "ui_runtime_init"
+    },
+    {
+      "service": 483068,
+      "target": 352027,
+      "active": true,
+      "working_name": "ui_runtime_shutdown"
+    },
+    {
+      "service": 483070,
+      "target": 352132,
+      "active": true,
+      "working_name": "ui_runtime_render_frame"
+    },
+    {
+      "service": 483072,
+      "target": 354336,
+      "active": true,
+      "working_name": "register_asset_bundle"
+    },
+    {
+      "service": 483074,
+      "target": 354767,
+      "active": true,
+      "working_name": "load_ui_family_a_descriptor"
+    },
+    {
+      "service": 483076,
+      "target": 354816,
+      "active": true,
+      "working_name": "init_ui_family_a_descriptor_runtime"
+    },
+    {
+      "service": 483078,
+      "target": 354920,
+      "active": true,
+      "working_name": "create_ui_family_a_object"
+    },
+    {
+      "service": 483080,
+      "target": 354960,
+      "active": true,
+      "working_name": "destroy_ui_family_a_object"
+    },
+    {
+      "service": 483082,
+      "target": 355035,
+      "active": true
+    },
+    {
+      "service": 483084,
+      "target": 355273,
+      "active": true
+    },
+    {
+      "service": 483086,
+      "target": 355299,
+      "active": true,
+      "working_name": "get_ui_family_a_object"
+    },
+    {
+      "service": 483088,
+      "target": 355349,
+      "active": true,
+      "working_name": "load_ui_family_b_descriptor"
+    },
+    {
+      "service": 483090,
+      "target": 355412,
+      "active": true,
+      "working_name": "create_ui_family_b_object"
+    },
+    {
+      "service": 483092,
+      "target": 355492,
+      "active": true,
+      "working_name": "destroy_ui_family_b_object"
+    },
+    {
+      "service": 483094,
+      "target": 355568,
+      "active": true
+    },
+    {
+      "service": 483096,
+      "target": 355964,
+      "active": true,
+      "working_name": "get_ui_family_b_object"
+    },
+    {
+      "service": 483098,
+      "target": 356014,
+      "active": true
+    },
+    {
+      "service": 483100,
+      "target": 356350,
+      "active": true,
+      "working_name": "bind_ui_object_control"
+    },
+    {
+      "service": 483102,
+      "target": 356559,
+      "active": true
+    },
+    {
+      "service": 483104,
+      "target": 356633,
+      "active": true
+    },
+    {
+      "service": 483106,
+      "target": 429917,
+      "active": true
+    },
+    {
+      "service": 483108,
+      "target": 430030,
+      "active": true
+    },
+    {
+      "service": 483110,
+      "target": 430094,
+      "active": true
+    },
+    {
+      "service": 483112,
+      "target": 430465,
+      "active": true
+    },
+    {
+      "service": 483114,
+      "target": 430608,
+      "active": true
+    },
+    {
+      "service": 483116,
+      "target": 430716,
+      "active": true
+    },
+    {
+      "service": 483118,
+      "target": 430842,
+      "active": true,
+      "working_name": "get_ticks"
+    },
+    {
+      "service": 483120,
+      "target": 445032,
+      "active": true,
+      "working_name": "touch_init"
+    },
+    {
+      "service": 483122,
+      "target": 445093,
+      "active": true,
+      "working_name": "touch_shutdown"
+    },
+    {
+      "service": 483124,
+      "target": 445150,
+      "active": true,
+      "working_name": "touch_update"
+    },
+    {
+      "service": 483126,
+      "target": 445370,
+      "active": true,
+      "working_name": "touch_get_enabled"
+    },
+    {
+      "service": 483128,
+      "target": 445379,
+      "active": true,
+      "working_name": "touch_set_enabled"
+    },
+    {
+      "service": 483130,
+      "target": 445393,
+      "active": true,
+      "working_name": "get_touch_event_pointer"
+    },
+    {
+      "service": 483132,
+      "target": 445402,
+      "active": true,
+      "working_name": "get_touch_event_count"
+    },
+    {
+      "service": 483134,
+      "target": 445414,
+      "active": true,
+      "working_name": "touch_clear_records"
+    },
+    {
+      "service": 483136,
+      "target": 445468,
+      "active": true,
+      "working_name": "touch_register_handler"
+    },
+    {
+      "service": 483138,
+      "target": 445653,
+      "active": true,
+      "working_name": "touch_unregister_handler"
+    },
+    {
+      "service": 483140,
+      "target": 445686,
+      "active": true,
+      "working_name": "touch_reset_handlers"
+    },
+    {
+      "service": 483142,
+      "target": 441497,
+      "active": true,
+      "working_name": "runtime_setup"
+    },
+    {
+      "service": 483144,
+      "target": 441604,
+      "active": true,
+      "working_name": "runtime_step"
+    },
+    {
+      "service": 483146,
+      "target": 442119,
+      "active": true,
+      "working_name": "runtime_finalize"
+    },
+    {
+      "service": 483148,
+      "target": 442143,
+      "active": true
+    },
+    {
+      "service": 483150,
+      "target": 442157,
+      "active": true
+    },
+    {
+      "service": 483152,
+      "target": 442163,
+      "active": true
+    },
+    {
+      "service": 483154,
+      "target": 417041,
+      "active": true,
+      "working_name": "gpio_b_bit9_hardware_init"
+    },
+    {
+      "service": 483156,
+      "target": 442169,
+      "active": true
+    },
+    {
+      "service": 483158,
+      "target": 442183,
+      "active": true
+    },
+    {
+      "service": 483160,
+      "target": 442197,
+      "active": true
+    },
+    {
+      "service": 483162,
+      "target": 442211,
+      "active": true
+    },
+    {
+      "service": 483164,
+      "target": 442225,
+      "active": true
+    },
+    {
+      "service": 483166,
+      "target": 442239,
+      "active": true
+    },
+    {
+      "service": 483168,
+      "target": 442265,
+      "active": true
+    },
+    {
+      "service": 483170,
+      "target": 441019,
+      "active": true
+    },
+    {
+      "service": 483172,
+      "target": 357196,
+      "active": true
+    },
+    {
+      "service": 483174,
+      "target": 357213,
+      "active": true
+    },
+    {
+      "service": 483176,
+      "target": 357234,
+      "active": true
+    },
+    {
+      "service": 483178,
+      "target": 357253,
+      "active": true
+    },
+    {
+      "service": 483180,
+      "target": 371393,
+      "active": true
+    },
+    {
+      "service": 483182,
+      "target": 371592,
+      "active": true
+    },
+    {
+      "service": 483184,
+      "target": 378251,
+      "active": true
+    },
+    {
+      "service": 483186,
+      "target": 378415,
+      "active": true
+    },
+    {
+      "service": 483188,
+      "target": 378558,
+      "active": true
+    },
+    {
+      "service": 483190,
+      "target": 378631,
+      "active": true
+    },
+    {
+      "service": 483192,
+      "target": 378704,
+      "active": true
+    },
+    {
+      "service": 483194,
+      "target": 378331,
+      "active": true
+    },
+    {
+      "service": 483196,
+      "target": 378802,
+      "active": true
+    },
+    {
+      "service": 483198,
+      "target": 417047,
+      "active": true
+    },
+    {
+      "service": 483200,
+      "target": 417059,
+      "active": true
+    },
+    {
+      "service": 483202,
+      "target": 417065,
+      "active": true,
+      "working_name": "apply_backlight"
+    },
+    {
+      "service": 483204,
+      "target": 385884,
+      "active": true
+    },
+    {
+      "service": 483206,
+      "target": 386306,
+      "active": true
+    },
+    {
+      "service": 483208,
+      "target": 386565,
+      "active": true
+    },
+    {
+      "service": 483210,
+      "target": 437289,
+      "active": true
+    },
+    {
+      "service": 483212,
+      "target": 437343,
+      "active": true
+    },
+    {
+      "service": 483214,
+      "target": 437437,
+      "active": true
+    },
+    {
+      "service": 483216,
+      "target": 437461,
+      "active": true
+    },
+    {
+      "service": 483218,
+      "target": 417035,
+      "active": true
+    },
+    {
+      "service": 483220,
+      "target": 356149,
+      "active": true
+    },
+    {
+      "service": 483222,
+      "target": 356295,
+      "active": true
+    },
+    {
+      "service": 483224,
+      "target": 437449,
+      "active": true
+    },
+    {
+      "service": 483226,
+      "target": 416902,
+      "active": true
+    },
+    {
+      "service": 483228,
+      "target": 416913,
+      "active": true
+    },
+    {
+      "service": 483230,
+      "target": 416962,
+      "active": true
+    },
+    {
+      "service": 483232,
+      "target": 380755,
+      "active": true,
+      "working_name": "storage_config"
+    },
+    {
+      "service": 483234,
+      "target": 436301,
+      "active": true,
+      "working_name": "file_open"
+    },
+    {
+      "service": 483236,
+      "target": 436413,
+      "active": true,
+      "working_name": "file_close"
+    },
+    {
+      "service": 483238,
+      "target": 436431,
+      "active": true,
+      "working_name": "file_read"
+    },
+    {
+      "service": 483240,
+      "target": 436462,
+      "active": true,
+      "working_name": "file_write"
+    },
+    {
+      "service": 483242,
+      "target": 436493,
+      "active": true,
+      "working_name": "file_truncate_at_position"
+    },
+    {
+      "service": 483244,
+      "target": 436511,
+      "active": true,
+      "working_name": "file_seek_absolute"
+    },
+    {
+      "service": 483246,
+      "target": 436535,
+      "active": true,
+      "working_name": "file_size"
+    },
+    {
+      "service": 483248,
+      "target": 436752,
+      "active": true,
+      "working_name": "file_stat"
+    },
+    {
+      "service": 483250,
+      "target": 436852,
+      "active": true,
+      "working_name": "path_remove"
+    },
+    {
+      "service": 483252,
+      "target": 436936,
+      "active": true,
+      "working_name": "path_exists"
+    },
+    {
+      "service": 483254,
+      "target": 437556,
+      "active": true
+    },
+    {
+      "service": 483256,
+      "target": 437580,
+      "active": true
+    },
+    {
+      "service": 483258,
+      "target": 437610,
+      "active": true
+    },
+    {
+      "service": 483260,
+      "target": 437616,
+      "active": true
+    },
+    {
+      "service": 483262,
+      "target": 437520,
+      "active": true
+    },
+    {
+      "service": 483264,
+      "target": 437011,
+      "active": true
+    },
+    {
+      "service": 483266,
+      "target": 437622,
+      "active": true
+    },
+    {
+      "service": 483268,
+      "target": 437676,
+      "active": true
+    },
+    {
+      "service": 483270,
+      "target": 437867,
+      "active": true
+    },
+    {
+      "service": 483272,
+      "target": 437879,
+      "active": true
+    },
+    {
+      "service": 483274,
+      "target": 371447,
+      "active": true,
+      "working_name": "launch_mba"
+    },
+    {
+      "service": 483276,
+      "target": 436284,
+      "active": true,
+      "working_name": "query_launch_volume"
+    },
+    {
+      "service": 483278,
+      "target": 436578,
+      "active": true
+    },
+    {
+      "service": 483280,
+      "target": 437097,
+      "active": true
+    },
+    {
+      "service": 483282,
+      "target": 437117,
+      "active": true
+    },
+    {
+      "service": 483284,
+      "target": 378832,
+      "active": true
+    },
+    {
+      "service": 483286,
+      "target": 383867,
+      "active": true
+    },
+    {
+      "service": 483288,
+      "target": 384406,
+      "active": true
+    },
+    {
+      "service": 483290,
+      "target": 436554,
+      "active": true
+    },
+    {
+      "service": 483292,
+      "target": 437201,
+      "active": true
+    },
+    {
+      "service": 483294,
+      "target": 417024,
+      "active": true
+    }
+  ]
+}

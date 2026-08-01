@@ -1,0 +1,5719 @@
+{
+  "schema": 1,
+  "warning": "raw opcode candidates; verify important sites in Ghidra",
+  "encoding": {
+    "mask": 65472,
+    "opcode": 61504,
+    "target": "((word0 & 0x3f) << 16) | word1"
+  },
+  "target_range": [
+    482304,
+    483328
+  ],
+  "image_count": 14,
+  "aggregate": [
+    {
+      "target": 482314,
+      "images_present": 5,
+      "total_calls": 5
+    },
+    {
+      "target": 482316,
+      "images_present": 6,
+      "total_calls": 24
+    },
+    {
+      "target": 482318,
+      "images_present": 6,
+      "total_calls": 12
+    },
+    {
+      "target": 482334,
+      "images_present": 1,
+      "total_calls": 3
+    },
+    {
+      "target": 482338,
+      "images_present": 1,
+      "total_calls": 3
+    },
+    {
+      "target": 482340,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 482342,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 482354,
+      "images_present": 2,
+      "total_calls": 3
+    },
+    {
+      "target": 482356,
+      "images_present": 1,
+      "total_calls": 7
+    },
+    {
+      "target": 482360,
+      "images_present": 1,
+      "total_calls": 2
+    },
+    {
+      "target": 482362,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 482364,
+      "images_present": 2,
+      "total_calls": 3
+    },
+    {
+      "target": 482366,
+      "images_present": 3,
+      "total_calls": 3
+    },
+    {
+      "target": 482368,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 482372,
+      "images_present": 1,
+      "total_calls": 3
+    },
+    {
+      "target": 482386,
+      "images_present": 1,
+      "total_calls": 3
+    },
+    {
+      "target": 482388,
+      "images_present": 1,
+      "total_calls": 3
+    },
+    {
+      "target": 482392,
+      "images_present": 1,
+      "total_calls": 3
+    },
+    {
+      "target": 482822,
+      "images_present": 7,
+      "total_calls": 7
+    },
+    {
+      "target": 482824,
+      "images_present": 3,
+      "total_calls": 3
+    },
+    {
+      "target": 482826,
+      "images_present": 6,
+      "total_calls": 20
+    },
+    {
+      "target": 482828,
+      "images_present": 4,
+      "total_calls": 12
+    },
+    {
+      "target": 482830,
+      "images_present": 7,
+      "total_calls": 34
+    },
+    {
+      "target": 482836,
+      "images_present": 3,
+      "total_calls": 6
+    },
+    {
+      "target": 482838,
+      "images_present": 3,
+      "total_calls": 6
+    },
+    {
+      "target": 482840,
+      "images_present": 6,
+      "total_calls": 12
+    },
+    {
+      "target": 482842,
+      "images_present": 7,
+      "total_calls": 16
+    },
+    {
+      "target": 482860,
+      "images_present": 6,
+      "total_calls": 6
+    },
+    {
+      "target": 482866,
+      "images_present": 5,
+      "total_calls": 7
+    },
+    {
+      "target": 482868,
+      "images_present": 5,
+      "total_calls": 9
+    },
+    {
+      "target": 482870,
+      "images_present": 6,
+      "total_calls": 6
+    },
+    {
+      "target": 482872,
+      "images_present": 6,
+      "total_calls": 6
+    },
+    {
+      "target": 482876,
+      "images_present": 3,
+      "total_calls": 3
+    },
+    {
+      "target": 482878,
+      "images_present": 3,
+      "total_calls": 3
+    },
+    {
+      "target": 482880,
+      "images_present": 6,
+      "total_calls": 27
+    },
+    {
+      "target": 482888,
+      "images_present": 4,
+      "total_calls": 8
+    },
+    {
+      "target": 482890,
+      "images_present": 4,
+      "total_calls": 4
+    },
+    {
+      "target": 482898,
+      "images_present": 1,
+      "total_calls": 8
+    },
+    {
+      "target": 482910,
+      "images_present": 8,
+      "total_calls": 11
+    },
+    {
+      "target": 482912,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 482916,
+      "images_present": 7,
+      "total_calls": 33
+    },
+    {
+      "target": 482920,
+      "images_present": 3,
+      "total_calls": 3
+    },
+    {
+      "target": 482922,
+      "images_present": 6,
+      "total_calls": 8
+    },
+    {
+      "target": 482926,
+      "images_present": 3,
+      "total_calls": 3
+    },
+    {
+      "target": 482928,
+      "images_present": 6,
+      "total_calls": 7
+    },
+    {
+      "target": 482930,
+      "images_present": 3,
+      "total_calls": 3
+    },
+    {
+      "target": 482940,
+      "images_present": 6,
+      "total_calls": 30
+    },
+    {
+      "target": 482942,
+      "images_present": 6,
+      "total_calls": 29
+    },
+    {
+      "target": 482946,
+      "images_present": 6,
+      "total_calls": 56
+    },
+    {
+      "target": 482948,
+      "images_present": 6,
+      "total_calls": 63
+    },
+    {
+      "target": 482950,
+      "images_present": 2,
+      "total_calls": 2
+    },
+    {
+      "target": 482952,
+      "images_present": 5,
+      "total_calls": 15
+    },
+    {
+      "target": 482954,
+      "images_present": 6,
+      "total_calls": 19
+    },
+    {
+      "target": 482966,
+      "images_present": 6,
+      "total_calls": 6
+    },
+    {
+      "target": 482968,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 482976,
+      "images_present": 4,
+      "total_calls": 8
+    },
+    {
+      "target": 482978,
+      "images_present": 4,
+      "total_calls": 4
+    },
+    {
+      "target": 482980,
+      "images_present": 2,
+      "total_calls": 5
+    },
+    {
+      "target": 482982,
+      "images_present": 1,
+      "total_calls": 7
+    },
+    {
+      "target": 482984,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 482986,
+      "images_present": 6,
+      "total_calls": 6
+    },
+    {
+      "target": 482988,
+      "images_present": 6,
+      "total_calls": 11
+    },
+    {
+      "target": 482994,
+      "images_present": 6,
+      "total_calls": 15
+    },
+    {
+      "target": 482996,
+      "images_present": 6,
+      "total_calls": 6
+    },
+    {
+      "target": 483000,
+      "images_present": 5,
+      "total_calls": 7
+    },
+    {
+      "target": 483002,
+      "images_present": 5,
+      "total_calls": 10
+    },
+    {
+      "target": 483018,
+      "images_present": 7,
+      "total_calls": 57
+    },
+    {
+      "target": 483020,
+      "images_present": 3,
+      "total_calls": 3
+    },
+    {
+      "target": 483040,
+      "images_present": 7,
+      "total_calls": 11
+    },
+    {
+      "target": 483042,
+      "images_present": 7,
+      "total_calls": 11
+    },
+    {
+      "target": 483046,
+      "images_present": 6,
+      "total_calls": 14
+    },
+    {
+      "target": 483050,
+      "images_present": 3,
+      "total_calls": 8
+    },
+    {
+      "target": 483052,
+      "images_present": 3,
+      "total_calls": 8
+    },
+    {
+      "target": 483056,
+      "images_present": 4,
+      "total_calls": 8
+    },
+    {
+      "target": 483058,
+      "images_present": 2,
+      "total_calls": 6
+    },
+    {
+      "target": 483072,
+      "images_present": 7,
+      "total_calls": 7
+    },
+    {
+      "target": 483078,
+      "images_present": 6,
+      "total_calls": 23
+    },
+    {
+      "target": 483080,
+      "images_present": 6,
+      "total_calls": 14
+    },
+    {
+      "target": 483086,
+      "images_present": 7,
+      "total_calls": 74
+    },
+    {
+      "target": 483090,
+      "images_present": 7,
+      "total_calls": 26
+    },
+    {
+      "target": 483092,
+      "images_present": 6,
+      "total_calls": 19
+    },
+    {
+      "target": 483094,
+      "images_present": 2,
+      "total_calls": 2
+    },
+    {
+      "target": 483096,
+      "images_present": 8,
+      "total_calls": 462
+    },
+    {
+      "target": 483100,
+      "images_present": 4,
+      "total_calls": 10
+    },
+    {
+      "target": 483102,
+      "images_present": 4,
+      "total_calls": 9
+    },
+    {
+      "target": 483104,
+      "images_present": 1,
+      "total_calls": 11
+    },
+    {
+      "target": 483112,
+      "images_present": 6,
+      "total_calls": 12
+    },
+    {
+      "target": 483114,
+      "images_present": 6,
+      "total_calls": 9
+    },
+    {
+      "target": 483118,
+      "images_present": 6,
+      "total_calls": 188
+    },
+    {
+      "target": 483130,
+      "images_present": 7,
+      "total_calls": 12
+    },
+    {
+      "target": 483132,
+      "images_present": 7,
+      "total_calls": 9
+    },
+    {
+      "target": 483142,
+      "images_present": 8,
+      "total_calls": 8
+    },
+    {
+      "target": 483144,
+      "images_present": 8,
+      "total_calls": 8
+    },
+    {
+      "target": 483146,
+      "images_present": 8,
+      "total_calls": 8
+    },
+    {
+      "target": 483148,
+      "images_present": 6,
+      "total_calls": 12
+    },
+    {
+      "target": 483152,
+      "images_present": 6,
+      "total_calls": 7
+    },
+    {
+      "target": 483154,
+      "images_present": 8,
+      "total_calls": 8
+    },
+    {
+      "target": 483166,
+      "images_present": 5,
+      "total_calls": 29
+    },
+    {
+      "target": 483170,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 483172,
+      "images_present": 4,
+      "total_calls": 10
+    },
+    {
+      "target": 483174,
+      "images_present": 5,
+      "total_calls": 26
+    },
+    {
+      "target": 483176,
+      "images_present": 5,
+      "total_calls": 11
+    },
+    {
+      "target": 483178,
+      "images_present": 5,
+      "total_calls": 33
+    },
+    {
+      "target": 483182,
+      "images_present": 1,
+      "total_calls": 2
+    },
+    {
+      "target": 483196,
+      "images_present": 6,
+      "total_calls": 10
+    },
+    {
+      "target": 483202,
+      "images_present": 6,
+      "total_calls": 18
+    },
+    {
+      "target": 483204,
+      "images_present": 4,
+      "total_calls": 4
+    },
+    {
+      "target": 483206,
+      "images_present": 4,
+      "total_calls": 8
+    },
+    {
+      "target": 483208,
+      "images_present": 4,
+      "total_calls": 8
+    },
+    {
+      "target": 483210,
+      "images_present": 1,
+      "total_calls": 2
+    },
+    {
+      "target": 483220,
+      "images_present": 3,
+      "total_calls": 23
+    },
+    {
+      "target": 483226,
+      "images_present": 3,
+      "total_calls": 6
+    },
+    {
+      "target": 483232,
+      "images_present": 7,
+      "total_calls": 8
+    },
+    {
+      "target": 483234,
+      "images_present": 5,
+      "total_calls": 26
+    },
+    {
+      "target": 483236,
+      "images_present": 5,
+      "total_calls": 49
+    },
+    {
+      "target": 483238,
+      "images_present": 5,
+      "total_calls": 36
+    },
+    {
+      "target": 483240,
+      "images_present": 4,
+      "total_calls": 26
+    },
+    {
+      "target": 483242,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 483244,
+      "images_present": 5,
+      "total_calls": 29
+    },
+    {
+      "target": 483246,
+      "images_present": 4,
+      "total_calls": 5
+    },
+    {
+      "target": 483248,
+      "images_present": 1,
+      "total_calls": 2
+    },
+    {
+      "target": 483250,
+      "images_present": 1,
+      "total_calls": 1
+    },
+    {
+      "target": 483252,
+      "images_present": 7,
+      "total_calls": 31
+    },
+    {
+      "target": 483264,
+      "images_present": 1,
+      "total_calls": 3
+    },
+    {
+      "target": 483274,
+      "images_present": 6,
+      "total_calls": 28
+    },
+    {
+      "target": 483276,
+      "images_present": 6,
+      "total_calls": 15
+    },
+    {
+      "target": 483278,
+      "images_present": 1,
+      "total_calls": 2
+    },
+    {
+      "target": 483286,
+      "images_present": 1,
+      "total_calls": 3
+    },
+    {
+      "target": 483288,
+      "images_present": 1,
+      "total_calls": 2
+    }
+  ],
+  "images": [
+    {
+      "name": "BUNDLE_G1_135800G1.MBA",
+      "path": "samples/BUNDLE_G1_135800G1.MBA",
+      "sha256": "e2ae552854d5a9e91c7f66f88dcc867f61b777bf34b3e5887d98bb43cb2bdcf5",
+      "runtime_base": 819200,
+      "entry": 924245,
+      "services": {
+        "0x075c0a": {
+          "call_count": 1,
+          "call_sites": [
+            917570
+          ]
+        },
+        "0x075c0c": {
+          "call_count": 3,
+          "call_sites": [
+            920721,
+            920778,
+            921282
+          ]
+        },
+        "0x075c0e": {
+          "call_count": 3,
+          "call_sites": [
+            920725,
+            920782,
+            921286
+          ]
+        },
+        "0x075c32": {
+          "call_count": 1,
+          "call_sites": [
+            911649
+          ]
+        },
+        "0x075c3e": {
+          "call_count": 1,
+          "call_sites": [
+            922870
+          ]
+        },
+        "0x075e06": {
+          "call_count": 1,
+          "call_sites": [
+            917522
+          ]
+        },
+        "0x075e0a": {
+          "call_count": 3,
+          "call_sites": [
+            905920,
+            907175,
+            907486
+          ]
+        },
+        "0x075e0c": {
+          "call_count": 2,
+          "call_sites": [
+            900523,
+            918206
+          ]
+        },
+        "0x075e0e": {
+          "call_count": 6,
+          "call_sites": [
+            907121,
+            907150,
+            907462,
+            907886,
+            918259,
+            922824
+          ]
+        },
+        "0x075e18": {
+          "call_count": 1,
+          "call_sites": [
+            922880
+          ]
+        },
+        "0x075e1a": {
+          "call_count": 2,
+          "call_sites": [
+            918303,
+            922903
+          ]
+        },
+        "0x075e2c": {
+          "call_count": 1,
+          "call_sites": [
+            922968
+          ]
+        },
+        "0x075e32": {
+          "call_count": 2,
+          "call_sites": [
+            873262,
+            888617
+          ]
+        },
+        "0x075e34": {
+          "call_count": 3,
+          "call_sites": [
+            873273,
+            887293,
+            888628
+          ]
+        },
+        "0x075e36": {
+          "call_count": 1,
+          "call_sites": [
+            923033
+          ]
+        },
+        "0x075e38": {
+          "call_count": 1,
+          "call_sites": [
+            923281
+          ]
+        },
+        "0x075e3c": {
+          "call_count": 1,
+          "call_sites": [
+            922941
+          ]
+        },
+        "0x075e3e": {
+          "call_count": 1,
+          "call_sites": [
+            923257
+          ]
+        },
+        "0x075e40": {
+          "call_count": 1,
+          "call_sites": [
+            923235
+          ]
+        },
+        "0x075e48": {
+          "call_count": 1,
+          "call_sites": [
+            923062
+          ]
+        },
+        "0x075e4a": {
+          "call_count": 1,
+          "call_sites": [
+            923076
+          ]
+        },
+        "0x075e5e": {
+          "call_count": 1,
+          "call_sites": [
+            918330
+          ]
+        },
+        "0x075e64": {
+          "call_count": 6,
+          "call_sites": [
+            906630,
+            907038,
+            907348,
+            907661,
+            916323,
+            918051
+          ]
+        },
+        "0x075e6a": {
+          "call_count": 1,
+          "call_sites": [
+            922466
+          ]
+        },
+        "0x075e6e": {
+          "call_count": 1,
+          "call_sites": [
+            847217
+          ]
+        },
+        "0x075e70": {
+          "call_count": 1,
+          "call_sites": [
+            911927
+          ]
+        },
+        "0x075e72": {
+          "call_count": 1,
+          "call_sites": [
+            912381
+          ]
+        },
+        "0x075e7c": {
+          "call_count": 4,
+          "call_sites": [
+            861966,
+            905736,
+            917611,
+            922665
+          ]
+        },
+        "0x075e7e": {
+          "call_count": 6,
+          "call_sites": [
+            861980,
+            906840,
+            917950,
+            918021,
+            918087,
+            922752
+          ]
+        },
+        "0x075e82": {
+          "call_count": 4,
+          "call_sites": [
+            861995,
+            905765,
+            922694,
+            923330
+          ]
+        },
+        "0x075e84": {
+          "call_count": 4,
+          "call_sites": [
+            862005,
+            906829,
+            922741,
+            923344
+          ]
+        },
+        "0x075e88": {
+          "call_count": 1,
+          "call_sites": [
+            862051
+          ]
+        },
+        "0x075e8a": {
+          "call_count": 2,
+          "call_sites": [
+            905661,
+            905708
+          ]
+        },
+        "0x075e96": {
+          "call_count": 1,
+          "call_sites": [
+            911796
+          ]
+        },
+        "0x075ea0": {
+          "call_count": 2,
+          "call_sites": [
+            907952,
+            908168
+          ]
+        },
+        "0x075ea2": {
+          "call_count": 1,
+          "call_sites": [
+            908347
+          ]
+        },
+        "0x075eaa": {
+          "call_count": 1,
+          "call_sites": [
+            905855
+          ]
+        },
+        "0x075eac": {
+          "call_count": 2,
+          "call_sites": [
+            907189,
+            907500
+          ]
+        },
+        "0x075eb2": {
+          "call_count": 4,
+          "call_sites": [
+            905923,
+            911790,
+            911800,
+            917593
+          ]
+        },
+        "0x075eb4": {
+          "call_count": 1,
+          "call_sites": [
+            907722
+          ]
+        },
+        "0x075eb8": {
+          "call_count": 1,
+          "call_sites": [
+            908937
+          ]
+        },
+        "0x075eba": {
+          "call_count": 2,
+          "call_sites": [
+            909010,
+            909026
+          ]
+        },
+        "0x075eca": {
+          "call_count": 8,
+          "call_sites": [
+            906423,
+            906452,
+            906481,
+            906510,
+            906539,
+            906568,
+            906598,
+            915916
+          ]
+        },
+        "0x075ecc": {
+          "call_count": 1,
+          "call_sites": [
+            915974
+          ]
+        },
+        "0x075ee0": {
+          "call_count": 2,
+          "call_sites": [
+            906211,
+            916071
+          ]
+        },
+        "0x075ee2": {
+          "call_count": 2,
+          "call_sites": [
+            906208,
+            916066
+          ]
+        },
+        "0x075ee6": {
+          "call_count": 2,
+          "call_sites": [
+            906259,
+            906342
+          ]
+        },
+        "0x075eea": {
+          "call_count": 2,
+          "call_sites": [
+            916160,
+            916229
+          ]
+        },
+        "0x075ef0": {
+          "call_count": 2,
+          "call_sites": [
+            916115,
+            916216
+          ]
+        },
+        "0x075f00": {
+          "call_count": 1,
+          "call_sites": [
+            917546
+          ]
+        },
+        "0x075f06": {
+          "call_count": 3,
+          "call_sites": [
+            862219,
+            862282,
+            918105
+          ]
+        },
+        "0x075f08": {
+          "call_count": 1,
+          "call_sites": [
+            862590
+          ]
+        },
+        "0x075f0e": {
+          "call_count": 10,
+          "call_sites": [
+            862248,
+            862311,
+            862383,
+            862711,
+            863253,
+            863335,
+            863485,
+            866423,
+            866778,
+            918113
+          ]
+        },
+        "0x075f12": {
+          "call_count": 4,
+          "call_sites": [
+            864443,
+            906024,
+            918127,
+            922159
+          ]
+        },
+        "0x075f14": {
+          "call_count": 3,
+          "call_sites": [
+            864996,
+            906908,
+            922407
+          ]
+        },
+        "0x075f18": {
+          "call_count": 64,
+          "call_sites": [
+            862868,
+            863837,
+            863979,
+            864064,
+            864192,
+            864375,
+            864469,
+            865062,
+            865135,
+            865170,
+            865205,
+            865262,
+            865308,
+            865419,
+            865518,
+            865612,
+            865721,
+            865775,
+            865820,
+            865977,
+            866166,
+            866243,
+            866283,
+            866486,
+            866527,
+            866566,
+            866604,
+            866643,
+            906072,
+            906091,
+            906112,
+            906133,
+            906154,
+            906176,
+            906784,
+            907206,
+            907227,
+            907256,
+            907278,
+            907300,
+            907370,
+            907391,
+            907517,
+            907538,
+            907560,
+            907582,
+            907611,
+            907762,
+            907784,
+            907806,
+            907827,
+            907856,
+            918135,
+            922198,
+            922214,
+            922232,
+            922250,
+            922268,
+            922286,
+            922304,
+            922323,
+            922546,
+            922617,
+            923801
+          ]
+        },
+        "0x075f1c": {
+          "call_count": 2,
+          "call_sites": [
+            864832,
+            864852
+          ]
+        },
+        "0x075f1e": {
+          "call_count": 2,
+          "call_sites": [
+            864954,
+            864967
+          ]
+        },
+        "0x075f28": {
+          "call_count": 3,
+          "call_sites": [
+            862093,
+            862134,
+            922361
+          ]
+        },
+        "0x075f2a": {
+          "call_count": 2,
+          "call_sites": [
+            922445,
+            923982
+          ]
+        },
+        "0x075f2e": {
+          "call_count": 17,
+          "call_sites": [
+            905664,
+            905711,
+            906671,
+            906740,
+            906974,
+            907005,
+            907316,
+            907328,
+            907627,
+            907639,
+            907899,
+            907911,
+            920020,
+            922495,
+            923351,
+            923358,
+            923367
+          ]
+        },
+        "0x075f3a": {
+          "call_count": 1,
+          "call_sites": [
+            915717
+          ]
+        },
+        "0x075f3c": {
+          "call_count": 1,
+          "call_sites": [
+            915710
+          ]
+        },
+        "0x075f46": {
+          "call_count": 1,
+          "call_sites": [
+            924261
+          ]
+        },
+        "0x075f48": {
+          "call_count": 1,
+          "call_sites": [
+            924400
+          ]
+        },
+        "0x075f4a": {
+          "call_count": 1,
+          "call_sites": [
+            924407
+          ]
+        },
+        "0x075f4c": {
+          "call_count": 2,
+          "call_sites": [
+            923373,
+            923662
+          ]
+        },
+        "0x075f50": {
+          "call_count": 1,
+          "call_sites": [
+            923376
+          ]
+        },
+        "0x075f52": {
+          "call_count": 1,
+          "call_sites": [
+            917549
+          ]
+        },
+        "0x075f5e": {
+          "call_count": 1,
+          "call_sites": [
+            923167
+          ]
+        },
+        "0x075f64": {
+          "call_count": 3,
+          "call_sites": [
+            867109,
+            868388,
+            919050
+          ]
+        },
+        "0x075f66": {
+          "call_count": 8,
+          "call_sites": [
+            849153,
+            849750,
+            863546,
+            867033,
+            867072,
+            867444,
+            867557,
+            919128
+          ]
+        },
+        "0x075f68": {
+          "call_count": 3,
+          "call_sites": [
+            867096,
+            868375,
+            919037
+          ]
+        },
+        "0x075f6a": {
+          "call_count": 10,
+          "call_sites": [
+            835514,
+            849086,
+            849728,
+            863530,
+            867020,
+            867062,
+            867431,
+            867510,
+            878884,
+            919112
+          ]
+        },
+        "0x075f7c": {
+          "call_count": 2,
+          "call_sites": [
+            919735,
+            919934
+          ]
+        },
+        "0x075f82": {
+          "call_count": 3,
+          "call_sites": [
+            905988,
+            906014,
+            907745
+          ]
+        },
+        "0x075f84": {
+          "call_count": 1,
+          "call_sites": [
+            909541
+          ]
+        },
+        "0x075f86": {
+          "call_count": 2,
+          "call_sites": [
+            909601,
+            909676
+          ]
+        },
+        "0x075f88": {
+          "call_count": 2,
+          "call_sites": [
+            909631,
+            909857
+          ]
+        },
+        "0x075f9a": {
+          "call_count": 2,
+          "call_sites": [
+            896650,
+            896654
+          ]
+        },
+        "0x075fa0": {
+          "call_count": 1,
+          "call_sites": [
+            919438
+          ]
+        },
+        "0x075fb4": {
+          "call_count": 4,
+          "call_sites": [
+            919630,
+            919711,
+            919829,
+            919910
+          ]
+        },
+        "0x075fca": {
+          "call_count": 6,
+          "call_sites": [
+            917994,
+            919221,
+            919650,
+            919731,
+            919849,
+            919930
+          ]
+        },
+        "0x075fcc": {
+          "call_count": 2,
+          "call_sites": [
+            919544,
+            919743
+          ]
+        }
+      }
+    },
+    {
+      "name": "BUNDLE_G2_135800G2.MBA",
+      "path": "samples/BUNDLE_G2_135800G2.MBA",
+      "sha256": "4feee848636f8248c35546e4efa1818e19d40f959c9f69d538335660a544dd5c",
+      "runtime_base": 819200,
+      "entry": 851778,
+      "services": {
+        "0x075c0a": {
+          "call_count": 1,
+          "call_sites": [
+            906015
+          ]
+        },
+        "0x075c0c": {
+          "call_count": 3,
+          "call_sites": [
+            909296,
+            909354,
+            909864
+          ]
+        },
+        "0x075c0e": {
+          "call_count": 3,
+          "call_sites": [
+            909300,
+            909358,
+            909868
+          ]
+        },
+        "0x075c3e": {
+          "call_count": 1,
+          "call_sites": [
+            910805
+          ]
+        },
+        "0x075e06": {
+          "call_count": 1,
+          "call_sites": [
+            905966
+          ]
+        },
+        "0x075e0a": {
+          "call_count": 3,
+          "call_sites": [
+            845842,
+            847207,
+            847521
+          ]
+        },
+        "0x075e0c": {
+          "call_count": 1,
+          "call_sites": [
+            906692
+          ]
+        },
+        "0x075e0e": {
+          "call_count": 6,
+          "call_sites": [
+            847150,
+            847180,
+            847495,
+            847924,
+            906748,
+            910759
+          ]
+        },
+        "0x075e18": {
+          "call_count": 1,
+          "call_sites": [
+            910815
+          ]
+        },
+        "0x075e1a": {
+          "call_count": 2,
+          "call_sites": [
+            906792,
+            910838
+          ]
+        },
+        "0x075e2c": {
+          "call_count": 1,
+          "call_sites": [
+            910905
+          ]
+        },
+        "0x075e32": {
+          "call_count": 2,
+          "call_sites": [
+            833069,
+            838343
+          ]
+        },
+        "0x075e34": {
+          "call_count": 3,
+          "call_sites": [
+            833080,
+            837014,
+            838354
+          ]
+        },
+        "0x075e36": {
+          "call_count": 1,
+          "call_sites": [
+            910979
+          ]
+        },
+        "0x075e38": {
+          "call_count": 1,
+          "call_sites": [
+            911231
+          ]
+        },
+        "0x075e3c": {
+          "call_count": 1,
+          "call_sites": [
+            910878
+          ]
+        },
+        "0x075e3e": {
+          "call_count": 1,
+          "call_sites": [
+            911207
+          ]
+        },
+        "0x075e40": {
+          "call_count": 1,
+          "call_sites": [
+            911185
+          ]
+        },
+        "0x075e48": {
+          "call_count": 1,
+          "call_sites": [
+            911009
+          ]
+        },
+        "0x075e4a": {
+          "call_count": 1,
+          "call_sites": [
+            911023
+          ]
+        },
+        "0x075e5e": {
+          "call_count": 1,
+          "call_sites": [
+            906820
+          ]
+        },
+        "0x075e64": {
+          "call_count": 6,
+          "call_sites": [
+            846634,
+            847066,
+            847380,
+            847696,
+            904713,
+            906526
+          ]
+        },
+        "0x075e6a": {
+          "call_count": 2,
+          "call_sites": [
+            907658,
+            910370
+          ]
+        },
+        "0x075e70": {
+          "call_count": 1,
+          "call_sites": [
+            850495
+          ]
+        },
+        "0x075e72": {
+          "call_count": 1,
+          "call_sites": [
+            850963
+          ]
+        },
+        "0x075e7c": {
+          "call_count": 4,
+          "call_sites": [
+            821322,
+            845640,
+            906058,
+            910583
+          ]
+        },
+        "0x075e7e": {
+          "call_count": 6,
+          "call_sites": [
+            821336,
+            846858,
+            906425,
+            906496,
+            906562,
+            910680
+          ]
+        },
+        "0x075e82": {
+          "call_count": 5,
+          "call_sites": [
+            821351,
+            845674,
+            851140,
+            910617,
+            911284
+          ]
+        },
+        "0x075e84": {
+          "call_count": 4,
+          "call_sites": [
+            821361,
+            846847,
+            910669,
+            911298
+          ]
+        },
+        "0x075e88": {
+          "call_count": 1,
+          "call_sites": [
+            821407
+          ]
+        },
+        "0x075e8a": {
+          "call_count": 2,
+          "call_sites": [
+            845563,
+            845612
+          ]
+        },
+        "0x075e96": {
+          "call_count": 1,
+          "call_sites": [
+            850332
+          ]
+        },
+        "0x075ea0": {
+          "call_count": 2,
+          "call_sites": [
+            847990,
+            848241
+          ]
+        },
+        "0x075ea2": {
+          "call_count": 1,
+          "call_sites": [
+            848431
+          ]
+        },
+        "0x075eaa": {
+          "call_count": 1,
+          "call_sites": [
+            845775
+          ]
+        },
+        "0x075eac": {
+          "call_count": 2,
+          "call_sites": [
+            847221,
+            847535
+          ]
+        },
+        "0x075eb2": {
+          "call_count": 4,
+          "call_sites": [
+            845845,
+            850326,
+            850336,
+            906040
+          ]
+        },
+        "0x075eb4": {
+          "call_count": 1,
+          "call_sites": [
+            847757
+          ]
+        },
+        "0x075eb8": {
+          "call_count": 1,
+          "call_sites": [
+            849054
+          ]
+        },
+        "0x075eba": {
+          "call_count": 2,
+          "call_sites": [
+            849140,
+            849156
+          ]
+        },
+        "0x075eca": {
+          "call_count": 8,
+          "call_sites": [
+            846379,
+            846415,
+            846451,
+            846487,
+            846523,
+            846559,
+            846596,
+            904282
+          ]
+        },
+        "0x075ecc": {
+          "call_count": 1,
+          "call_sites": [
+            904344
+          ]
+        },
+        "0x075ee0": {
+          "call_count": 2,
+          "call_sites": [
+            846138,
+            904444
+          ]
+        },
+        "0x075ee2": {
+          "call_count": 2,
+          "call_sites": [
+            846135,
+            904438
+          ]
+        },
+        "0x075ee6": {
+          "call_count": 2,
+          "call_sites": [
+            846202,
+            846291
+          ]
+        },
+        "0x075eea": {
+          "call_count": 3,
+          "call_sites": [
+            858701,
+            904538,
+            904610
+          ]
+        },
+        "0x075eec": {
+          "call_count": 1,
+          "call_sites": [
+            858710
+          ]
+        },
+        "0x075ef0": {
+          "call_count": 2,
+          "call_sites": [
+            904490,
+            904596
+          ]
+        },
+        "0x075f00": {
+          "call_count": 1,
+          "call_sites": [
+            905991
+          ]
+        },
+        "0x075f06": {
+          "call_count": 4,
+          "call_sites": [
+            821579,
+            821646,
+            900899,
+            906581
+          ]
+        },
+        "0x075f08": {
+          "call_count": 1,
+          "call_sites": [
+            821977
+          ]
+        },
+        "0x075f0e": {
+          "call_count": 11,
+          "call_sites": [
+            821610,
+            821677,
+            821756,
+            822108,
+            822687,
+            822776,
+            822937,
+            826032,
+            826400,
+            900915,
+            906591
+          ]
+        },
+        "0x075f12": {
+          "call_count": 6,
+          "call_sites": [
+            823950,
+            845950,
+            900989,
+            901358,
+            906605,
+            910057
+          ]
+        },
+        "0x075f14": {
+          "call_count": 4,
+          "call_sites": [
+            824524,
+            846932,
+            901951,
+            910309
+          ]
+        },
+        "0x075f18": {
+          "call_count": 81,
+          "call_sites": [
+            822275,
+            823307,
+            823456,
+            823547,
+            823685,
+            823880,
+            823978,
+            824594,
+            824668,
+            824705,
+            824742,
+            824801,
+            824849,
+            824965,
+            825066,
+            825161,
+            825271,
+            825330,
+            825377,
+            825544,
+            825744,
+            825823,
+            825865,
+            826095,
+            826140,
+            826181,
+            826220,
+            826261,
+            845998,
+            846017,
+            846038,
+            846059,
+            846080,
+            846102,
+            846802,
+            847238,
+            847259,
+            847288,
+            847310,
+            847332,
+            847402,
+            847423,
+            847552,
+            847573,
+            847595,
+            847617,
+            847646,
+            847799,
+            847821,
+            847843,
+            847864,
+            847893,
+            901005,
+            901183,
+            901305,
+            901374,
+            901525,
+            901594,
+            901641,
+            901744,
+            901789,
+            901852,
+            901900,
+            901984,
+            902052,
+            902586,
+            902634,
+            902687,
+            902807,
+            906615,
+            910096,
+            910112,
+            910130,
+            910148,
+            910166,
+            910184,
+            910202,
+            910221,
+            910462,
+            910535,
+            911780
+          ]
+        },
+        "0x075f1c": {
+          "call_count": 2,
+          "call_sites": [
+            824354,
+            824374
+          ]
+        },
+        "0x075f1e": {
+          "call_count": 2,
+          "call_sites": [
+            824480,
+            824493
+          ]
+        },
+        "0x075f28": {
+          "call_count": 3,
+          "call_sites": [
+            821453,
+            821494,
+            910261
+          ]
+        },
+        "0x075f2a": {
+          "call_count": 2,
+          "call_sites": [
+            910348,
+            911967
+          ]
+        },
+        "0x075f2e": {
+          "call_count": 22,
+          "call_sites": [
+            845566,
+            845615,
+            846683,
+            846758,
+            847002,
+            847033,
+            847348,
+            847360,
+            847662,
+            847674,
+            847937,
+            847949,
+            853114,
+            858742,
+            866592,
+            870911,
+            870974,
+            908561,
+            910412,
+            911305,
+            911312,
+            911322
+          ]
+        },
+        "0x075f3a": {
+          "call_count": 1,
+          "call_sites": [
+            904084
+          ]
+        },
+        "0x075f3c": {
+          "call_count": 1,
+          "call_sites": [
+            904076
+          ]
+        },
+        "0x075f46": {
+          "call_count": 1,
+          "call_sites": [
+            851796
+          ]
+        },
+        "0x075f48": {
+          "call_count": 1,
+          "call_sites": [
+            851945
+          ]
+        },
+        "0x075f4a": {
+          "call_count": 1,
+          "call_sites": [
+            851952
+          ]
+        },
+        "0x075f4c": {
+          "call_count": 2,
+          "call_sites": [
+            911328,
+            911639
+          ]
+        },
+        "0x075f50": {
+          "call_count": 1,
+          "call_sites": [
+            911331
+          ]
+        },
+        "0x075f52": {
+          "call_count": 1,
+          "call_sites": [
+            905994
+          ]
+        },
+        "0x075f5e": {
+          "call_count": 1,
+          "call_sites": [
+            911117
+          ]
+        },
+        "0x075f64": {
+          "call_count": 3,
+          "call_sites": [
+            826742,
+            828084,
+            908379
+          ]
+        },
+        "0x075f66": {
+          "call_count": 6,
+          "call_sites": [
+            823004,
+            826662,
+            826701,
+            827092,
+            827211,
+            908457
+          ]
+        },
+        "0x075f68": {
+          "call_count": 3,
+          "call_sites": [
+            826725,
+            828067,
+            908366
+          ]
+        },
+        "0x075f6a": {
+          "call_count": 7,
+          "call_sites": [
+            822986,
+            826649,
+            826691,
+            827079,
+            827161,
+            902786,
+            908441
+          ]
+        },
+        "0x075f7c": {
+          "call_count": 2,
+          "call_sites": [
+            907440,
+            907650
+          ]
+        },
+        "0x075f82": {
+          "call_count": 3,
+          "call_sites": [
+            845912,
+            845940,
+            847782
+          ]
+        },
+        "0x075f84": {
+          "call_count": 1,
+          "call_sites": [
+            849727
+          ]
+        },
+        "0x075f86": {
+          "call_count": 2,
+          "call_sites": [
+            849789,
+            849868
+          ]
+        },
+        "0x075f88": {
+          "call_count": 2,
+          "call_sites": [
+            849821,
+            850056
+          ]
+        },
+        "0x075f94": {
+          "call_count": 1,
+          "call_sites": [
+            901559
+          ]
+        },
+        "0x075f9a": {
+          "call_count": 2,
+          "call_sites": [
+            838870,
+            838874
+          ]
+        },
+        "0x075fa0": {
+          "call_count": 1,
+          "call_sites": [
+            907125
+          ]
+        },
+        "0x075fb4": {
+          "call_count": 4,
+          "call_sites": [
+            907327,
+            907413,
+            907537,
+            907623
+          ]
+        },
+        "0x075fca": {
+          "call_count": 6,
+          "call_sites": [
+            906469,
+            906907,
+            907350,
+            907436,
+            907560,
+            907646
+          ]
+        },
+        "0x075fcc": {
+          "call_count": 2,
+          "call_sites": [
+            907238,
+            907448
+          ]
+        }
+      }
+    },
+    {
+      "name": "BUNDLE_G3_135800G3.MBA",
+      "path": "samples/BUNDLE_G3_135800G3.MBA",
+      "sha256": "d1247344a34b0738076feed6547b533509780c4e73de8eb1347f8ecd34ae5b33",
+      "runtime_base": 819200,
+      "entry": 885829,
+      "services": {
+        "0x075c0a": {
+          "call_count": 1,
+          "call_sites": [
+            834633
+          ]
+        },
+        "0x075c0c": {
+          "call_count": 4,
+          "call_sites": [
+            841616,
+            841646,
+            841677,
+            842199
+          ]
+        },
+        "0x075c0e": {
+          "call_count": 1,
+          "call_sites": [
+            841588
+          ]
+        },
+        "0x075e06": {
+          "call_count": 1,
+          "call_sites": [
+            834278
+          ]
+        },
+        "0x075e08": {
+          "call_count": 1,
+          "call_sites": [
+            848254
+          ]
+        },
+        "0x075e0a": {
+          "call_count": 4,
+          "call_sites": [
+            837853,
+            839583,
+            839897,
+            848262
+          ]
+        },
+        "0x075e0e": {
+          "call_count": 7,
+          "call_sites": [
+            839526,
+            839556,
+            839871,
+            840300,
+            848630,
+            848900,
+            848931
+          ]
+        },
+        "0x075e14": {
+          "call_count": 2,
+          "call_sites": [
+            849158,
+            849229
+          ]
+        },
+        "0x075e16": {
+          "call_count": 2,
+          "call_sites": [
+            849192,
+            849254
+          ]
+        },
+        "0x075e18": {
+          "call_count": 3,
+          "call_sites": [
+            848968,
+            849017,
+            849104
+          ]
+        },
+        "0x075e1a": {
+          "call_count": 2,
+          "call_sites": [
+            848116,
+            849357
+          ]
+        },
+        "0x075e2c": {
+          "call_count": 1,
+          "call_sites": [
+            849424
+          ]
+        },
+        "0x075e32": {
+          "call_count": 1,
+          "call_sites": [
+            849517
+          ]
+        },
+        "0x075e34": {
+          "call_count": 1,
+          "call_sites": [
+            849531
+          ]
+        },
+        "0x075e36": {
+          "call_count": 1,
+          "call_sites": [
+            849473
+          ]
+        },
+        "0x075e38": {
+          "call_count": 1,
+          "call_sites": [
+            849577
+          ]
+        },
+        "0x075e40": {
+          "call_count": 8,
+          "call_sites": [
+            833430,
+            833566,
+            833594,
+            833622,
+            833650,
+            833678,
+            833706,
+            833731
+          ]
+        },
+        "0x075e5e": {
+          "call_count": 2,
+          "call_sites": [
+            837536,
+            885059
+          ]
+        },
+        "0x075e64": {
+          "call_count": 5,
+          "call_sites": [
+            835347,
+            839010,
+            839442,
+            839756,
+            840072
+          ]
+        },
+        "0x075e68": {
+          "call_count": 1,
+          "call_sites": [
+            834901
+          ]
+        },
+        "0x075e6a": {
+          "call_count": 1,
+          "call_sites": [
+            851602
+          ]
+        },
+        "0x075e6e": {
+          "call_count": 1,
+          "call_sites": [
+            837211
+          ]
+        },
+        "0x075e70": {
+          "call_count": 1,
+          "call_sites": [
+            838138
+          ]
+        },
+        "0x075e7c": {
+          "call_count": 2,
+          "call_sites": [
+            837649,
+            851815
+          ]
+        },
+        "0x075e7e": {
+          "call_count": 3,
+          "call_sites": [
+            839234,
+            841402,
+            851912
+          ]
+        },
+        "0x075e82": {
+          "call_count": 2,
+          "call_sites": [
+            837683,
+            851849
+          ]
+        },
+        "0x075e84": {
+          "call_count": 2,
+          "call_sites": [
+            839223,
+            851901
+          ]
+        },
+        "0x075e8a": {
+          "call_count": 2,
+          "call_sites": [
+            837572,
+            837621
+          ]
+        },
+        "0x075e96": {
+          "call_count": 1,
+          "call_sites": [
+            834287
+          ]
+        },
+        "0x075ea0": {
+          "call_count": 2,
+          "call_sites": [
+            845881,
+            846132
+          ]
+        },
+        "0x075ea2": {
+          "call_count": 1,
+          "call_sites": [
+            846322
+          ]
+        },
+        "0x075eaa": {
+          "call_count": 1,
+          "call_sites": [
+            837786
+          ]
+        },
+        "0x075eac": {
+          "call_count": 2,
+          "call_sites": [
+            839597,
+            839911
+          ]
+        },
+        "0x075eb2": {
+          "call_count": 1,
+          "call_sites": [
+            837856
+          ]
+        },
+        "0x075eb4": {
+          "call_count": 1,
+          "call_sites": [
+            840133
+          ]
+        },
+        "0x075eb8": {
+          "call_count": 1,
+          "call_sites": [
+            846945
+          ]
+        },
+        "0x075eba": {
+          "call_count": 2,
+          "call_sites": [
+            847031,
+            847047
+          ]
+        },
+        "0x075eca": {
+          "call_count": 15,
+          "call_sites": [
+            835174,
+            835196,
+            838671,
+            838728,
+            838785,
+            838835,
+            838885,
+            838935,
+            838972,
+            853152,
+            853232,
+            862164,
+            863867,
+            878599,
+            879206
+          ]
+        },
+        "0x075ee0": {
+          "call_count": 2,
+          "call_sites": [
+            838374,
+            853087
+          ]
+        },
+        "0x075ee2": {
+          "call_count": 2,
+          "call_sites": [
+            838371,
+            853084
+          ]
+        },
+        "0x075ee6": {
+          "call_count": 3,
+          "call_sites": [
+            838462,
+            838567,
+            842238
+          ]
+        },
+        "0x075f00": {
+          "call_count": 1,
+          "call_sites": [
+            834258
+          ]
+        },
+        "0x075f06": {
+          "call_count": 2,
+          "call_sites": [
+            840371,
+            884879
+          ]
+        },
+        "0x075f08": {
+          "call_count": 1,
+          "call_sites": [
+            840447
+          ]
+        },
+        "0x075f0e": {
+          "call_count": 14,
+          "call_sites": [
+            826250,
+            826580,
+            826998,
+            840387,
+            840486,
+            840540,
+            842925,
+            849714,
+            849848,
+            850055,
+            876810,
+            877494,
+            878427,
+            884895
+          ]
+        },
+        "0x075f12": {
+          "call_count": 5,
+          "call_sites": [
+            837961,
+            840603,
+            840862,
+            851289,
+            884931
+          ]
+        },
+        "0x075f14": {
+          "call_count": 3,
+          "call_sites": [
+            839308,
+            841441,
+            851541
+          ]
+        },
+        "0x075f18": {
+          "call_count": 47,
+          "call_sites": [
+            838009,
+            838028,
+            838049,
+            838070,
+            838091,
+            838113,
+            839178,
+            839614,
+            839635,
+            839664,
+            839686,
+            839708,
+            839778,
+            839799,
+            839928,
+            839949,
+            839971,
+            839993,
+            840022,
+            840175,
+            840197,
+            840219,
+            840240,
+            840269,
+            840619,
+            840780,
+            840878,
+            840988,
+            841064,
+            841174,
+            841226,
+            841278,
+            841334,
+            842759,
+            842855,
+            851328,
+            851344,
+            851362,
+            851380,
+            851398,
+            851416,
+            851434,
+            851453,
+            851694,
+            851767,
+            862002,
+            884947
+          ]
+        },
+        "0x075f28": {
+          "call_count": 1,
+          "call_sites": [
+            851493
+          ]
+        },
+        "0x075f2a": {
+          "call_count": 1,
+          "call_sites": [
+            851580
+          ]
+        },
+        "0x075f2e": {
+          "call_count": 61,
+          "call_sites": [
+            833760,
+            834646,
+            837213,
+            837575,
+            837624,
+            839059,
+            839134,
+            839378,
+            839409,
+            839724,
+            839736,
+            840038,
+            840050,
+            840313,
+            840325,
+            843280,
+            851644,
+            852913,
+            853065,
+            853215,
+            853295,
+            854575,
+            854625,
+            855189,
+            856569,
+            856617,
+            860100,
+            861094,
+            861150,
+            861453,
+            861503,
+            862119,
+            862198,
+            862388,
+            863174,
+            863778,
+            864526,
+            865736,
+            865784,
+            866625,
+            867455,
+            868630,
+            868678,
+            870883,
+            871299,
+            873148,
+            873196,
+            878699,
+            879117,
+            879848,
+            879942,
+            880190,
+            880240,
+            880798,
+            881196,
+            883092,
+            883142,
+            884848,
+            885041,
+            885062,
+            885074
+          ]
+        },
+        "0x075f3a": {
+          "call_count": 3,
+          "call_sites": [
+            838176,
+            841511,
+            841530
+          ]
+        },
+        "0x075f3c": {
+          "call_count": 2,
+          "call_sites": [
+            838168,
+            841505
+          ]
+        },
+        "0x075f46": {
+          "call_count": 1,
+          "call_sites": [
+            885877
+          ]
+        },
+        "0x075f48": {
+          "call_count": 1,
+          "call_sites": [
+            885888
+          ]
+        },
+        "0x075f4a": {
+          "call_count": 1,
+          "call_sites": [
+            885895
+          ]
+        },
+        "0x075f4c": {
+          "call_count": 2,
+          "call_sites": [
+            885080,
+            885391
+          ]
+        },
+        "0x075f50": {
+          "call_count": 1,
+          "call_sites": [
+            885083
+          ]
+        },
+        "0x075f52": {
+          "call_count": 1,
+          "call_sites": [
+            834261
+          ]
+        },
+        "0x075f5e": {
+          "call_count": 16,
+          "call_sites": [
+            826448,
+            826496,
+            826544,
+            826880,
+            826921,
+            826962,
+            827165,
+            851219,
+            876966,
+            877266,
+            877331,
+            877469,
+            877675,
+            878319,
+            878394,
+            878577
+          ]
+        },
+        "0x075f68": {
+          "call_count": 1,
+          "call_sites": [
+            862070
+          ]
+        },
+        "0x075f6a": {
+          "call_count": 5,
+          "call_sites": [
+            836223,
+            862111,
+            862306,
+            874092,
+            885030
+          ]
+        },
+        "0x075f7c": {
+          "call_count": 1,
+          "call_sites": [
+            884760
+          ]
+        },
+        "0x075f82": {
+          "call_count": 3,
+          "call_sites": [
+            837923,
+            837951,
+            840158
+          ]
+        },
+        "0x075f84": {
+          "call_count": 1,
+          "call_sites": [
+            847618
+          ]
+        },
+        "0x075f86": {
+          "call_count": 2,
+          "call_sites": [
+            847680,
+            847759
+          ]
+        },
+        "0x075f88": {
+          "call_count": 2,
+          "call_sites": [
+            847712,
+            847947
+          ]
+        },
+        "0x075fa0": {
+          "call_count": 1,
+          "call_sites": [
+            884445
+          ]
+        },
+        "0x075fa2": {
+          "call_count": 11,
+          "call_sites": [
+            821446,
+            821495,
+            822057,
+            822200,
+            822286,
+            822570,
+            822815,
+            822967,
+            823054,
+            823140,
+            823278
+          ]
+        },
+        "0x075fa4": {
+          "call_count": 11,
+          "call_sites": [
+            821479,
+            821528,
+            822090,
+            822259,
+            822553,
+            822648,
+            822893,
+            823031,
+            823123,
+            823209,
+            823306
+          ]
+        },
+        "0x075fa6": {
+          "call_count": 5,
+          "call_sites": [
+            821521,
+            822308,
+            822641,
+            823116,
+            823299
+          ]
+        },
+        "0x075fa8": {
+          "call_count": 6,
+          "call_sites": [
+            821472,
+            822083,
+            822247,
+            822886,
+            823019,
+            823202
+          ]
+        },
+        "0x075fac": {
+          "call_count": 4,
+          "call_sites": [
+            822601,
+            822846,
+            823078,
+            823164
+          ]
+        },
+        "0x075fb4": {
+          "call_count": 6,
+          "call_sites": [
+            821275,
+            822120,
+            822920,
+            823226,
+            884647,
+            884733
+          ]
+        },
+        "0x075fc0": {
+          "call_count": 3,
+          "call_sites": [
+            821285,
+            822130,
+            822930
+          ]
+        },
+        "0x075fca": {
+          "call_count": 3,
+          "call_sites": [
+            884227,
+            884670,
+            884756
+          ]
+        },
+        "0x075fcc": {
+          "call_count": 1,
+          "call_sites": [
+            884558
+          ]
+        }
+      }
+    },
+    {
+      "name": "BUNDLE_G4_135800G4.MBA",
+      "path": "samples/BUNDLE_G4_135800G4.MBA",
+      "sha256": "7d0b55ee02e296cda08ea4cc9d74c97371e262cec9dda0a17343c41e71a8ef07",
+      "runtime_base": 819200,
+      "entry": 885730,
+      "services": {
+        "0x075c1e": {
+          "call_count": 3,
+          "call_sites": [
+            858509,
+            858992,
+            867690
+          ]
+        },
+        "0x075c22": {
+          "call_count": 3,
+          "call_sites": [
+            858518,
+            859001,
+            867699
+          ]
+        },
+        "0x075c24": {
+          "call_count": 1,
+          "call_sites": [
+            874445
+          ]
+        },
+        "0x075c26": {
+          "call_count": 1,
+          "call_sites": [
+            874439
+          ]
+        },
+        "0x075c32": {
+          "call_count": 2,
+          "call_sites": [
+            875437,
+            875506
+          ]
+        },
+        "0x075e06": {
+          "call_count": 1,
+          "call_sites": [
+            884707
+          ]
+        },
+        "0x075e08": {
+          "call_count": 1,
+          "call_sites": [
+            843524
+          ]
+        },
+        "0x075e0a": {
+          "call_count": 4,
+          "call_sites": [
+            841034,
+            842546,
+            842860,
+            843532
+          ]
+        },
+        "0x075e0e": {
+          "call_count": 6,
+          "call_sites": [
+            842489,
+            842519,
+            842834,
+            843263,
+            844283,
+            844621
+          ]
+        },
+        "0x075e14": {
+          "call_count": 2,
+          "call_sites": [
+            844838,
+            844909
+          ]
+        },
+        "0x075e16": {
+          "call_count": 2,
+          "call_sites": [
+            844872,
+            844934
+          ]
+        },
+        "0x075e18": {
+          "call_count": 3,
+          "call_sites": [
+            844658,
+            844707,
+            844794
+          ]
+        },
+        "0x075e1a": {
+          "call_count": 2,
+          "call_sites": [
+            843343,
+            845047
+          ]
+        },
+        "0x075e2c": {
+          "call_count": 1,
+          "call_sites": [
+            845114
+          ]
+        },
+        "0x075e32": {
+          "call_count": 1,
+          "call_sites": [
+            845207
+          ]
+        },
+        "0x075e34": {
+          "call_count": 1,
+          "call_sites": [
+            845221
+          ]
+        },
+        "0x075e36": {
+          "call_count": 1,
+          "call_sites": [
+            845163
+          ]
+        },
+        "0x075e38": {
+          "call_count": 1,
+          "call_sites": [
+            845267
+          ]
+        },
+        "0x075e40": {
+          "call_count": 12,
+          "call_sites": [
+            843509,
+            843799,
+            843888,
+            843911,
+            843934,
+            843957,
+            843980,
+            844003,
+            844023,
+            844094,
+            844131,
+            844365
+          ]
+        },
+        "0x075e5e": {
+          "call_count": 2,
+          "call_sites": [
+            849650,
+            859869
+          ]
+        },
+        "0x075e64": {
+          "call_count": 4,
+          "call_sites": [
+            841973,
+            842405,
+            842719,
+            843035
+          ]
+        },
+        "0x075e68": {
+          "call_count": 1,
+          "call_sites": [
+            884805
+          ]
+        },
+        "0x075e6a": {
+          "call_count": 1,
+          "call_sites": [
+            850024
+          ]
+        },
+        "0x075e70": {
+          "call_count": 2,
+          "call_sites": [
+            841317,
+            852234
+          ]
+        },
+        "0x075e7c": {
+          "call_count": 4,
+          "call_sites": [
+            840820,
+            850237,
+            852198,
+            884767
+          ]
+        },
+        "0x075e7e": {
+          "call_count": 4,
+          "call_sites": [
+            842197,
+            850334,
+            859065,
+            884919
+          ]
+        },
+        "0x075e82": {
+          "call_count": 13,
+          "call_sites": [
+            821885,
+            822144,
+            822393,
+            826544,
+            826685,
+            826968,
+            837064,
+            840854,
+            850271,
+            859649,
+            859687,
+            884593,
+            884648
+          ]
+        },
+        "0x075e84": {
+          "call_count": 18,
+          "call_sites": [
+            822129,
+            822378,
+            823218,
+            826668,
+            826953,
+            826989,
+            827402,
+            837116,
+            842186,
+            850323,
+            859672,
+            859878,
+            859908,
+            859976,
+            860396,
+            884630,
+            884684,
+            884906
+          ]
+        },
+        "0x075e86": {
+          "call_count": 1,
+          "call_sites": [
+            884891
+          ]
+        },
+        "0x075e88": {
+          "call_count": 9,
+          "call_sites": [
+            859574,
+            861370,
+            862497,
+            876356,
+            877270,
+            877339,
+            877677,
+            878384,
+            883717
+          ]
+        },
+        "0x075e8a": {
+          "call_count": 5,
+          "call_sites": [
+            823657,
+            828881,
+            840731,
+            840792,
+            883468
+          ]
+        },
+        "0x075eaa": {
+          "call_count": 1,
+          "call_sites": [
+            840967
+          ]
+        },
+        "0x075eac": {
+          "call_count": 2,
+          "call_sites": [
+            842560,
+            842874
+          ]
+        },
+        "0x075eb2": {
+          "call_count": 1,
+          "call_sites": [
+            841037
+          ]
+        },
+        "0x075eb4": {
+          "call_count": 1,
+          "call_sites": [
+            843096
+          ]
+        },
+        "0x075eca": {
+          "call_count": 7,
+          "call_sites": [
+            841718,
+            841754,
+            841790,
+            841826,
+            841862,
+            841898,
+            841935
+          ]
+        },
+        "0x075ee0": {
+          "call_count": 1,
+          "call_sites": [
+            841483
+          ]
+        },
+        "0x075ee2": {
+          "call_count": 1,
+          "call_sites": [
+            841480
+          ]
+        },
+        "0x075ee6": {
+          "call_count": 2,
+          "call_sites": [
+            841541,
+            841630
+          ]
+        },
+        "0x075eec": {
+          "call_count": 6,
+          "call_sites": [
+            822900,
+            831519,
+            833171,
+            833183,
+            834395,
+            835756
+          ]
+        },
+        "0x075ef0": {
+          "call_count": 1,
+          "call_sites": [
+            836481
+          ]
+        },
+        "0x075ef2": {
+          "call_count": 5,
+          "call_sites": [
+            822894,
+            823235,
+            831307,
+            835750,
+            836002
+          ]
+        },
+        "0x075f00": {
+          "call_count": 1,
+          "call_sites": [
+            884732
+          ]
+        },
+        "0x075f06": {
+          "call_count": 8,
+          "call_sites": [
+            823709,
+            849470,
+            852084,
+            852316,
+            852503,
+            852820,
+            853080,
+            883491
+          ]
+        },
+        "0x075f08": {
+          "call_count": 7,
+          "call_sites": [
+            826422,
+            859037,
+            859093,
+            871344,
+            874380,
+            877417,
+            883850
+          ]
+        },
+        "0x075f0e": {
+          "call_count": 18,
+          "call_sites": [
+            823731,
+            823751,
+            823770,
+            849486,
+            852104,
+            852336,
+            852523,
+            852840,
+            853100,
+            853461,
+            854242,
+            854847,
+            855032,
+            855809,
+            856428,
+            858490,
+            882249,
+            883511
+          ]
+        },
+        "0x075f12": {
+          "call_count": 4,
+          "call_sites": [
+            841142,
+            847310,
+            849522,
+            849711
+          ]
+        },
+        "0x075f14": {
+          "call_count": 3,
+          "call_sites": [
+            842271,
+            847486,
+            849963
+          ]
+        },
+        "0x075f16": {
+          "call_count": 1,
+          "call_sites": [
+            847449
+          ]
+        },
+        "0x075f18": {
+          "call_count": 156,
+          "call_sites": [
+            841190,
+            841209,
+            841230,
+            841251,
+            841272,
+            841294,
+            842141,
+            842577,
+            842598,
+            842627,
+            842649,
+            842671,
+            842741,
+            842762,
+            842891,
+            842912,
+            842934,
+            842956,
+            842985,
+            843138,
+            843160,
+            843182,
+            843203,
+            843232,
+            847326,
+            847525,
+            847593,
+            847671,
+            847739,
+            847821,
+            847903,
+            847952,
+            848010,
+            848060,
+            848109,
+            848156,
+            848207,
+            848316,
+            848369,
+            848629,
+            848708,
+            849538,
+            849750,
+            849766,
+            849784,
+            849802,
+            849820,
+            849838,
+            849856,
+            849875,
+            850116,
+            850189,
+            857658,
+            859717,
+            859780,
+            865502,
+            865525,
+            869285,
+            869476,
+            869519,
+            869544,
+            869587,
+            869612,
+            869655,
+            869680,
+            869723,
+            869748,
+            869805,
+            869835,
+            869883,
+            869991,
+            870133,
+            870911,
+            871079,
+            871428,
+            871478,
+            871535,
+            871600,
+            871621,
+            871670,
+            871724,
+            871745,
+            871766,
+            871830,
+            871880,
+            871937,
+            872002,
+            872023,
+            872072,
+            872126,
+            872147,
+            872168,
+            872236,
+            872341,
+            872375,
+            872465,
+            872499,
+            872595,
+            872645,
+            872713,
+            872754,
+            872781,
+            873104,
+            873412,
+            873641,
+            874140,
+            875032,
+            875164,
+            875769,
+            875816,
+            875850,
+            876152,
+            876186,
+            876233,
+            876267,
+            876415,
+            878311,
+            878502,
+            878594,
+            878695,
+            878810,
+            879504,
+            879625,
+            879730,
+            879919,
+            879942,
+            880007,
+            880031,
+            880054,
+            880158,
+            880241,
+            880323,
+            880405,
+            880525,
+            880919,
+            880984,
+            881045,
+            881105,
+            881348,
+            881469,
+            881676,
+            881948,
+            882331,
+            882432,
+            882913,
+            882951,
+            883056,
+            883094,
+            883152,
+            883188,
+            883535,
+            883577,
+            883606,
+            883635,
+            883776,
+            883830
+          ]
+        },
+        "0x075f1c": {
+          "call_count": 4,
+          "call_sites": [
+            825629,
+            826216,
+            828307,
+            828554
+          ]
+        },
+        "0x075f1e": {
+          "call_count": 3,
+          "call_sites": [
+            823553,
+            823571,
+            832390
+          ]
+        },
+        "0x075f28": {
+          "call_count": 1,
+          "call_sites": [
+            849915
+          ]
+        },
+        "0x075f2a": {
+          "call_count": 1,
+          "call_sites": [
+            850002
+          ]
+        },
+        "0x075f2e": {
+          "call_count": 37,
+          "call_sites": [
+            824391,
+            824620,
+            824646,
+            824701,
+            824837,
+            824849,
+            824926,
+            824938,
+            825410,
+            825430,
+            825682,
+            825702,
+            825905,
+            825925,
+            825983,
+            826004,
+            826231,
+            826251,
+            828030,
+            830201,
+            840745,
+            840795,
+            842022,
+            842097,
+            842341,
+            842372,
+            842687,
+            842699,
+            843001,
+            843013,
+            843276,
+            843288,
+            849439,
+            849632,
+            849653,
+            850066,
+            851292
+          ]
+        },
+        "0x075f3a": {
+          "call_count": 1,
+          "call_sites": [
+            841351
+          ]
+        },
+        "0x075f3c": {
+          "call_count": 1,
+          "call_sites": [
+            841343
+          ]
+        },
+        "0x075f46": {
+          "call_count": 1,
+          "call_sites": [
+            885770
+          ]
+        },
+        "0x075f48": {
+          "call_count": 1,
+          "call_sites": [
+            885781
+          ]
+        },
+        "0x075f4a": {
+          "call_count": 1,
+          "call_sites": [
+            885788
+          ]
+        },
+        "0x075f4c": {
+          "call_count": 2,
+          "call_sites": [
+            851298,
+            851609
+          ]
+        },
+        "0x075f50": {
+          "call_count": 2,
+          "call_sites": [
+            851301,
+            869249
+          ]
+        },
+        "0x075f52": {
+          "call_count": 1,
+          "call_sites": [
+            884735
+          ]
+        },
+        "0x075f5e": {
+          "call_count": 10,
+          "call_sites": [
+            852188,
+            854749,
+            854887,
+            854914,
+            855512,
+            856492,
+            857059,
+            857275,
+            857309,
+            857810
+          ]
+        },
+        "0x075f64": {
+          "call_count": 1,
+          "call_sites": [
+            850395
+          ]
+        },
+        "0x075f66": {
+          "call_count": 4,
+          "call_sites": [
+            850466,
+            850597,
+            850755,
+            850791
+          ]
+        },
+        "0x075f68": {
+          "call_count": 1,
+          "call_sites": [
+            850378
+          ]
+        },
+        "0x075f6a": {
+          "call_count": 4,
+          "call_sites": [
+            849621,
+            850444,
+            850553,
+            850719
+          ]
+        },
+        "0x075f7c": {
+          "call_count": 1,
+          "call_sites": [
+            849351
+          ]
+        },
+        "0x075f82": {
+          "call_count": 3,
+          "call_sites": [
+            841104,
+            841132,
+            843121
+          ]
+        },
+        "0x075f94": {
+          "call_count": 20,
+          "call_sites": [
+            824176,
+            824345,
+            825072,
+            825307,
+            825555,
+            825851,
+            826154,
+            827953,
+            870085,
+            870227,
+            870614,
+            870828,
+            873259,
+            873552,
+            873767,
+            874113,
+            874988,
+            877148,
+            878145,
+            878282
+          ]
+        },
+        "0x075fa0": {
+          "call_count": 1,
+          "call_sites": [
+            849036
+          ]
+        },
+        "0x075fa2": {
+          "call_count": 6,
+          "call_sites": [
+            845407,
+            845429,
+            845461,
+            845477,
+            855690,
+            855749
+          ]
+        },
+        "0x075fa4": {
+          "call_count": 12,
+          "call_sites": [
+            845444,
+            845513,
+            845533,
+            845570,
+            845588,
+            845625,
+            845645,
+            845682,
+            845702,
+            845808,
+            855735,
+            855785
+          ]
+        },
+        "0x075fa6": {
+          "call_count": 10,
+          "call_sites": [
+            845499,
+            845556,
+            845611,
+            845668,
+            846245,
+            846278,
+            846408,
+            846441,
+            846962,
+            855728
+          ]
+        },
+        "0x075fa8": {
+          "call_count": 6,
+          "call_sites": [
+            845904,
+            845957,
+            846033,
+            846120,
+            847143,
+            855778
+          ]
+        },
+        "0x075fac": {
+          "call_count": 8,
+          "call_sites": [
+            845780,
+            845877,
+            846093,
+            846222,
+            846385,
+            846940,
+            847121,
+            847267
+          ]
+        },
+        "0x075fae": {
+          "call_count": 2,
+          "call_sites": [
+            845760,
+            855704
+          ]
+        },
+        "0x075fb0": {
+          "call_count": 2,
+          "call_sites": [
+            857103,
+            857153
+          ]
+        },
+        "0x075fb2": {
+          "call_count": 1,
+          "call_sites": [
+            857402
+          ]
+        },
+        "0x075fb4": {
+          "call_count": 6,
+          "call_sites": [
+            821907,
+            822189,
+            822425,
+            849238,
+            849324,
+            857385
+          ]
+        },
+        "0x075fca": {
+          "call_count": 3,
+          "call_sites": [
+            848818,
+            849261,
+            849347
+          ]
+        },
+        "0x075fcc": {
+          "call_count": 1,
+          "call_sites": [
+            849149
+          ]
+        },
+        "0x075fce": {
+          "call_count": 2,
+          "call_sites": [
+            856802,
+            856905
+          ]
+        }
+      }
+    },
+    {
+      "name": "BUNDLE_LD_135800LD.MBA",
+      "path": "samples/BUNDLE_LD_135800LD.MBA",
+      "sha256": "02e15903d2ed3eee1006e99459d8690c83d30c499dee60a916ccca5d41a2f50e",
+      "runtime_base": 819200,
+      "entry": 821402,
+      "services": {
+        "0x075e06": {
+          "call_count": 1,
+          "call_sites": [
+            821304
+          ]
+        },
+        "0x075e0e": {
+          "call_count": 1,
+          "call_sites": [
+            821363
+          ]
+        },
+        "0x075e1a": {
+          "call_count": 1,
+          "call_sites": [
+            821384
+          ]
+        },
+        "0x075e5e": {
+          "call_count": 1,
+          "call_sites": [
+            821393
+          ]
+        },
+        "0x075e60": {
+          "call_count": 1,
+          "call_sites": [
+            821331
+          ]
+        },
+        "0x075f00": {
+          "call_count": 1,
+          "call_sites": [
+            821285
+          ]
+        },
+        "0x075f18": {
+          "call_count": 1,
+          "call_sites": [
+            821316
+          ]
+        },
+        "0x075f46": {
+          "call_count": 1,
+          "call_sites": [
+            821436
+          ]
+        },
+        "0x075f48": {
+          "call_count": 1,
+          "call_sites": [
+            821459
+          ]
+        },
+        "0x075f4a": {
+          "call_count": 1,
+          "call_sites": [
+            821474
+          ]
+        },
+        "0x075f52": {
+          "call_count": 1,
+          "call_sites": [
+            821288
+          ]
+        }
+      }
+    },
+    {
+      "name": "BUNDLE_SY_135800SY.MBA",
+      "path": "samples/BUNDLE_SY_135800SY.MBA",
+      "sha256": "233eb01522c2654c48bf579539661aa4892f560c391100c98bd931edf2beb67a",
+      "runtime_base": 819200,
+      "entry": 916509,
+      "services": {
+        "0x075c0a": {
+          "call_count": 1,
+          "call_sites": [
+            911163
+          ]
+        },
+        "0x075c0c": {
+          "call_count": 3,
+          "call_sites": [
+            913418,
+            913476,
+            913986
+          ]
+        },
+        "0x075c0e": {
+          "call_count": 3,
+          "call_sites": [
+            913422,
+            913480,
+            913990
+          ]
+        },
+        "0x075c34": {
+          "call_count": 7,
+          "call_sites": [
+            882529,
+            882563,
+            882601,
+            883201,
+            883518,
+            912023,
+            912286
+          ]
+        },
+        "0x075c3c": {
+          "call_count": 2,
+          "call_sites": [
+            883089,
+            886863
+          ]
+        },
+        "0x075c3e": {
+          "call_count": 1,
+          "call_sites": [
+            914927
+          ]
+        },
+        "0x075c40": {
+          "call_count": 1,
+          "call_sites": [
+            853886
+          ]
+        },
+        "0x075c44": {
+          "call_count": 3,
+          "call_sites": [
+            882522,
+            883366,
+            912278
+          ]
+        },
+        "0x075e06": {
+          "call_count": 1,
+          "call_sites": [
+            911114
+          ]
+        },
+        "0x075e0a": {
+          "call_count": 3,
+          "call_sites": [
+            892782,
+            894147,
+            894461
+          ]
+        },
+        "0x075e0c": {
+          "call_count": 2,
+          "call_sites": [
+            889237,
+            911758
+          ]
+        },
+        "0x075e0e": {
+          "call_count": 6,
+          "call_sites": [
+            894090,
+            894120,
+            894435,
+            894864,
+            911814,
+            914881
+          ]
+        },
+        "0x075e18": {
+          "call_count": 1,
+          "call_sites": [
+            914937
+          ]
+        },
+        "0x075e1a": {
+          "call_count": 2,
+          "call_sites": [
+            911858,
+            914960
+          ]
+        },
+        "0x075e2c": {
+          "call_count": 1,
+          "call_sites": [
+            915027
+          ]
+        },
+        "0x075e36": {
+          "call_count": 1,
+          "call_sites": [
+            915101
+          ]
+        },
+        "0x075e38": {
+          "call_count": 1,
+          "call_sites": [
+            915353
+          ]
+        },
+        "0x075e3c": {
+          "call_count": 1,
+          "call_sites": [
+            915000
+          ]
+        },
+        "0x075e3e": {
+          "call_count": 1,
+          "call_sites": [
+            915329
+          ]
+        },
+        "0x075e40": {
+          "call_count": 1,
+          "call_sites": [
+            915307
+          ]
+        },
+        "0x075e48": {
+          "call_count": 1,
+          "call_sites": [
+            915131
+          ]
+        },
+        "0x075e4a": {
+          "call_count": 1,
+          "call_sites": [
+            915145
+          ]
+        },
+        "0x075e5e": {
+          "call_count": 1,
+          "call_sites": [
+            911886
+          ]
+        },
+        "0x075e64": {
+          "call_count": 6,
+          "call_sites": [
+            893574,
+            894006,
+            894320,
+            894636,
+            905606,
+            911592
+          ]
+        },
+        "0x075e6a": {
+          "call_count": 2,
+          "call_sites": [
+            889540,
+            914492
+          ]
+        },
+        "0x075e70": {
+          "call_count": 1,
+          "call_sites": [
+            901181
+          ]
+        },
+        "0x075e72": {
+          "call_count": 1,
+          "call_sites": [
+            901605
+          ]
+        },
+        "0x075e7c": {
+          "call_count": 4,
+          "call_sites": [
+            859678,
+            892580,
+            911206,
+            914705
+          ]
+        },
+        "0x075e7e": {
+          "call_count": 6,
+          "call_sites": [
+            859692,
+            893798,
+            911491,
+            911562,
+            911628,
+            914802
+          ]
+        },
+        "0x075e82": {
+          "call_count": 4,
+          "call_sites": [
+            859707,
+            892614,
+            914739,
+            915406
+          ]
+        },
+        "0x075e84": {
+          "call_count": 4,
+          "call_sites": [
+            859717,
+            893787,
+            914791,
+            915420
+          ]
+        },
+        "0x075e88": {
+          "call_count": 1,
+          "call_sites": [
+            859763
+          ]
+        },
+        "0x075e8a": {
+          "call_count": 2,
+          "call_sites": [
+            892503,
+            892552
+          ]
+        },
+        "0x075e96": {
+          "call_count": 1,
+          "call_sites": [
+            901044
+          ]
+        },
+        "0x075e98": {
+          "call_count": 1,
+          "call_sites": [
+            888068
+          ]
+        },
+        "0x075ea0": {
+          "call_count": 2,
+          "call_sites": [
+            894930,
+            895209
+          ]
+        },
+        "0x075ea2": {
+          "call_count": 1,
+          "call_sites": [
+            895399
+          ]
+        },
+        "0x075ea4": {
+          "call_count": 4,
+          "call_sites": [
+            886769,
+            886821,
+            909495,
+            912016
+          ]
+        },
+        "0x075ea6": {
+          "call_count": 7,
+          "call_sites": [
+            827523,
+            831342,
+            844196,
+            847816,
+            849596,
+            858982,
+            889566
+          ]
+        },
+        "0x075ea8": {
+          "call_count": 1,
+          "call_sites": [
+            831380
+          ]
+        },
+        "0x075eaa": {
+          "call_count": 1,
+          "call_sites": [
+            892715
+          ]
+        },
+        "0x075eac": {
+          "call_count": 2,
+          "call_sites": [
+            894161,
+            894475
+          ]
+        },
+        "0x075eb2": {
+          "call_count": 4,
+          "call_sites": [
+            892785,
+            901038,
+            901048,
+            911188
+          ]
+        },
+        "0x075eb4": {
+          "call_count": 1,
+          "call_sites": [
+            894697
+          ]
+        },
+        "0x075eb8": {
+          "call_count": 1,
+          "call_sites": [
+            896023
+          ]
+        },
+        "0x075eba": {
+          "call_count": 2,
+          "call_sites": [
+            896109,
+            896125
+          ]
+        },
+        "0x075eca": {
+          "call_count": 8,
+          "call_sites": [
+            893319,
+            893355,
+            893391,
+            893427,
+            893463,
+            893499,
+            893536,
+            905175
+          ]
+        },
+        "0x075ecc": {
+          "call_count": 1,
+          "call_sites": [
+            905237
+          ]
+        },
+        "0x075ee0": {
+          "call_count": 2,
+          "call_sites": [
+            893078,
+            905337
+          ]
+        },
+        "0x075ee2": {
+          "call_count": 2,
+          "call_sites": [
+            893075,
+            905331
+          ]
+        },
+        "0x075ee6": {
+          "call_count": 2,
+          "call_sites": [
+            893142,
+            893231
+          ]
+        },
+        "0x075eea": {
+          "call_count": 3,
+          "call_sites": [
+            821268,
+            905431,
+            905503
+          ]
+        },
+        "0x075eec": {
+          "call_count": 1,
+          "call_sites": [
+            821284
+          ]
+        },
+        "0x075ef0": {
+          "call_count": 3,
+          "call_sites": [
+            821262,
+            905383,
+            905489
+          ]
+        },
+        "0x075ef2": {
+          "call_count": 1,
+          "call_sites": [
+            821296
+          ]
+        },
+        "0x075f00": {
+          "call_count": 1,
+          "call_sites": [
+            911139
+          ]
+        },
+        "0x075f06": {
+          "call_count": 5,
+          "call_sites": [
+            852092,
+            852130,
+            859935,
+            860002,
+            911647
+          ]
+        },
+        "0x075f08": {
+          "call_count": 3,
+          "call_sites": [
+            854713,
+            854726,
+            860333
+          ]
+        },
+        "0x075f0e": {
+          "call_count": 16,
+          "call_sites": [
+            852112,
+            852150,
+            852207,
+            854550,
+            855647,
+            858393,
+            859966,
+            860033,
+            860112,
+            860464,
+            861043,
+            861132,
+            861293,
+            864388,
+            864756,
+            911657
+          ]
+        },
+        "0x075f12": {
+          "call_count": 4,
+          "call_sites": [
+            862306,
+            892890,
+            911671,
+            914179
+          ]
+        },
+        "0x075f14": {
+          "call_count": 3,
+          "call_sites": [
+            862880,
+            893872,
+            914431
+          ]
+        },
+        "0x075f18": {
+          "call_count": 66,
+          "call_sites": [
+            851742,
+            860631,
+            861663,
+            861812,
+            861903,
+            862041,
+            862236,
+            862334,
+            862950,
+            863024,
+            863061,
+            863098,
+            863157,
+            863205,
+            863321,
+            863422,
+            863517,
+            863627,
+            863686,
+            863733,
+            863900,
+            864100,
+            864179,
+            864221,
+            864451,
+            864496,
+            864537,
+            864576,
+            864617,
+            880370,
+            892938,
+            892957,
+            892978,
+            892999,
+            893020,
+            893042,
+            893742,
+            894178,
+            894199,
+            894228,
+            894250,
+            894272,
+            894342,
+            894363,
+            894492,
+            894513,
+            894535,
+            894557,
+            894586,
+            894739,
+            894761,
+            894783,
+            894804,
+            894833,
+            911681,
+            912625,
+            914218,
+            914234,
+            914252,
+            914270,
+            914288,
+            914306,
+            914324,
+            914343,
+            914584,
+            914657
+          ]
+        },
+        "0x075f1c": {
+          "call_count": 2,
+          "call_sites": [
+            862710,
+            862730
+          ]
+        },
+        "0x075f1e": {
+          "call_count": 2,
+          "call_sites": [
+            862836,
+            862849
+          ]
+        },
+        "0x075f28": {
+          "call_count": 3,
+          "call_sites": [
+            859809,
+            859850,
+            914383
+          ]
+        },
+        "0x075f2a": {
+          "call_count": 2,
+          "call_sites": [
+            851929,
+            914470
+          ]
+        },
+        "0x075f2e": {
+          "call_count": 24,
+          "call_sites": [
+            881921,
+            882399,
+            882613,
+            882667,
+            882910,
+            883239,
+            892506,
+            892555,
+            893623,
+            893698,
+            893942,
+            893973,
+            894288,
+            894300,
+            894602,
+            894614,
+            894877,
+            894889,
+            908738,
+            912133,
+            914534,
+            915427,
+            915434,
+            915898
+          ]
+        },
+        "0x075f3a": {
+          "call_count": 1,
+          "call_sites": [
+            904977
+          ]
+        },
+        "0x075f3c": {
+          "call_count": 1,
+          "call_sites": [
+            904969
+          ]
+        },
+        "0x075f46": {
+          "call_count": 1,
+          "call_sites": [
+            916670
+          ]
+        },
+        "0x075f48": {
+          "call_count": 1,
+          "call_sites": [
+            916681
+          ]
+        },
+        "0x075f4a": {
+          "call_count": 1,
+          "call_sites": [
+            916688
+          ]
+        },
+        "0x075f4c": {
+          "call_count": 2,
+          "call_sites": [
+            915904,
+            916215
+          ]
+        },
+        "0x075f50": {
+          "call_count": 1,
+          "call_sites": [
+            915907
+          ]
+        },
+        "0x075f52": {
+          "call_count": 1,
+          "call_sites": [
+            911142
+          ]
+        },
+        "0x075f5e": {
+          "call_count": 1,
+          "call_sites": [
+            915239
+          ]
+        },
+        "0x075f62": {
+          "call_count": 1,
+          "call_sites": [
+            889524
+          ]
+        },
+        "0x075f64": {
+          "call_count": 3,
+          "call_sites": [
+            865098,
+            866440,
+            911002
+          ]
+        },
+        "0x075f66": {
+          "call_count": 6,
+          "call_sites": [
+            861360,
+            865018,
+            865057,
+            865448,
+            865567,
+            911080
+          ]
+        },
+        "0x075f68": {
+          "call_count": 3,
+          "call_sites": [
+            865081,
+            866423,
+            910989
+          ]
+        },
+        "0x075f6a": {
+          "call_count": 7,
+          "call_sites": [
+            861342,
+            865005,
+            865047,
+            865435,
+            865517,
+            887875,
+            911064
+          ]
+        },
+        "0x075f7c": {
+          "call_count": 2,
+          "call_sites": [
+            908436,
+            908646
+          ]
+        },
+        "0x075f82": {
+          "call_count": 3,
+          "call_sites": [
+            892852,
+            892880,
+            894722
+          ]
+        },
+        "0x075f84": {
+          "call_count": 1,
+          "call_sites": [
+            896699
+          ]
+        },
+        "0x075f86": {
+          "call_count": 2,
+          "call_sites": [
+            896761,
+            896840
+          ]
+        },
+        "0x075f88": {
+          "call_count": 2,
+          "call_sites": [
+            896793,
+            897028
+          ]
+        },
+        "0x075f8a": {
+          "call_count": 2,
+          "call_sites": [
+            909512,
+            909520
+          ]
+        },
+        "0x075f9a": {
+          "call_count": 2,
+          "call_sites": [
+            876951,
+            876955
+          ]
+        },
+        "0x075fa0": {
+          "call_count": 2,
+          "call_sites": [
+            908121,
+            909848
+          ]
+        },
+        "0x075fa2": {
+          "call_count": 4,
+          "call_sites": [
+            897190,
+            897389,
+            897417,
+            909713
+          ]
+        },
+        "0x075fa4": {
+          "call_count": 15,
+          "call_sites": [
+            897245,
+            897286,
+            897329,
+            897372,
+            897404,
+            897452,
+            897472,
+            897509,
+            897527,
+            897564,
+            897584,
+            897621,
+            897641,
+            897747,
+            909810
+          ]
+        },
+        "0x075fa6": {
+          "call_count": 10,
+          "call_sites": [
+            897438,
+            897495,
+            897550,
+            897607,
+            898184,
+            898217,
+            898347,
+            898380,
+            898901,
+            909740
+          ]
+        },
+        "0x075fa8": {
+          "call_count": 9,
+          "call_sites": [
+            897231,
+            897272,
+            897315,
+            897358,
+            897843,
+            897896,
+            897972,
+            898059,
+            899082
+          ]
+        },
+        "0x075faa": {
+          "call_count": 1,
+          "call_sites": [
+            897205
+          ]
+        },
+        "0x075fac": {
+          "call_count": 8,
+          "call_sites": [
+            897719,
+            897816,
+            898032,
+            898161,
+            898324,
+            898879,
+            899060,
+            899206
+          ]
+        },
+        "0x075fae": {
+          "call_count": 1,
+          "call_sites": [
+            897699
+          ]
+        },
+        "0x075fb4": {
+          "call_count": 6,
+          "call_sites": [
+            908323,
+            908409,
+            908533,
+            908619,
+            909694,
+            915508
+          ]
+        },
+        "0x075fca": {
+          "call_count": 6,
+          "call_sites": [
+            907903,
+            908346,
+            908432,
+            908556,
+            908642,
+            911535
+          ]
+        },
+        "0x075fcc": {
+          "call_count": 2,
+          "call_sites": [
+            908234,
+            908444
+          ]
+        }
+      }
+    },
+    {
+      "name": "BUNDLE_TM_135800TM.MBA",
+      "path": "samples/BUNDLE_TM_135800TM.MBA",
+      "sha256": "9d22007875c00793b84ff3a55b4c3bfdf859b61d365107b87344fab06c3739b4",
+      "runtime_base": 819200,
+      "entry": 827562,
+      "services": {
+        "0x075c0a": {
+          "call_count": 1,
+          "call_sites": [
+            826296
+          ]
+        },
+        "0x075c0c": {
+          "call_count": 7,
+          "call_sites": [
+            821502,
+            821532,
+            821563,
+            822085,
+            822103,
+            822111,
+            822121
+          ]
+        },
+        "0x075c0e": {
+          "call_count": 1,
+          "call_sites": [
+            821474
+          ]
+        },
+        "0x075c38": {
+          "call_count": 2,
+          "call_sites": [
+            826290,
+            826302
+          ]
+        },
+        "0x075c3a": {
+          "call_count": 1,
+          "call_sites": [
+            823508
+          ]
+        },
+        "0x075c3c": {
+          "call_count": 1,
+          "call_sites": [
+            823612
+          ]
+        },
+        "0x075e5e": {
+          "call_count": 2,
+          "call_sites": [
+            823709,
+            827179
+          ]
+        },
+        "0x075e64": {
+          "call_count": 2,
+          "call_sites": [
+            823704,
+            827174
+          ]
+        },
+        "0x075e96": {
+          "call_count": 1,
+          "call_sites": [
+            826305
+          ]
+        },
+        "0x075ea4": {
+          "call_count": 1,
+          "call_sites": [
+            823752
+          ]
+        },
+        "0x075eca": {
+          "call_count": 4,
+          "call_sites": [
+            823432,
+            823691,
+            823845,
+            827161
+          ]
+        },
+        "0x075ee0": {
+          "call_count": 1,
+          "call_sites": [
+            824222
+          ]
+        },
+        "0x075ee2": {
+          "call_count": 1,
+          "call_sites": [
+            824219
+          ]
+        },
+        "0x075f00": {
+          "call_count": 1,
+          "call_sites": [
+            826068
+          ]
+        },
+        "0x075f0e": {
+          "call_count": 1,
+          "call_sites": [
+            825806
+          ]
+        },
+        "0x075f12": {
+          "call_count": 1,
+          "call_sites": [
+            821291
+          ]
+        },
+        "0x075f18": {
+          "call_count": 2,
+          "call_sites": [
+            821307,
+            821417
+          ]
+        },
+        "0x075f3a": {
+          "call_count": 2,
+          "call_sites": [
+            822142,
+            822161
+          ]
+        },
+        "0x075f3c": {
+          "call_count": 1,
+          "call_sites": [
+            822136
+          ]
+        },
+        "0x075f46": {
+          "call_count": 1,
+          "call_sites": [
+            827580
+          ]
+        },
+        "0x075f48": {
+          "call_count": 1,
+          "call_sites": [
+            827607
+          ]
+        },
+        "0x075f4a": {
+          "call_count": 1,
+          "call_sites": [
+            827614
+          ]
+        },
+        "0x075f52": {
+          "call_count": 1,
+          "call_sites": [
+            826071
+          ]
+        },
+        "0x075f66": {
+          "call_count": 2,
+          "call_sites": [
+            826124,
+            826221
+          ]
+        },
+        "0x075f7c": {
+          "call_count": 2,
+          "call_sites": [
+            823696,
+            827166
+          ]
+        },
+        "0x075fa0": {
+          "call_count": 1,
+          "call_sites": [
+            825432
+          ]
+        },
+        "0x075fa2": {
+          "call_count": 1,
+          "call_sites": [
+            824468
+          ]
+        },
+        "0x075fa4": {
+          "call_count": 1,
+          "call_sites": [
+            825011
+          ]
+        },
+        "0x075fa6": {
+          "call_count": 2,
+          "call_sites": [
+            824593,
+            824897
+          ]
+        },
+        "0x075fac": {
+          "call_count": 1,
+          "call_sites": [
+            824840
+          ]
+        },
+        "0x075fae": {
+          "call_count": 1,
+          "call_sites": [
+            824484
+          ]
+        },
+        "0x075fb4": {
+          "call_count": 1,
+          "call_sites": [
+            824434
+          ]
+        }
+      }
+    },
+    {
+      "name": "USENG_EBOOK.MBA",
+      "path": "samples/USENG_EBOOK.MBA",
+      "sha256": "91e132e85fcbbe38d2886c98844da5cddf731542492ee5b2fb2881cd3835810f",
+      "runtime_base": 819200,
+      "entry": 870664,
+      "services": {
+        "0x075c0c": {
+          "call_count": 4,
+          "call_sites": [
+            853232,
+            853262,
+            853293,
+            853815
+          ]
+        },
+        "0x075c0e": {
+          "call_count": 1,
+          "call_sites": [
+            853204
+          ]
+        },
+        "0x075c52": {
+          "call_count": 3,
+          "call_sites": [
+            826528,
+            827156,
+            846788
+          ]
+        },
+        "0x075c54": {
+          "call_count": 3,
+          "call_sites": [
+            825316,
+            826595,
+            846874
+          ]
+        },
+        "0x075c58": {
+          "call_count": 3,
+          "call_sites": [
+            826702,
+            849806,
+            852233
+          ]
+        },
+        "0x075e06": {
+          "call_count": 1,
+          "call_sites": [
+            844159
+          ]
+        },
+        "0x075e08": {
+          "call_count": 1,
+          "call_sites": [
+            857126
+          ]
+        },
+        "0x075e0a": {
+          "call_count": 3,
+          "call_sites": [
+            855113,
+            856452,
+            857134
+          ]
+        },
+        "0x075e0c": {
+          "call_count": 7,
+          "call_sites": [
+            826111,
+            834126,
+            837767,
+            841411,
+            846018,
+            862764,
+            866891
+          ]
+        },
+        "0x075e0e": {
+          "call_count": 2,
+          "call_sites": [
+            857681,
+            858057
+          ]
+        },
+        "0x075e14": {
+          "call_count": 2,
+          "call_sites": [
+            858274,
+            858345
+          ]
+        },
+        "0x075e16": {
+          "call_count": 2,
+          "call_sites": [
+            858308,
+            858370
+          ]
+        },
+        "0x075e18": {
+          "call_count": 3,
+          "call_sites": [
+            858094,
+            858143,
+            858230
+          ]
+        },
+        "0x075e1a": {
+          "call_count": 5,
+          "call_sites": [
+            837874,
+            844922,
+            851265,
+            856947,
+            858483
+          ]
+        },
+        "0x075e2c": {
+          "call_count": 1,
+          "call_sites": [
+            858554
+          ]
+        },
+        "0x075e32": {
+          "call_count": 1,
+          "call_sites": [
+            858668
+          ]
+        },
+        "0x075e34": {
+          "call_count": 1,
+          "call_sites": [
+            858682
+          ]
+        },
+        "0x075e36": {
+          "call_count": 1,
+          "call_sites": [
+            858624
+          ]
+        },
+        "0x075e38": {
+          "call_count": 1,
+          "call_sites": [
+            858728
+          ]
+        },
+        "0x075e40": {
+          "call_count": 4,
+          "call_sites": [
+            857111,
+            857399,
+            857527,
+            857799
+          ]
+        },
+        "0x075e48": {
+          "call_count": 5,
+          "call_sites": [
+            825350,
+            826104,
+            857782,
+            858587,
+            862757
+          ]
+        },
+        "0x075e4a": {
+          "call_count": 1,
+          "call_sites": [
+            857759
+          ]
+        },
+        "0x075e52": {
+          "call_count": 8,
+          "call_sites": [
+            836438,
+            836495,
+            840450,
+            840507,
+            844011,
+            850982,
+            859928,
+            867546
+          ]
+        },
+        "0x075e5e": {
+          "call_count": 1,
+          "call_sites": [
+            847154
+          ]
+        },
+        "0x075e64": {
+          "call_count": 4,
+          "call_sites": [
+            855895,
+            856322,
+            856376,
+            856669
+          ]
+        },
+        "0x075e68": {
+          "call_count": 1,
+          "call_sites": [
+            851900
+          ]
+        },
+        "0x075e6a": {
+          "call_count": 1,
+          "call_sites": [
+            869733
+          ]
+        },
+        "0x075e6e": {
+          "call_count": 1,
+          "call_sites": [
+            825517
+          ]
+        },
+        "0x075e70": {
+          "call_count": 1,
+          "call_sites": [
+            855228
+          ]
+        },
+        "0x075e7c": {
+          "call_count": 12,
+          "call_sites": [
+            844711,
+            845350,
+            845458,
+            845557,
+            845724,
+            851027,
+            851852,
+            854887,
+            860522,
+            865961,
+            867591,
+            869946
+          ]
+        },
+        "0x075e7e": {
+          "call_count": 4,
+          "call_sites": [
+            849993,
+            853018,
+            856128,
+            870043
+          ]
+        },
+        "0x075e82": {
+          "call_count": 28,
+          "call_sites": [
+            834783,
+            836542,
+            836793,
+            837835,
+            841502,
+            844839,
+            846942,
+            847007,
+            847188,
+            851060,
+            851199,
+            851376,
+            851477,
+            851523,
+            851613,
+            851719,
+            851787,
+            854921,
+            859974,
+            860538,
+            860714,
+            862874,
+            865440,
+            867624,
+            867792,
+            867836,
+            867904,
+            869980
+          ]
+        },
+        "0x075e84": {
+          "call_count": 31,
+          "call_sites": [
+            835673,
+            836759,
+            836844,
+            839051,
+            842225,
+            845068,
+            845775,
+            846962,
+            847068,
+            847240,
+            849980,
+            851166,
+            851347,
+            851449,
+            851494,
+            851585,
+            851693,
+            851761,
+            851834,
+            856117,
+            860487,
+            860612,
+            860734,
+            862894,
+            863111,
+            865928,
+            867761,
+            867809,
+            867878,
+            867921,
+            870032
+          ]
+        },
+        "0x075e86": {
+          "call_count": 1,
+          "call_sites": [
+            849965
+          ]
+        },
+        "0x075e88": {
+          "call_count": 3,
+          "call_sites": [
+            846052,
+            846325,
+            867016
+          ]
+        },
+        "0x075e8a": {
+          "call_count": 6,
+          "call_sites": [
+            854798,
+            854859,
+            860600,
+            860667,
+            866005,
+            866060
+          ]
+        },
+        "0x075e96": {
+          "call_count": 1,
+          "call_sites": [
+            868872
+          ]
+        },
+        "0x075eaa": {
+          "call_count": 1,
+          "call_sites": [
+            855046
+          ]
+        },
+        "0x075eac": {
+          "call_count": 1,
+          "call_sites": [
+            856466
+          ]
+        },
+        "0x075eb2": {
+          "call_count": 1,
+          "call_sites": [
+            855116
+          ]
+        },
+        "0x075eb4": {
+          "call_count": 1,
+          "call_sites": [
+            856730
+          ]
+        },
+        "0x075eb8": {
+          "call_count": 3,
+          "call_sites": [
+            868936,
+            869090,
+            869243
+          ]
+        },
+        "0x075eba": {
+          "call_count": 2,
+          "call_sites": [
+            869026,
+            869466
+          ]
+        },
+        "0x075eca": {
+          "call_count": 7,
+          "call_sites": [
+            855640,
+            855676,
+            855712,
+            855748,
+            855784,
+            855820,
+            855857
+          ]
+        },
+        "0x075ee0": {
+          "call_count": 1,
+          "call_sites": [
+            855405
+          ]
+        },
+        "0x075ee2": {
+          "call_count": 1,
+          "call_sites": [
+            855402
+          ]
+        },
+        "0x075ee6": {
+          "call_count": 3,
+          "call_sites": [
+            853854,
+            855463,
+            855552
+          ]
+        },
+        "0x075f06": {
+          "call_count": 1,
+          "call_sites": [
+            851992
+          ]
+        },
+        "0x075f08": {
+          "call_count": 1,
+          "call_sites": [
+            852068
+          ]
+        },
+        "0x075f0e": {
+          "call_count": 4,
+          "call_sites": [
+            852008,
+            852107,
+            852161,
+            854545
+          ]
+        },
+        "0x075f12": {
+          "call_count": 2,
+          "call_sites": [
+            847287,
+            852478
+          ]
+        },
+        "0x075f14": {
+          "call_count": 3,
+          "call_sites": [
+            847463,
+            853057,
+            869672
+          ]
+        },
+        "0x075f16": {
+          "call_count": 1,
+          "call_sites": [
+            847426
+          ]
+        },
+        "0x075f18": {
+          "call_count": 45,
+          "call_sites": [
+            826742,
+            828973,
+            847303,
+            847502,
+            847570,
+            847648,
+            847716,
+            847798,
+            847880,
+            847929,
+            847987,
+            848167,
+            848217,
+            848268,
+            848317,
+            848364,
+            848415,
+            848524,
+            848575,
+            848628,
+            848696,
+            848791,
+            848845,
+            848902,
+            849052,
+            849211,
+            849323,
+            849434,
+            849541,
+            849823,
+            849912,
+            850038,
+            852250,
+            852396,
+            852494,
+            852604,
+            852680,
+            852790,
+            852842,
+            852894,
+            852950,
+            854379,
+            854475,
+            869825,
+            869898
+          ]
+        },
+        "0x075f20": {
+          "call_count": 11,
+          "call_sites": [
+            821789,
+            828713,
+            831771,
+            836383,
+            840395,
+            842545,
+            843959,
+            849737,
+            850963,
+            859876,
+            867527
+          ]
+        },
+        "0x075f28": {
+          "call_count": 1,
+          "call_sites": [
+            869624
+          ]
+        },
+        "0x075f2a": {
+          "call_count": 1,
+          "call_sites": [
+            869711
+          ]
+        },
+        "0x075f2e": {
+          "call_count": 27,
+          "call_sites": [
+            822928,
+            824657,
+            826180,
+            828447,
+            846353,
+            846398,
+            854812,
+            854862,
+            855944,
+            856021,
+            856255,
+            856286,
+            856634,
+            856646,
+            856880,
+            856892,
+            866895,
+            867023,
+            867044,
+            868785,
+            869292,
+            869309,
+            869341,
+            869420,
+            869427,
+            869775,
+            870065
+          ]
+        },
+        "0x075f3a": {
+          "call_count": 3,
+          "call_sites": [
+            853127,
+            853146,
+            855262
+          ]
+        },
+        "0x075f3c": {
+          "call_count": 2,
+          "call_sites": [
+            853121,
+            855254
+          ]
+        },
+        "0x075f46": {
+          "call_count": 1,
+          "call_sites": [
+            870746
+          ]
+        },
+        "0x075f48": {
+          "call_count": 1,
+          "call_sites": [
+            870757
+          ]
+        },
+        "0x075f4a": {
+          "call_count": 1,
+          "call_sites": [
+            870764
+          ]
+        },
+        "0x075f4c": {
+          "call_count": 2,
+          "call_sites": [
+            870071,
+            870382
+          ]
+        },
+        "0x075f50": {
+          "call_count": 1,
+          "call_sites": [
+            870074
+          ]
+        },
+        "0x075f52": {
+          "call_count": 1,
+          "call_sites": [
+            851881
+          ]
+        },
+        "0x075f6e": {
+          "call_count": 2,
+          "call_sites": [
+            866308,
+            866857
+          ]
+        },
+        "0x075f82": {
+          "call_count": 3,
+          "call_sites": [
+            855183,
+            855211,
+            856755
+          ]
+        },
+        "0x075f94": {
+          "call_count": 2,
+          "call_sites": [
+            844871,
+            850114
+          ]
+        },
+        "0x075fa0": {
+          "call_count": 1,
+          "call_sites": [
+            866527
+          ]
+        },
+        "0x075fa2": {
+          "call_count": 4,
+          "call_sites": [
+            860764,
+            860786,
+            860818,
+            860834
+          ]
+        },
+        "0x075fa4": {
+          "call_count": 10,
+          "call_sites": [
+            860801,
+            860870,
+            860890,
+            860927,
+            860945,
+            860982,
+            861002,
+            861039,
+            861059,
+            861165
+          ]
+        },
+        "0x075fa6": {
+          "call_count": 9,
+          "call_sites": [
+            860856,
+            860913,
+            860968,
+            861025,
+            861602,
+            861635,
+            861765,
+            861798,
+            862319
+          ]
+        },
+        "0x075fa8": {
+          "call_count": 5,
+          "call_sites": [
+            861261,
+            861314,
+            861390,
+            861477,
+            862500
+          ]
+        },
+        "0x075fac": {
+          "call_count": 8,
+          "call_sites": [
+            861137,
+            861234,
+            861450,
+            861579,
+            861742,
+            862297,
+            862478,
+            862624
+          ]
+        },
+        "0x075fae": {
+          "call_count": 1,
+          "call_sites": [
+            861117
+          ]
+        },
+        "0x075fb4": {
+          "call_count": 4,
+          "call_sites": [
+            866178,
+            866266,
+            866729,
+            866815
+          ]
+        },
+        "0x075fca": {
+          "call_count": 4,
+          "call_sites": [
+            866203,
+            866289,
+            866752,
+            866838
+          ]
+        },
+        "0x075fcc": {
+          "call_count": 7,
+          "call_sites": [
+            866089,
+            866640,
+            868886,
+            868994,
+            869040,
+            869193,
+            869434
+          ]
+        },
+        "0x075fd6": {
+          "call_count": 3,
+          "call_sites": [
+            868914,
+            869068,
+            869221
+          ]
+        },
+        "0x075fd8": {
+          "call_count": 2,
+          "call_sites": [
+            869013,
+            869453
+          ]
+        }
+      }
+    },
+    {
+      "name": "USENG_MM.MBA",
+      "path": "samples/USENG_MM.MBA",
+      "sha256": "78320de49b0de0c8a88999118d593fb565600f2ad5845df77a07a92734db128e",
+      "runtime_base": 2244608,
+      "entry": 2283685,
+      "services": {}
+    },
+    {
+      "name": "USENG_UB.MBA",
+      "path": "samples/USENG_UB.MBA",
+      "sha256": "f95754dc9f558ee1f019c6d5c94537d4acfae63010a5ed42e4be723cf426dcd4",
+      "runtime_base": 2244608,
+      "entry": 2253409,
+      "services": {}
+    },
+    {
+      "name": "58-115800-000-002_V020.gam",
+      "path": "samples/58-115800-000-002_V020.gam",
+      "sha256": "7fd742a13ae6ca122cf0b7ab01c8900a25a5b56cabb2d1f36c0d480104fc4eb0",
+      "runtime_base": 2244608,
+      "entry": 2282784,
+      "services": {}
+    },
+    {
+      "name": "58-115800-000-029_V020.gam",
+      "path": "samples/58-115800-000-029_V020.gam",
+      "sha256": "26a6219554597a872d0af60c87aef67652ec49724717c05259fadae9ab82d41d",
+      "runtime_base": 2244608,
+      "entry": 2273338,
+      "services": {}
+    },
+    {
+      "name": "58-115800-000-030_V020.gam",
+      "path": "samples/58-115800-000-030_V020.gam",
+      "sha256": "e53b6c0428252420d1bf1a7e8fd7e1cd8c475d8aab8f9ece0446eb625ba408d5",
+      "runtime_base": 2244608,
+      "entry": 2272711,
+      "services": {}
+    },
+    {
+      "name": "58-115800-000-031_V010.gam",
+      "path": "samples/58-115800-000-031_V010.gam",
+      "sha256": "7aee23a9b5c804e35a7650d22205b6f7e3ff65f92eba8fd2d32d776617d33c54",
+      "runtime_base": 2244608,
+      "entry": 2283659,
+      "services": {}
+    }
+  ]
+}

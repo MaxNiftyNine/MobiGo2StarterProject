@@ -1,0 +1,112 @@
+#ifndef MOBIGO_SDK_RESIDENT_ADDRESSES_H
+#define MOBIGO_SDK_RESIDENT_ADDRESSES_H
+
+/*
+ * Fixed u'nSP word addresses used by the MobiGo resident service bank.
+ *
+ * These are addresses, not linker-provided symbols. Names are clean-room
+ * descriptions based on official application callers. Keep prototypes in a
+ * subsystem adapter until their argument and return types are verified.
+ */
+
+/*
+ * Dynamic linked-resource slots. EBOOK proves that the resident runtime can
+ * relocate additional version-2 bundles into slots 1..7 after the primary
+ * slot-0 application bundle has already been registered.
+ */
+#define MG_SDK_RESIDENT_REGISTER_DYNAMIC_BUNDLE 0x00075c52UL
+#define MG_SDK_RESIDENT_UNREGISTER_DYNAMIC_BUNDLE 0x00075c54UL
+#define MG_SDK_RESIDENT_CREATE_DYNAMIC_UI_FAMILY_B 0x00075c58UL
+
+#define MG_SDK_RESIDENT_REGISTER_AUDIO_RESOURCES 0x00075e06UL
+#define MG_SDK_RESIDENT_APPLY_MASTER_VOLUME 0x00075e0aUL
+#define MG_SDK_RESIDENT_PLAY_SOUND          0x00075e0eUL
+#define MG_SDK_RESIDENT_GET_SOUND_STATE     0x00075e1aUL
+#define MG_SDK_RESIDENT_PLAY_MUSIC          0x00075e2cUL
+#define MG_SDK_RESIDENT_PAUSE_MUSIC         0x00075e32UL
+#define MG_SDK_RESIDENT_RESUME_MUSIC        0x00075e34UL
+#define MG_SDK_RESIDENT_STOP_MUSIC          0x00075e36UL
+#define MG_SDK_RESIDENT_GET_MUSIC_STATE     0x00075e38UL
+#define MG_SDK_RESIDENT_SET_MUSIC_REPEAT    0x00075e3cUL
+#define MG_SDK_RESIDENT_GET_MUSIC_LEVEL     0x00075e3eUL
+#define MG_SDK_RESIDENT_SET_MUSIC_LEVEL     0x00075e40UL
+#define MG_SDK_RESIDENT_REQUEST_POWEROFF    0x00075e5eUL
+#define MG_SDK_RESIDENT_GET_SYSTEM_KEYS     0x00075e60UL
+#define MG_SDK_RESIDENT_SYSTEM_KEY_DOWN     0x00075e62UL
+#define MG_SDK_RESIDENT_SYSTEM_KEY_PRESSED  0x00075e64UL
+#define MG_SDK_RESIDENT_SYSTEM_KEY_RELEASED 0x00075e66UL
+#define MG_SDK_RESIDENT_CREATE_CONTEXT      0x00075e7cUL
+#define MG_SDK_RESIDENT_DESTROY_CONTEXT     0x00075e7eUL
+#define MG_SDK_RESIDENT_GET_CONTEXT_POINTER 0x00075e82UL
+#define MG_SDK_RESIDENT_RELEASE_CONTEXT     0x00075e84UL
+#define MG_SDK_RESIDENT_POST_FRAMEWORK_EVENT 0x00075e8aUL
+#define MG_SDK_RESIDENT_GET_VOLUME          0x00075eaaUL
+#define MG_SDK_RESIDENT_SET_VOLUME          0x00075eacUL
+#define MG_SDK_RESIDENT_GET_BRIGHTNESS      0x00075eb2UL
+#define MG_SDK_RESIDENT_SET_BRIGHTNESS      0x00075eb4UL
+#define MG_SDK_RESIDENT_GET_GAME_KEYS        0x00075ec6UL
+#define MG_SDK_RESIDENT_GAME_KEY_DOWN        0x00075ec8UL
+#define MG_SDK_RESIDENT_GAME_KEY_PRESSED     0x00075ecaUL
+#define MG_SDK_RESIDENT_GAME_KEY_RELEASED    0x00075eccUL
+#define MG_SDK_RESIDENT_GET_INPUT_EVENT_PTR  0x00075ee0UL
+#define MG_SDK_RESIDENT_GET_INPUT_EVENT_COUNT 0x00075ee2UL
+#define MG_SDK_RESIDENT_TEST_SPECIAL_KEY     0x00075ee6UL
+
+/*
+ * Resident UI/PPU subsystem. The implementation behind these trampolines
+ * initializes the fixed family-A/family-B object pools, tears them down, and
+ * renders both linked object families once per frame.
+ */
+#define MG_SDK_RESIDENT_UI_RUNTIME_INIT       0x00075efaUL
+#define MG_SDK_RESIDENT_UI_RUNTIME_SHUTDOWN   0x00075efcUL
+#define MG_SDK_RESIDENT_UI_RUNTIME_RENDER_FRAME 0x00075efeUL
+
+#define MG_SDK_RESIDENT_REGISTER_ASSET_BUNDLE 0x00075f00UL
+#define MG_SDK_RESIDENT_LOAD_UI_FAMILY_A_DESCRIPTOR 0x00075f02UL
+#define MG_SDK_RESIDENT_INIT_UI_FAMILY_A_DESCRIPTOR_RUNTIME 0x00075f04UL
+#define MG_SDK_RESIDENT_CREATE_UI_FAMILY_A    0x00075f06UL
+#define MG_SDK_RESIDENT_DESTROY_UI_FAMILY_A   0x00075f08UL
+#define MG_SDK_RESIDENT_GET_UI_FAMILY_A       0x00075f0eUL
+#define MG_SDK_RESIDENT_LOAD_UI_FAMILY_B_DESCRIPTOR 0x00075f10UL
+#define MG_SDK_RESIDENT_CREATE_UI_FAMILY_B    0x00075f12UL
+#define MG_SDK_RESIDENT_DESTROY_UI_FAMILY_B   0x00075f14UL
+#define MG_SDK_RESIDENT_GET_UI_FAMILY_B       0x00075f18UL
+#define MG_SDK_RESIDENT_BIND_UI_CALLBACK      0x00075f1cUL
+#define MG_SDK_RESIDENT_CREATE_UI_OBJECT \
+    MG_SDK_RESIDENT_CREATE_UI_FAMILY_B
+#define MG_SDK_RESIDENT_GET_UI_OBJECT \
+    MG_SDK_RESIDENT_GET_UI_FAMILY_B
+#define MG_SDK_RESIDENT_GET_TICKS           0x00075f2eUL
+#define MG_SDK_RESIDENT_GET_TOUCH_EVENT_PTR 0x00075f3aUL
+#define MG_SDK_RESIDENT_GET_TOUCH_EVENT_COUNT 0x00075f3cUL
+#define MG_SDK_RESIDENT_RUNTIME_SETUP       0x00075f46UL
+#define MG_SDK_RESIDENT_RUNTIME_STEP        0x00075f48UL
+#define MG_SDK_RESIDENT_RUNTIME_FINALIZE    0x00075f4aUL
+/*
+ * G1 calls this after asset-bundle registration. Resident decompilation shows
+ * it toggles GPIO-B bit 9 around a short hardware-service sequence; it is not
+ * the application/runtime initializer (that lifecycle is 0x075f46/48/4a).
+ * Keep the old name as a source-compatible alias until the attached peripheral
+ * is identified with independent hardware evidence.
+ */
+#define MG_SDK_RESIDENT_SERVICE_075F52      0x00075f52UL
+#define MG_SDK_RESIDENT_RUNTIME_INIT \
+    MG_SDK_RESIDENT_SERVICE_075F52
+#define MG_SDK_RESIDENT_APPLY_BACKLIGHT     0x00075f82UL
+#define MG_SDK_RESIDENT_STORAGE_CONFIG      0x00075fa0UL
+#define MG_SDK_RESIDENT_GET_VOLUME_PREFIX \
+    MG_SDK_RESIDENT_STORAGE_CONFIG
+#define MG_SDK_RESIDENT_FILE_OPEN            0x00075fa2UL
+#define MG_SDK_RESIDENT_FILE_CLOSE           0x00075fa4UL
+#define MG_SDK_RESIDENT_FILE_READ            0x00075fa6UL
+#define MG_SDK_RESIDENT_FILE_WRITE           0x00075fa8UL
+#define MG_SDK_RESIDENT_FILE_TRUNCATE        0x00075faaUL
+#define MG_SDK_RESIDENT_FILE_SEEK_ABSOLUTE   0x00075facUL
+#define MG_SDK_RESIDENT_FILE_SIZE            0x00075faeUL
+#define MG_SDK_RESIDENT_FILE_STAT            0x00075fb0UL
+#define MG_SDK_RESIDENT_PATH_REMOVE          0x00075fb2UL
+#define MG_SDK_RESIDENT_PATH_EXISTS         0x00075fb4UL
+#define MG_SDK_RESIDENT_LAUNCH_MBA          0x00075fcaUL
+#define MG_SDK_RESIDENT_QUERY_LAUNCH_VOLUME 0x00075fccUL
+
+#endif

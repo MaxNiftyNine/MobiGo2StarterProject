@@ -1,0 +1,952 @@
+{
+  "schema": 1,
+  "units": "16-bit words unless field name says bytes",
+  "algorithm": {
+    "kind": "exact rolling-hash anchors with byte-for-byte verification",
+    "anchor_words": 32,
+    "anchor_stride": 8,
+    "minimum_words": 64,
+    "header_words_ignored": 2048
+  },
+  "reference": {
+    "path": "samples/BUNDLE_G1_135800G1.MBA",
+    "name": "BUNDLE_G1_135800G1.MBA",
+    "sha256": "e2ae552854d5a9e91c7f66f88dcc867f61b777bf34b3e5887d98bb43cb2bdcf5",
+    "size_bytes": 2179072,
+    "size_words": 1089536,
+    "runtime_base": 819200,
+    "body_load": 821248,
+    "entry": 924245,
+    "title": "MGB_G1"
+  },
+  "comparisons": [
+    {
+      "target": {
+        "path": "samples/BUNDLE_SY_135800SY.MBA",
+        "name": "BUNDLE_SY_135800SY.MBA",
+        "sha256": "233eb01522c2654c48bf579539661aa4892f560c391100c98bd931edf2beb67a",
+        "size_bytes": 1523712,
+        "size_words": 761856,
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 916509,
+        "title": "MGB_SYS"
+      },
+      "shared_words": 63962,
+      "shared_bytes": 127924,
+      "same_runtime_address_words": 0,
+      "matches": [
+        {
+          "reference_word_offset": 42759,
+          "target_word_offset": 40471,
+          "length_words": 96,
+          "reference_file_offset": 85518,
+          "target_file_offset": 80942,
+          "reference_runtime_address": 861959,
+          "target_runtime_address": 859671,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 80606,
+          "target_word_offset": 61039,
+          "length_words": 93,
+          "reference_file_offset": 161212,
+          "target_file_offset": 122078,
+          "reference_runtime_address": 899806,
+          "target_runtime_address": 880239,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 98133,
+          "target_word_offset": 87482,
+          "length_words": 71,
+          "reference_file_offset": 196266,
+          "target_file_offset": 174964,
+          "reference_runtime_address": 917333,
+          "target_runtime_address": 906682,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 99800,
+          "target_word_offset": 91752,
+          "length_words": 145,
+          "reference_file_offset": 199600,
+          "target_file_offset": 183504,
+          "reference_runtime_address": 919000,
+          "target_runtime_address": 910952,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 99959,
+          "target_word_offset": 88641,
+          "length_words": 72,
+          "reference_file_offset": 199918,
+          "target_file_offset": 177282,
+          "reference_runtime_address": 919159,
+          "target_runtime_address": 907841,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 101686,
+          "target_word_offset": 94388,
+          "length_words": 74,
+          "reference_file_offset": 203372,
+          "target_file_offset": 188776,
+          "reference_runtime_address": 920886,
+          "target_runtime_address": 913588,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 101817,
+          "target_word_offset": 94519,
+          "length_words": 74,
+          "reference_file_offset": 203634,
+          "target_file_offset": 189038,
+          "reference_runtime_address": 921017,
+          "target_runtime_address": 913719,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 101948,
+          "target_word_offset": 94650,
+          "length_words": 78,
+          "reference_file_offset": 203896,
+          "target_file_offset": 189300,
+          "reference_runtime_address": 921148,
+          "target_runtime_address": 913850,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 102986,
+          "target_word_offset": 95006,
+          "length_words": 165,
+          "reference_file_offset": 205972,
+          "target_file_offset": 190012,
+          "reference_runtime_address": 922186,
+          "target_runtime_address": 914206,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 103394,
+          "target_word_offset": 95434,
+          "length_words": 65,
+          "reference_file_offset": 206788,
+          "target_file_offset": 190868,
+          "reference_runtime_address": 922594,
+          "target_runtime_address": 914634,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 103654,
+          "target_word_offset": 95711,
+          "length_words": 73,
+          "reference_file_offset": 207308,
+          "target_file_offset": 191422,
+          "reference_runtime_address": 922854,
+          "target_runtime_address": 914911,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 103902,
+          "target_word_offset": 95974,
+          "length_words": 93,
+          "reference_file_offset": 207804,
+          "target_file_offset": 191948,
+          "reference_runtime_address": 923102,
+          "target_runtime_address": 915174,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 104018,
+          "target_word_offset": 96090,
+          "length_words": 71,
+          "reference_file_offset": 208036,
+          "target_file_offset": 192180,
+          "reference_runtime_address": 923218,
+          "target_runtime_address": 915290,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 104818,
+          "target_word_offset": 97082,
+          "length_words": 85,
+          "reference_file_offset": 209636,
+          "target_file_offset": 194164,
+          "reference_runtime_address": 924018,
+          "target_runtime_address": 916282,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 104910,
+          "target_word_offset": 97174,
+          "length_words": 82,
+          "reference_file_offset": 209820,
+          "target_file_offset": 194348,
+          "reference_runtime_address": 924110,
+          "target_runtime_address": 916374,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 106258,
+          "target_word_offset": 98207,
+          "length_words": 93,
+          "reference_file_offset": 212516,
+          "target_file_offset": 196414,
+          "reference_runtime_address": 925458,
+          "target_runtime_address": 917407,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 106438,
+          "target_word_offset": 98615,
+          "length_words": 81,
+          "reference_file_offset": 212876,
+          "target_file_offset": 197230,
+          "reference_runtime_address": 925638,
+          "target_runtime_address": 917815,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 189701,
+          "target_word_offset": 199933,
+          "length_words": 1143,
+          "reference_file_offset": 379402,
+          "target_file_offset": 399866,
+          "reference_runtime_address": 1008901,
+          "target_runtime_address": 1019133,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 191913,
+          "target_word_offset": 293980,
+          "length_words": 72,
+          "reference_file_offset": 383826,
+          "target_file_offset": 587960,
+          "reference_runtime_address": 1011113,
+          "target_runtime_address": 1113180,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 192052,
+          "target_word_offset": 293981,
+          "length_words": 71,
+          "reference_file_offset": 384104,
+          "target_file_offset": 587962,
+          "reference_runtime_address": 1011252,
+          "target_runtime_address": 1113181,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 218438,
+          "target_word_offset": 211870,
+          "length_words": 2452,
+          "reference_file_offset": 436876,
+          "target_file_offset": 423740,
+          "reference_runtime_address": 1037638,
+          "target_runtime_address": 1031070,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 225846,
+          "target_word_offset": 201674,
+          "length_words": 6748,
+          "reference_file_offset": 451692,
+          "target_file_offset": 403348,
+          "reference_runtime_address": 1045046,
+          "target_runtime_address": 1020874,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 232594,
+          "target_word_offset": 216989,
+          "length_words": 66,
+          "reference_file_offset": 465188,
+          "target_file_offset": 433978,
+          "reference_runtime_address": 1051794,
+          "target_runtime_address": 1036189,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 244648,
+          "target_word_offset": 223811,
+          "length_words": 175,
+          "reference_file_offset": 489296,
+          "target_file_offset": 447622,
+          "reference_runtime_address": 1063848,
+          "target_runtime_address": 1043011,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 245708,
+          "target_word_offset": 293980,
+          "length_words": 72,
+          "reference_file_offset": 491416,
+          "target_file_offset": 587960,
+          "reference_runtime_address": 1064908,
+          "target_runtime_address": 1113180,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 255464,
+          "target_word_offset": 338760,
+          "length_words": 64,
+          "reference_file_offset": 510928,
+          "target_file_offset": 677520,
+          "reference_runtime_address": 1074664,
+          "target_runtime_address": 1157960,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 301773,
+          "target_word_offset": 407053,
+          "length_words": 91,
+          "reference_file_offset": 603546,
+          "target_file_offset": 814106,
+          "reference_runtime_address": 1120973,
+          "target_runtime_address": 1226253,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 320702,
+          "target_word_offset": 296638,
+          "length_words": 66,
+          "reference_file_offset": 641404,
+          "target_file_offset": 593276,
+          "reference_runtime_address": 1139902,
+          "target_runtime_address": 1115838,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 324904,
+          "target_word_offset": 225192,
+          "length_words": 102,
+          "reference_file_offset": 649808,
+          "target_file_offset": 450384,
+          "reference_runtime_address": 1144104,
+          "target_runtime_address": 1044392,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 354288,
+          "target_word_offset": 286576,
+          "length_words": 5385,
+          "reference_file_offset": 708576,
+          "target_file_offset": 573152,
+          "reference_runtime_address": 1173488,
+          "target_runtime_address": 1105776,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 360520,
+          "target_word_offset": 338712,
+          "length_words": 64,
+          "reference_file_offset": 721040,
+          "target_file_offset": 677424,
+          "reference_runtime_address": 1179720,
+          "target_runtime_address": 1157912,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 362114,
+          "target_word_offset": 310194,
+          "length_words": 78,
+          "reference_file_offset": 724228,
+          "target_file_offset": 620388,
+          "reference_runtime_address": 1181314,
+          "target_runtime_address": 1129394,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 362964,
+          "target_word_offset": 310772,
+          "length_words": 132,
+          "reference_file_offset": 725928,
+          "target_file_offset": 621544,
+          "reference_runtime_address": 1182164,
+          "target_runtime_address": 1129972,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 410809,
+          "target_word_offset": 355440,
+          "length_words": 72,
+          "reference_file_offset": 821618,
+          "target_file_offset": 710880,
+          "reference_runtime_address": 1230009,
+          "target_runtime_address": 1174640,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 415396,
+          "target_word_offset": 355440,
+          "length_words": 71,
+          "reference_file_offset": 830792,
+          "target_file_offset": 710880,
+          "reference_runtime_address": 1234596,
+          "target_runtime_address": 1174640,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 436430,
+          "target_word_offset": 326977,
+          "length_words": 72,
+          "reference_file_offset": 872860,
+          "target_file_offset": 653954,
+          "reference_runtime_address": 1255630,
+          "target_runtime_address": 1146177,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 438749,
+          "target_word_offset": 438097,
+          "length_words": 71,
+          "reference_file_offset": 877498,
+          "target_file_offset": 876194,
+          "reference_runtime_address": 1257949,
+          "target_runtime_address": 1257297,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 442867,
+          "target_word_offset": 355440,
+          "length_words": 71,
+          "reference_file_offset": 885734,
+          "target_file_offset": 710880,
+          "reference_runtime_address": 1262067,
+          "target_runtime_address": 1174640,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 496153,
+          "target_word_offset": 355440,
+          "length_words": 72,
+          "reference_file_offset": 992306,
+          "target_file_offset": 710880,
+          "reference_runtime_address": 1315353,
+          "target_runtime_address": 1174640,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 496934,
+          "target_word_offset": 355440,
+          "length_words": 72,
+          "reference_file_offset": 993868,
+          "target_file_offset": 710880,
+          "reference_runtime_address": 1316134,
+          "target_runtime_address": 1174640,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 508680,
+          "target_word_offset": 331630,
+          "length_words": 64,
+          "reference_file_offset": 1017360,
+          "target_file_offset": 663260,
+          "reference_runtime_address": 1327880,
+          "target_runtime_address": 1150830,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 512302,
+          "target_word_offset": 322038,
+          "length_words": 98,
+          "reference_file_offset": 1024604,
+          "target_file_offset": 644076,
+          "reference_runtime_address": 1331502,
+          "target_runtime_address": 1141238,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 513655,
+          "target_word_offset": 388809,
+          "length_words": 118,
+          "reference_file_offset": 1027310,
+          "target_file_offset": 777618,
+          "reference_runtime_address": 1332855,
+          "target_runtime_address": 1208009,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 515039,
+          "target_word_offset": 350597,
+          "length_words": 75,
+          "reference_file_offset": 1030078,
+          "target_file_offset": 701194,
+          "reference_runtime_address": 1334239,
+          "target_runtime_address": 1169797,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 516828,
+          "target_word_offset": 310876,
+          "length_words": 2486,
+          "reference_file_offset": 1033656,
+          "target_file_offset": 621752,
+          "reference_runtime_address": 1336028,
+          "target_runtime_address": 1130076,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 519904,
+          "target_word_offset": 474176,
+          "length_words": 64,
+          "reference_file_offset": 1039808,
+          "target_file_offset": 948352,
+          "reference_runtime_address": 1339104,
+          "target_runtime_address": 1293376,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 525369,
+          "target_word_offset": 314361,
+          "length_words": 6743,
+          "reference_file_offset": 1050738,
+          "target_file_offset": 628722,
+          "reference_runtime_address": 1344569,
+          "target_runtime_address": 1133561,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 533088,
+          "target_word_offset": 338640,
+          "length_words": 80,
+          "reference_file_offset": 1066176,
+          "target_file_offset": 677280,
+          "reference_runtime_address": 1352288,
+          "target_runtime_address": 1157840,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 534098,
+          "target_word_offset": 338626,
+          "length_words": 94,
+          "reference_file_offset": 1068196,
+          "target_file_offset": 677252,
+          "reference_runtime_address": 1353298,
+          "target_runtime_address": 1157826,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 535056,
+          "target_word_offset": 338560,
+          "length_words": 160,
+          "reference_file_offset": 1070112,
+          "target_file_offset": 677120,
+          "reference_runtime_address": 1354256,
+          "target_runtime_address": 1157760,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 536160,
+          "target_word_offset": 338640,
+          "length_words": 80,
+          "reference_file_offset": 1072320,
+          "target_file_offset": 677280,
+          "reference_runtime_address": 1355360,
+          "target_runtime_address": 1157840,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 537904,
+          "target_word_offset": 406304,
+          "length_words": 319,
+          "reference_file_offset": 1075808,
+          "target_file_offset": 812608,
+          "reference_runtime_address": 1357104,
+          "target_runtime_address": 1225504,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 538401,
+          "target_word_offset": 406289,
+          "length_words": 250,
+          "reference_file_offset": 1076802,
+          "target_file_offset": 812578,
+          "reference_runtime_address": 1357601,
+          "target_runtime_address": 1225489,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 538706,
+          "target_word_offset": 406082,
+          "length_words": 430,
+          "reference_file_offset": 1077412,
+          "target_file_offset": 812164,
+          "reference_runtime_address": 1357906,
+          "target_runtime_address": 1225282,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 539216,
+          "target_word_offset": 406080,
+          "length_words": 448,
+          "reference_file_offset": 1078432,
+          "target_file_offset": 812160,
+          "reference_runtime_address": 1358416,
+          "target_runtime_address": 1225280,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 539744,
+          "target_word_offset": 406096,
+          "length_words": 512,
+          "reference_file_offset": 1079488,
+          "target_file_offset": 812192,
+          "reference_runtime_address": 1358944,
+          "target_runtime_address": 1225296,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 540806,
+          "target_word_offset": 355963,
+          "length_words": 76,
+          "reference_file_offset": 1081612,
+          "target_file_offset": 711926,
+          "reference_runtime_address": 1360006,
+          "target_runtime_address": 1175163,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 544486,
+          "target_word_offset": 435241,
+          "length_words": 81,
+          "reference_file_offset": 1088972,
+          "target_file_offset": 870482,
+          "reference_runtime_address": 1363686,
+          "target_runtime_address": 1254441,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 546814,
+          "target_word_offset": 322942,
+          "length_words": 2965,
+          "reference_file_offset": 1093628,
+          "target_file_offset": 645884,
+          "reference_runtime_address": 1366014,
+          "target_runtime_address": 1142142,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 575622,
+          "target_word_offset": 416990,
+          "length_words": 170,
+          "reference_file_offset": 1151244,
+          "target_file_offset": 833980,
+          "reference_runtime_address": 1394822,
+          "target_runtime_address": 1236190,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 585113,
+          "target_word_offset": 430768,
+          "length_words": 165,
+          "reference_file_offset": 1170226,
+          "target_file_offset": 861536,
+          "reference_runtime_address": 1404313,
+          "target_runtime_address": 1249968,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 589298,
+          "target_word_offset": 417062,
+          "length_words": 94,
+          "reference_file_offset": 1178596,
+          "target_file_offset": 834124,
+          "reference_runtime_address": 1408498,
+          "target_runtime_address": 1236262,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 606306,
+          "target_word_offset": 350519,
+          "length_words": 153,
+          "reference_file_offset": 1212612,
+          "target_file_offset": 701038,
+          "reference_runtime_address": 1425506,
+          "target_runtime_address": 1169719,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 608696,
+          "target_word_offset": 398934,
+          "length_words": 166,
+          "reference_file_offset": 1217392,
+          "target_file_offset": 797868,
+          "reference_runtime_address": 1427896,
+          "target_runtime_address": 1218134,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 608950,
+          "target_word_offset": 398934,
+          "length_words": 166,
+          "reference_file_offset": 1217900,
+          "target_file_offset": 797868,
+          "reference_runtime_address": 1428150,
+          "target_runtime_address": 1218134,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 609207,
+          "target_word_offset": 398934,
+          "length_words": 168,
+          "reference_file_offset": 1218414,
+          "target_file_offset": 797868,
+          "reference_runtime_address": 1428407,
+          "target_runtime_address": 1218134,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 610412,
+          "target_word_offset": 448795,
+          "length_words": 84,
+          "reference_file_offset": 1220824,
+          "target_file_offset": 897590,
+          "reference_runtime_address": 1429612,
+          "target_runtime_address": 1267995,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 616803,
+          "target_word_offset": 398984,
+          "length_words": 109,
+          "reference_file_offset": 1233606,
+          "target_file_offset": 797968,
+          "reference_runtime_address": 1436003,
+          "target_runtime_address": 1218184,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 651189,
+          "target_word_offset": 441791,
+          "length_words": 65,
+          "reference_file_offset": 1302378,
+          "target_file_offset": 883582,
+          "reference_runtime_address": 1470389,
+          "target_runtime_address": 1260991,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 656360,
+          "target_word_offset": 403123,
+          "length_words": 81,
+          "reference_file_offset": 1312720,
+          "target_file_offset": 806246,
+          "reference_runtime_address": 1475560,
+          "target_runtime_address": 1222323,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 668928,
+          "target_word_offset": 440640,
+          "length_words": 725,
+          "reference_file_offset": 1337856,
+          "target_file_offset": 881280,
+          "reference_runtime_address": 1488128,
+          "target_runtime_address": 1259840,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 678017,
+          "target_word_offset": 357506,
+          "length_words": 71,
+          "reference_file_offset": 1356034,
+          "target_file_offset": 715012,
+          "reference_runtime_address": 1497217,
+          "target_runtime_address": 1176706,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 680268,
+          "target_word_offset": 401470,
+          "length_words": 68,
+          "reference_file_offset": 1360536,
+          "target_file_offset": 802940,
+          "reference_runtime_address": 1499468,
+          "target_runtime_address": 1220670,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 686552,
+          "target_word_offset": 481752,
+          "length_words": 11042,
+          "reference_file_offset": 1373104,
+          "target_file_offset": 963504,
+          "reference_runtime_address": 1505752,
+          "target_runtime_address": 1300952,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 697592,
+          "target_word_offset": 497078,
+          "length_words": 2542,
+          "reference_file_offset": 1395184,
+          "target_file_offset": 994156,
+          "reference_runtime_address": 1516792,
+          "target_runtime_address": 1316278,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 729469,
+          "target_word_offset": 500113,
+          "length_words": 6825,
+          "reference_file_offset": 1458938,
+          "target_file_offset": 1000226,
+          "reference_runtime_address": 1548669,
+          "target_runtime_address": 1319313,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 745854,
+          "target_word_offset": 506938,
+          "length_words": 1328,
+          "reference_file_offset": 1491708,
+          "target_file_offset": 1013876,
+          "reference_runtime_address": 1565054,
+          "target_runtime_address": 1326138,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 793155,
+          "target_word_offset": 518947,
+          "length_words": 2509,
+          "reference_file_offset": 1586310,
+          "target_file_offset": 1037894,
+          "reference_runtime_address": 1612355,
+          "target_runtime_address": 1338147,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 820128,
+          "target_word_offset": 536647,
+          "length_words": 91,
+          "reference_file_offset": 1640256,
+          "target_file_offset": 1073294,
+          "reference_runtime_address": 1639328,
+          "target_runtime_address": 1355847,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 824261,
+          "target_word_offset": 652461,
+          "length_words": 1439,
+          "reference_file_offset": 1648522,
+          "target_file_offset": 1304922,
+          "reference_runtime_address": 1643461,
+          "target_runtime_address": 1471661,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 896824,
+          "target_word_offset": 704668,
+          "length_words": 64,
+          "reference_file_offset": 1793648,
+          "target_file_offset": 1409336,
+          "reference_runtime_address": 1716024,
+          "target_runtime_address": 1523868,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 938056,
+          "target_word_offset": 697495,
+          "length_words": 129,
+          "reference_file_offset": 1876112,
+          "target_file_offset": 1394990,
+          "reference_runtime_address": 1757256,
+          "target_runtime_address": 1516695,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 939906,
+          "target_word_offset": 723825,
+          "length_words": 134,
+          "reference_file_offset": 1879812,
+          "target_file_offset": 1447650,
+          "reference_runtime_address": 1759106,
+          "target_runtime_address": 1543025,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 944728,
+          "target_word_offset": 664126,
+          "length_words": 88,
+          "reference_file_offset": 1889456,
+          "target_file_offset": 1328252,
+          "reference_runtime_address": 1763928,
+          "target_runtime_address": 1483326,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 973684,
+          "target_word_offset": 662897,
+          "length_words": 86,
+          "reference_file_offset": 1947368,
+          "target_file_offset": 1325794,
+          "reference_runtime_address": 1792884,
+          "target_runtime_address": 1482097,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 1042328,
+          "target_word_offset": 751853,
+          "length_words": 65,
+          "reference_file_offset": 2084656,
+          "target_file_offset": 1503706,
+          "reference_runtime_address": 1861528,
+          "target_runtime_address": 1571053,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 1042937,
+          "target_word_offset": 697495,
+          "length_words": 132,
+          "reference_file_offset": 2085874,
+          "target_file_offset": 1394990,
+          "reference_runtime_address": 1862137,
+          "target_runtime_address": 1516695,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 1045899,
+          "target_word_offset": 687902,
+          "length_words": 86,
+          "reference_file_offset": 2091798,
+          "target_file_offset": 1375804,
+          "reference_runtime_address": 1865099,
+          "target_runtime_address": 1507102,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 1058394,
+          "target_word_offset": 566963,
+          "length_words": 125,
+          "reference_file_offset": 2116788,
+          "target_file_offset": 1133926,
+          "reference_runtime_address": 1877594,
+          "target_runtime_address": 1386163,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 1065822,
+          "target_word_offset": 682757,
+          "length_words": 108,
+          "reference_file_offset": 2131644,
+          "target_file_offset": 1365514,
+          "reference_runtime_address": 1885022,
+          "target_runtime_address": 1501957,
+          "same_runtime_address": false
+        },
+        {
+          "reference_word_offset": 1088296,
+          "target_word_offset": 758166,
+          "length_words": 948,
+          "reference_file_offset": 2176592,
+          "target_file_offset": 1516332,
+          "reference_runtime_address": 1907496,
+          "target_runtime_address": 1577366,
+          "same_runtime_address": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4666 @@
+{
+  "schema": 1,
+  "classification": {
+    "working_name": "SPF2ALP sound-patch bank",
+    "confidence": "strong",
+    "reason": "zone records use key ranges and audio-like sample/playback fields; related firmware records contain 11025 Hz values",
+    "copyright_note": "metadata only; this report does not extract retail audio"
+  },
+  "source": {
+    "path": "samples/BUNDLE_G1_135800G1.MBA",
+    "sha256": "e2ae552854d5a9e91c7f66f88dcc867f61b777bf34b3e5887d98bb43cb2bdcf5",
+    "file_offset": 451692,
+    "byte_length": 13496,
+    "block_sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c"
+  },
+  "layout": {
+    "primary_group_count": 71,
+    "secondary_group_count": 34,
+    "data_base": 1280,
+    "zone_size": 68,
+    "group_size_formula": "8 + 4*zone_count + 0x44*zone_count",
+    "parsed_end": 13496
+  },
+  "summary": {
+    "group_count": 105,
+    "zone_count": 158,
+    "zones_per_group": {
+      "1": 64,
+      "2": 30,
+      "3": 10,
+      "4": 1
+    },
+    "tags": {
+      "SPF2ALP": 158
+    },
+    "playback_values": [
+      8000,
+      10000,
+      10406,
+      10465,
+      10477,
+      11000,
+      11025,
+      11651,
+      11760,
+      12000,
+      12334,
+      12347,
+      12459,
+      12558,
+      12572,
+      12740,
+      13081,
+      13185,
+      13200,
+      13720,
+      13859,
+      14651,
+      14683,
+      14896,
+      15480,
+      15680,
+      15698,
+      15828,
+      15840,
+      16000,
+      16280,
+      16482,
+      16660,
+      16720,
+      16744,
+      17072,
+      17462,
+      17600,
+      20930,
+      20931,
+      22050
+    ],
+    "signature_a_values": [
+      1598044521
+    ],
+    "signature_b_values": [
+      1598044666
+    ]
+  },
+  "groups": [
+    {
+      "bank": "primary",
+      "resource_id": null,
+      "data_offset": 0,
+      "byte_length": 296,
+      "zone_count": 4,
+      "header_size": 24,
+      "zone_offsets": [
+        0,
+        68,
+        136,
+        204
+      ],
+      "zones": [
+        {
+          "offset": 1304,
+          "key_low": 48,
+          "key_high": 48,
+          "settings": 1681917442,
+          "data_begin": 2476,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 2504,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 0,
+          "frame_or_sample_count": 872,
+          "raw_34": 0,
+          "trailing_parameters": 3158228,
+          "trailing_format": 1538,
+          "raw_40": 0
+        },
+        {
+          "offset": 1372,
+          "key_low": 60,
+          "key_high": 60,
+          "settings": 1681917442,
+          "data_begin": 1612,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 1640,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 0,
+          "frame_or_sample_count": 683,
+          "raw_34": 0,
+          "trailing_parameters": 3947732,
+          "trailing_format": 1538,
+          "raw_40": 2464
+        },
+        {
+          "offset": 1440,
+          "key_low": 72,
+          "key_high": 76,
+          "settings": 1681917442,
+          "data_begin": 1998,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 2028,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 0,
+          "frame_or_sample_count": 907,
+          "raw_34": 0,
+          "trailing_parameters": 4999380,
+          "trailing_format": 1538,
+          "raw_40": 4064
+        },
+        {
+          "offset": 1508,
+          "key_low": 84,
+          "key_high": 98,
+          "settings": 1681917442,
+          "data_begin": 1906,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 1952,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 0,
+          "frame_or_sample_count": 876,
+          "raw_34": 0,
+          "trailing_parameters": 6444244,
+          "trailing_format": 1538,
+          "raw_40": 6052
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 4,
+      "data_offset": 296,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 1596,
+          "key_low": 49,
+          "key_high": 70,
+          "settings": 1681917186,
+          "data_begin": 558,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 596,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13859,
+          "raw_2c": 4,
+          "frame_or_sample_count": 178,
+          "raw_34": 0,
+          "trailing_parameters": 4600276,
+          "trailing_format": 1282,
+          "raw_40": 7964
+        },
+        {
+          "offset": 1664,
+          "key_low": 59,
+          "key_high": 82,
+          "settings": 1681917186,
+          "data_begin": 388,
+          "level_pair": 28527,
+          "raw_10": 0,
+          "data_end": 416,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12347,
+          "raw_2c": 0,
+          "frame_or_sample_count": 143,
+          "raw_34": 0,
+          "trailing_parameters": 5389268,
+          "trailing_format": 1282,
+          "raw_40": 8520
+        },
+        {
+          "offset": 1732,
+          "key_low": 79,
+          "key_high": 97,
+          "settings": 1681917186,
+          "data_begin": 324,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 352,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15680,
+          "raw_2c": 0,
+          "frame_or_sample_count": 141,
+          "raw_34": 0,
+          "trailing_parameters": 6377428,
+          "trailing_format": 1282,
+          "raw_40": 8896
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 5,
+      "data_offset": 520,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 1816,
+          "key_low": 69,
+          "key_high": 81,
+          "settings": 1681917442,
+          "data_begin": 660,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 700,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16720,
+          "raw_2c": 2,
+          "frame_or_sample_count": 291,
+          "raw_34": 0,
+          "trailing_parameters": 5326292,
+          "trailing_format": 1538,
+          "raw_40": 9208
+        },
+        {
+          "offset": 1884,
+          "key_low": 81,
+          "key_high": 99,
+          "settings": 1681917442,
+          "data_begin": 410,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 448,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 4,
+          "frame_or_sample_count": 168,
+          "raw_34": 0,
+          "trailing_parameters": 6509012,
+          "trailing_format": 1538,
+          "raw_40": 9868
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 6,
+      "data_offset": 672,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 1972,
+          "key_low": 58,
+          "key_high": 70,
+          "settings": 1681917442,
+          "data_begin": 552,
+          "level_pair": 30069,
+          "raw_10": 0,
+          "data_end": 580,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 11651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 225,
+          "raw_34": 0,
+          "trailing_parameters": 4602580,
+          "trailing_format": 1538,
+          "raw_40": 10276
+        },
+        {
+          "offset": 2040,
+          "key_low": 69,
+          "key_high": 80,
+          "settings": 1681917186,
+          "data_begin": 432,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 468,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15480,
+          "raw_2c": 10,
+          "frame_or_sample_count": 180,
+          "raw_34": 0,
+          "trailing_parameters": 5260756,
+          "trailing_format": 1282,
+          "raw_40": 10816
+        },
+        {
+          "offset": 2108,
+          "key_low": 81,
+          "key_high": 102,
+          "settings": 1681917186,
+          "data_begin": 386,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 432,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13200,
+          "raw_2c": 0,
+          "frame_or_sample_count": 177,
+          "raw_34": 0,
+          "trailing_parameters": 6705620,
+          "trailing_format": 1282,
+          "raw_40": 11244
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 7,
+      "data_offset": 896,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 2196,
+          "key_low": 55,
+          "key_high": 65,
+          "settings": 1681917186,
+          "data_begin": 400,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 436,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16660,
+          "raw_2c": 0,
+          "frame_or_sample_count": 114,
+          "raw_34": 0,
+          "trailing_parameters": 4274132,
+          "trailing_format": 1282,
+          "raw_40": 11636
+        },
+        {
+          "offset": 2264,
+          "key_low": 67,
+          "key_high": 84,
+          "settings": 1681917186,
+          "data_begin": 190,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 232,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16744,
+          "raw_2c": 0,
+          "frame_or_sample_count": 51,
+          "raw_34": 0,
+          "trailing_parameters": 5522388,
+          "trailing_format": 1282,
+          "raw_40": 12032
+        },
+        {
+          "offset": 2332,
+          "key_low": 79,
+          "key_high": 102,
+          "settings": 1681917186,
+          "data_begin": 96,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 132,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 11760,
+          "raw_2c": 0,
+          "frame_or_sample_count": 32,
+          "raw_34": 0,
+          "trailing_parameters": 6705108,
+          "trailing_format": 1282,
+          "raw_40": 12224
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 9,
+      "data_offset": 1120,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 2416,
+          "key_low": 72,
+          "key_high": 84,
+          "settings": 1681917442,
+          "data_begin": 832,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 864,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 163,
+          "raw_34": 0,
+          "trailing_parameters": 5523668,
+          "trailing_format": 1538,
+          "raw_40": 12316
+        },
+        {
+          "offset": 2484,
+          "key_low": 84,
+          "key_high": 104,
+          "settings": 1681917442,
+          "data_begin": 356,
+          "level_pair": 27756,
+          "raw_10": 0,
+          "data_end": 376,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 107,
+          "raw_34": 0,
+          "trailing_parameters": 6837460,
+          "trailing_format": 1538,
+          "raw_40": 13140
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 10,
+      "data_offset": 1272,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 2568,
+          "key_low": 72,
+          "key_high": 88,
+          "settings": 1681917699,
+          "data_begin": 464,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 580,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12558,
+          "raw_2c": 0,
+          "frame_or_sample_count": 207,
+          "raw_34": 0,
+          "trailing_parameters": 5785812,
+          "trailing_format": 1795,
+          "raw_40": 13476
+        },
+        {
+          "offset": 2636,
+          "key_low": 84,
+          "key_high": 106,
+          "settings": 1681917442,
+          "data_begin": 384,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 484,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12558,
+          "raw_2c": 0,
+          "frame_or_sample_count": 167,
+          "raw_34": 0,
+          "trailing_parameters": 6968532,
+          "trailing_format": 1538,
+          "raw_40": 14016
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 11,
+      "data_offset": 1424,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 2720,
+          "key_low": 69,
+          "key_high": 77,
+          "settings": 1681916674,
+          "data_begin": 392,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 428,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 4,
+          "frame_or_sample_count": 159,
+          "raw_34": 0,
+          "trailing_parameters": 5064148,
+          "trailing_format": 770,
+          "raw_40": 14460
+        },
+        {
+          "offset": 2788,
+          "key_low": 81,
+          "key_high": 99,
+          "settings": 1681917186,
+          "data_begin": 370,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 408,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 0,
+          "frame_or_sample_count": 166,
+          "raw_34": 0,
+          "trailing_parameters": 6509012,
+          "trailing_format": 1282,
+          "raw_40": 14848
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 12,
+      "data_offset": 1576,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 2872,
+          "key_low": 72,
+          "key_high": 92,
+          "settings": 1681917442,
+          "data_begin": 350,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 396,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 146,
+          "raw_34": 0,
+          "trailing_parameters": 6047956,
+          "trailing_format": 1538,
+          "raw_40": 15216
+        },
+        {
+          "offset": 2940,
+          "key_low": 81,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 378,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 400,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17600,
+          "raw_2c": 0,
+          "frame_or_sample_count": 168,
+          "raw_34": 0,
+          "trailing_parameters": 6377940,
+          "trailing_format": 1538,
+          "raw_40": 15572
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 13,
+      "data_offset": 1728,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 3024,
+          "key_low": 69,
+          "key_high": 86,
+          "settings": 1681917442,
+          "data_begin": 314,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 344,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13200,
+          "raw_2c": 212,
+          "frame_or_sample_count": 126,
+          "raw_34": 0,
+          "trailing_parameters": 5653972,
+          "trailing_format": 1538,
+          "raw_40": 15932
+        },
+        {
+          "offset": 3092,
+          "key_low": 81,
+          "key_high": 102,
+          "settings": 1681917442,
+          "data_begin": 276,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 316,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13200,
+          "raw_2c": 0,
+          "frame_or_sample_count": 122,
+          "raw_34": 0,
+          "trailing_parameters": 6705620,
+          "trailing_format": 1538,
+          "raw_40": 16236
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 16,
+      "data_offset": 1880,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 3176,
+          "key_low": 60,
+          "key_high": 82,
+          "settings": 1681917186,
+          "data_begin": 266,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 368,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 0,
+          "frame_or_sample_count": 82,
+          "raw_34": 0,
+          "trailing_parameters": 5389524,
+          "trailing_format": 1282,
+          "raw_40": 16512
+        },
+        {
+          "offset": 3244,
+          "key_low": 84,
+          "key_high": 106,
+          "settings": 1681919744,
+          "data_begin": 232,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 348,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 0,
+          "frame_or_sample_count": 90,
+          "raw_34": 0,
+          "trailing_parameters": 6968532,
+          "trailing_format": 3840,
+          "raw_40": 16840
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 18,
+      "data_offset": 2032,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 3328,
+          "key_low": 60,
+          "key_high": 78,
+          "settings": 1681917442,
+          "data_begin": 7568,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 7788,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16482,
+          "raw_2c": 0,
+          "frame_or_sample_count": 124,
+          "raw_34": 0,
+          "trailing_parameters": 5127380,
+          "trailing_format": 1538,
+          "raw_40": 17148
+        },
+        {
+          "offset": 3396,
+          "key_low": 84,
+          "key_high": 101,
+          "settings": 1681917442,
+          "data_begin": 5430,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 5632,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16744,
+          "raw_2c": 8,
+          "frame_or_sample_count": 88,
+          "raw_34": 0,
+          "trailing_parameters": 6640852,
+          "trailing_format": 1538,
+          "raw_40": 24896
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 19,
+      "data_offset": 2184,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 3484,
+          "key_low": 60,
+          "key_high": 72,
+          "settings": 1681917442,
+          "data_begin": 460,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 552,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 0,
+          "frame_or_sample_count": 179,
+          "raw_34": 0,
+          "trailing_parameters": 4734164,
+          "trailing_format": 1538,
+          "raw_40": 30488
+        },
+        {
+          "offset": 3552,
+          "key_low": 72,
+          "key_high": 83,
+          "settings": 1681917442,
+          "data_begin": 466,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 556,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 0,
+          "frame_or_sample_count": 182,
+          "raw_34": 0,
+          "trailing_parameters": 5458132,
+          "trailing_format": 1538,
+          "raw_40": 31000
+        },
+        {
+          "offset": 3620,
+          "key_low": 84,
+          "key_high": 106,
+          "settings": 1681917442,
+          "data_begin": 282,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 372,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 0,
+          "frame_or_sample_count": 90,
+          "raw_34": 0,
+          "trailing_parameters": 6968532,
+          "trailing_format": 1538,
+          "raw_40": 31516
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 23,
+      "data_offset": 2408,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 3708,
+          "key_low": 57,
+          "key_high": 57,
+          "settings": 1681917186,
+          "data_begin": 352,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 448,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13200,
+          "raw_2c": 0,
+          "frame_or_sample_count": 116,
+          "raw_34": 0,
+          "trailing_parameters": 3750356,
+          "trailing_format": 1282,
+          "raw_40": 31848
+        },
+        {
+          "offset": 3776,
+          "key_low": 69,
+          "key_high": 85,
+          "settings": 1681917442,
+          "data_begin": 304,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 384,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16280,
+          "raw_2c": 1,
+          "frame_or_sample_count": 114,
+          "raw_34": 0,
+          "trailing_parameters": 5588436,
+          "trailing_format": 1538,
+          "raw_40": 32256
+        },
+        {
+          "offset": 3844,
+          "key_low": 81,
+          "key_high": 99,
+          "settings": 1681919744,
+          "data_begin": 282,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 376,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 0,
+          "frame_or_sample_count": 122,
+          "raw_34": 0,
+          "trailing_parameters": 6509012,
+          "trailing_format": 3840,
+          "raw_40": 32600
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 24,
+      "data_offset": 2632,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 3928,
+          "key_low": 72,
+          "key_high": 84,
+          "settings": 1681917442,
+          "data_begin": 600,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 640,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16744,
+          "raw_2c": 107,
+          "frame_or_sample_count": 235,
+          "raw_34": 0,
+          "trailing_parameters": 5523668,
+          "trailing_format": 1538,
+          "raw_40": 32936
+        },
+        {
+          "offset": 3996,
+          "key_low": 84,
+          "key_high": 101,
+          "settings": 1681917186,
+          "data_begin": 572,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 616,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16744,
+          "raw_2c": 84,
+          "frame_or_sample_count": 189,
+          "raw_34": 0,
+          "trailing_parameters": 6640852,
+          "trailing_format": 1282,
+          "raw_40": 33536
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 26,
+      "data_offset": 2784,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 4084,
+          "key_low": 45,
+          "key_high": 64,
+          "settings": 1681917442,
+          "data_begin": 330,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 364,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 11000,
+          "raw_2c": 1,
+          "frame_or_sample_count": 64,
+          "raw_34": 0,
+          "trailing_parameters": 4206036,
+          "trailing_format": 1538,
+          "raw_40": 34112
+        },
+        {
+          "offset": 4152,
+          "key_low": 62,
+          "key_high": 82,
+          "settings": 1681917442,
+          "data_begin": 204,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 232,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14683,
+          "raw_2c": 0,
+          "frame_or_sample_count": 51,
+          "raw_34": 0,
+          "trailing_parameters": 5390036,
+          "trailing_format": 1538,
+          "raw_40": 34436
+        },
+        {
+          "offset": 4220,
+          "key_low": 81,
+          "key_high": 99,
+          "settings": 1681917442,
+          "data_begin": 242,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 272,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 0,
+          "frame_or_sample_count": 47,
+          "raw_34": 0,
+          "trailing_parameters": 6509012,
+          "trailing_format": 1538,
+          "raw_40": 34628
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 27,
+      "data_offset": 3008,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 4304,
+          "key_low": 60,
+          "key_high": 78,
+          "settings": 1681917442,
+          "data_begin": 348,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 372,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16482,
+          "raw_2c": 90,
+          "frame_or_sample_count": 110,
+          "raw_34": 0,
+          "trailing_parameters": 5127380,
+          "trailing_format": 1538,
+          "raw_40": 34860
+        },
+        {
+          "offset": 4372,
+          "key_low": 84,
+          "key_high": 100,
+          "settings": 1681917442,
+          "data_begin": 156,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 184,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16744,
+          "raw_2c": 0,
+          "frame_or_sample_count": 61,
+          "raw_34": 0,
+          "trailing_parameters": 6575316,
+          "trailing_format": 1538,
+          "raw_40": 35192
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 29,
+      "data_offset": 3160,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 4456,
+          "key_low": 50,
+          "key_high": 70,
+          "settings": 1681917442,
+          "data_begin": 568,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 672,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14683,
+          "raw_2c": 5,
+          "frame_or_sample_count": 183,
+          "raw_34": 0,
+          "trailing_parameters": 4600532,
+          "trailing_format": 1538,
+          "raw_40": 35336
+        },
+        {
+          "offset": 4524,
+          "key_low": 79,
+          "key_high": 102,
+          "settings": 1681917442,
+          "data_begin": 288,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 372,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 11760,
+          "raw_2c": 0,
+          "frame_or_sample_count": 128,
+          "raw_34": 0,
+          "trailing_parameters": 6705108,
+          "trailing_format": 1538,
+          "raw_40": 35968
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 30,
+      "data_offset": 3312,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 4608,
+          "key_low": 50,
+          "key_high": 70,
+          "settings": 1681917442,
+          "data_begin": 618,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 716,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14683,
+          "raw_2c": 5,
+          "frame_or_sample_count": 208,
+          "raw_34": 0,
+          "trailing_parameters": 4600532,
+          "trailing_format": 1538,
+          "raw_40": 36300
+        },
+        {
+          "offset": 4676,
+          "key_low": 68,
+          "key_high": 86,
+          "settings": 1681917442,
+          "data_begin": 236,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 308,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12459,
+          "raw_2c": 134,
+          "frame_or_sample_count": 87,
+          "raw_34": 0,
+          "trailing_parameters": 5653716,
+          "trailing_format": 1538,
+          "raw_40": 36976
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 32,
+      "data_offset": 3464,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 4760,
+          "key_low": 36,
+          "key_high": 52,
+          "settings": 1681917186,
+          "data_begin": 1352,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 1372,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17072,
+          "raw_2c": 24,
+          "frame_or_sample_count": 416,
+          "raw_34": 0,
+          "trailing_parameters": 3417300,
+          "trailing_format": 1282,
+          "raw_40": 37244
+        },
+        {
+          "offset": 4828,
+          "key_low": 60,
+          "key_high": 82,
+          "settings": 1681917442,
+          "data_begin": 470,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 492,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 3,
+          "frame_or_sample_count": 134,
+          "raw_34": 0,
+          "trailing_parameters": 5389524,
+          "trailing_format": 1538,
+          "raw_40": 38576
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 33,
+      "data_offset": 3616,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 4912,
+          "key_low": 55,
+          "key_high": 59,
+          "settings": 1681917442,
+          "data_begin": 474,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 496,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12740,
+          "raw_2c": 10,
+          "frame_or_sample_count": 106,
+          "raw_34": 0,
+          "trailing_parameters": 3880916,
+          "trailing_format": 1538,
+          "raw_40": 39028
+        },
+        {
+          "offset": 4980,
+          "key_low": 67,
+          "key_high": 84,
+          "settings": 1681917442,
+          "data_begin": 298,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 320,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12740,
+          "raw_2c": 15,
+          "frame_or_sample_count": 83,
+          "raw_34": 0,
+          "trailing_parameters": 5522388,
+          "trailing_format": 1538,
+          "raw_40": 39484
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 35,
+      "data_offset": 3768,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 5060,
+          "key_low": 79,
+          "key_high": 98,
+          "settings": 1681917442,
+          "data_begin": 266,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 296,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14896,
+          "raw_2c": 0,
+          "frame_or_sample_count": 39,
+          "raw_34": 0,
+          "trailing_parameters": 6442964,
+          "trailing_format": 1538,
+          "raw_40": 39764
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 36,
+      "data_offset": 3848,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 5144,
+          "key_low": 50,
+          "key_high": 69,
+          "settings": 1681917442,
+          "data_begin": 352,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 372,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14683,
+          "raw_2c": 1,
+          "frame_or_sample_count": 75,
+          "raw_34": 0,
+          "trailing_parameters": 4534996,
+          "trailing_format": 1538,
+          "raw_40": 40020
+        },
+        {
+          "offset": 5212,
+          "key_low": 69,
+          "key_high": 86,
+          "settings": 1681917442,
+          "data_begin": 166,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 188,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14683,
+          "raw_2c": 7,
+          "frame_or_sample_count": 49,
+          "raw_34": 0,
+          "trailing_parameters": 5653972,
+          "trailing_format": 1538,
+          "raw_40": 40352
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 37,
+      "data_offset": 4000,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 5296,
+          "key_low": 48,
+          "key_high": 66,
+          "settings": 1681917442,
+          "data_begin": 370,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 392,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15698,
+          "raw_2c": 0,
+          "frame_or_sample_count": 64,
+          "raw_34": 0,
+          "trailing_parameters": 4337876,
+          "trailing_format": 1538,
+          "raw_40": 40500
+        },
+        {
+          "offset": 5364,
+          "key_low": 60,
+          "key_high": 78,
+          "settings": 1681917442,
+          "data_begin": 210,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 232,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15698,
+          "raw_2c": 0,
+          "frame_or_sample_count": 44,
+          "raw_34": 0,
+          "trailing_parameters": 5127380,
+          "trailing_format": 1538,
+          "raw_40": 40852
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 38,
+      "data_offset": 4152,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 5444,
+          "key_low": 69,
+          "key_high": 72,
+          "settings": 1681917442,
+          "data_begin": 182,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 220,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13200,
+          "raw_2c": 80,
+          "frame_or_sample_count": 60,
+          "raw_34": 0,
+          "trailing_parameters": 4736468,
+          "trailing_format": 1538,
+          "raw_40": 41044
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 40,
+      "data_offset": 4232,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 5532,
+          "key_low": 67,
+          "key_high": 80,
+          "settings": 1681917186,
+          "data_begin": 826,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 1108,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15680,
+          "raw_2c": 0,
+          "frame_or_sample_count": 372,
+          "raw_34": 0,
+          "trailing_parameters": 5260244,
+          "trailing_format": 1282,
+          "raw_40": 41224
+        },
+        {
+          "offset": 5600,
+          "key_low": 76,
+          "key_high": 89,
+          "settings": 1681917442,
+          "data_begin": 818,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 1112,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13185,
+          "raw_2c": 0,
+          "frame_or_sample_count": 388,
+          "raw_34": 0,
+          "trailing_parameters": 5852372,
+          "trailing_format": 1538,
+          "raw_40": 42292
+        },
+        {
+          "offset": 5668,
+          "key_low": 84,
+          "key_high": 109,
+          "settings": 1681917186,
+          "data_begin": 430,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 748,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10465,
+          "raw_2c": 0,
+          "frame_or_sample_count": 204,
+          "raw_34": 0,
+          "trailing_parameters": 7165140,
+          "trailing_format": 1282,
+          "raw_40": 43364
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 41,
+      "data_offset": 4456,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 5756,
+          "key_low": 60,
+          "key_high": 72,
+          "settings": 1681917442,
+          "data_begin": 3500,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 3572,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15698,
+          "raw_2c": 0,
+          "frame_or_sample_count": 1689,
+          "raw_34": 0,
+          "trailing_parameters": 4734164,
+          "trailing_format": 1538,
+          "raw_40": 44072
+        },
+        {
+          "offset": 5824,
+          "key_low": 69,
+          "key_high": 84,
+          "settings": 1681917442,
+          "data_begin": 2460,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 2528,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17600,
+          "raw_2c": 2,
+          "frame_or_sample_count": 1189,
+          "raw_34": 0,
+          "trailing_parameters": 5522900,
+          "trailing_format": 1538,
+          "raw_40": 47604
+        },
+        {
+          "offset": 5892,
+          "key_low": 81,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 636,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 700,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17600,
+          "raw_2c": 0,
+          "frame_or_sample_count": 297,
+          "raw_34": 0,
+          "trailing_parameters": 6377940,
+          "trailing_format": 1538,
+          "raw_40": 50092
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 42,
+      "data_offset": 4680,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 5980,
+          "key_low": 53,
+          "key_high": 66,
+          "settings": 1681917442,
+          "data_begin": 1278,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 1400,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 22050,
+          "raw_2c": 491,
+          "frame_or_sample_count": 511,
+          "raw_34": 0,
+          "trailing_parameters": 4339156,
+          "trailing_format": 1538,
+          "raw_40": 50752
+        },
+        {
+          "offset": 6048,
+          "key_low": 69,
+          "key_high": 84,
+          "settings": 1681917442,
+          "data_begin": 476,
+          "level_pair": 31868,
+          "raw_10": 0,
+          "data_end": 584,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 5,
+          "frame_or_sample_count": 201,
+          "raw_34": 0,
+          "trailing_parameters": 5522900,
+          "trailing_format": 1538,
+          "raw_40": 52112
+        },
+        {
+          "offset": 6116,
+          "key_low": 81,
+          "key_high": 99,
+          "settings": 1681917442,
+          "data_begin": 214,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 328,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 0,
+          "frame_or_sample_count": 88,
+          "raw_34": 0,
+          "trailing_parameters": 6509012,
+          "trailing_format": 1538,
+          "raw_40": 52656
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 43,
+      "data_offset": 4904,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6196,
+          "key_low": 60,
+          "key_high": 62,
+          "settings": 1681917186,
+          "data_begin": 334,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 516,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 0,
+          "frame_or_sample_count": 116,
+          "raw_34": 0,
+          "trailing_parameters": 4078804,
+          "trailing_format": 1282,
+          "raw_40": 52944
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 44,
+      "data_offset": 4984,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6276,
+          "key_low": 77,
+          "key_high": 102,
+          "settings": 1681917442,
+          "data_begin": 4544,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 4796,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10477,
+          "raw_2c": 0,
+          "frame_or_sample_count": 23,
+          "raw_34": 0,
+          "trailing_parameters": 6704596,
+          "trailing_format": 1538,
+          "raw_40": 53420
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 45,
+      "data_offset": 5064,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6356,
+          "key_low": 84,
+          "key_high": 98,
+          "settings": 1681917442,
+          "data_begin": 586,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 620,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 11025,
+          "raw_2c": 0,
+          "frame_or_sample_count": 271,
+          "raw_34": 0,
+          "trailing_parameters": 6444244,
+          "trailing_format": 1538,
+          "raw_40": 58176
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 46,
+      "data_offset": 5144,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6436,
+          "key_low": 48,
+          "key_high": 98,
+          "settings": 1681917442,
+          "data_begin": 412,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 444,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 2,
+          "frame_or_sample_count": 105,
+          "raw_34": 0,
+          "trailing_parameters": 6435028,
+          "trailing_format": 1538,
+          "raw_40": 58756
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 47,
+      "data_offset": 5224,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6516,
+          "key_low": 48,
+          "key_high": 70,
+          "settings": 1681917442,
+          "data_begin": 1226,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 1252,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 12,
+          "frame_or_sample_count": 416,
+          "raw_34": 0,
+          "trailing_parameters": 4600020,
+          "trailing_format": 1538,
+          "raw_40": 59160
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 48,
+      "data_offset": 5304,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6596,
+          "key_low": 77,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 6308,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 6520,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10406,
+          "raw_2c": 0,
+          "frame_or_sample_count": 23,
+          "raw_34": 0,
+          "trailing_parameters": 6376916,
+          "trailing_format": 1538,
+          "raw_40": 60372
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 49,
+      "data_offset": 5384,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6676,
+          "key_low": 81,
+          "key_high": 99,
+          "settings": 1681917442,
+          "data_begin": 4900,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 5080,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 0,
+          "frame_or_sample_count": 797,
+          "raw_34": 0,
+          "trailing_parameters": 6509012,
+          "trailing_format": 1538,
+          "raw_40": 66852
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 50,
+      "data_offset": 5464,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6756,
+          "key_low": 72,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 5600,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 6068,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10465,
+          "raw_2c": 0,
+          "frame_or_sample_count": 23,
+          "raw_34": 0,
+          "trailing_parameters": 6375636,
+          "trailing_format": 1538,
+          "raw_40": 71892
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 52,
+      "data_offset": 5544,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6836,
+          "key_low": 77,
+          "key_high": 99,
+          "settings": 1681917442,
+          "data_begin": 3850,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 4876,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12572,
+          "raw_2c": 0,
+          "frame_or_sample_count": 135,
+          "raw_34": 0,
+          "trailing_parameters": 6507988,
+          "trailing_format": 1538,
+          "raw_40": 77920
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 54,
+      "data_offset": 5624,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6916,
+          "key_low": 81,
+          "key_high": 99,
+          "settings": 1681917442,
+          "data_begin": 15328,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 15416,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 0,
+          "frame_or_sample_count": 23,
+          "raw_34": 0,
+          "trailing_parameters": 6509012,
+          "trailing_format": 1538,
+          "raw_40": 82756
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 55,
+      "data_offset": 5704,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 6996,
+          "key_low": 72,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 1662,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 1680,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10465,
+          "raw_2c": 101,
+          "frame_or_sample_count": 828,
+          "raw_34": 0,
+          "trailing_parameters": 6375636,
+          "trailing_format": 1538,
+          "raw_40": 98132
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 56,
+      "data_offset": 5784,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 7080,
+          "key_low": 67,
+          "key_high": 80,
+          "settings": 1681917442,
+          "data_begin": 268,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 488,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13720,
+          "raw_2c": 4,
+          "frame_or_sample_count": 98,
+          "raw_34": 0,
+          "trailing_parameters": 5260244,
+          "trailing_format": 1538,
+          "raw_40": 99772
+        },
+        {
+          "offset": 7148,
+          "key_low": 84,
+          "key_high": 104,
+          "settings": 1681917186,
+          "data_begin": 124,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 252,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 47,
+          "raw_34": 0,
+          "trailing_parameters": 6837460,
+          "trailing_format": 1282,
+          "raw_40": 100220
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 57,
+      "data_offset": 5936,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 7232,
+          "key_low": 60,
+          "key_high": 72,
+          "settings": 1681917442,
+          "data_begin": 298,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 392,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13081,
+          "raw_2c": 0,
+          "frame_or_sample_count": 98,
+          "raw_34": 0,
+          "trailing_parameters": 4734164,
+          "trailing_format": 1538,
+          "raw_40": 100432
+        },
+        {
+          "offset": 7300,
+          "key_low": 72,
+          "key_high": 92,
+          "settings": 1681917442,
+          "data_begin": 204,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 300,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 73,
+          "raw_34": 0,
+          "trailing_parameters": 6047956,
+          "trailing_format": 1538,
+          "raw_40": 100784
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 58,
+      "data_offset": 6088,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 7384,
+          "key_low": 48,
+          "key_high": 55,
+          "settings": 1681917186,
+          "data_begin": 464,
+          "level_pair": 31611,
+          "raw_10": 0,
+          "data_end": 560,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15828,
+          "raw_2c": 0,
+          "frame_or_sample_count": 109,
+          "raw_34": 0,
+          "trailing_parameters": 3616980,
+          "trailing_format": 1282,
+          "raw_40": 101044
+        },
+        {
+          "offset": 7452,
+          "key_low": 72,
+          "key_high": 89,
+          "settings": 1681916673,
+          "data_begin": 228,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 336,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 85,
+          "raw_34": 0,
+          "trailing_parameters": 5851348,
+          "trailing_format": 769,
+          "raw_40": 101564
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 59,
+      "data_offset": 6240,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 7532,
+          "key_low": 72,
+          "key_high": 89,
+          "settings": 1681917186,
+          "data_begin": 162,
+          "level_pair": 29298,
+          "raw_10": 0,
+          "data_end": 256,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12558,
+          "raw_2c": 0,
+          "frame_or_sample_count": 56,
+          "raw_34": 0,
+          "trailing_parameters": 5851348,
+          "trailing_format": 1282,
+          "raw_40": 101860
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 60,
+      "data_offset": 6320,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 7612,
+          "key_low": 72,
+          "key_high": 84,
+          "settings": 1681917442,
+          "data_begin": 5286,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 5380,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10000,
+          "raw_2c": 0,
+          "frame_or_sample_count": 23,
+          "raw_34": 0,
+          "trailing_parameters": 5523668,
+          "trailing_format": 1538,
+          "raw_40": 102076
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 61,
+      "data_offset": 6400,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 7692,
+          "key_low": 81,
+          "key_high": 102,
+          "settings": 1681917186,
+          "data_begin": 468,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 576,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13200,
+          "raw_2c": 0,
+          "frame_or_sample_count": 218,
+          "raw_34": 0,
+          "trailing_parameters": 6705620,
+          "trailing_format": 1282,
+          "raw_40": 107416
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 63,
+      "data_offset": 6480,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 7776,
+          "key_low": 60,
+          "key_high": 80,
+          "settings": 1681917442,
+          "data_begin": 1622,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 1700,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 754,
+          "raw_34": 0,
+          "trailing_parameters": 5258452,
+          "trailing_format": 1538,
+          "raw_40": 107952
+        },
+        {
+          "offset": 7844,
+          "key_low": 84,
+          "key_high": 104,
+          "settings": 1681917442,
+          "data_begin": 352,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 432,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 161,
+          "raw_34": 0,
+          "trailing_parameters": 6837460,
+          "trailing_format": 1538,
+          "raw_40": 109612
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 64,
+      "data_offset": 6632,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 7928,
+          "key_low": 72,
+          "key_high": 84,
+          "settings": 1681917186,
+          "data_begin": 370,
+          "level_pair": 31611,
+          "raw_10": 0,
+          "data_end": 516,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12558,
+          "raw_2c": 0,
+          "frame_or_sample_count": 160,
+          "raw_34": 0,
+          "trailing_parameters": 5523668,
+          "trailing_format": 1282,
+          "raw_40": 110004
+        },
+        {
+          "offset": 7996,
+          "key_low": 84,
+          "key_high": 101,
+          "settings": 1681917186,
+          "data_begin": 236,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 340,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 103,
+          "raw_34": 0,
+          "trailing_parameters": 6640852,
+          "trailing_format": 1282,
+          "raw_40": 110480
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 65,
+      "data_offset": 6784,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 8080,
+          "key_low": 60,
+          "key_high": 78,
+          "settings": 1681917442,
+          "data_begin": 374,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 452,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15698,
+          "raw_2c": 0,
+          "frame_or_sample_count": 126,
+          "raw_34": 0,
+          "trailing_parameters": 5127380,
+          "trailing_format": 1538,
+          "raw_40": 110780
+        },
+        {
+          "offset": 8148,
+          "key_low": 81,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 172,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 232,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17600,
+          "raw_2c": 0,
+          "frame_or_sample_count": 65,
+          "raw_34": 0,
+          "trailing_parameters": 6377940,
+          "trailing_format": 1538,
+          "raw_40": 111192
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 66,
+      "data_offset": 6936,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 8228,
+          "key_low": 69,
+          "key_high": 84,
+          "settings": 1681917442,
+          "data_begin": 340,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 400,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17600,
+          "raw_2c": 0,
+          "frame_or_sample_count": 129,
+          "raw_34": 0,
+          "trailing_parameters": 5522900,
+          "trailing_format": 1538,
+          "raw_40": 111384
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 68,
+      "data_offset": 7016,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 8308,
+          "key_low": 67,
+          "key_high": 98,
+          "settings": 1681917442,
+          "data_begin": 254,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 352,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15680,
+          "raw_2c": 0,
+          "frame_or_sample_count": 86,
+          "raw_34": 0,
+          "trailing_parameters": 6439892,
+          "trailing_format": 1538,
+          "raw_40": 111744
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 69,
+      "data_offset": 7096,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 8392,
+          "key_low": 60,
+          "key_high": 78,
+          "settings": 1681917186,
+          "data_begin": 342,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 524,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16482,
+          "raw_2c": 87,
+          "frame_or_sample_count": 107,
+          "raw_34": 0,
+          "trailing_parameters": 5127380,
+          "trailing_format": 1282,
+          "raw_40": 112056
+        },
+        {
+          "offset": 8460,
+          "key_low": 72,
+          "key_high": 89,
+          "settings": 1681917186,
+          "data_begin": 296,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 440,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16744,
+          "raw_2c": 47,
+          "frame_or_sample_count": 115,
+          "raw_34": 0,
+          "trailing_parameters": 5851348,
+          "trailing_format": 1282,
+          "raw_40": 112540
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 70,
+      "data_offset": 7248,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 8540,
+          "key_low": 60,
+          "key_high": 77,
+          "settings": 1681917442,
+          "data_begin": 410,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 524,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15698,
+          "raw_2c": 0,
+          "frame_or_sample_count": 144,
+          "raw_34": 0,
+          "trailing_parameters": 5061844,
+          "trailing_format": 1538,
+          "raw_40": 112940
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 71,
+      "data_offset": 7328,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 8620,
+          "key_low": 69,
+          "key_high": 98,
+          "settings": 1681917186,
+          "data_begin": 728,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 876,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 13200,
+          "raw_2c": 626,
+          "frame_or_sample_count": 333,
+          "raw_34": 0,
+          "trailing_parameters": 6440404,
+          "trailing_format": 1282,
+          "raw_40": 113424
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 72,
+      "data_offset": 7408,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 8700,
+          "key_low": 84,
+          "key_high": 104,
+          "settings": 1681917186,
+          "data_begin": 292,
+          "level_pair": 30840,
+          "raw_10": 0,
+          "data_end": 544,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 131,
+          "raw_34": 0,
+          "trailing_parameters": 6837460,
+          "trailing_format": 1282,
+          "raw_40": 114260
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 73,
+      "data_offset": 7488,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 8780,
+          "key_low": 72,
+          "key_high": 98,
+          "settings": 1681917442,
+          "data_begin": 432,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 548,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15698,
+          "raw_2c": 330,
+          "frame_or_sample_count": 185,
+          "raw_34": 0,
+          "trailing_parameters": 6441172,
+          "trailing_format": 1538,
+          "raw_40": 114764
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 75,
+      "data_offset": 7568,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 8860,
+          "key_low": 84,
+          "key_high": 104,
+          "settings": 1681916930,
+          "data_begin": 6510,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 6804,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14651,
+          "raw_2c": 0,
+          "frame_or_sample_count": 198,
+          "raw_34": 0,
+          "trailing_parameters": 6837460,
+          "trailing_format": 1026,
+          "raw_40": 115272
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 77,
+      "data_offset": 7648,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 8944,
+          "key_low": 65,
+          "key_high": 82,
+          "settings": 1681917442,
+          "data_begin": 522,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 628,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17462,
+          "raw_2c": 0,
+          "frame_or_sample_count": 210,
+          "raw_34": 0,
+          "trailing_parameters": 5390804,
+          "trailing_format": 1538,
+          "raw_40": 122036
+        },
+        {
+          "offset": 9012,
+          "key_low": 81,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 386,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 504,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17600,
+          "raw_2c": 0,
+          "frame_or_sample_count": 172,
+          "raw_34": 0,
+          "trailing_parameters": 6377940,
+          "trailing_format": 1538,
+          "raw_40": 122624
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 78,
+      "data_offset": 7800,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 9092,
+          "key_low": 84,
+          "key_high": 98,
+          "settings": 1681917442,
+          "data_begin": 2624,
+          "level_pair": 30840,
+          "raw_10": 0,
+          "data_end": 2856,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 22050,
+          "raw_2c": 0,
+          "frame_or_sample_count": 23,
+          "raw_34": 0,
+          "trailing_parameters": 6444244,
+          "trailing_format": 1538,
+          "raw_40": 123088
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 80,
+      "data_offset": 7880,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 9176,
+          "key_low": 69,
+          "key_high": 82,
+          "settings": 1681917442,
+          "data_begin": 136,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 224,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16280,
+          "raw_2c": 0,
+          "frame_or_sample_count": 30,
+          "raw_34": 0,
+          "trailing_parameters": 5391828,
+          "trailing_format": 1538,
+          "raw_40": 125904
+        },
+        {
+          "offset": 9244,
+          "key_low": 81,
+          "key_high": 99,
+          "settings": 1681917442,
+          "data_begin": 102,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 208,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 0,
+          "frame_or_sample_count": 32,
+          "raw_34": 0,
+          "trailing_parameters": 6509012,
+          "trailing_format": 1538,
+          "raw_40": 126088
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 81,
+      "data_offset": 8032,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 9328,
+          "key_low": 69,
+          "key_high": 69,
+          "settings": 1681917186,
+          "data_begin": 156,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 312,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16280,
+          "raw_2c": 0,
+          "frame_or_sample_count": 40,
+          "raw_34": 0,
+          "trailing_parameters": 4539860,
+          "trailing_format": 1282,
+          "raw_40": 126256
+        },
+        {
+          "offset": 9396,
+          "key_low": 81,
+          "key_high": 97,
+          "settings": 1681917186,
+          "data_begin": 106,
+          "level_pair": 32125,
+          "raw_10": 0,
+          "data_end": 228,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17600,
+          "raw_2c": 0,
+          "frame_or_sample_count": 32,
+          "raw_34": 0,
+          "trailing_parameters": 6377940,
+          "trailing_format": 1282,
+          "raw_40": 126528
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 83,
+      "data_offset": 8184,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 9476,
+          "key_low": 81,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 3598,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 3620,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 0,
+          "frame_or_sample_count": 49,
+          "raw_34": 0,
+          "trailing_parameters": 6377940,
+          "trailing_format": 1538,
+          "raw_40": 126716
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 84,
+      "data_offset": 8264,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 9556,
+          "key_low": 79,
+          "key_high": 102,
+          "settings": 1681917186,
+          "data_begin": 3506,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 3524,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12000,
+          "raw_2c": 0,
+          "frame_or_sample_count": 34,
+          "raw_34": 0,
+          "trailing_parameters": 6705108,
+          "trailing_format": 1282,
+          "raw_40": 130296
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 85,
+      "data_offset": 8344,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 9636,
+          "key_low": 69,
+          "key_high": 87,
+          "settings": 1681917442,
+          "data_begin": 240,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 268,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 1,
+          "frame_or_sample_count": 83,
+          "raw_34": 0,
+          "trailing_parameters": 5719508,
+          "trailing_format": 1538,
+          "raw_40": 133780
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 86,
+      "data_offset": 8424,
+      "byte_length": 224,
+      "zone_count": 3,
+      "header_size": 20,
+      "zone_offsets": [
+        0,
+        68,
+        136
+      ],
+      "zones": [
+        {
+          "offset": 9724,
+          "key_low": 62,
+          "key_high": 80,
+          "settings": 1681917697,
+          "data_begin": 214,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 236,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 14683,
+          "raw_2c": 0,
+          "frame_or_sample_count": 56,
+          "raw_34": 0,
+          "trailing_parameters": 5258964,
+          "trailing_format": 1793,
+          "raw_40": 134008
+        },
+        {
+          "offset": 9792,
+          "key_low": 71,
+          "key_high": 94,
+          "settings": 1681916672,
+          "data_begin": 134,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 164,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12347,
+          "raw_2c": 0,
+          "frame_or_sample_count": 41,
+          "raw_34": 0,
+          "trailing_parameters": 6178772,
+          "trailing_format": 768,
+          "raw_40": 134204
+        },
+        {
+          "offset": 9860,
+          "key_low": 74,
+          "key_high": 97,
+          "settings": 1681918721,
+          "data_begin": 128,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 156,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 12334,
+          "raw_2c": 0,
+          "frame_or_sample_count": 42,
+          "raw_34": 0,
+          "trailing_parameters": 6376148,
+          "trailing_format": 2817,
+          "raw_40": 134328
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 88,
+      "data_offset": 8648,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 9944,
+          "key_low": 55,
+          "key_high": 68,
+          "settings": 1681919489,
+          "data_begin": 188,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 216,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 11025,
+          "raw_2c": 0,
+          "frame_or_sample_count": 37,
+          "raw_34": 0,
+          "trailing_parameters": 4470740,
+          "trailing_format": 3585,
+          "raw_40": 134444
+        },
+        {
+          "offset": 10012,
+          "key_low": 67,
+          "key_high": 92,
+          "settings": 1681919745,
+          "data_begin": 158,
+          "level_pair": 32382,
+          "raw_10": 0,
+          "data_end": 204,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 11025,
+          "raw_2c": 0,
+          "frame_or_sample_count": 50,
+          "raw_34": 0,
+          "trailing_parameters": 6046676,
+          "trailing_format": 3841,
+          "raw_40": 134620
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 90,
+      "data_offset": 8800,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 10096,
+          "key_low": 60,
+          "key_high": 78,
+          "settings": 1681917442,
+          "data_begin": 242,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 404,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15698,
+          "raw_2c": 0,
+          "frame_or_sample_count": 60,
+          "raw_34": 0,
+          "trailing_parameters": 5127380,
+          "trailing_format": 1538,
+          "raw_40": 134784
+        },
+        {
+          "offset": 10164,
+          "key_low": 84,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 148,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 296,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 20931,
+          "raw_2c": 0,
+          "frame_or_sample_count": 53,
+          "raw_34": 0,
+          "trailing_parameters": 6378708,
+          "trailing_format": 1538,
+          "raw_40": 135148
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 91,
+      "data_offset": 8952,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 10248,
+          "key_low": 60,
+          "key_high": 78,
+          "settings": 1681917442,
+          "data_begin": 374,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 464,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15698,
+          "raw_2c": 0,
+          "frame_or_sample_count": 126,
+          "raw_34": 0,
+          "trailing_parameters": 5127380,
+          "trailing_format": 1538,
+          "raw_40": 135404
+        },
+        {
+          "offset": 10316,
+          "key_low": 81,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 206,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 332,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 17600,
+          "raw_2c": 0,
+          "frame_or_sample_count": 82,
+          "raw_34": 0,
+          "trailing_parameters": 6377940,
+          "trailing_format": 1538,
+          "raw_40": 135828
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 93,
+      "data_offset": 9104,
+      "byte_length": 152,
+      "zone_count": 2,
+      "header_size": 16,
+      "zone_offsets": [
+        0,
+        68
+      ],
+      "zones": [
+        {
+          "offset": 10400,
+          "key_low": 69,
+          "key_high": 69,
+          "settings": 1681917442,
+          "data_begin": 182,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 204,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 1,
+          "frame_or_sample_count": 54,
+          "raw_34": 0,
+          "trailing_parameters": 4539860,
+          "trailing_format": 1538,
+          "raw_40": 136120
+        },
+        {
+          "offset": 10468,
+          "key_low": 81,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 120,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 140,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 15840,
+          "raw_2c": 0,
+          "frame_or_sample_count": 41,
+          "raw_34": 0,
+          "trailing_parameters": 6377940,
+          "trailing_format": 1538,
+          "raw_40": 136284
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 95,
+      "data_offset": 9256,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 10548,
+          "key_low": 72,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 768,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 796,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10465,
+          "raw_2c": 0,
+          "frame_or_sample_count": 363,
+          "raw_34": 0,
+          "trailing_parameters": 6375636,
+          "trailing_format": 1538,
+          "raw_40": 136384
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 97,
+      "data_offset": 9336,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 10628,
+          "key_low": 60,
+          "key_high": 85,
+          "settings": 1681917442,
+          "data_begin": 2244,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 2260,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 11025,
+          "raw_2c": 137,
+          "frame_or_sample_count": 1119,
+          "raw_34": 0,
+          "trailing_parameters": 5586132,
+          "trailing_format": 1538,
+          "raw_40": 137140
+        }
+      ]
+    },
+    {
+      "bank": "primary",
+      "resource_id": 100,
+      "data_offset": 9416,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 10708,
+          "key_low": 84,
+          "key_high": 97,
+          "settings": 1681917442,
+          "data_begin": 3306,
+          "level_pair": 10537,
+          "raw_10": 0,
+          "data_end": 3424,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 20930,
+          "raw_2c": 0,
+          "frame_or_sample_count": 23,
+          "raw_34": 0,
+          "trailing_parameters": 6378708,
+          "trailing_format": 1538,
+          "raw_40": 139360
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 0,
+      "data_offset": 9496,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 10788,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917698,
+          "data_begin": 2202,
+          "level_pair": 257,
+          "raw_10": 0,
+          "data_end": 2232,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 22050,
+          "raw_2c": 1081,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 1908181,
+          "trailing_format": 1794,
+          "raw_40": 142744
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 5,
+      "data_offset": 9576,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 10868,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 262,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 280,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10000,
+          "raw_2c": 111,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 2368725,
+          "trailing_format": 1538,
+          "raw_40": 144936
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 6,
+      "data_offset": 9656,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 10948,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 250,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 268,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10000,
+          "raw_2c": 105,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 2434517,
+          "trailing_format": 1538,
+          "raw_40": 145176
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 7,
+      "data_offset": 9736,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11028,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 784,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 800,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10000,
+          "raw_2c": 372,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 2500309,
+          "trailing_format": 1538,
+          "raw_40": 145404
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 8,
+      "data_offset": 9816,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11108,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 596,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 612,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10000,
+          "raw_2c": 278,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 2566101,
+          "trailing_format": 1538,
+          "raw_40": 146164
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 9,
+      "data_offset": 9896,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11188,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 540,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 556,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 250,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 2631893,
+          "trailing_format": 1538,
+          "raw_40": 146736
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 11,
+      "data_offset": 9976,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11268,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 382,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 400,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 171,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 2763477,
+          "trailing_format": 1538,
+          "raw_40": 147252
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 13,
+      "data_offset": 10056,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11348,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 518,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 536,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 239,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 2895061,
+          "trailing_format": 1538,
+          "raw_40": 147612
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 15,
+      "data_offset": 10136,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11428,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 918,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 940,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 439,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3026645,
+          "trailing_format": 1538,
+          "raw_40": 148108
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 16,
+      "data_offset": 10216,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11508,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 732,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 748,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 346,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3092437,
+          "trailing_format": 1538,
+          "raw_40": 149008
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 18,
+      "data_offset": 10296,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11588,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 1026,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 1044,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 493,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3224021,
+          "trailing_format": 1538,
+          "raw_40": 149716
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 20,
+      "data_offset": 10376,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11668,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 1762,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 2056,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 861,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3355605,
+          "trailing_format": 1538,
+          "raw_40": 150720
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 21,
+      "data_offset": 10456,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11748,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 1152,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 1180,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10000,
+          "raw_2c": 556,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3421397,
+          "trailing_format": 1538,
+          "raw_40": 152736
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 22,
+      "data_offset": 10536,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11828,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 648,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 672,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10000,
+          "raw_2c": 304,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3487189,
+          "trailing_format": 1538,
+          "raw_40": 153876
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 23,
+      "data_offset": 10616,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11908,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 884,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 904,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 422,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3552981,
+          "trailing_format": 1538,
+          "raw_40": 154508
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 25,
+      "data_offset": 10696,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 11988,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 340,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 356,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 150,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3684565,
+          "trailing_format": 1538,
+          "raw_40": 155372
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 27,
+      "data_offset": 10776,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12068,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 846,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 868,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 10000,
+          "raw_2c": 403,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3816149,
+          "trailing_format": 1538,
+          "raw_40": 155688
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 29,
+      "data_offset": 10856,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12148,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 242,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 260,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 101,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 3947733,
+          "trailing_format": 1538,
+          "raw_40": 156516
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 30,
+      "data_offset": 10936,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12228,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 192,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 208,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 76,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4013525,
+          "trailing_format": 1538,
+          "raw_40": 156736
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 31,
+      "data_offset": 11016,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12308,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 312,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 328,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 136,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4079317,
+          "trailing_format": 1538,
+          "raw_40": 156904
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 32,
+      "data_offset": 11096,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12388,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 438,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 456,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 199,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4145109,
+          "trailing_format": 1538,
+          "raw_40": 157192
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 33,
+      "data_offset": 11176,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12468,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 510,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 528,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 235,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4210901,
+          "trailing_format": 1538,
+          "raw_40": 157608
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 34,
+      "data_offset": 11256,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12548,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 660,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 676,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 310,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4276693,
+          "trailing_format": 1538,
+          "raw_40": 158096
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 35,
+      "data_offset": 11336,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12628,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 714,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 732,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 337,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4342485,
+          "trailing_format": 1538,
+          "raw_40": 158732
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 36,
+      "data_offset": 11416,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12708,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 304,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 328,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 132,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4408277,
+          "trailing_format": 1538,
+          "raw_40": 159424
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 37,
+      "data_offset": 11496,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12788,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 324,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 352,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 142,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4474069,
+          "trailing_format": 1538,
+          "raw_40": 159712
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 38,
+      "data_offset": 11576,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12868,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 556,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 572,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 258,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4539861,
+          "trailing_format": 1538,
+          "raw_40": 160024
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 39,
+      "data_offset": 11656,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 12948,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 480,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 496,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 220,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4605653,
+          "trailing_format": 1538,
+          "raw_40": 160556
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 43,
+      "data_offset": 11736,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 13028,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 384,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 432,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 172,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4868821,
+          "trailing_format": 1538,
+          "raw_40": 161012
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 44,
+      "data_offset": 11816,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 13108,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 174,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 192,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 67,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 4934613,
+          "trailing_format": 1538,
+          "raw_40": 161404
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 45,
+      "data_offset": 11896,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 13188,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 218,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 236,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 89,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 5000405,
+          "trailing_format": 1538,
+          "raw_40": 161556
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 46,
+      "data_offset": 11976,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 13268,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 258,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 276,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 8000,
+          "raw_2c": 109,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 5066197,
+          "trailing_format": 1538,
+          "raw_40": 161752
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 49,
+      "data_offset": 12056,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 13348,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 378,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 396,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 169,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 5263573,
+          "trailing_format": 1538,
+          "raw_40": 161988
+        }
+      ]
+    },
+    {
+      "bank": "secondary",
+      "resource_id": 50,
+      "data_offset": 12136,
+      "byte_length": 80,
+      "zone_count": 1,
+      "header_size": 12,
+      "zone_offsets": [
+        0
+      ],
+      "zones": [
+        {
+          "offset": 13428,
+          "key_low": 0,
+          "key_high": 0,
+          "settings": 1681917442,
+          "data_begin": 506,
+          "level_pair": 32639,
+          "raw_10": 0,
+          "data_end": 528,
+          "tag": "SPF2ALP",
+          "signature_a": 1598044521,
+          "signature_b": 1598044666,
+          "playback_value": 16000,
+          "raw_2c": 233,
+          "frame_or_sample_count": 0,
+          "raw_34": 0,
+          "trailing_parameters": 5329365,
+          "trailing_format": 1538,
+          "raw_40": 162344
+        }
+      ]
+    }
+  ]
+}

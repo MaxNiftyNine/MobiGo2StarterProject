@@ -1,0 +1,281 @@
+{
+  "schema": 1,
+  "address_unit": "16-bit word",
+  "classification": "MobiGo 2 launcher footer physical page-load bitmap",
+  "samples": [
+    {
+      "file": "58-115800-000-002_V020.gam",
+      "sha256": "7fd742a13ae6ca122cf0b7ab01c8900a25a5b56cabb2d1f36c0d480104fc4eb0",
+      "title": "Wild Cards",
+      "kind": "linear_or_legacy",
+      "file_page_count": 71
+    },
+    {
+      "file": "58-115800-000-029_V020.gam",
+      "sha256": "26a6219554597a872d0af60c87aef67652ec49724717c05259fadae9ab82d41d",
+      "title": "Keyboard Jam",
+      "kind": "linear_or_legacy",
+      "file_page_count": 72
+    },
+    {
+      "file": "58-115800-000-030_V020.gam",
+      "sha256": "e53b6c0428252420d1bf1a7e8fd7e1cd8c475d8aab8f9ece0446eb625ba408d5",
+      "title": "DJ Beats",
+      "kind": "linear_or_legacy",
+      "file_page_count": 53
+    },
+    {
+      "file": "58-115800-000-031_V010.gam",
+      "sha256": "7aee23a9b5c804e35a7650d22205b6f7e3ff65f92eba8fd2d32d776617d33c54",
+      "title": "Monkey Disco",
+      "kind": "linear_or_legacy",
+      "file_page_count": 147
+    },
+    {
+      "file": "BUNDLE_G1_135800G1.MBA",
+      "sha256": "e2ae552854d5a9e91c7f66f88dcc867f61b777bf34b3e5887d98bb43cb2bdcf5",
+      "title": "MGB_G1",
+      "kind": "footer_page_map",
+      "page_bytes": 4096,
+      "page_words": 2048,
+      "map_word_begin": 819200,
+      "map_word_end_exclusive": 4182016,
+      "file_page_count": 532,
+      "set_page_count": 532,
+      "runs": [
+        {
+          "index": 0,
+          "file_offset": 0,
+          "byte_length": 491520,
+          "page_count": 120,
+          "runtime_word_begin": 819200,
+          "runtime_word_end_exclusive": 1064960
+        },
+        {
+          "index": 1,
+          "file_offset": 491520,
+          "byte_length": 1687552,
+          "page_count": 412,
+          "runtime_word_begin": 3256320,
+          "runtime_word_end_exclusive": 4100096
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_G2_135800G2.MBA",
+      "sha256": "4feee848636f8248c35546e4efa1818e19d40f959c9f69d538335660a544dd5c",
+      "title": "MGB_G2",
+      "kind": "footer_page_map",
+      "page_bytes": 4096,
+      "page_words": 2048,
+      "map_word_begin": 819200,
+      "map_word_end_exclusive": 4182016,
+      "file_page_count": 318,
+      "set_page_count": 318,
+      "runs": [
+        {
+          "index": 0,
+          "file_offset": 0,
+          "byte_length": 319488,
+          "page_count": 78,
+          "runtime_word_begin": 819200,
+          "runtime_word_end_exclusive": 978944
+        },
+        {
+          "index": 1,
+          "file_offset": 319488,
+          "byte_length": 983040,
+          "page_count": 240,
+          "runtime_word_begin": 3608576,
+          "runtime_word_end_exclusive": 4100096
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_G3_135800G3.MBA",
+      "sha256": "d1247344a34b0738076feed6547b533509780c4e73de8eb1347f8ecd34ae5b33",
+      "title": "MGB_G3",
+      "kind": "footer_page_map",
+      "page_bytes": 4096,
+      "page_words": 2048,
+      "map_word_begin": 819200,
+      "map_word_end_exclusive": 4182016,
+      "file_page_count": 1008,
+      "set_page_count": 1008,
+      "runs": [
+        {
+          "index": 0,
+          "file_offset": 0,
+          "byte_length": 2523136,
+          "page_count": 616,
+          "runtime_word_begin": 819200,
+          "runtime_word_end_exclusive": 2080768
+        },
+        {
+          "index": 1,
+          "file_offset": 2523136,
+          "byte_length": 1605632,
+          "page_count": 392,
+          "runtime_word_begin": 3297280,
+          "runtime_word_end_exclusive": 4100096
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_G4_135800G4.MBA",
+      "sha256": "7d0b55ee02e296cda08ea4cc9d74c97371e262cec9dda0a17343c41e71a8ef07",
+      "title": "MGB_G4",
+      "kind": "footer_page_map",
+      "page_bytes": 4096,
+      "page_words": 2048,
+      "map_word_begin": 819200,
+      "map_word_end_exclusive": 4182016,
+      "file_page_count": 738,
+      "set_page_count": 738,
+      "runs": [
+        {
+          "index": 0,
+          "file_offset": 0,
+          "byte_length": 1474560,
+          "page_count": 360,
+          "runtime_word_begin": 819200,
+          "runtime_word_end_exclusive": 1556480
+        },
+        {
+          "index": 1,
+          "file_offset": 1474560,
+          "byte_length": 1548288,
+          "page_count": 378,
+          "runtime_word_begin": 3325952,
+          "runtime_word_end_exclusive": 4100096
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_LD_135800LD.MBA",
+      "sha256": "02e15903d2ed3eee1006e99459d8690c83d30c499dee60a916ccca5d41a2f50e",
+      "title": "Loading App",
+      "kind": "footer_page_map",
+      "page_bytes": 4096,
+      "page_words": 2048,
+      "map_word_begin": 819200,
+      "map_word_end_exclusive": 4182016,
+      "file_page_count": 30,
+      "set_page_count": 30,
+      "runs": [
+        {
+          "index": 0,
+          "file_offset": 0,
+          "byte_length": 20480,
+          "page_count": 5,
+          "runtime_word_begin": 819200,
+          "runtime_word_end_exclusive": 829440
+        },
+        {
+          "index": 1,
+          "file_offset": 20480,
+          "byte_length": 102400,
+          "page_count": 25,
+          "runtime_word_begin": 4130816,
+          "runtime_word_end_exclusive": 4182016
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_SY_135800SY.MBA",
+      "sha256": "233eb01522c2654c48bf579539661aa4892f560c391100c98bd931edf2beb67a",
+      "title": "MGB_SYS",
+      "kind": "footer_page_map",
+      "page_bytes": 4096,
+      "page_words": 2048,
+      "map_word_begin": 819200,
+      "map_word_end_exclusive": 4182016,
+      "file_page_count": 372,
+      "set_page_count": 372,
+      "runs": [
+        {
+          "index": 0,
+          "file_offset": 0,
+          "byte_length": 450560,
+          "page_count": 110,
+          "runtime_word_begin": 819200,
+          "runtime_word_end_exclusive": 1044480
+        },
+        {
+          "index": 1,
+          "file_offset": 450560,
+          "byte_length": 1073152,
+          "page_count": 262,
+          "runtime_word_begin": 3563520,
+          "runtime_word_end_exclusive": 4100096
+        }
+      ]
+    },
+    {
+      "file": "BUNDLE_TM_135800TM.MBA",
+      "sha256": "9d22007875c00793b84ff3a55b4c3bfdf859b61d365107b87344fab06c3739b4",
+      "title": "MGB_TM",
+      "kind": "footer_page_map",
+      "page_bytes": 4096,
+      "page_words": 2048,
+      "map_word_begin": 819200,
+      "map_word_end_exclusive": 4182016,
+      "file_page_count": 19,
+      "set_page_count": 19,
+      "runs": [
+        {
+          "index": 0,
+          "file_offset": 0,
+          "byte_length": 61440,
+          "page_count": 15,
+          "runtime_word_begin": 819200,
+          "runtime_word_end_exclusive": 849920
+        },
+        {
+          "index": 1,
+          "file_offset": 61440,
+          "byte_length": 16384,
+          "page_count": 4,
+          "runtime_word_begin": 4091904,
+          "runtime_word_end_exclusive": 4100096
+        }
+      ]
+    },
+    {
+      "file": "USENG_EBOOK.MBA",
+      "sha256": "91e132e85fcbbe38d2886c98844da5cddf731542492ee5b2fb2881cd3835810f",
+      "title": "MGB_EBK",
+      "kind": "footer_page_map",
+      "page_bytes": 4096,
+      "page_words": 2048,
+      "map_word_begin": 819200,
+      "map_word_end_exclusive": 4182016,
+      "file_page_count": 29,
+      "set_page_count": 29,
+      "runs": [
+        {
+          "index": 0,
+          "file_offset": 0,
+          "byte_length": 118784,
+          "page_count": 29,
+          "runtime_word_begin": 819200,
+          "runtime_word_end_exclusive": 878592
+        }
+      ]
+    },
+    {
+      "file": "USENG_MM.MBA",
+      "sha256": "78320de49b0de0c8a88999118d593fb565600f2ad5845df77a07a92734db128e",
+      "title": "Main Meun",
+      "kind": "linear_or_legacy",
+      "file_page_count": 65
+    },
+    {
+      "file": "USENG_UB.MBA",
+      "sha256": "f95754dc9f558ee1f019c6d5c94537d4acfae63010a5ed42e4be723cf426dcd4",
+      "title": "USB APP",
+      "kind": "linear_or_legacy",
+      "file_page_count": 19
+    }
+  ]
+}

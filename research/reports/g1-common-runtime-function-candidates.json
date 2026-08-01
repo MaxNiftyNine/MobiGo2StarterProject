@@ -1,0 +1,2305 @@
+{
+  "schema": 1,
+  "warning": "Candidates are similarity leads and require Ghidra verification; aligned equality can understate matches with inserted instructions",
+  "algorithm": {
+    "anchor_words": 6,
+    "maximum_anchor_occurrences": 8,
+    "reported_candidates": 3
+  },
+  "reference": {
+    "path": "samples/BUNDLE_G1_135800G1.MBA",
+    "name": "BUNDLE_G1_135800G1.MBA",
+    "sha256": "e2ae552854d5a9e91c7f66f88dcc867f61b777bf34b3e5887d98bb43cb2bdcf5",
+    "runtime_base": 819200,
+    "body_load": 821248,
+    "entry": 924245
+  },
+  "functions": [
+    {
+      "name": "system_controls_init",
+      "start": 905724,
+      "end_exclusive": 906188
+    },
+    {
+      "name": "system_controls_poll",
+      "start": 906188,
+      "end_exclusive": 906802
+    },
+    {
+      "name": "handle_volume_keys",
+      "start": 907029,
+      "end_exclusive": 907652
+    },
+    {
+      "name": "handle_brightness_key",
+      "start": 907652,
+      "end_exclusive": 907924
+    },
+    {
+      "name": "runtime_init",
+      "start": 917504,
+      "end_exclusive": 917621
+    },
+    {
+      "name": "update_poweroff_sequence",
+      "start": 918033,
+      "end_exclusive": 918338
+    }
+  ],
+  "targets": [
+    {
+      "image": {
+        "path": "samples/BUNDLE_G2_135800G2.MBA",
+        "name": "BUNDLE_G2_135800G2.MBA",
+        "sha256": "4feee848636f8248c35546e4efa1818e19d40f959c9f69d538335660a544dd5c",
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 851778
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 845650,
+            "target_file_offset": 52900,
+            "anchor_votes": 63,
+            "equal_words": 169,
+            "function_words": 464,
+            "aligned_equality": 0.364224,
+            "longest_equal_run_words": 23
+          },
+          {
+            "target_runtime_address": 845644,
+            "target_file_offset": 52888,
+            "anchor_votes": 21,
+            "equal_words": 55,
+            "function_words": 464,
+            "aligned_equality": 0.118534,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 845646,
+            "target_file_offset": 52892,
+            "anchor_votes": 19,
+            "equal_words": 54,
+            "function_words": 464,
+            "aligned_equality": 0.116379,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 846206,
+            "target_file_offset": 54012,
+            "anchor_votes": 43,
+            "equal_words": 92,
+            "function_words": 614,
+            "aligned_equality": 0.149837,
+            "longest_equal_run_words": 25
+          },
+          {
+            "target_runtime_address": 846137,
+            "target_file_offset": 53874,
+            "anchor_votes": 26,
+            "equal_words": 73,
+            "function_words": 614,
+            "aligned_equality": 0.118893,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 846144,
+            "target_file_offset": 53888,
+            "anchor_votes": 23,
+            "equal_words": 71,
+            "function_words": 614,
+            "aligned_equality": 0.115635,
+            "longest_equal_run_words": 15
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 847061,
+            "target_file_offset": 55722,
+            "anchor_votes": 103,
+            "equal_words": 270,
+            "function_words": 623,
+            "aligned_equality": 0.433387,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 847064,
+            "target_file_offset": 55728,
+            "anchor_votes": 61,
+            "equal_words": 160,
+            "function_words": 623,
+            "aligned_equality": 0.256822,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 846750,
+            "target_file_offset": 55100,
+            "anchor_votes": 36,
+            "equal_words": 114,
+            "function_words": 623,
+            "aligned_equality": 0.182986,
+            "longest_equal_run_words": 20
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 847689,
+            "target_file_offset": 56978,
+            "anchor_votes": 51,
+            "equal_words": 133,
+            "function_words": 272,
+            "aligned_equality": 0.488971,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 847687,
+            "target_file_offset": 56974,
+            "anchor_votes": 29,
+            "equal_words": 70,
+            "function_words": 272,
+            "aligned_equality": 0.257353,
+            "longest_equal_run_words": 14
+          },
+          {
+            "target_runtime_address": 847690,
+            "target_file_offset": 56980,
+            "anchor_votes": 18,
+            "equal_words": 38,
+            "function_words": 272,
+            "aligned_equality": 0.139706,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 905949,
+            "target_file_offset": 173498,
+            "anchor_votes": 10,
+            "equal_words": 30,
+            "function_words": 117,
+            "aligned_equality": 0.25641,
+            "longest_equal_run_words": 13
+          },
+          {
+            "target_runtime_address": 905951,
+            "target_file_offset": 173502,
+            "anchor_votes": 4,
+            "equal_words": 30,
+            "function_words": 117,
+            "aligned_equality": 0.25641,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 905948,
+            "target_file_offset": 173496,
+            "anchor_votes": 4,
+            "equal_words": 29,
+            "function_words": 117,
+            "aligned_equality": 0.247863,
+            "longest_equal_run_words": 8
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 906522,
+            "target_file_offset": 174644,
+            "anchor_votes": 49,
+            "equal_words": 81,
+            "function_words": 305,
+            "aligned_equality": 0.265574,
+            "longest_equal_run_words": 36
+          },
+          {
+            "target_runtime_address": 906508,
+            "target_file_offset": 174616,
+            "anchor_votes": 25,
+            "equal_words": 56,
+            "function_words": 305,
+            "aligned_equality": 0.183607,
+            "longest_equal_run_words": 22
+          },
+          {
+            "target_runtime_address": 906517,
+            "target_file_offset": 174634,
+            "anchor_votes": 16,
+            "equal_words": 39,
+            "function_words": 305,
+            "aligned_equality": 0.127869,
+            "longest_equal_run_words": 13
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/BUNDLE_G3_135800G3.MBA",
+        "name": "BUNDLE_G3_135800G3.MBA",
+        "sha256": "d1247344a34b0738076feed6547b533509780c4e73de8eb1347f8ecd34ae5b33",
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 885829
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 837661,
+            "target_file_offset": 36922,
+            "anchor_votes": 44,
+            "equal_words": 160,
+            "function_words": 464,
+            "aligned_equality": 0.344828,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 837655,
+            "target_file_offset": 36910,
+            "anchor_votes": 21,
+            "equal_words": 55,
+            "function_words": 464,
+            "aligned_equality": 0.118534,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 837657,
+            "target_file_offset": 36914,
+            "anchor_votes": 19,
+            "equal_words": 54,
+            "function_words": 464,
+            "aligned_equality": 0.116379,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 838413,
+            "target_file_offset": 38426,
+            "anchor_votes": 23,
+            "equal_words": 65,
+            "function_words": 614,
+            "aligned_equality": 0.105863,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 838582,
+            "target_file_offset": 38764,
+            "anchor_votes": 22,
+            "equal_words": 73,
+            "function_words": 614,
+            "aligned_equality": 0.118893,
+            "longest_equal_run_words": 20
+          },
+          {
+            "target_runtime_address": 838436,
+            "target_file_offset": 38472,
+            "anchor_votes": 21,
+            "equal_words": 54,
+            "function_words": 614,
+            "aligned_equality": 0.087948,
+            "longest_equal_run_words": 15
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 839437,
+            "target_file_offset": 40474,
+            "anchor_votes": 83,
+            "equal_words": 267,
+            "function_words": 623,
+            "aligned_equality": 0.428571,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 839440,
+            "target_file_offset": 40480,
+            "anchor_votes": 55,
+            "equal_words": 159,
+            "function_words": 623,
+            "aligned_equality": 0.255217,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 839126,
+            "target_file_offset": 39852,
+            "anchor_votes": 30,
+            "equal_words": 113,
+            "function_words": 623,
+            "aligned_equality": 0.18138,
+            "longest_equal_run_words": 20
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 840065,
+            "target_file_offset": 41730,
+            "anchor_votes": 38,
+            "equal_words": 131,
+            "function_words": 272,
+            "aligned_equality": 0.481618,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 840063,
+            "target_file_offset": 41726,
+            "anchor_votes": 28,
+            "equal_words": 70,
+            "function_words": 272,
+            "aligned_equality": 0.257353,
+            "longest_equal_run_words": 14
+          },
+          {
+            "target_runtime_address": 840066,
+            "target_file_offset": 41732,
+            "anchor_votes": 18,
+            "equal_words": 38,
+            "function_words": 272,
+            "aligned_equality": 0.139706,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 837542,
+            "target_file_offset": 36684,
+            "anchor_votes": 4,
+            "equal_words": 18,
+            "function_words": 117,
+            "aligned_equality": 0.153846,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 851708,
+            "target_file_offset": 65016,
+            "anchor_votes": 4,
+            "equal_words": 18,
+            "function_words": 117,
+            "aligned_equality": 0.153846,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 834567,
+            "target_file_offset": 30734,
+            "anchor_votes": 2,
+            "equal_words": 11,
+            "function_words": 117,
+            "aligned_equality": 0.094017,
+            "longest_equal_run_words": 7
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 848705,
+            "target_file_offset": 59010,
+            "anchor_votes": 10,
+            "equal_words": 27,
+            "function_words": 305,
+            "aligned_equality": 0.088525,
+            "longest_equal_run_words": 14
+          },
+          {
+            "target_runtime_address": 839300,
+            "target_file_offset": 40200,
+            "anchor_votes": 6,
+            "equal_words": 30,
+            "function_words": 305,
+            "aligned_equality": 0.098361,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 839330,
+            "target_file_offset": 40260,
+            "anchor_votes": 6,
+            "equal_words": 29,
+            "function_words": 305,
+            "aligned_equality": 0.095082,
+            "longest_equal_run_words": 12
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/BUNDLE_G4_135800G4.MBA",
+        "name": "BUNDLE_G4_135800G4.MBA",
+        "sha256": "7d0b55ee02e296cda08ea4cc9d74c97371e262cec9dda0a17343c41e71a8ef07",
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 885730
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 840842,
+            "target_file_offset": 43284,
+            "anchor_votes": 53,
+            "equal_words": 187,
+            "function_words": 464,
+            "aligned_equality": 0.403017,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 840838,
+            "target_file_offset": 43276,
+            "anchor_votes": 19,
+            "equal_words": 54,
+            "function_words": 464,
+            "aligned_equality": 0.116379,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 840836,
+            "target_file_offset": 43272,
+            "anchor_votes": 16,
+            "equal_words": 48,
+            "function_words": 464,
+            "aligned_equality": 0.103448,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 841476,
+            "target_file_offset": 44552,
+            "anchor_votes": 26,
+            "equal_words": 73,
+            "function_words": 614,
+            "aligned_equality": 0.118893,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 841483,
+            "target_file_offset": 44566,
+            "anchor_votes": 23,
+            "equal_words": 72,
+            "function_words": 614,
+            "aligned_equality": 0.117264,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 841545,
+            "target_file_offset": 44690,
+            "anchor_votes": 22,
+            "equal_words": 83,
+            "function_words": 614,
+            "aligned_equality": 0.135179,
+            "longest_equal_run_words": 20
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 842400,
+            "target_file_offset": 46400,
+            "anchor_votes": 86,
+            "equal_words": 268,
+            "function_words": 623,
+            "aligned_equality": 0.430177,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 842403,
+            "target_file_offset": 46406,
+            "anchor_votes": 56,
+            "equal_words": 159,
+            "function_words": 623,
+            "aligned_equality": 0.255217,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 842089,
+            "target_file_offset": 45778,
+            "anchor_votes": 31,
+            "equal_words": 113,
+            "function_words": 623,
+            "aligned_equality": 0.18138,
+            "longest_equal_run_words": 20
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 843028,
+            "target_file_offset": 47656,
+            "anchor_votes": 45,
+            "equal_words": 133,
+            "function_words": 272,
+            "aligned_equality": 0.488971,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 843026,
+            "target_file_offset": 47652,
+            "anchor_votes": 30,
+            "equal_words": 70,
+            "function_words": 272,
+            "aligned_equality": 0.257353,
+            "longest_equal_run_words": 14
+          },
+          {
+            "target_runtime_address": 843029,
+            "target_file_offset": 47658,
+            "anchor_votes": 18,
+            "equal_words": 38,
+            "function_words": 272,
+            "aligned_equality": 0.139706,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 884689,
+            "target_file_offset": 130978,
+            "anchor_votes": 4,
+            "equal_words": 30,
+            "function_words": 117,
+            "aligned_equality": 0.25641,
+            "longest_equal_run_words": 8
+          },
+          {
+            "target_runtime_address": 840713,
+            "target_file_offset": 43026,
+            "anchor_votes": 4,
+            "equal_words": 19,
+            "function_words": 117,
+            "aligned_equality": 0.162393,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 850130,
+            "target_file_offset": 61860,
+            "anchor_votes": 4,
+            "equal_words": 18,
+            "function_words": 117,
+            "aligned_equality": 0.153846,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 842263,
+            "target_file_offset": 46126,
+            "anchor_votes": 6,
+            "equal_words": 31,
+            "function_words": 305,
+            "aligned_equality": 0.101639,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 842293,
+            "target_file_offset": 46186,
+            "anchor_votes": 6,
+            "equal_words": 30,
+            "function_words": 305,
+            "aligned_equality": 0.098361,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 843037,
+            "target_file_offset": 47674,
+            "anchor_votes": 6,
+            "equal_words": 27,
+            "function_words": 305,
+            "aligned_equality": 0.088525,
+            "longest_equal_run_words": 12
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/BUNDLE_LD_135800LD.MBA",
+        "name": "BUNDLE_LD_135800LD.MBA",
+        "sha256": "02e15903d2ed3eee1006e99459d8690c83d30c499dee60a916ccca5d41a2f50e",
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 821402
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 821275,
+            "target_file_offset": 4150,
+            "anchor_votes": 2,
+            "equal_words": 10,
+            "function_words": 464,
+            "aligned_equality": 0.021552,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 821447,
+            "target_file_offset": 4494,
+            "anchor_votes": 1,
+            "equal_words": 10,
+            "function_words": 464,
+            "aligned_equality": 0.021552,
+            "longest_equal_run_words": 6
+          },
+          {
+            "target_runtime_address": 821424,
+            "target_file_offset": 4448,
+            "anchor_votes": 1,
+            "equal_words": 8,
+            "function_words": 464,
+            "aligned_equality": 0.017241,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "system_controls_poll": [],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 821270,
+            "target_file_offset": 4140,
+            "anchor_votes": 14,
+            "equal_words": 22,
+            "function_words": 623,
+            "aligned_equality": 0.035313,
+            "longest_equal_run_words": 19
+          },
+          {
+            "target_runtime_address": 821271,
+            "target_file_offset": 4142,
+            "anchor_votes": 1,
+            "equal_words": 6,
+            "function_words": 623,
+            "aligned_equality": 0.009631,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "handle_brightness_key": [],
+        "runtime_init": [
+          {
+            "target_runtime_address": 821286,
+            "target_file_offset": 4172,
+            "anchor_votes": 1,
+            "equal_words": 13,
+            "function_words": 117,
+            "aligned_equality": 0.111111,
+            "longest_equal_run_words": 6
+          },
+          {
+            "target_runtime_address": 821352,
+            "target_file_offset": 4304,
+            "anchor_votes": 1,
+            "equal_words": 10,
+            "function_words": 117,
+            "aligned_equality": 0.08547,
+            "longest_equal_run_words": 6
+          },
+          {
+            "target_runtime_address": 821329,
+            "target_file_offset": 4258,
+            "anchor_votes": 1,
+            "equal_words": 8,
+            "function_words": 117,
+            "aligned_equality": 0.068376,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 821262,
+            "target_file_offset": 4124,
+            "anchor_votes": 2,
+            "equal_words": 12,
+            "function_words": 305,
+            "aligned_equality": 0.039344,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 821342,
+            "target_file_offset": 4284,
+            "anchor_votes": 1,
+            "equal_words": 7,
+            "function_words": 305,
+            "aligned_equality": 0.022951,
+            "longest_equal_run_words": 6
+          },
+          {
+            "target_runtime_address": 821365,
+            "target_file_offset": 4330,
+            "anchor_votes": 1,
+            "equal_words": 7,
+            "function_words": 305,
+            "aligned_equality": 0.022951,
+            "longest_equal_run_words": 6
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/BUNDLE_SY_135800SY.MBA",
+        "name": "BUNDLE_SY_135800SY.MBA",
+        "sha256": "233eb01522c2654c48bf579539661aa4892f560c391100c98bd931edf2beb67a",
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 916509
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 892590,
+            "target_file_offset": 146780,
+            "anchor_votes": 62,
+            "equal_words": 170,
+            "function_words": 464,
+            "aligned_equality": 0.366379,
+            "longest_equal_run_words": 23
+          },
+          {
+            "target_runtime_address": 892584,
+            "target_file_offset": 146768,
+            "anchor_votes": 21,
+            "equal_words": 55,
+            "function_words": 464,
+            "aligned_equality": 0.118534,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 892586,
+            "target_file_offset": 146772,
+            "anchor_votes": 19,
+            "equal_words": 54,
+            "function_words": 464,
+            "aligned_equality": 0.116379,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 893146,
+            "target_file_offset": 147892,
+            "anchor_votes": 44,
+            "equal_words": 93,
+            "function_words": 614,
+            "aligned_equality": 0.151466,
+            "longest_equal_run_words": 25
+          },
+          {
+            "target_runtime_address": 893077,
+            "target_file_offset": 147754,
+            "anchor_votes": 26,
+            "equal_words": 74,
+            "function_words": 614,
+            "aligned_equality": 0.120521,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 893084,
+            "target_file_offset": 147768,
+            "anchor_votes": 23,
+            "equal_words": 72,
+            "function_words": 614,
+            "aligned_equality": 0.117264,
+            "longest_equal_run_words": 15
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 894001,
+            "target_file_offset": 149602,
+            "anchor_votes": 106,
+            "equal_words": 273,
+            "function_words": 623,
+            "aligned_equality": 0.438202,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 894004,
+            "target_file_offset": 149608,
+            "anchor_votes": 61,
+            "equal_words": 160,
+            "function_words": 623,
+            "aligned_equality": 0.256822,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 893997,
+            "target_file_offset": 149594,
+            "anchor_votes": 37,
+            "equal_words": 85,
+            "function_words": 623,
+            "aligned_equality": 0.136437,
+            "longest_equal_run_words": 19
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 894629,
+            "target_file_offset": 150858,
+            "anchor_votes": 52,
+            "equal_words": 134,
+            "function_words": 272,
+            "aligned_equality": 0.492647,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 894627,
+            "target_file_offset": 150854,
+            "anchor_votes": 30,
+            "equal_words": 71,
+            "function_words": 272,
+            "aligned_equality": 0.261029,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 894630,
+            "target_file_offset": 150860,
+            "anchor_votes": 18,
+            "equal_words": 38,
+            "function_words": 272,
+            "aligned_equality": 0.139706,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 911097,
+            "target_file_offset": 183794,
+            "anchor_votes": 8,
+            "equal_words": 31,
+            "function_words": 117,
+            "aligned_equality": 0.264957,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 911096,
+            "target_file_offset": 183792,
+            "anchor_votes": 5,
+            "equal_words": 30,
+            "function_words": 117,
+            "aligned_equality": 0.25641,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 911099,
+            "target_file_offset": 183798,
+            "anchor_votes": 4,
+            "equal_words": 31,
+            "function_words": 117,
+            "aligned_equality": 0.264957,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 911588,
+            "target_file_offset": 184776,
+            "anchor_votes": 30,
+            "equal_words": 78,
+            "function_words": 305,
+            "aligned_equality": 0.255738,
+            "longest_equal_run_words": 28
+          },
+          {
+            "target_runtime_address": 893864,
+            "target_file_offset": 149328,
+            "anchor_votes": 13,
+            "equal_words": 32,
+            "function_words": 305,
+            "aligned_equality": 0.104918,
+            "longest_equal_run_words": 19
+          },
+          {
+            "target_runtime_address": 893894,
+            "target_file_offset": 149388,
+            "anchor_votes": 13,
+            "equal_words": 31,
+            "function_words": 305,
+            "aligned_equality": 0.101639,
+            "longest_equal_run_words": 19
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/BUNDLE_TM_135800TM.MBA",
+        "name": "BUNDLE_TM_135800TM.MBA",
+        "sha256": "9d22007875c00793b84ff3a55b4c3bfdf859b61d365107b87344fab06c3739b4",
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 827562
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 825420,
+            "target_file_offset": 12440,
+            "anchor_votes": 1,
+            "equal_words": 18,
+            "function_words": 464,
+            "aligned_equality": 0.038793,
+            "longest_equal_run_words": 6
+          },
+          {
+            "target_runtime_address": 826147,
+            "target_file_offset": 13894,
+            "anchor_votes": 1,
+            "equal_words": 15,
+            "function_words": 464,
+            "aligned_equality": 0.032328,
+            "longest_equal_run_words": 6
+          },
+          {
+            "target_runtime_address": 826050,
+            "target_file_offset": 13700,
+            "anchor_votes": 1,
+            "equal_words": 13,
+            "function_words": 464,
+            "aligned_equality": 0.028017,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 823262,
+            "target_file_offset": 8124,
+            "anchor_votes": 5,
+            "equal_words": 21,
+            "function_words": 614,
+            "aligned_equality": 0.034202,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 826732,
+            "target_file_offset": 15064,
+            "anchor_votes": 5,
+            "equal_words": 18,
+            "function_words": 614,
+            "aligned_equality": 0.029316,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 823052,
+            "target_file_offset": 7704,
+            "anchor_votes": 4,
+            "equal_words": 15,
+            "function_words": 614,
+            "aligned_equality": 0.02443,
+            "longest_equal_run_words": 9
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 823385,
+            "target_file_offset": 8370,
+            "anchor_votes": 2,
+            "equal_words": 29,
+            "function_words": 623,
+            "aligned_equality": 0.046549,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 825831,
+            "target_file_offset": 13262,
+            "anchor_votes": 2,
+            "equal_words": 24,
+            "function_words": 623,
+            "aligned_equality": 0.038523,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 826855,
+            "target_file_offset": 15310,
+            "anchor_votes": 2,
+            "equal_words": 20,
+            "function_words": 623,
+            "aligned_equality": 0.032103,
+            "longest_equal_run_words": 7
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 826030,
+            "target_file_offset": 13660,
+            "anchor_votes": 2,
+            "equal_words": 13,
+            "function_words": 272,
+            "aligned_equality": 0.047794,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 827165,
+            "target_file_offset": 15930,
+            "anchor_votes": 2,
+            "equal_words": 11,
+            "function_words": 272,
+            "aligned_equality": 0.040441,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 823695,
+            "target_file_offset": 8990,
+            "anchor_votes": 2,
+            "equal_words": 10,
+            "function_words": 272,
+            "aligned_equality": 0.036765,
+            "longest_equal_run_words": 7
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 826025,
+            "target_file_offset": 13650,
+            "anchor_votes": 1,
+            "equal_words": 16,
+            "function_words": 117,
+            "aligned_equality": 0.136752,
+            "longest_equal_run_words": 6
+          },
+          {
+            "target_runtime_address": 826026,
+            "target_file_offset": 13652,
+            "anchor_votes": 1,
+            "equal_words": 9,
+            "function_words": 117,
+            "aligned_equality": 0.076923,
+            "longest_equal_run_words": 6
+          },
+          {
+            "target_runtime_address": 827500,
+            "target_file_offset": 16600,
+            "anchor_votes": 1,
+            "equal_words": 9,
+            "function_words": 117,
+            "aligned_equality": 0.076923,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 825498,
+            "target_file_offset": 12596,
+            "anchor_votes": 6,
+            "equal_words": 17,
+            "function_words": 305,
+            "aligned_equality": 0.055738,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 823686,
+            "target_file_offset": 8972,
+            "anchor_votes": 4,
+            "equal_words": 19,
+            "function_words": 305,
+            "aligned_equality": 0.062295,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 827156,
+            "target_file_offset": 15912,
+            "anchor_votes": 4,
+            "equal_words": 13,
+            "function_words": 305,
+            "aligned_equality": 0.042623,
+            "longest_equal_run_words": 9
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/USENG_EBOOK.MBA",
+        "name": "USENG_EBOOK.MBA",
+        "sha256": "91e132e85fcbbe38d2886c98844da5cddf731542492ee5b2fb2881cd3835810f",
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 870664
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 854917,
+            "target_file_offset": 71434,
+            "anchor_votes": 8,
+            "equal_words": 48,
+            "function_words": 464,
+            "aligned_equality": 0.103448,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 854915,
+            "target_file_offset": 71430,
+            "anchor_votes": 6,
+            "equal_words": 45,
+            "function_words": 464,
+            "aligned_equality": 0.096983,
+            "longest_equal_run_words": 8
+          },
+          {
+            "target_runtime_address": 854880,
+            "target_file_offset": 71360,
+            "anchor_votes": 4,
+            "equal_words": 36,
+            "function_words": 464,
+            "aligned_equality": 0.077586,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 855398,
+            "target_file_offset": 72396,
+            "anchor_votes": 11,
+            "equal_words": 69,
+            "function_words": 614,
+            "aligned_equality": 0.112378,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 855405,
+            "target_file_offset": 72410,
+            "anchor_votes": 11,
+            "equal_words": 68,
+            "function_words": 614,
+            "aligned_equality": 0.110749,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 855383,
+            "target_file_offset": 72366,
+            "anchor_votes": 6,
+            "equal_words": 40,
+            "function_words": 614,
+            "aligned_equality": 0.065147,
+            "longest_equal_run_words": 9
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 856347,
+            "target_file_offset": 74294,
+            "anchor_votes": 5,
+            "equal_words": 48,
+            "function_words": 623,
+            "aligned_equality": 0.077047,
+            "longest_equal_run_words": 8
+          },
+          {
+            "target_runtime_address": 856036,
+            "target_file_offset": 73672,
+            "anchor_votes": 5,
+            "equal_words": 46,
+            "function_words": 623,
+            "aligned_equality": 0.073836,
+            "longest_equal_run_words": 8
+          },
+          {
+            "target_runtime_address": 856282,
+            "target_file_offset": 74164,
+            "anchor_votes": 5,
+            "equal_words": 46,
+            "function_words": 623,
+            "aligned_equality": 0.073836,
+            "longest_equal_run_words": 8
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 856660,
+            "target_file_offset": 74920,
+            "anchor_votes": 15,
+            "equal_words": 68,
+            "function_words": 272,
+            "aligned_equality": 0.25,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 856387,
+            "target_file_offset": 74374,
+            "anchor_votes": 5,
+            "equal_words": 41,
+            "function_words": 272,
+            "aligned_equality": 0.150735,
+            "longest_equal_run_words": 8
+          },
+          {
+            "target_runtime_address": 856633,
+            "target_file_offset": 74866,
+            "anchor_votes": 5,
+            "equal_words": 31,
+            "function_words": 272,
+            "aligned_equality": 0.113971,
+            "longest_equal_run_words": 8
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 851745,
+            "target_file_offset": 65090,
+            "anchor_votes": 3,
+            "equal_words": 19,
+            "function_words": 117,
+            "aligned_equality": 0.162393,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 854780,
+            "target_file_offset": 71160,
+            "anchor_votes": 3,
+            "equal_words": 19,
+            "function_words": 117,
+            "aligned_equality": 0.162393,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 869839,
+            "target_file_offset": 101278,
+            "anchor_votes": 3,
+            "equal_words": 18,
+            "function_words": 117,
+            "aligned_equality": 0.153846,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 845866,
+            "target_file_offset": 53332,
+            "anchor_votes": 6,
+            "equal_words": 20,
+            "function_words": 305,
+            "aligned_equality": 0.065574,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 857831,
+            "target_file_offset": 77262,
+            "anchor_votes": 4,
+            "equal_words": 28,
+            "function_words": 305,
+            "aligned_equality": 0.091803,
+            "longest_equal_run_words": 8
+          },
+          {
+            "target_runtime_address": 845845,
+            "target_file_offset": 53290,
+            "anchor_votes": 4,
+            "equal_words": 18,
+            "function_words": 305,
+            "aligned_equality": 0.059016,
+            "longest_equal_run_words": 9
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/USENG_MM.MBA",
+        "name": "USENG_MM.MBA",
+        "sha256": "78320de49b0de0c8a88999118d593fb565600f2ad5845df77a07a92734db128e",
+        "runtime_base": 2244608,
+        "body_load": 2246656,
+        "entry": 2283685
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 2275247,
+            "target_file_offset": 61278,
+            "anchor_votes": 22,
+            "equal_words": 160,
+            "function_words": 464,
+            "aligned_equality": 0.344828,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 2275269,
+            "target_file_offset": 61322,
+            "anchor_votes": 16,
+            "equal_words": 69,
+            "function_words": 464,
+            "aligned_equality": 0.148707,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2275271,
+            "target_file_offset": 61326,
+            "anchor_votes": 14,
+            "equal_words": 49,
+            "function_words": 464,
+            "aligned_equality": 0.105603,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 2275927,
+            "target_file_offset": 62638,
+            "anchor_votes": 18,
+            "equal_words": 67,
+            "function_words": 614,
+            "aligned_equality": 0.109121,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2275934,
+            "target_file_offset": 62652,
+            "anchor_votes": 16,
+            "equal_words": 68,
+            "function_words": 614,
+            "aligned_equality": 0.110749,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2275996,
+            "target_file_offset": 62776,
+            "anchor_votes": 11,
+            "equal_words": 77,
+            "function_words": 614,
+            "aligned_equality": 0.125407,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 2276851,
+            "target_file_offset": 64486,
+            "anchor_votes": 39,
+            "equal_words": 243,
+            "function_words": 623,
+            "aligned_equality": 0.390048,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2276854,
+            "target_file_offset": 64492,
+            "anchor_votes": 24,
+            "equal_words": 141,
+            "function_words": 623,
+            "aligned_equality": 0.226324,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2276847,
+            "target_file_offset": 64478,
+            "anchor_votes": 19,
+            "equal_words": 80,
+            "function_words": 623,
+            "aligned_equality": 0.128411,
+            "longest_equal_run_words": 12
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 2277477,
+            "target_file_offset": 65738,
+            "anchor_votes": 20,
+            "equal_words": 66,
+            "function_words": 272,
+            "aligned_equality": 0.242647,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2277479,
+            "target_file_offset": 65742,
+            "anchor_votes": 14,
+            "equal_words": 119,
+            "function_words": 272,
+            "aligned_equality": 0.4375,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2276874,
+            "target_file_offset": 64532,
+            "anchor_votes": 6,
+            "equal_words": 55,
+            "function_words": 272,
+            "aligned_equality": 0.202206,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 2267338,
+            "target_file_offset": 45460,
+            "anchor_votes": 2,
+            "equal_words": 7,
+            "function_words": 117,
+            "aligned_equality": 0.059829,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 2282878,
+            "target_file_offset": 76540,
+            "anchor_votes": 1,
+            "equal_words": 12,
+            "function_words": 117,
+            "aligned_equality": 0.102564,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 2266227,
+            "target_file_offset": 43238,
+            "anchor_votes": 4,
+            "equal_words": 16,
+            "function_words": 305,
+            "aligned_equality": 0.052459,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2265944,
+            "target_file_offset": 42672,
+            "anchor_votes": 4,
+            "equal_words": 15,
+            "function_words": 305,
+            "aligned_equality": 0.04918,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2257053,
+            "target_file_offset": 24890,
+            "anchor_votes": 2,
+            "equal_words": 15,
+            "function_words": 305,
+            "aligned_equality": 0.04918,
+            "longest_equal_run_words": 7
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/USENG_UB.MBA",
+        "name": "USENG_UB.MBA",
+        "sha256": "f95754dc9f558ee1f019c6d5c94537d4acfae63010a5ed42e4be723cf426dcd4",
+        "runtime_base": 2244608,
+        "body_load": 2246656,
+        "entry": 2253409
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 2246689,
+            "target_file_offset": 4162,
+            "anchor_votes": 27,
+            "equal_words": 152,
+            "function_words": 464,
+            "aligned_equality": 0.327586,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 2246683,
+            "target_file_offset": 4150,
+            "anchor_votes": 17,
+            "equal_words": 53,
+            "function_words": 464,
+            "aligned_equality": 0.114224,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2246685,
+            "target_file_offset": 4154,
+            "anchor_votes": 14,
+            "equal_words": 50,
+            "function_words": 464,
+            "aligned_equality": 0.107759,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 2247477,
+            "target_file_offset": 5738,
+            "anchor_votes": 1,
+            "equal_words": 37,
+            "function_words": 614,
+            "aligned_equality": 0.060261,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2247254,
+            "target_file_offset": 5292,
+            "anchor_votes": 1,
+            "equal_words": 34,
+            "function_words": 614,
+            "aligned_equality": 0.055375,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2247163,
+            "target_file_offset": 5110,
+            "anchor_votes": 1,
+            "equal_words": 32,
+            "function_words": 614,
+            "aligned_equality": 0.052117,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 2247488,
+            "target_file_offset": 5760,
+            "anchor_votes": 48,
+            "equal_words": 243,
+            "function_words": 623,
+            "aligned_equality": 0.390048,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2247484,
+            "target_file_offset": 5752,
+            "anchor_votes": 27,
+            "equal_words": 80,
+            "function_words": 623,
+            "aligned_equality": 0.128411,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2247491,
+            "target_file_offset": 5766,
+            "anchor_votes": 25,
+            "equal_words": 141,
+            "function_words": 623,
+            "aligned_equality": 0.226324,
+            "longest_equal_run_words": 12
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 2248116,
+            "target_file_offset": 7016,
+            "anchor_votes": 22,
+            "equal_words": 119,
+            "function_words": 272,
+            "aligned_equality": 0.4375,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2248114,
+            "target_file_offset": 7012,
+            "anchor_votes": 21,
+            "equal_words": 66,
+            "function_words": 272,
+            "aligned_equality": 0.242647,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2249003,
+            "target_file_offset": 8790,
+            "anchor_votes": 9,
+            "equal_words": 20,
+            "function_words": 272,
+            "aligned_equality": 0.073529,
+            "longest_equal_run_words": 14
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 2251638,
+            "target_file_offset": 14060,
+            "anchor_votes": 1,
+            "equal_words": 17,
+            "function_words": 117,
+            "aligned_equality": 0.145299,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 2249012,
+            "target_file_offset": 8808,
+            "anchor_votes": 9,
+            "equal_words": 28,
+            "function_words": 305,
+            "aligned_equality": 0.091803,
+            "longest_equal_run_words": 14
+          },
+          {
+            "target_runtime_address": 2247696,
+            "target_file_offset": 6176,
+            "anchor_votes": 8,
+            "equal_words": 29,
+            "function_words": 305,
+            "aligned_equality": 0.095082,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2247351,
+            "target_file_offset": 5486,
+            "anchor_votes": 8,
+            "equal_words": 27,
+            "function_words": 305,
+            "aligned_equality": 0.088525,
+            "longest_equal_run_words": 12
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/58-115800-000-002_V020.gam",
+        "name": "58-115800-000-002_V020.gam",
+        "sha256": "7fd742a13ae6ca122cf0b7ab01c8900a25a5b56cabb2d1f36c0d480104fc4eb0",
+        "runtime_base": 2244608,
+        "body_load": 2246656,
+        "entry": 2282784
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 2270648,
+            "target_file_offset": 52080,
+            "anchor_votes": 26,
+            "equal_words": 162,
+            "function_words": 464,
+            "aligned_equality": 0.349138,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 2270670,
+            "target_file_offset": 52124,
+            "anchor_votes": 16,
+            "equal_words": 69,
+            "function_words": 464,
+            "aligned_equality": 0.148707,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2270672,
+            "target_file_offset": 52128,
+            "anchor_votes": 12,
+            "equal_words": 48,
+            "function_words": 464,
+            "aligned_equality": 0.103448,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 2271326,
+            "target_file_offset": 53436,
+            "anchor_votes": 18,
+            "equal_words": 67,
+            "function_words": 614,
+            "aligned_equality": 0.109121,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2271333,
+            "target_file_offset": 53450,
+            "anchor_votes": 16,
+            "equal_words": 68,
+            "function_words": 614,
+            "aligned_equality": 0.110749,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2271395,
+            "target_file_offset": 53574,
+            "anchor_votes": 9,
+            "equal_words": 77,
+            "function_words": 614,
+            "aligned_equality": 0.125407,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 2272250,
+            "target_file_offset": 55284,
+            "anchor_votes": 37,
+            "equal_words": 243,
+            "function_words": 623,
+            "aligned_equality": 0.390048,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2272253,
+            "target_file_offset": 55290,
+            "anchor_votes": 23,
+            "equal_words": 141,
+            "function_words": 623,
+            "aligned_equality": 0.226324,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2272246,
+            "target_file_offset": 55276,
+            "anchor_votes": 19,
+            "equal_words": 80,
+            "function_words": 623,
+            "aligned_equality": 0.128411,
+            "longest_equal_run_words": 12
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 2272876,
+            "target_file_offset": 56536,
+            "anchor_votes": 19,
+            "equal_words": 66,
+            "function_words": 272,
+            "aligned_equality": 0.242647,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2272878,
+            "target_file_offset": 56540,
+            "anchor_votes": 13,
+            "equal_words": 119,
+            "function_words": 272,
+            "aligned_equality": 0.4375,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2272273,
+            "target_file_offset": 55330,
+            "anchor_votes": 6,
+            "equal_words": 55,
+            "function_words": 272,
+            "aligned_equality": 0.202206,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 2281235,
+            "target_file_offset": 73254,
+            "anchor_votes": 1,
+            "equal_words": 19,
+            "function_words": 117,
+            "aligned_equality": 0.162393,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 2275217,
+            "target_file_offset": 61218,
+            "anchor_votes": 4,
+            "equal_words": 11,
+            "function_words": 305,
+            "aligned_equality": 0.036066,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2278324,
+            "target_file_offset": 67432,
+            "anchor_votes": 1,
+            "equal_words": 25,
+            "function_words": 305,
+            "aligned_equality": 0.081967,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 2271007,
+            "target_file_offset": 52798,
+            "anchor_votes": 1,
+            "equal_words": 15,
+            "function_words": 305,
+            "aligned_equality": 0.04918,
+            "longest_equal_run_words": 6
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/58-115800-000-029_V020.gam",
+        "name": "58-115800-000-029_V020.gam",
+        "sha256": "26a6219554597a872d0af60c87aef67652ec49724717c05259fadae9ab82d41d",
+        "runtime_base": 2244608,
+        "body_load": 2246656,
+        "entry": 2273338
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 2261288,
+            "target_file_offset": 33360,
+            "anchor_votes": 25,
+            "equal_words": 149,
+            "function_words": 464,
+            "aligned_equality": 0.321121,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 2261282,
+            "target_file_offset": 33348,
+            "anchor_votes": 16,
+            "equal_words": 53,
+            "function_words": 464,
+            "aligned_equality": 0.114224,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2261284,
+            "target_file_offset": 33352,
+            "anchor_votes": 12,
+            "equal_words": 50,
+            "function_words": 464,
+            "aligned_equality": 0.107759,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 2261968,
+            "target_file_offset": 34720,
+            "anchor_votes": 18,
+            "equal_words": 67,
+            "function_words": 614,
+            "aligned_equality": 0.109121,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2261975,
+            "target_file_offset": 34734,
+            "anchor_votes": 16,
+            "equal_words": 68,
+            "function_words": 614,
+            "aligned_equality": 0.110749,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2262037,
+            "target_file_offset": 34858,
+            "anchor_votes": 9,
+            "equal_words": 77,
+            "function_words": 614,
+            "aligned_equality": 0.125407,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 2262892,
+            "target_file_offset": 36568,
+            "anchor_votes": 37,
+            "equal_words": 243,
+            "function_words": 623,
+            "aligned_equality": 0.390048,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2262895,
+            "target_file_offset": 36574,
+            "anchor_votes": 23,
+            "equal_words": 141,
+            "function_words": 623,
+            "aligned_equality": 0.226324,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2262888,
+            "target_file_offset": 36560,
+            "anchor_votes": 19,
+            "equal_words": 80,
+            "function_words": 623,
+            "aligned_equality": 0.128411,
+            "longest_equal_run_words": 12
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 2263518,
+            "target_file_offset": 37820,
+            "anchor_votes": 19,
+            "equal_words": 66,
+            "function_words": 272,
+            "aligned_equality": 0.242647,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2263520,
+            "target_file_offset": 37824,
+            "anchor_votes": 13,
+            "equal_words": 119,
+            "function_words": 272,
+            "aligned_equality": 0.4375,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2262915,
+            "target_file_offset": 36614,
+            "anchor_votes": 6,
+            "equal_words": 55,
+            "function_words": 272,
+            "aligned_equality": 0.202206,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 2265969,
+            "target_file_offset": 42722,
+            "anchor_votes": 1,
+            "equal_words": 12,
+            "function_words": 117,
+            "aligned_equality": 0.102564,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 2266887,
+            "target_file_offset": 44558,
+            "anchor_votes": 4,
+            "equal_words": 22,
+            "function_words": 305,
+            "aligned_equality": 0.072131,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2268905,
+            "target_file_offset": 48594,
+            "anchor_votes": 1,
+            "equal_words": 25,
+            "function_words": 305,
+            "aligned_equality": 0.081967,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 2261649,
+            "target_file_offset": 34082,
+            "anchor_votes": 1,
+            "equal_words": 10,
+            "function_words": 305,
+            "aligned_equality": 0.032787,
+            "longest_equal_run_words": 6
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/58-115800-000-030_V020.gam",
+        "name": "58-115800-000-030_V020.gam",
+        "sha256": "e53b6c0428252420d1bf1a7e8fd7e1cd8c475d8aab8f9ece0446eb625ba408d5",
+        "runtime_base": 2244608,
+        "body_load": 2246656,
+        "entry": 2272711
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 2262980,
+            "target_file_offset": 36744,
+            "anchor_votes": 27,
+            "equal_words": 152,
+            "function_words": 464,
+            "aligned_equality": 0.327586,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 2263003,
+            "target_file_offset": 36790,
+            "anchor_votes": 16,
+            "equal_words": 57,
+            "function_words": 464,
+            "aligned_equality": 0.122845,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2263005,
+            "target_file_offset": 36794,
+            "anchor_votes": 12,
+            "equal_words": 50,
+            "function_words": 464,
+            "aligned_equality": 0.107759,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 2263660,
+            "target_file_offset": 38104,
+            "anchor_votes": 18,
+            "equal_words": 67,
+            "function_words": 614,
+            "aligned_equality": 0.109121,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2263667,
+            "target_file_offset": 38118,
+            "anchor_votes": 16,
+            "equal_words": 68,
+            "function_words": 614,
+            "aligned_equality": 0.110749,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2263729,
+            "target_file_offset": 38242,
+            "anchor_votes": 9,
+            "equal_words": 77,
+            "function_words": 614,
+            "aligned_equality": 0.125407,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 2264584,
+            "target_file_offset": 39952,
+            "anchor_votes": 37,
+            "equal_words": 243,
+            "function_words": 623,
+            "aligned_equality": 0.390048,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2264587,
+            "target_file_offset": 39958,
+            "anchor_votes": 23,
+            "equal_words": 141,
+            "function_words": 623,
+            "aligned_equality": 0.226324,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2264580,
+            "target_file_offset": 39944,
+            "anchor_votes": 19,
+            "equal_words": 80,
+            "function_words": 623,
+            "aligned_equality": 0.128411,
+            "longest_equal_run_words": 12
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 2265210,
+            "target_file_offset": 41204,
+            "anchor_votes": 19,
+            "equal_words": 66,
+            "function_words": 272,
+            "aligned_equality": 0.242647,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2265212,
+            "target_file_offset": 41208,
+            "anchor_votes": 13,
+            "equal_words": 119,
+            "function_words": 272,
+            "aligned_equality": 0.4375,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2264607,
+            "target_file_offset": 39998,
+            "anchor_votes": 6,
+            "equal_words": 55,
+            "function_words": 272,
+            "aligned_equality": 0.202206,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 2268657,
+            "target_file_offset": 48098,
+            "anchor_votes": 1,
+            "equal_words": 12,
+            "function_words": 117,
+            "aligned_equality": 0.102564,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 2250657,
+            "target_file_offset": 12098,
+            "anchor_votes": 4,
+            "equal_words": 14,
+            "function_words": 305,
+            "aligned_equality": 0.045902,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2250287,
+            "target_file_offset": 11358,
+            "anchor_votes": 4,
+            "equal_words": 11,
+            "function_words": 305,
+            "aligned_equality": 0.036066,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2252050,
+            "target_file_offset": 14884,
+            "anchor_votes": 4,
+            "equal_words": 11,
+            "function_words": 305,
+            "aligned_equality": 0.036066,
+            "longest_equal_run_words": 9
+          }
+        ]
+      }
+    },
+    {
+      "image": {
+        "path": "samples/58-115800-000-031_V010.gam",
+        "name": "58-115800-000-031_V010.gam",
+        "sha256": "7aee23a9b5c804e35a7650d22205b6f7e3ff65f92eba8fd2d32d776617d33c54",
+        "runtime_base": 2244608,
+        "body_load": 2246656,
+        "entry": 2283659
+      },
+      "matches": {
+        "system_controls_init": [
+          {
+            "target_runtime_address": 2270661,
+            "target_file_offset": 52106,
+            "anchor_votes": 24,
+            "equal_words": 149,
+            "function_words": 464,
+            "aligned_equality": 0.321121,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 2270655,
+            "target_file_offset": 52094,
+            "anchor_votes": 16,
+            "equal_words": 53,
+            "function_words": 464,
+            "aligned_equality": 0.114224,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2270657,
+            "target_file_offset": 52098,
+            "anchor_votes": 12,
+            "equal_words": 50,
+            "function_words": 464,
+            "aligned_equality": 0.107759,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "system_controls_poll": [
+          {
+            "target_runtime_address": 2271341,
+            "target_file_offset": 53466,
+            "anchor_votes": 18,
+            "equal_words": 67,
+            "function_words": 614,
+            "aligned_equality": 0.109121,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2271348,
+            "target_file_offset": 53480,
+            "anchor_votes": 16,
+            "equal_words": 68,
+            "function_words": 614,
+            "aligned_equality": 0.110749,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 2271410,
+            "target_file_offset": 53604,
+            "anchor_votes": 9,
+            "equal_words": 77,
+            "function_words": 614,
+            "aligned_equality": 0.125407,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "handle_volume_keys": [
+          {
+            "target_runtime_address": 2272265,
+            "target_file_offset": 55314,
+            "anchor_votes": 37,
+            "equal_words": 243,
+            "function_words": 623,
+            "aligned_equality": 0.390048,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2272268,
+            "target_file_offset": 55320,
+            "anchor_votes": 23,
+            "equal_words": 141,
+            "function_words": 623,
+            "aligned_equality": 0.226324,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2272261,
+            "target_file_offset": 55306,
+            "anchor_votes": 19,
+            "equal_words": 80,
+            "function_words": 623,
+            "aligned_equality": 0.128411,
+            "longest_equal_run_words": 12
+          }
+        ],
+        "handle_brightness_key": [
+          {
+            "target_runtime_address": 2272891,
+            "target_file_offset": 56566,
+            "anchor_votes": 19,
+            "equal_words": 66,
+            "function_words": 272,
+            "aligned_equality": 0.242647,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2272893,
+            "target_file_offset": 56570,
+            "anchor_votes": 13,
+            "equal_words": 119,
+            "function_words": 272,
+            "aligned_equality": 0.4375,
+            "longest_equal_run_words": 12
+          },
+          {
+            "target_runtime_address": 2272288,
+            "target_file_offset": 55360,
+            "anchor_votes": 6,
+            "equal_words": 55,
+            "function_words": 272,
+            "aligned_equality": 0.202206,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "runtime_init": [
+          {
+            "target_runtime_address": 2273149,
+            "target_file_offset": 57082,
+            "anchor_votes": 1,
+            "equal_words": 12,
+            "function_words": 117,
+            "aligned_equality": 0.102564,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "update_poweroff_sequence": [
+          {
+            "target_runtime_address": 2274499,
+            "target_file_offset": 59782,
+            "anchor_votes": 4,
+            "equal_words": 22,
+            "function_words": 305,
+            "aligned_equality": 0.072131,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2250243,
+            "target_file_offset": 11270,
+            "anchor_votes": 4,
+            "equal_words": 20,
+            "function_words": 305,
+            "aligned_equality": 0.065574,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 2248711,
+            "target_file_offset": 8206,
+            "anchor_votes": 4,
+            "equal_words": 14,
+            "function_words": 305,
+            "aligned_equality": 0.045902,
+            "longest_equal_run_words": 10
+          }
+        ]
+      }
+    }
+  ]
+}

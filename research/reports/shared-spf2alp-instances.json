@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "classification": "exact instances of the shared SPF2ALP sound-patch bank",
+  "g1": {
+    "name": "BUNDLE_G1_135800G1.MBA",
+    "file_offset": 451692,
+    "byte_length": 13496,
+    "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c"
+  },
+  "instances": [
+    {
+      "name": "BUNDLE_G2_135800G2.MBA",
+      "title": "MGB_G2",
+      "file_offset": 270424,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "BUNDLE_G3_135800G3.MBA",
+      "title": "MGB_G3",
+      "file_offset": 2498002,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "BUNDLE_G4_135800G4.MBA",
+      "title": "MGB_G4",
+      "file_offset": 1437422,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "BUNDLE_SY_135800SY.MBA",
+      "title": "MGB_SYS",
+      "file_offset": 403348,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "BUNDLE_TM_135800TM.MBA",
+      "title": "MGB_TM",
+      "file_offset": 43942,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "USENG_EBOOK.MBA",
+      "title": "MGB_EBK",
+      "file_offset": 105078,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "USENG_MM.MBA",
+      "title": "Main Meun",
+      "file_offset": 96056,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "USENG_UB.MBA",
+      "title": "USB APP",
+      "file_offset": 17946,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "58-115800-000-002_V020.gam",
+      "title": "Wild Cards",
+      "file_offset": 77540,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "58-115800-000-029_V020.gam",
+      "title": "Keyboard Jam",
+      "file_offset": 59580,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "58-115800-000-030_V020.gam",
+      "title": "DJ Beats",
+      "file_offset": 57168,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    },
+    {
+      "name": "58-115800-000-031_V010.gam",
+      "title": "Monkey Disco",
+      "file_offset": 131562,
+      "byte_length": 13496,
+      "sha256": "4942eaad03a9e63410e46111328d878d727a56a8d21acbf82074d6282acdf92c",
+      "identical_to_g1": true,
+      "primary_groups": 71,
+      "secondary_groups": 34,
+      "zones": 158
+    }
+  ],
+  "not_exact_instances": [
+    {
+      "name": "BUNDLE_LD_135800LD.MBA",
+      "title": "Loading App"
+    }
+  ]
+}

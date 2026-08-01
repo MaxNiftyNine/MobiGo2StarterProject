@@ -1,161 +1,130 @@
 # THIS IS AI SLOP LIKE EVERYTHING I DO, but it works
 im sorry, not sorry.
-anyways so that means that this project is not meant for humans, its meant for you to say something crazy to codex like "make me minecraft for mobigo" and it just does it without any work you lazy shit
 
+# MobiGo 2 SDK Starter
 
-For testing on a real MobiGo 2, use the included
-[USB tools](tools/mobigo_usb/README.md).
+A complete C homebrew starter for the VTech MobiGo 2. The project builds the
+editable application in [`app/main.c`](app/main.c) against a clean-room SDK,
+creates a complete MBA without a donor game, installs it in a copied NAND, and
+runs it in Emulator2.
 
-# MobiGo 2 starter project
+The emulator source already contains the recovered SPU beat and channel
+behavior required by SDK music. There is one emulator source tree and one
+normal test path—no runtime patch step.
 
-This folder is a self-contained starting point for a boot-time MobiGo 2
-application. The default program is the color-cycle demo. One command builds it
-with the Generalplus u'nSP compiler, generates a complete SY MBA from source,
-creates a separate edited NAND, and boots Emulator2.
-The firmware invokes SY automatically, so no Hamster Highway or Easy menu
-presses are needed. The emulator window opens immediately after the SY handoff.
+## Quick start
 
-## Start on macOS
-
-Install Wine and Python 3, then double-click `build_and_run.command` or run:
+macOS requires Python 3 and Wine:
 
 ```sh
-./build_and_run.command --no-audio
+./scripts/build_and_run.command --no-audio
 ```
 
-With Homebrew, Wine can be installed with:
-
-```sh
-brew install --cask wine-stable
-```
-
-The bundled Generalplus Windows compiler, assembler, and linker run locally
-through Wine. Set `MOBIGO_WINE` only if the Wine executable is not named
-`wine`; set `WINEPREFIX` if you keep a non-default Wine prefix.
-The large NAND dump is stored as GitHub-safe parts; the script reassembles and
-verifies it automatically before use. To use emulator tools directly, first run
-`python3 tools/assemble_nand.py`.
-Before launching, the script asks whether to emulate host audio. Choose `y` for
-audio playback, or press Enter to keep it off for faster execution.
-Pass `--audio` or `--no-audio` to skip that question.
-
-An Apple Silicon emulator and its SDL2 runtime are included. On a different Mac
-architecture, `tools/build_emulator_macos.sh` rebuilds from the included source
-when CMake, pkg-config, and SDL2 are installed.
-
-## Start on Windows
-
-Right-click `build_and_run.ps1` and choose **Run with PowerShell**, or run:
+Windows requires Python 3:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\build_and_run.ps1 -NoAudio
+.\scripts\build_and_run.ps1 -NoAudio
 ```
 
-You can also double-click `build_and_run.bat`.
-
-The script uses the bundled compiler first, then `UNSP_IDE`, then the standard
-Generalplus u'nSP IDE 4.1.1 installation path. Python 3 is required.
-It automatically reassembles the split NAND before use. For direct emulator or
-NAND-tool use, run `python tools\assemble_nand.py` first.
-Before launching, it asks whether to emulate host audio; press Enter to leave it
-off for faster execution. Pass `-Audio` or `-NoAudio` to skip that question.
-
-## Edit the program
-
-Start with:
+Both commands generate:
 
 ```text
-src/main.c
+build/MobiGo2Starter.MBA
+build/nand.edited.bin
 ```
 
-The starter deliberately avoids initialized global/static data because the SY
-entry jumps directly into `main()` without normal C runtime initialization.
-Keep inherited IRQ/FIQ enabled, service the watchdog, use the launcher-selected
-FBI/FBO buffers, and do not return from a resident application. Read
-`documents/documentation/CONFIRMED_HARDWARE_RULES.md` before replacing the
-demo loop.
+They never modify the source NAND in `vendor/firmware/`.
 
-Build products are written only under `build/`:
+## Develop a game
+
+Edit [`app/main.c`](app/main.c). The public SDK is in
+[`include/mobigo_sdk`](include/mobigo_sdk), its implementation is in `src/`,
+and focused working examples are in [`examples`](examples).
+
+Build without launching the emulator:
+
+```sh
+python3 tools/build/build_sdk_app.py app/main.c \
+  --output-dir build \
+  --name MobiGo2Starter \
+  --slot SY
+```
+
+Useful options include `--slot G1`, repeatable `--extra-source` for C or u'nSP
+assembly files,
+`--with-clean-font`, and custom `--menu-tile`/`--palette` data.
+
+Three complete G1 projects ported from the original toolkit are maintained in
+[`examples`](examples): Color Cycle, the monochrome movie player, and MobiGo
+Celeste. Build all three with `make samples`.
+
+An MBA handoff does not run a conventional initialized-data C startup. Keep
+large immutable assets `const`, explicitly initialize mutable state, and do not
+return from a resident application. The starter demonstrates the safe pattern.
+
+## Test
+
+Fast host tests:
+
+```sh
+make test
+```
+
+Complete compiler, emulator, graphics, storage, input, and audio verification:
+
+```sh
+make release-check
+```
+
+The emulator itself is tested directly with:
+
+```sh
+tools/build/emulator_macos.sh --test
+```
+
+## Hardware and Ghidra
+
+USB installation and recovery guidance is in
+[`tools/usb/README.md`](tools/usb/README.md). Install the default SY build with:
+
+```sh
+./scripts/usb/install_mba.command --system build/MobiGo2Starter.MBA
+```
+
+For a guided real-console check of every supported SDK subsystem, build the
+[`examples/hardware_test_suite`](examples/hardware_test_suite) project or run
+`make hardware-suite`.
+
+The MBA/GAM Ghidra extension is in
+[`tools/ghidra/loader/MobiGoMbaLoader`](tools/ghidra/loader/MobiGoMbaLoader).
+Analysis helpers are kept separately in `tools/ghidra/scripts/`.
+
+## Documentation
+
+[Click Here for docs](https://maxniftynine.github.io/MobiGo2StarterProject/)
+
+The GitHub Pages source is [`docs`](docs), configured by `mkdocs.yml`. Locally:
+
+```sh
+python3 -m pip install -r docs/requirements.txt
+mkdocs serve
+```
+
+
+## Layout
 
 ```text
-app.bin
-MobiGo2Starter.MBA
-nand.edited.bin
+app/             editable starter application
+include/, src/   public SDK and implementation
+examples/        focused probes, a hardware suite, and complete sample projects
+tests/           firmware-free SDK and packaging tests
+emulator/        Emulator2 source, tests, web frontend, and platform binaries
+tools/           build, asset, NAND, USB, RE, verification, and Ghidra tools
+scripts/         user-facing macOS and Windows launchers
+docs/            published guides and technical references
+research/        RE notes, reports, archived material, and experimental probes
+vendor/          Generalplus tools/linker bodies and device firmware
 ```
 
-The original NAND under `firmware/` is a read-only input. The generated MBA is
-installed only into `build/nand.edited.bin`, and the source NAND is verified
-after installation.
-
-## Write to a real MobiGo 2 over USB
-
-After building, use `mobigo_install_mba.command` on macOS or
-`mobigo_install_mba.bat` on Windows. The interactive script asks for the MBA
-and whether to install it as G1, SY, or at root. The default build is linked
-for SY, so install it with:
-
-```sh
-./mobigo_install_mba.command --system build/MobiGo2Starter.MBA
-```
-
-Developer mode and storage have matching launchers. Setup, Windows
-dependencies, remote deletion, non-interactive flags, and recovery warnings are in the
-[MobiGo 2 USB tools README](tools/mobigo_usb/README.md).
-
-## Included material
-
-- `documents/documentation`: programmer guide, MBA development guide,
-  [MBA/GAM format specification](documents/documentation/mobigo_mba_format.md),
-  confirmed hardware rules, u'nSP 2.0 manual, GPL16250VA datasheet, and the
-  corrected full input matrix.
-- `ghidra/MobiGoMbaLoader`: source and installable ZIP for the MBA/GAM Ghidra
-  loader, including documented hardware-register labels.
-- `documents/samples`: color cycle, MobiPong, and Bad Apple sample projects.
-- `documents/api`: the experimental MobiGo 2 C/C++ abstraction layer.
-- `firmware`: internal ROM, SPI image, and US stitched NAND used by the
-  emulator.
-- `emulator`: Emulator2 source, tests, macOS binary, and Windows binary.
-- `compiler/windows`: the Generalplus compiler files required by the build.
-
-## Emulator controls
-
-Arrow keys are the large D-pad, Control is Primary, Escape is Exit, and F12
-closes the emulator. See
-`documents/documentation/INPUT_MATRIX.md` for every physical matrix cell,
-host binding, and scripted key name.
-
-## Safety
-
-The automation never edits `firmware/nand.us-stitched.bin`. It creates
-`build/nand.edited.bin`. Emulator success does not guarantee hardware success;
-keep verified recovery dumps and do not overwrite the only copy of a real
-device's NAND or SPI. SY is loaded during startup, so a broken SY replacement
-can prevent normal boot and may require recovery.
-
-## Validation performed on this template
-
-- macOS Wine compilation, from-scratch MBA generation, NAND installation, and
-  read-back: pass;
-- Windows-local compilation using the bundled compiler: pass;
-- Windows x64 emulator startup with the included DLLs: pass;
-- automatic SY boot into the resident color demo with no touch events: pass;
-- emulator audio, watchdog, and hardware-accuracy unit tests: 3/3 pass;
-
-## Browser build
-
-The emulator can also be compiled to WebAssembly and deployed as a static
-GitHub Pages site. Install and activate [Emscripten](https://emscripten.org/),
-then run:
-
-```sh
-./scripts/build-web.sh
-```
-
-The deployable site is written to `web/dist`. It includes the firmware as two
-files because GitHub Pages rejects individual files larger than 100 MiB. The
-included `.github/workflows/pages.yml` builds and deploys it automatically from
-the `main` branch after GitHub Pages is enabled for the repository.
-- all documented `--key-event` matrix names: parse and execute successfully.
-
-Generated files were removed after testing so the checked-in `build/` directory
-is clean.
+See [`docs/project-status.md`](docs/project-status.md) for exact evidence and
+known limitations. Read [`THIRD_PARTY.md`](THIRD_PARTY.md) before redistribution.

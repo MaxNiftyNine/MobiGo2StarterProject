@@ -1,0 +1,285 @@
+{
+  "schema": 1,
+  "tables": {
+    "volume_logical_to_master_gain": [
+      4,
+      14,
+      25,
+      35,
+      45,
+      55,
+      67,
+      79,
+      91,
+      105
+    ],
+    "brightness_logical_to_backlight": [
+      1,
+      5,
+      10,
+      15
+    ]
+  },
+  "images": [
+    {
+      "name": "BUNDLE_G1_135800G1.MBA",
+      "path": "samples/BUNDLE_G1_135800G1.MBA",
+      "sha256": "e2ae552854d5a9e91c7f66f88dcc867f61b777bf34b3e5887d98bb43cb2bdcf5",
+      "runtime_base": 819200,
+      "entry": 924245,
+      "volume_matches": [
+        {
+          "file_offset": 213516,
+          "runtime_word_address": 925958
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 213540,
+          "runtime_word_address": 925970
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "BUNDLE_G2_135800G2.MBA",
+      "path": "samples/BUNDLE_G2_135800G2.MBA",
+      "sha256": "4feee848636f8248c35546e4efa1818e19d40f959c9f69d538335660a544dd5c",
+      "runtime_base": 819200,
+      "entry": 851778,
+      "volume_matches": [
+        {
+          "file_offset": 188524,
+          "runtime_word_address": 913462
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 188548,
+          "runtime_word_address": 913474
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "BUNDLE_G3_135800G3.MBA",
+      "path": "samples/BUNDLE_G3_135800G3.MBA",
+      "sha256": "d1247344a34b0738076feed6547b533509780c4e73de8eb1347f8ecd34ae5b33",
+      "runtime_base": 819200,
+      "entry": 885829,
+      "volume_matches": [
+        {
+          "file_offset": 134818,
+          "runtime_word_address": 886609
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 134842,
+          "runtime_word_address": 886621
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "BUNDLE_G4_135800G4.MBA",
+      "path": "samples/BUNDLE_G4_135800G4.MBA",
+      "sha256": "7d0b55ee02e296cda08ea4cc9d74c97371e262cec9dda0a17343c41e71a8ef07",
+      "runtime_base": 819200,
+      "entry": 885730,
+      "volume_matches": [
+        {
+          "file_offset": 135408,
+          "runtime_word_address": 886904
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 135432,
+          "runtime_word_address": 886916
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "BUNDLE_LD_135800LD.MBA",
+      "path": "samples/BUNDLE_LD_135800LD.MBA",
+      "sha256": "02e15903d2ed3eee1006e99459d8690c83d30c499dee60a916ccca5d41a2f50e",
+      "runtime_base": 819200,
+      "entry": 821402,
+      "volume_matches": [],
+      "brightness_matches": [],
+      "tables_adjacent": false
+    },
+    {
+      "name": "BUNDLE_SY_135800SY.MBA",
+      "path": "samples/BUNDLE_SY_135800SY.MBA",
+      "sha256": "233eb01522c2654c48bf579539661aa4892f560c391100c98bd931edf2beb67a",
+      "runtime_base": 819200,
+      "entry": 916509,
+      "volume_matches": [
+        {
+          "file_offset": 197776,
+          "runtime_word_address": 918088
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 197800,
+          "runtime_word_address": 918100
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "BUNDLE_TM_135800TM.MBA",
+      "path": "samples/BUNDLE_TM_135800TM.MBA",
+      "sha256": "9d22007875c00793b84ff3a55b4c3bfdf859b61d365107b87344fab06c3739b4",
+      "runtime_base": 819200,
+      "entry": 827562,
+      "volume_matches": [],
+      "brightness_matches": [],
+      "tables_adjacent": false
+    },
+    {
+      "name": "USENG_EBOOK.MBA",
+      "path": "samples/USENG_EBOOK.MBA",
+      "sha256": "91e132e85fcbbe38d2886c98844da5cddf731542492ee5b2fb2881cd3835810f",
+      "runtime_base": 819200,
+      "entry": 870664,
+      "volume_matches": [
+        {
+          "file_offset": 104970,
+          "runtime_word_address": 871685
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 104994,
+          "runtime_word_address": 871697
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "USENG_MM.MBA",
+      "path": "samples/USENG_MM.MBA",
+      "sha256": "78320de49b0de0c8a88999118d593fb565600f2ad5845df77a07a92734db128e",
+      "runtime_base": 2244608,
+      "entry": 2283685,
+      "volume_matches": [
+        {
+          "file_offset": 80178,
+          "runtime_word_address": 2284697
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 80202,
+          "runtime_word_address": 2284709
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "USENG_UB.MBA",
+      "path": "samples/USENG_UB.MBA",
+      "sha256": "f95754dc9f558ee1f019c6d5c94537d4acfae63010a5ed42e4be723cf426dcd4",
+      "runtime_base": 2244608,
+      "entry": 2253409,
+      "volume_matches": [
+        {
+          "file_offset": 17876,
+          "runtime_word_address": 2253546
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 17900,
+          "runtime_word_address": 2253558
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "58-115800-000-002_V020.gam",
+      "path": "samples/58-115800-000-002_V020.gam",
+      "sha256": "7fd742a13ae6ca122cf0b7ab01c8900a25a5b56cabb2d1f36c0d480104fc4eb0",
+      "runtime_base": 2244608,
+      "entry": 2282784,
+      "volume_matches": [
+        {
+          "file_offset": 77460,
+          "runtime_word_address": 2283338
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 77484,
+          "runtime_word_address": 2283350
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "58-115800-000-029_V020.gam",
+      "path": "samples/58-115800-000-029_V020.gam",
+      "sha256": "26a6219554597a872d0af60c87aef67652ec49724717c05259fadae9ab82d41d",
+      "runtime_base": 2244608,
+      "entry": 2273338,
+      "volume_matches": [
+        {
+          "file_offset": 59524,
+          "runtime_word_address": 2274370
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 59548,
+          "runtime_word_address": 2274382
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "58-115800-000-030_V020.gam",
+      "path": "samples/58-115800-000-030_V020.gam",
+      "sha256": "e53b6c0428252420d1bf1a7e8fd7e1cd8c475d8aab8f9ece0446eb625ba408d5",
+      "runtime_base": 2244608,
+      "entry": 2272711,
+      "volume_matches": [
+        {
+          "file_offset": 57112,
+          "runtime_word_address": 2273164
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 57136,
+          "runtime_word_address": 2273176
+        }
+      ],
+      "tables_adjacent": true
+    },
+    {
+      "name": "58-115800-000-031_V010.gam",
+      "path": "samples/58-115800-000-031_V010.gam",
+      "sha256": "7aee23a9b5c804e35a7650d22205b6f7e3ff65f92eba8fd2d32d776617d33c54",
+      "runtime_base": 2244608,
+      "entry": 2283659,
+      "volume_matches": [
+        {
+          "file_offset": 80252,
+          "runtime_word_address": 2284734
+        }
+      ],
+      "brightness_matches": [
+        {
+          "file_offset": 80276,
+          "runtime_word_address": 2284746
+        }
+      ],
+      "tables_adjacent": true
+    }
+  ]
+}

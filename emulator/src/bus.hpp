@@ -1,5 +1,6 @@
 #pragma once
 
+#include "accelerometer.hpp"
 #include "devices.hpp"
 
 namespace mobigo {
@@ -18,13 +19,16 @@ struct Bus {
     std::array<uint16_t, 0x1000> palette_ram{};
     std::array<uint16_t, 0x800> sprite_ram{};
     std::array<uint16_t, 0x400> sound_ram{};
+    std::array<uint32_t, 32> spu_channel_start_sequence{};
     std::vector<uint16_t> internal_rom;
     uint32_t internal_rom_base = 0x008000;
     bool internal_rom_shadow_low = true;
     bool internal_rom_fetch_mirror64 = true;
     SpiNorDevice spi;
     NandDevice nand;
+    MotionAccelerometer accelerometer;
     uint64_t cycles = 0;
+    uint64_t clock_change_generation = 0;
     uint32_t pc_for_log = 0;
     std::unordered_set<uint32_t> logged_unknown_reads;
     std::unordered_set<uint32_t> logged_unknown_writes;
@@ -79,21 +83,26 @@ struct Bus {
     uint64_t ppu_go_due_cycles = 0;
     bool ppu_framebuffer_valid = false;
     uint32_t last_video_scanline = UINT32_MAX;
+    uint64_t next_video_edge_cycles = 0;
     uint64_t last_periodic_update_cycles = UINT64_MAX;
-    uint64_t last_timer_cycles = 0;
+    uint64_t next_periodic_event_cycles = 0;
+    uint64_t last_timer_cycles = UINT64_MAX;
     // Fractional source ticks are kept as a numerator whose denominator is
     // periodic_clock_hz. This preserves the non-integral 32.768 kHz-derived
     // periods at the normal 48 MHz system clock.
     std::array<uint64_t, 4> timer_phase_accum{};
     bool timer_any_enabled = false;
-    uint64_t last_timebase_cycles = 0;
+    uint64_t last_timebase_cycles = UINT64_MAX;
     std::array<uint64_t, 3> timebase_phase_accum{};
-    uint64_t last_scheduler_cycles = 0;
+    uint64_t last_scheduler_cycles = UINT64_MAX;
     uint64_t scheduler_phase_accum = 0;
-    uint64_t last_rtc_cycles = 0;
+    uint64_t last_rtc_cycles = UINT64_MAX;
     uint64_t rtc_phase_accum = 0;
+    uint64_t last_spu_beat_cycles = UINT64_MAX;
+    uint64_t spu_beat_phase_accum = 0;
+    uint64_t spu_beat_elapsed_ticks = 0;
     uint64_t periodic_clock_hz = 0;
-    uint64_t usb_device_enabled_cycle = 0;
+    uint64_t usb_device_enabled_cycle = UINT64_MAX;
     bool usb_suspend_latched = false;
     bool usb_host_available = false;
     bool usb_host_connected = false;
@@ -419,6 +428,10 @@ struct Bus {
         else matrix_pressed[row] &= uint16_t(~bit);
     }
 
+    void set_motion_direction(unsigned direction, bool pressed) {
+        accelerometer.set_direction(direction, pressed);
+    }
+
     void set_touch(bool pressed, uint16_t adc_x, uint16_t adc_y) {
         touch_adc_x = adc_x & 0x0fff;
         touch_adc_y = adc_y & 0x0fff;
@@ -434,6 +447,27 @@ struct Bus {
                                      mmio[0x7883 - kMmioBase] & 0x0400;
         if (touch_pressed && driven_high) return external_input | 0x0100;
         return external_input & uint16_t(~0x0100);
+    }
+
+    uint16_t motion_adjusted_gpio_e(uint16_t external_input) const {
+        // IOE6/7 have board pull-ups and form the accelerometer's I2C clock
+        // and data lines. The slave can only pull SDA low.
+        uint16_t input = external_input | 0x00c0;
+        if (accelerometer.sda_is_low()) input &= uint16_t(~0x0080);
+        return input;
+    }
+
+    bool gpio_e_host_line_high(uint16_t bit) const {
+        // The retail bit-banged driver changes IOE_Buffer directly. IOE_Data
+        // is the pad sample register and is not rewritten for each edge.
+        const uint16_t buffer = mmio[0x7881 - kMmioBase];
+        return (buffer & bit) != 0;
+    }
+
+    void update_accelerometer_i2c() {
+        const bool scl = gpio_e_host_line_high(0x0040);
+        const bool sda = gpio_e_host_line_high(0x0080);
+        accelerometer.observe(scl, sda);
     }
 
     static uint32_t adc_conversion_cycles(uint16_t setup) {
@@ -533,6 +567,7 @@ struct Bus {
         tx3_transform_ram.fill(0);
         sprite_ram.fill(0);
         sound_ram.fill(0);
+        spu_channel_start_sequence.fill(0);
         apply_reset_defaults();
 
         nand.command = 0;
@@ -553,18 +588,23 @@ struct Bus {
 
         cycles = 0;
         last_video_scanline = UINT32_MAX;
+        next_video_edge_cycles = 0;
         last_periodic_update_cycles = UINT64_MAX;
-        last_timer_cycles = 0;
+        next_periodic_event_cycles = 0;
+        last_timer_cycles = UINT64_MAX;
         timer_phase_accum.fill(0);
         timer_any_enabled = false;
-        last_timebase_cycles = 0;
+        last_timebase_cycles = UINT64_MAX;
         timebase_phase_accum.fill(0);
-        last_scheduler_cycles = 0;
+        last_scheduler_cycles = UINT64_MAX;
         scheduler_phase_accum = 0;
-        last_rtc_cycles = 0;
+        last_rtc_cycles = UINT64_MAX;
         rtc_phase_accum = 0;
+        last_spu_beat_cycles = UINT64_MAX;
+        spu_beat_phase_accum = 0;
+        spu_beat_elapsed_ticks = 0;
         periodic_clock_hz = 0;
-        usb_device_enabled_cycle = 0;
+        usb_device_enabled_cycle = UINT64_MAX;
         usb_suspend_latched = false;
         usb_dma_programmed_bytes = 0;
         usb_dma_transferred_bytes = 0;
@@ -583,6 +623,7 @@ struct Bus {
         adc_manual_due_cycles = 0;
         adc_manual_channel = 0;
         adc_manual_data = 0;
+        accelerometer.reset_bus();
         logged_unknown_reads.clear();
         logged_unknown_writes.clear();
         dma_write_log_count = 0;
@@ -876,7 +917,11 @@ struct Bus {
     void write(uint32_t addr, uint16_t value) {
         addr &= kAddrMask;
         if (addr >= 0x7c00 && addr <= 0x7fff) {
-            sound_ram[addr - 0x7c00] = value;
+            const uint32_t sound_offset = addr - 0x7c00;
+            sound_ram[sound_offset] = value;
+            if (sound_offset < 0x200 && (sound_offset & 0x0f) <= 1) {
+                ++spu_channel_start_sequence[sound_offset >> 4];
+            }
             if (g_log) log_a6fa_bus("WRITE", addr, value);
             return;
         }
@@ -1092,19 +1137,46 @@ struct Bus {
     }
 
     void write_spu_control(uint32_t addr, uint16_t value) {
-        uint16_t &reg = mmio[addr - kMmioBase];
         const uint32_t offset = addr & 0x1f;
+        if (offset == 0x04 || offset == 0x05) update_periodic_events();
+        uint16_t &reg = mmio[addr - kMmioBase];
         // Per-channel FIQ status, stop status, and envelope IRQ status are
         // hardware latches acknowledged by writing one. Channel status is
         // read-only. The low/high channel banks share the same layout.
-        if (offset == 0x03 || offset == 0x0b || offset == 0x17) {
+        if (offset == 0x00) {
+            const uint16_t rising = uint16_t(value & ~reg);
+            const unsigned bank = (addr >= 0x7ba0) ? 1u : 0u;
+            reg = value;
+            for (unsigned bit = 0; bit < 16; ++bit) {
+                if (rising & uint16_t(1u << bit)) {
+                    ++spu_channel_start_sequence[bank * 16 + bit];
+                }
+            }
+        } else if (offset == 0x0b) {
+            const unsigned bank = (addr >= 0x7ba0) ? 1u : 0u;
+            const uint32_t enable_addr = bank ? 0x7ba0 : 0x7b80;
+            const uint32_t status_addr = bank ? 0x7baf : 0x7b8f;
+            // P_SPU_CH_STOP_STATUS is both the stop command and a W1C latch.
+            // The resident resets all voices by writing ffff to both banks.
+            reg &= uint16_t(~value);
+            mmio[enable_addr - kMmioBase] &= uint16_t(~value);
+            mmio[status_addr - kMmioBase] &= uint16_t(~value);
+        } else if (offset == 0x03 || offset == 0x17) {
             reg &= uint16_t(~value);
         } else if (offset == 0x0f) {
             return;
+        } else if (offset == 0x04) {
+            reg = value & 0x07ff;
+            last_spu_beat_cycles = cycles;
+            spu_beat_phase_accum = 0;
+            spu_beat_elapsed_ticks = 0;
         } else if (offset == 0x05) {
             const uint16_t status = reg & 0x4000;
             reg = uint16_t((value & ~uint16_t(0x4000)) |
                            (status & ~value));
+            last_spu_beat_cycles = cycles;
+            spu_beat_phase_accum = 0;
+            spu_beat_elapsed_ticks = 0;
         } else {
             reg = value;
         }
@@ -1132,6 +1204,54 @@ struct Bus {
 
     uint32_t tft_scanline() const {
         return uint32_t((cycles / tft_cycles_per_line()) % tft_total_lines());
+    }
+
+    void schedule_next_video_edge() {
+        const uint64_t cycles_per_line = tft_cycles_per_line();
+        const uint64_t total_lines = tft_total_lines();
+        const uint64_t frame_cycles = cycles_per_line * total_lines;
+        const uint64_t frame_position = cycles % frame_cycles;
+        const uint64_t compare_position =
+            uint64_t(mmio[0x7054 - kMmioBase] % total_lines) * cycles_per_line;
+        const uint64_t to_wrap = frame_cycles - frame_position;
+        uint64_t to_compare = compare_position > frame_position
+            ? compare_position - frame_position
+            : frame_cycles - frame_position + compare_position;
+        if (to_compare == 0) to_compare = frame_cycles;
+        next_video_edge_cycles = cycles + std::min(to_wrap, to_compare);
+    }
+
+    void update_video_edges() {
+        if (next_video_edge_cycles != 0 && cycles < next_video_edge_cycles) return;
+
+        const uint64_t cycles_per_line = tft_cycles_per_line();
+        const uint64_t total_lines = tft_total_lines();
+        const uint64_t frame_cycles = cycles_per_line * total_lines;
+        const uint64_t frame_position = cycles % frame_cycles;
+        const uint32_t compare_line = mmio[0x7054 - kMmioBase] % total_lines;
+        const uint64_t compare_position = uint64_t(compare_line) * cycles_per_line;
+        const bool compare_is_latest = compare_line != 0 && frame_position >= compare_position;
+
+        last_video_scanline = uint32_t(frame_position / cycles_per_line);
+        if (compare_is_latest) {
+            // The target observes vertical-blank and frame-end together at
+            // the programmed comparison line. Both are sticky until the next
+            // frame wrap or a W1C acknowledgement.
+            mmio[0x7063 - kMmioBase] |= 0x0801;
+            mmio[0x705a - kMmioBase] |= 0x0002;
+        } else {
+            mmio[0x7063 - kMmioBase] &= ~uint16_t(0x0801);
+        }
+        if (g_log && cycles >= 0x30000000ull && late_video_edge_log_count++ < 256) {
+            g_log << "VIDEO STATUS EDGE "
+                  << (compare_is_latest ? "vblank-frame-end" : "frame-wrap")
+                  << " pc=0x" << std::hex << pc_for_log
+                  << " enable=0x" << mmio[0x7062 - kMmioBase]
+                  << " status=0x" << mmio[0x7063 - kMmioBase]
+                  << " scanline=0x" << last_video_scanline
+                  << " cycles=0x" << cycles << std::dec << "\n";
+        }
+        schedule_next_video_edge();
     }
 
     uint16_t read_mmio(uint32_t addr) {
@@ -1261,7 +1381,8 @@ struct Bus {
             }
         case 0x7880:
             {
-                const uint16_t input = touch_adjusted_gpio_e(gpio_e_input);
+                const uint16_t input = motion_adjusted_gpio_e(
+                    touch_adjusted_gpio_e(gpio_e_input));
                 const uint16_t value = gpio_pad_read(addr, input);
                 log_gpio_read(addr, value, input);
                 return value;
@@ -1384,9 +1505,12 @@ struct Bus {
             }
             return int_status2_value();
         case 0x78a2:
+            return mmio[addr - kMmioBase];
         case 0x78a3:
+            return int_status3_value();
         case 0x78a4:
         case 0x78a5:
+        case 0x78a6:
             return mmio[addr - kMmioBase];
         case 0x780f:
             // The documented active states follow P_Clock_Ctrl: C32K selects
@@ -1603,6 +1727,17 @@ struct Bus {
         return ticks;
     }
 
+    static uint64_t cycles_until_source_ticks(uint64_t ticks, uint64_t phase,
+                                               uint64_t source_hz,
+                                               uint64_t clock_hz) {
+        if (ticks == 0 || source_hz == 0) return UINT64_MAX;
+        const unsigned __int128 target =
+            static_cast<unsigned __int128>(ticks) * clock_hz;
+        if (target <= phase) return 1;
+        const unsigned __int128 remaining = target - phase;
+        return uint64_t((remaining + source_hz - 1) / source_hz);
+    }
+
     uint64_t watchdog_period_cycles(uint16_t ctrl) const {
         const uint64_t clock_hz = system_clock_hz();
         switch (ctrl & 0x0007) {
@@ -1756,7 +1891,78 @@ struct Bus {
             (mmio[0x78d8 - kMmioBase] & 0x2000);
     }
 
-    void update_periodic_events() {
+    void schedule_next_periodic_event(uint64_t clock_hz) {
+        uint64_t next = next_video_edge_cycles;
+        const auto consider_delta = [&](uint64_t delta) {
+            if (delta == UINT64_MAX) return;
+            const uint64_t due = cycles + std::max<uint64_t>(1, delta);
+            next = next == 0 ? due : std::min(next, due);
+        };
+        const auto consider_absolute = [&](uint64_t due) {
+            if (due == 0 || due <= cycles) return;
+            next = next == 0 ? due : std::min(next, due);
+        };
+
+        if (adc_manual_pending) consider_absolute(adc_manual_due_cycles);
+        if (watchdog_enabled) consider_absolute(watchdog_expire_cycles);
+        if (usb_device_enabled_cycle != UINT64_MAX &&
+            !usb_host_connected && !usb_suspend_latched)
+            consider_absolute(usb_device_enabled_cycle + 4096);
+
+        const uint16_t spu_counter = mmio[0x7b85 - kMmioBase];
+        const uint64_t spu_base = mmio[0x7b84 - kMmioBase] & 0x07ff;
+        if ((spu_counter & 0xc000) == 0x8000 && spu_base != 0) {
+            const uint64_t count = (spu_counter & 0x3fff) ?
+                (spu_counter & 0x3fff) : 1;
+            const uint64_t required = spu_base * count * 4;
+            if (spu_beat_elapsed_ticks < required) {
+                consider_delta(cycles_until_source_ticks(
+                    required - spu_beat_elapsed_ticks, spu_beat_phase_accum,
+                    281250, clock_hz));
+            }
+        }
+
+        static constexpr std::array<uint32_t, 4> ctrl_addrs{
+            0x78c0, 0x78c8, 0x78d0, 0x78d8};
+        static constexpr std::array<uint32_t, 4> upcount_addrs{
+            0x78c4, 0x78cc, 0x78d4, 0x78dc};
+        for (uint32_t i = 0; i < ctrl_addrs.size(); ++i) {
+            const uint16_t ctrl = mmio[ctrl_addrs[i] - kMmioBase];
+            if ((ctrl & 0xa000) != 0x2000) continue;
+            const uint64_t source_hz = timer_effective_hz(ctrl, clock_hz);
+            const uint64_t remaining =
+                0x10000ull - mmio[upcount_addrs[i] - kMmioBase];
+            consider_delta(cycles_until_source_ticks(
+                remaining, timer_phase_accum[i], source_hz, clock_hz));
+        }
+
+        static constexpr std::array<std::array<uint16_t, 4>, 3> timebase_hz{{
+            {{0, 1, 2, 4}}, {{8, 16, 32, 64}}, {{128, 256, 512, 1024}}
+        }};
+        for (uint32_t i = 0; i < timebase_phase_accum.size(); ++i) {
+            const uint16_t ctrl = mmio[0x78b0 + i - kMmioBase];
+            if ((ctrl & 0xa000) != 0x2000) continue;
+            consider_delta(cycles_until_source_ticks(
+                1, timebase_phase_accum[i], timebase_hz[i][ctrl & 3], clock_hz));
+        }
+
+        const uint16_t rtc_ctrl = mmio[0x7934 - kMmioBase];
+        if (rtc_ctrl & 0x8000) {
+            consider_delta(cycles_until_source_ticks(
+                1, rtc_phase_accum, 1, clock_hz));
+        }
+        if ((rtc_ctrl & 0x0100) && !(mmio[0x7935 - kMmioBase] & 0x0100)) {
+            static constexpr std::array<uint32_t, 8> scheduler_hz{
+                16, 32, 64, 128, 256, 512, 1024, 2048};
+            consider_delta(cycles_until_source_ticks(
+                1, scheduler_phase_accum, scheduler_hz[rtc_ctrl & 7], clock_hz));
+        }
+        next_periodic_event_cycles = next;
+    }
+
+    void update_periodic_events(bool force = true) {
+        if (!force && next_periodic_event_cycles != 0 &&
+            cycles < next_periodic_event_cycles) return;
         if (last_periodic_update_cycles == cycles) return;
         last_periodic_update_cycles = cycles;
         if (adc_manual_pending && cycles >= adc_manual_due_cycles) {
@@ -1785,10 +1991,45 @@ struct Bus {
             for (uint64_t &phase : timer_phase_accum) rescale_phase(phase);
             for (uint64_t &phase : timebase_phase_accum) rescale_phase(phase);
             rescale_phase(scheduler_phase_accum);
+            rescale_phase(spu_beat_phase_accum);
             periodic_clock_hz = clock_hz;
         }
+        if (last_spu_beat_cycles == UINT64_MAX) {
+            last_spu_beat_cycles = cycles;
+        }
+        const uint64_t spu_beat_elapsed = cycles - last_spu_beat_cycles;
+        last_spu_beat_cycles = cycles;
+        uint16_t &spu_beat_counter = mmio[0x7b85 - kMmioBase];
+        const uint16_t spu_beat_base = mmio[0x7b84 - kMmioBase] & 0x07ff;
+        const uint16_t spu_beat_count = spu_beat_counter & 0x3fff;
+        if ((spu_beat_counter & 0x8000) == 0 ||
+            (spu_beat_counter & 0x4000) != 0 ||
+            spu_beat_base == 0) {
+            spu_beat_phase_accum = 0;
+            spu_beat_elapsed_ticks = 0;
+        } else {
+            // The Generalplus SPU examples define one beat-base unit as four
+            // 281.25 kHz service frames. Beat status latches until firmware
+            // acknowledges bit 14 or programs the next count.
+            spu_beat_elapsed_ticks += accumulate_source_ticks(
+                spu_beat_phase_accum,
+                spu_beat_elapsed,
+                281250,
+                clock_hz);
+            // A zero count is the shortest interval, not a disabled timer.
+            // The resident intentionally leaves 0x8000 programmed while idle
+            // so a later music object is noticed by the next heartbeat.
+            const uint64_t effective_count = spu_beat_count ? spu_beat_count : 1;
+            const uint64_t required_ticks =
+                uint64_t(spu_beat_base) * effective_count * 4;
+            if (spu_beat_elapsed_ticks >= required_ticks) {
+                spu_beat_counter |= 0x4000;
+                spu_beat_phase_accum = 0;
+                spu_beat_elapsed_ticks = 0;
+            }
+        }
         if (timer_any_enabled) {
-            if (last_timer_cycles == 0) last_timer_cycles = cycles;
+            if (last_timer_cycles == UINT64_MAX) last_timer_cycles = cycles;
             const uint64_t elapsed = cycles - last_timer_cycles;
             if (elapsed != 0) {
                 last_timer_cycles = cycles;
@@ -1828,7 +2069,7 @@ struct Bus {
         } else {
             last_timer_cycles = cycles;
         }
-        if (last_timebase_cycles == 0) last_timebase_cycles = cycles;
+        if (last_timebase_cycles == UINT64_MAX) last_timebase_cycles = cycles;
         const uint64_t timebase_elapsed = cycles - last_timebase_cycles;
         last_timebase_cycles = cycles;
         static constexpr std::array<std::array<uint16_t, 4>, 3> timebase_hz{{
@@ -1844,11 +2085,11 @@ struct Bus {
                 timebase_hz[i][ctrl & 0x0003], clock_hz);
             if (ticks != 0) ctrl |= 0x8000;
         }
-        if (last_scheduler_cycles == 0) last_scheduler_cycles = cycles;
+        if (last_scheduler_cycles == UINT64_MAX) last_scheduler_cycles = cycles;
         const uint64_t scheduler_elapsed = cycles - last_scheduler_cycles;
         last_scheduler_cycles = cycles;
         const uint16_t rtc_ctrl = mmio[0x7934 - kMmioBase];
-        if (last_rtc_cycles == 0) last_rtc_cycles = cycles;
+        if (last_rtc_cycles == UINT64_MAX) last_rtc_cycles = cycles;
         const uint64_t rtc_elapsed = cycles - last_rtc_cycles;
         last_rtc_cycles = cycles;
         if (rtc_ctrl & 0x8000) {
@@ -1897,36 +2138,10 @@ struct Bus {
         } else {
             scheduler_phase_accum = 0;
         }
-        const uint32_t scanline = tft_scanline();
-        if (scanline != last_video_scanline) {
-            last_video_scanline = scanline;
-            if (scanline == 0) {
-                // Both target-visible frame timing indicators are pulses. The
-                // downloaded firmware polls the complete register for a
-                // low-high-low transition without acknowledging it, including
-                // while the corresponding interrupt source is masked.
-                mmio[0x7063 - kMmioBase] &= ~uint16_t(0x0801);
-                if (g_log && cycles >= 0x30000000ull && late_video_edge_log_count++ < 256) {
-                    g_log << "VIDEO STATUS EDGE frame-wrap pc=0x" << std::hex << pc_for_log
-                          << " enable=0x" << mmio[0x7062 - kMmioBase]
-                          << " status=0x" << mmio[0x7063 - kMmioBase]
-                          << " cycles=0x" << cycles << std::dec << "\n";
-                }
-            } else if (scanline == (mmio[0x7054 - kMmioBase] % tft_total_lines())) {
-                // The target firmware observes bits 11 and 0 at the common
-                // frame edge, even when bit 0 is masked in P_PPU_IRQ_Control.
-                // It acknowledges them independently with writes of 0x0800
-                // and C_TFT_FrameIntClear (0x0001).
-                mmio[0x7063 - kMmioBase] |= 0x0801;
-                mmio[0x705a - kMmioBase] |= 0x0002;
-                if (g_log && cycles >= 0x30000000ull && late_video_edge_log_count++ < 256) {
-                    g_log << "VIDEO STATUS EDGE vblank-frame-end pc=0x" << std::hex << pc_for_log
-                          << " enable=0x" << mmio[0x7062 - kMmioBase]
-                          << " status=0x" << mmio[0x7063 - kMmioBase]
-                          << " cycles=0x" << cycles << std::dec << "\n";
-                }
-            }
-        }
+        // Scanline reads remain cycle-exact, while status work is performed
+        // only at the two hardware-visible edges per frame. This removes a
+        // division/modulo pair from the interpreter's per-instruction path.
+        update_video_edges();
         // ASSUMPTION: With the USB device enabled but no host attached, the
         // controller reports bus suspend after a short interval. The ROM
         // explicitly handles USBD_INT bit 0x20 and otherwise waits forever.
@@ -1935,7 +2150,8 @@ struct Bus {
         if (usb_host_connected && usb_transceiver_enabled() && !usb_enumerated) {
             usb_host_enumerate();
         }
-        if (usb_device_enabled_cycle && !usb_host_connected && !usb_suspend_latched &&
+        if (usb_device_enabled_cycle != UINT64_MAX &&
+            !usb_host_connected && !usb_suspend_latched &&
             cycles - usb_device_enabled_cycle >= 4096) {
             mmio[0x7a3a - kMmioBase] |= 0x0020;
             usb_suspend_latched = true;
@@ -1954,6 +2170,7 @@ struct Bus {
                       << " cycles=0x" << cycles << std::dec << "\n";
             }
         }
+        schedule_next_periodic_event(clock_hz);
     }
 
     uint16_t int_status2_value() const {
@@ -1966,6 +2183,18 @@ struct Bus {
         if (mmio[0x78b1 - kMmioBase] & 0x8000) value |= 0x0200;
         if (mmio[0x78b2 - kMmioBase] & 0x8000) value |= 0x0400;
         if (mmio[0x7935 - kMmioBase] & 0x050f) value |= 0x0004;
+        return value;
+    }
+
+    uint16_t int_status3_value() const {
+        uint16_t value = 0;
+        const uint16_t channel_low = mmio[0x7b83 - kMmioBase] &
+                                     mmio[0x7b82 - kMmioBase];
+        const uint16_t channel_high = mmio[0x7ba3 - kMmioBase] &
+                                      mmio[0x7ba2 - kMmioBase];
+        if (channel_low || channel_high) value |= 0x0001;
+        if (mmio[0x7b97 - kMmioBase] || mmio[0x7bb7 - kMmioBase]) value |= 0x0002;
+        if (mmio[0x7b85 - kMmioBase] & 0x4000) value |= 0x0004;
         return value;
     }
 
@@ -1995,11 +2224,14 @@ struct Bus {
 
     bool audio_fiq_asserted_no_update() const {
         const uint16_t priority = mmio[0x78a4 - kMmioBase];
+        const uint16_t spu_status = int_status3_value();
+        const uint16_t spu_priority = mmio[0x78a6 - kMmioBase];
         const bool channel_a = (mmio[0x78f0 - kMmioBase] & 0xc000) == 0xc000 &&
                                (priority & 0x0010) != 0;
         const bool channel_b = (mmio[0x78f8 - kMmioBase] & 0xc000) == 0xc000 &&
                                (priority & 0x0020) != 0;
-        return channel_a || channel_b;
+        const bool spu = (spu_status & spu_priority & 0x0007) != 0;
+        return channel_a || channel_b || spu;
     }
 
     bool adc_irq1_asserted_no_update() const {
@@ -2080,6 +2312,11 @@ struct Bus {
     }
 
     bool timer_irq4_asserted_no_update() const {
+        const uint16_t spu_status = int_status3_value() & 0x0007;
+        const uint16_t spu_priority = mmio[0x78a6 - kMmioBase];
+        if ((spu_status & uint16_t(~spu_priority)) != 0) {
+            return true;
+        }
         static constexpr std::array<uint32_t, 4> ctrl_addrs{0x78c0, 0x78c8, 0x78d0, 0x78d8};
         const uint16_t priority2 = mmio[0x78a5 - kMmioBase];
         for (uint32_t i = 0; i < ctrl_addrs.size(); ++i) {
@@ -2110,6 +2347,13 @@ struct Bus {
     }
 
     void write_mmio(uint32_t addr, uint16_t value) {
+        // Any peripheral write can change a divisor, enable, status latch, or
+        // deadline. The invalidation must happen after the pre-write state is
+        // synchronized, including on the many early-return register paths.
+        struct DeadlineInvalidator {
+            uint64_t &deadline;
+            ~DeadlineInvalidator() { deadline = 0; }
+        } deadline_invalidator{next_periodic_event_cycles};
         const bool key_video_write =
             (addr == 0x7062 && value != mmio[addr - kMmioBase]) ||
             (addr >= 0x7078 && addr <= 0x707f) ||
@@ -2405,7 +2649,7 @@ struct Bus {
             mmio[addr - kMmioBase] = stored;
             return;
         }
-        if (addr == 0x78a0 || addr == 0x78a1) {
+        if (addr == 0x78a0 || addr == 0x78a1 || addr == 0x78a3) {
             if (addr == 0x78a1 && cycles >= 0x2f000000ull &&
                 late_timer_ack_log_count++ < 2048 && g_log) {
                 g_log << "LATE INT_STATUS2 W1C pc=0x" << std::hex << pc_for_log
@@ -2435,6 +2679,12 @@ struct Bus {
                 if (value & 0x8000) mmio[0x78d8 - kMmioBase] &= ~uint16_t(0x8000);
                 if (value & 0x0400) mmio[0x78b2 - kMmioBase] &= ~uint16_t(0x8000);
                 if (value & 0x0004) mmio[0x7935 - kMmioBase] &= ~uint16_t(0x050f);
+            }
+            if (addr == 0x78a3 && (value & 0x0004)) {
+                mmio[0x7b85 - kMmioBase] &= ~uint16_t(0x4000);
+                last_spu_beat_cycles = cycles;
+                spu_beat_phase_accum = 0;
+                spu_beat_elapsed_ticks = 0;
             }
             return;
         }
@@ -2635,6 +2885,7 @@ struct Bus {
             // changing either the SYSCLK selector/divider or PLL multiplier.
             update_periodic_events();
             mmio[addr - kMmioBase] = value;
+            ++clock_change_generation;
             return;
         }
         if ((addr == 0x7a80 || addr == 0x7a88 ||
@@ -2645,12 +2896,23 @@ struct Bus {
             log_dma_param_write(addr, value);
             return;
         }
+        if (addr == 0x7038) {
+            // P_Line_Counter is read-only. Retail initialization writes zero
+            // defensively, but the hardware-visible value remains scanline
+            // timing derived from the TFT counters.
+            return;
+        }
         mmio[addr - kMmioBase] = value;
+        if (addr == 0x7050 || addr == 0x7051 ||
+            addr == 0x7054 || addr == 0x7055) {
+            next_video_edge_cycles = 0;
+        }
         if (is_gpio_data_register(addr)) {
             // The I/O Buffer register is the DATA latch; DATA reads return the
             // external pad state, while BUFFER reads back the last written data.
             mmio[addr + 1 - kMmioBase] = value;
         }
+        if (addr >= 0x7880 && addr <= 0x7883) update_accelerometer_i2c();
         switch (addr) {
         case 0x7000: case 0x7001: case 0x7002: case 0x7003:
         case 0x7004: case 0x7005: case 0x7006: case 0x7007:
@@ -2661,7 +2923,8 @@ struct Bus {
         case 0x7018: case 0x7019: case 0x701a: case 0x701b:
         case 0x701c: case 0x701d: case 0x701e:
         case 0x7020: case 0x7021: case 0x7022: case 0x7023:
-        case 0x7024: case 0x702a: case 0x702b: case 0x702c:
+        case 0x7024: case 0x7028: case 0x7029: case 0x702a:
+        case 0x702b: case 0x702c:
         case 0x702d: case 0x702e: case 0x702f: case 0x7030:
         case 0x7036: case 0x7037: case 0x703a: case 0x703c:
         case 0x7042:
@@ -2738,12 +3001,19 @@ struct Bus {
         case 0x785c:
         case 0x785d: break; // ECC/control registers, stored for now
         case 0x7820: case 0x7821: case 0x7822: case 0x7823: case 0x7824:
-        case 0x7825: case 0x782d: case 0x782f: case 0x783a: case 0x783b:
+        case 0x7825: case 0x782d: case 0x782f:
+        case 0x7837: case 0x7838: case 0x783a: case 0x783b:
         case 0x783c: case 0x783d: case 0x783e:
+        case 0x7840: case 0x7841:
             break;
-        case 0x7804: case 0x7805: case 0x7806: case 0x7807: case 0x7808:
+        case 0x7803: case 0x7804: case 0x7805: case 0x7806:
+        case 0x7807: case 0x7808:
         case 0x780a: case 0x780b: case 0x780c: case 0x780d:
-        case 0x7818: case 0x781f:
+        case 0x7810:
+            // Only the low six bits select the 2-Mword external-memory bank.
+            mmio[addr - kMmioBase] &= 0x003f;
+            break;
+        case 0x7818: case 0x7819: case 0x781f:
             break;
         case 0x78a3: case 0x78a4: case 0x78a5:
         case 0x7934:
@@ -2775,6 +3045,8 @@ struct Bus {
         case 0x7971:
         case 0x7972:
         case 0x7973:
+            break;
+        case 0x7902: // UART control; retained until a serial endpoint is modeled.
             break;
         case 0x79e0: case 0x79e1: case 0x79e2: case 0x79e3: case 0x79e4:
         case 0x79e5: case 0x79e6: case 0x79e8: case 0x79e9: case 0x79ea:
@@ -2834,22 +3106,22 @@ struct Bus {
         case 0x7bbc: case 0x7bbd: case 0x7bbe:
             break;
         case 0x7a30:
-            if (value && usb_device_enabled_cycle == 0) {
-                usb_device_enabled_cycle = cycles ? cycles : 1;
+            if (value && usb_device_enabled_cycle == UINT64_MAX) {
+                usb_device_enabled_cycle = cycles;
                 usb_suspend_latched = false;
                 if (g_log) {
                     g_log << "USB device enabled pc=0x" << std::hex << pc_for_log
                           << " config=0x" << value << std::dec << "\n";
                 }
             } else if (!value) {
-        usb_device_enabled_cycle = 0;
-        usb_suspend_latched = false;
-        usb_bus_reset_pending = usb_host_connected;
-        usb_enumerated = false;
-        usb_ep0_fifo.clear();
-        usb_bulk_out_fifo.clear();
-        usb_bulk_in_fifo.clear();
-        usb_interrupt_in_fifo.clear();
+                usb_device_enabled_cycle = UINT64_MAX;
+                usb_suspend_latched = false;
+                usb_bus_reset_pending = usb_host_connected;
+                usb_enumerated = false;
+                usb_ep0_fifo.clear();
+                usb_bulk_out_fifo.clear();
+                usb_bulk_in_fifo.clear();
+                usb_interrupt_in_fifo.clear();
                 mmio[0x7a3a - kMmioBase] = 0;
             }
             break;

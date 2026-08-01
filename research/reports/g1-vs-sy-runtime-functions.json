@@ -1,0 +1,543 @@
+{
+  "schema": 1,
+  "warning": "Candidates are similarity leads and require Ghidra verification; aligned equality can understate matches with inserted instructions",
+  "algorithm": {
+    "anchor_words": 6,
+    "maximum_anchor_occurrences": 8,
+    "reported_candidates": 3
+  },
+  "reference": {
+    "path": "samples/BUNDLE_G1_135800G1.MBA",
+    "name": "BUNDLE_G1_135800G1.MBA",
+    "sha256": "e2ae552854d5a9e91c7f66f88dcc867f61b777bf34b3e5887d98bb43cb2bdcf5",
+    "runtime_base": 819200,
+    "body_load": 821248,
+    "entry": 924245
+  },
+  "functions": [
+    {
+      "name": "sdk_post_input_event",
+      "start": 905630,
+      "end_exclusive": 905724
+    },
+    {
+      "name": "sdk_system_controls_init",
+      "start": 905724,
+      "end_exclusive": 906188
+    },
+    {
+      "name": "sdk_input_and_system_controls_poll",
+      "start": 906188,
+      "end_exclusive": 906802
+    },
+    {
+      "name": "sdk_system_controls_shutdown",
+      "start": 906802,
+      "end_exclusive": 906857
+    },
+    {
+      "name": "sdk_handle_volume_keys",
+      "start": 907029,
+      "end_exclusive": 907652
+    },
+    {
+      "name": "sdk_handle_brightness_key",
+      "start": 907652,
+      "end_exclusive": 907924
+    },
+    {
+      "name": "sdk_dispatch_touch_events",
+      "start": 915706,
+      "end_exclusive": 915881
+    },
+    {
+      "name": "sdk_dispatch_game_key_edges",
+      "start": 915881,
+      "end_exclusive": 916017
+    },
+    {
+      "name": "sdk_dispatch_buffered_input_codes",
+      "start": 916060,
+      "end_exclusive": 916213
+    },
+    {
+      "name": "sdk_dispatch_system_key_edges",
+      "start": 916297,
+      "end_exclusive": 916358
+    },
+    {
+      "name": "sdk_poll_high_level_input",
+      "start": 916358,
+      "end_exclusive": 916430
+    },
+    {
+      "name": "sdk_runtime_init",
+      "start": 917504,
+      "end_exclusive": 917621
+    },
+    {
+      "name": "sdk_runtime_tick_and_handoff",
+      "start": 917621,
+      "end_exclusive": 918033
+    },
+    {
+      "name": "sdk_update_poweroff_sequence",
+      "start": 918033,
+      "end_exclusive": 918338
+    },
+    {
+      "name": "sdk_fill_words_far",
+      "start": 923109,
+      "end_exclusive": 923140
+    }
+  ],
+  "targets": [
+    {
+      "image": {
+        "path": "samples/BUNDLE_SY_135800SY.MBA",
+        "name": "BUNDLE_SY_135800SY.MBA",
+        "sha256": "233eb01522c2654c48bf579539661aa4892f560c391100c98bd931edf2beb67a",
+        "runtime_base": 819200,
+        "body_load": 821248,
+        "entry": 916509
+      },
+      "matches": {
+        "sdk_post_input_event": [
+          {
+            "target_runtime_address": 892472,
+            "target_file_offset": 146544,
+            "anchor_votes": 30,
+            "equal_words": 40,
+            "function_words": 94,
+            "aligned_equality": 0.425532,
+            "longest_equal_run_words": 23
+          },
+          {
+            "target_runtime_address": 892521,
+            "target_file_offset": 146642,
+            "anchor_votes": 22,
+            "equal_words": 32,
+            "function_words": 94,
+            "aligned_equality": 0.340426,
+            "longest_equal_run_words": 23
+          },
+          {
+            "target_runtime_address": 892425,
+            "target_file_offset": 146450,
+            "anchor_votes": 21,
+            "equal_words": 34,
+            "function_words": 94,
+            "aligned_equality": 0.361702,
+            "longest_equal_run_words": 23
+          }
+        ],
+        "sdk_system_controls_init": [
+          {
+            "target_runtime_address": 892590,
+            "target_file_offset": 146780,
+            "anchor_votes": 62,
+            "equal_words": 170,
+            "function_words": 464,
+            "aligned_equality": 0.366379,
+            "longest_equal_run_words": 23
+          },
+          {
+            "target_runtime_address": 892584,
+            "target_file_offset": 146768,
+            "anchor_votes": 21,
+            "equal_words": 55,
+            "function_words": 464,
+            "aligned_equality": 0.118534,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 892586,
+            "target_file_offset": 146772,
+            "anchor_votes": 19,
+            "equal_words": 54,
+            "function_words": 464,
+            "aligned_equality": 0.116379,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "sdk_input_and_system_controls_poll": [
+          {
+            "target_runtime_address": 893146,
+            "target_file_offset": 147892,
+            "anchor_votes": 44,
+            "equal_words": 93,
+            "function_words": 614,
+            "aligned_equality": 0.151466,
+            "longest_equal_run_words": 25
+          },
+          {
+            "target_runtime_address": 893077,
+            "target_file_offset": 147754,
+            "anchor_votes": 26,
+            "equal_words": 74,
+            "function_words": 614,
+            "aligned_equality": 0.120521,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 893084,
+            "target_file_offset": 147768,
+            "anchor_votes": 23,
+            "equal_words": 72,
+            "function_words": 614,
+            "aligned_equality": 0.117264,
+            "longest_equal_run_words": 15
+          }
+        ],
+        "sdk_system_controls_shutdown": [
+          {
+            "target_runtime_address": 893760,
+            "target_file_offset": 149120,
+            "anchor_votes": 6,
+            "equal_words": 37,
+            "function_words": 55,
+            "aligned_equality": 0.672727,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 914764,
+            "target_file_offset": 191128,
+            "anchor_votes": 6,
+            "equal_words": 37,
+            "function_words": 55,
+            "aligned_equality": 0.672727,
+            "longest_equal_run_words": 10
+          },
+          {
+            "target_runtime_address": 911453,
+            "target_file_offset": 184506,
+            "anchor_votes": 2,
+            "equal_words": 11,
+            "function_words": 55,
+            "aligned_equality": 0.2,
+            "longest_equal_run_words": 9
+          }
+        ],
+        "sdk_handle_volume_keys": [
+          {
+            "target_runtime_address": 894001,
+            "target_file_offset": 149602,
+            "anchor_votes": 106,
+            "equal_words": 273,
+            "function_words": 623,
+            "aligned_equality": 0.438202,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 894004,
+            "target_file_offset": 149608,
+            "anchor_votes": 61,
+            "equal_words": 160,
+            "function_words": 623,
+            "aligned_equality": 0.256822,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 893997,
+            "target_file_offset": 149594,
+            "anchor_votes": 37,
+            "equal_words": 85,
+            "function_words": 623,
+            "aligned_equality": 0.136437,
+            "longest_equal_run_words": 19
+          }
+        ],
+        "sdk_handle_brightness_key": [
+          {
+            "target_runtime_address": 894629,
+            "target_file_offset": 150858,
+            "anchor_votes": 52,
+            "equal_words": 134,
+            "function_words": 272,
+            "aligned_equality": 0.492647,
+            "longest_equal_run_words": 21
+          },
+          {
+            "target_runtime_address": 894627,
+            "target_file_offset": 150854,
+            "anchor_votes": 30,
+            "equal_words": 71,
+            "function_words": 272,
+            "aligned_equality": 0.261029,
+            "longest_equal_run_words": 15
+          },
+          {
+            "target_runtime_address": 894630,
+            "target_file_offset": 150860,
+            "anchor_votes": 18,
+            "equal_words": 38,
+            "function_words": 272,
+            "aligned_equality": 0.139706,
+            "longest_equal_run_words": 11
+          }
+        ],
+        "sdk_dispatch_touch_events": [
+          {
+            "target_runtime_address": 904962,
+            "target_file_offset": 171524,
+            "anchor_votes": 19,
+            "equal_words": 39,
+            "function_words": 175,
+            "aligned_equality": 0.222857,
+            "longest_equal_run_words": 20
+          },
+          {
+            "target_runtime_address": 904963,
+            "target_file_offset": 171526,
+            "anchor_votes": 15,
+            "equal_words": 55,
+            "function_words": 175,
+            "aligned_equality": 0.314286,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 904964,
+            "target_file_offset": 171528,
+            "anchor_votes": 11,
+            "equal_words": 16,
+            "function_words": 175,
+            "aligned_equality": 0.091429,
+            "longest_equal_run_words": 16
+          }
+        ],
+        "sdk_dispatch_game_key_edges": [
+          {
+            "target_runtime_address": 905146,
+            "target_file_offset": 171892,
+            "anchor_votes": 10,
+            "equal_words": 26,
+            "function_words": 136,
+            "aligned_equality": 0.191176,
+            "longest_equal_run_words": 13
+          },
+          {
+            "target_runtime_address": 905144,
+            "target_file_offset": 171888,
+            "anchor_votes": 9,
+            "equal_words": 21,
+            "function_words": 136,
+            "aligned_equality": 0.154412,
+            "longest_equal_run_words": 14
+          },
+          {
+            "target_runtime_address": 905140,
+            "target_file_offset": 171880,
+            "anchor_votes": 9,
+            "equal_words": 19,
+            "function_words": 136,
+            "aligned_equality": 0.139706,
+            "longest_equal_run_words": 14
+          }
+        ],
+        "sdk_dispatch_buffered_input_codes": [
+          {
+            "target_runtime_address": 905331,
+            "target_file_offset": 172262,
+            "anchor_votes": 6,
+            "equal_words": 20,
+            "function_words": 153,
+            "aligned_equality": 0.130719,
+            "longest_equal_run_words": 8
+          },
+          {
+            "target_runtime_address": 905333,
+            "target_file_offset": 172266,
+            "anchor_votes": 4,
+            "equal_words": 22,
+            "function_words": 153,
+            "aligned_equality": 0.143791,
+            "longest_equal_run_words": 8
+          },
+          {
+            "target_runtime_address": 905328,
+            "target_file_offset": 172256,
+            "anchor_votes": 4,
+            "equal_words": 21,
+            "function_words": 153,
+            "aligned_equality": 0.137255,
+            "longest_equal_run_words": 8
+          }
+        ],
+        "sdk_dispatch_system_key_edges": [
+          {
+            "target_runtime_address": 905580,
+            "target_file_offset": 172760,
+            "anchor_votes": 12,
+            "equal_words": 36,
+            "function_words": 61,
+            "aligned_equality": 0.590164,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 911566,
+            "target_file_offset": 184732,
+            "anchor_votes": 2,
+            "equal_words": 11,
+            "function_words": 61,
+            "aligned_equality": 0.180328,
+            "longest_equal_run_words": 7
+          },
+          {
+            "target_runtime_address": 905220,
+            "target_file_offset": 172040,
+            "anchor_votes": 1,
+            "equal_words": 10,
+            "function_words": 61,
+            "aligned_equality": 0.163934,
+            "longest_equal_run_words": 6
+          }
+        ],
+        "sdk_poll_high_level_input": [
+          {
+            "target_runtime_address": 905643,
+            "target_file_offset": 172886,
+            "anchor_votes": 9,
+            "equal_words": 43,
+            "function_words": 72,
+            "aligned_equality": 0.597222,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 914419,
+            "target_file_offset": 190438,
+            "anchor_votes": 4,
+            "equal_words": 10,
+            "function_words": 72,
+            "aligned_equality": 0.138889,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 828371,
+            "target_file_offset": 18342,
+            "anchor_votes": 4,
+            "equal_words": 9,
+            "function_words": 72,
+            "aligned_equality": 0.125,
+            "longest_equal_run_words": 9
+          }
+        ],
+        "sdk_runtime_init": [
+          {
+            "target_runtime_address": 911097,
+            "target_file_offset": 183794,
+            "anchor_votes": 8,
+            "equal_words": 31,
+            "function_words": 117,
+            "aligned_equality": 0.264957,
+            "longest_equal_run_words": 11
+          },
+          {
+            "target_runtime_address": 911096,
+            "target_file_offset": 183792,
+            "anchor_votes": 5,
+            "equal_words": 30,
+            "function_words": 117,
+            "aligned_equality": 0.25641,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 911099,
+            "target_file_offset": 183798,
+            "anchor_votes": 4,
+            "equal_words": 31,
+            "function_words": 117,
+            "aligned_equality": 0.264957,
+            "longest_equal_run_words": 10
+          }
+        ],
+        "sdk_runtime_tick_and_handoff": [
+          {
+            "target_runtime_address": 911162,
+            "target_file_offset": 183924,
+            "anchor_votes": 34,
+            "equal_words": 95,
+            "function_words": 412,
+            "aligned_equality": 0.230583,
+            "longest_equal_run_words": 18
+          },
+          {
+            "target_runtime_address": 911221,
+            "target_file_offset": 184042,
+            "anchor_votes": 17,
+            "equal_words": 67,
+            "function_words": 412,
+            "aligned_equality": 0.162621,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 911220,
+            "target_file_offset": 184040,
+            "anchor_votes": 16,
+            "equal_words": 44,
+            "function_words": 412,
+            "aligned_equality": 0.106796,
+            "longest_equal_run_words": 13
+          }
+        ],
+        "sdk_update_poweroff_sequence": [
+          {
+            "target_runtime_address": 911588,
+            "target_file_offset": 184776,
+            "anchor_votes": 30,
+            "equal_words": 78,
+            "function_words": 305,
+            "aligned_equality": 0.255738,
+            "longest_equal_run_words": 28
+          },
+          {
+            "target_runtime_address": 893864,
+            "target_file_offset": 149328,
+            "anchor_votes": 13,
+            "equal_words": 32,
+            "function_words": 305,
+            "aligned_equality": 0.104918,
+            "longest_equal_run_words": 19
+          },
+          {
+            "target_runtime_address": 893894,
+            "target_file_offset": 149388,
+            "anchor_votes": 13,
+            "equal_words": 31,
+            "function_words": 305,
+            "aligned_equality": 0.101639,
+            "longest_equal_run_words": 19
+          }
+        ],
+        "sdk_fill_words_far": [
+          {
+            "target_runtime_address": 915181,
+            "target_file_offset": 191962,
+            "anchor_votes": 23,
+            "equal_words": 31,
+            "function_words": 31,
+            "aligned_equality": 1.0,
+            "longest_equal_run_words": 31
+          },
+          {
+            "target_runtime_address": 916069,
+            "target_file_offset": 193738,
+            "anchor_votes": 4,
+            "equal_words": 9,
+            "function_words": 31,
+            "aligned_equality": 0.290323,
+            "longest_equal_run_words": 9
+          },
+          {
+            "target_runtime_address": 823143,
+            "target_file_offset": 7886,
+            "anchor_votes": 2,
+            "equal_words": 10,
+            "function_words": 31,
+            "aligned_equality": 0.322581,
+            "longest_equal_run_words": 10
+          }
+        ]
+      }
+    }
+  ]
+}

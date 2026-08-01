@@ -25,11 +25,15 @@ cmake -S . -B build
 cmake --build build
 ```
 
-For the fastest local binary, build with profile-guided optimization:
+For the fastest macOS/Clang binary, train a profile-guided build against the
+retail boot path:
 
 ```sh
 ./pgo_build.sh
-./build/mobigo2_emu --no-window --steps 100000000
+../build/emulator-pgo/mobigo2_emu --no-window --steps 100000000 \
+  --rom ../vendor/firmware/internalrom.bin \
+  --spi ../vendor/firmware/spi.bin \
+  --nand ../vendor/firmware/nand.us-stitched.bin
 ```
 
 Set `TRAIN_STEPS=...` to change the PGO training run length.
@@ -37,15 +41,14 @@ Set `TRAIN_STEPS=...` to change the PGO training run length.
 Run:
 
 ```sh
-./build/mobigo2_emu --rom ../Assets/internalrom.bin --spi spi.bin --nand nand.bin
+./build/mobigo2_emu \
+  --rom ../vendor/firmware/internalrom.bin \
+  --spi ../vendor/firmware/spi.bin \
+  --nand ../vendor/firmware/nand.us-stitched.bin
 ```
 
-The defaults already select those files when run from the `Emulator2` directory,
-so this is equivalent:
-
-```sh
-./build/mobigo2_emu
-```
+The prebuilt 64-bit Windows executable is in `bin/windows/` with the matching
+SDL2 and MinGW/GCC runtime DLLs and their license notices.
 
 Host audio is off by default. Pass `--audio` for playback in a windowed run.
 The implementation supports direct DAC FIFO playback and SPU PCM8, PCM16, IMA
@@ -53,9 +56,15 @@ ADPCM, and ADPCM36, including pitch, pan, volume/envelopes, looping, FIFO
 status, and IRQ/FIQ refill signaling. Silent and headless runs still advance
 audio hardware state without opening a host device or throttling execution.
 
-Do not use `--mba` it doesnt work.
+Windowed desktop runs are capped to the MobiGo 2's emulated hardware time by
+default. The cap integrates CPU cycles using the live system-clock source, PLL
+multiplier, and divider rather than assuming a fixed instruction rate. Use
+`--no-cap` to allow a windowed run to execute as quickly as the host permits.
+`--no-window` runs are always uncapped. Host audio, VSync, or the desktop
+compositor can still make a run slower; the cap does not speed up a slow host.
 
-`MM.MBA` copy in both recoverable MOBIGOFS snapshots, including `/DEFAULT/MM.MBA`
+`--mba PATH` replaces the `MM.MBA` copy in both recoverable MOBIGOFS snapshots,
+including `/DEFAULT/MM.MBA`
 and the active language directory. If the MBA exceeds the original allocation,
 the overlay maps additional erased NAND blocks in memory. The source NAND and
 its OOB data on disk are never changed. When `--mba` is combined with `--usb`,
@@ -86,6 +95,19 @@ The GPL16250VA PPU model follows the verified SDK register definitions:
 when `C_RTCEN` is set. RTC status/enable delivery and system-DMA completion
 flags use their documented W1C paths.
 
+PPU indexed and direct-color transparency, the four global blend levels,
+per-sprite 6-bit blend values, RGB fade, and saturation are applied in the
+renderer. Video comparison/wrap events, timers, timebases, RTC, watchdog, ADC,
+USB suspend, and SPU beat events use cycle deadlines. Counter MMIO reads remain
+cycle-exact, but the interpreter can skip peripheral work until an observable
+event is due.
+
+On the development Mac, the event scheduler changed a deterministic
+10,000,000-instruction retail boot run from 26.7 to 35.3 MIPS without changing
+its final cycle count, PC, or registers. A profile trained for 10,000,000
+instructions reached about 44 MIPS. These figures are a regression reference, not
+a portable guarantee; CPU and compiler versions matter.
+
 This is an exact filesystem substitution, not a format-role converter. Retail
 firmware can reject an otherwise valid bundle MBA when it occupies the main-menu
 slot. For example, VTech's `BUNDLE_G1_135800G1.MBA` has the internal role label
@@ -95,14 +117,14 @@ for direct startup must have the structure and entry behavior expected of an
 
 Host controls:
 
-- Arrow keys: MobiGo D-pad
+- Arrow keys: MobiGo D-pad and MobiGo 2 accelerometer tilt simultaneously
 - Left or right Control: physical Primary button
 - Letter keys: matching MobiGo keyboard keys
 - Escape: physical Exit button
 - F12: close the emulator
 - Left mouse button: resistive touchscreen stylus
 
-See `../documents/documentation/INPUT_MATRIX.md` for the complete matrix and
+See `../docs/reference/INPUT_MATRIX.md` for the complete matrix and
 all host bindings.
 
 Headless tests can inject repeatable LCD touches with one or more
@@ -111,12 +133,17 @@ instruction counts; events are sorted by start time and may not overlap.
 
 Headless keyboard-matrix tests can inject every documented matrix control with
 `--key-event at,duration,key`. Use letter names or the logical names listed in
-`../documents/documentation/INPUT_MATRIX.md`.
+`../docs/reference/INPUT_MATRIX.md`.
 
 The buttons drive the GPIO matrix cells that the retail firmware scans. Mouse
 input drives the MobiGo board's IOE touch-contact circuit and the 12-bit manual
 ADC channels used by its four-wire resistive panel. Neither path bypasses
 firmware input processing.
+
+The PPU renderer decodes sprite positions as signed ten-bit coordinates and
+clips them at the 320x240 LCD boundary. This matches SY's centered Family-B UI
+objects, including animations that leave the top of the display without
+reappearing at the bottom.
 
 USB device simulation is enabled with:
 
