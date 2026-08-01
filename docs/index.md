@@ -1,3 +1,6 @@
+# WARNING THIS IS ALL AI GENERATED AND MAY BE WRONG!!!
+have fun
+
 # MobiGo 2 Homebrew SDK
 
 This project turns `app/main.c` into a complete MobiGo 2 MBA and runs it in an
