@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 audio_choice=""
-
+chmod -R +x "$ROOT"
 for argument in "$@"; do
     case "$argument" in
         --audio) audio_choice="enabled" ;;
