@@ -14,9 +14,10 @@ BUILD = ROOT / "build" / "emulator-host"
 
 
 def find(name: str) -> str:
-    candidate = Path(r"C:\msys64\mingw64\bin") / (name + ".exe")
-    if candidate.is_file():
-        return str(candidate)
+    for directory in (Path(r"C:\msys64\mingw64\bin"), Path(r"C:\mingw64\bin")):
+        candidate = directory / (name + ".exe")
+        if candidate.is_file():
+            return str(candidate)
     found = shutil.which(name)
     if found:
         return found
@@ -27,10 +28,16 @@ def find(name: str) -> str:
 
 
 def main() -> int:
-    cmake = find("cmake")
-    ctest = find("ctest")
-    ninja = find("ninja")
     gxx = find("g++")
+    runtime_directory = Path(gxx).parent
+
+    def companion(name: str) -> str:
+        candidate = runtime_directory / f"{name}.exe"
+        return str(candidate) if candidate.is_file() else find(name)
+
+    cmake = companion("cmake")
+    ctest = companion("ctest")
+    ninja = companion("ninja")
     environment = os.environ.copy()
     tool_directories = dict.fromkeys(
         str(Path(tool).parent) for tool in (cmake, ctest, ninja, gxx)
@@ -44,7 +51,7 @@ def main() -> int:
             "-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-DBUILD_TESTING=ON",
             f"-DCMAKE_MAKE_PROGRAM={ninja}",
             f"-DCMAKE_CXX_COMPILER={gxx}",
-            "-DCMAKE_PREFIX_PATH=C:/msys64/mingw64",
+            f"-DCMAKE_PREFIX_PATH={runtime_directory.parent}",
         ],
         check=True, env=environment,
     )
@@ -53,7 +60,6 @@ def main() -> int:
     executable = BUILD / "mobigo2_emu.exe"
     if not executable.is_file():
         raise SystemExit(f"Windows emulator build did not produce {executable}")
-    runtime_directory = Path(gxx).parent
     for name in (
         "SDL2.dll",
         "libgcc_s_seh-1.dll",

@@ -476,9 +476,14 @@ def doctor(*, as_json: bool = False) -> int:
             check("Windows emulator", executable.is_file(), str(executable))
         else:
             windows_tools = []
+            mingw_directories = (
+                Path(r"C:\msys64\mingw64\bin"),
+                Path(r"C:\mingw64\bin"),
+            )
             for name in ("cmake", "ctest", "ninja", "g++"):
-                candidate = Path(r"C:\msys64\mingw64\bin") / f"{name}.exe"
-                path = str(candidate) if candidate.is_file() else shutil.which(name) or ""
+                candidates = [directory / f"{name}.exe" for directory in mingw_directories]
+                candidate = next((item for item in candidates if item.is_file()), None)
+                path = str(candidate) if candidate else shutil.which(name) or ""
                 windows_tools.append((name, path, Path(path).is_file()))
             check(
                 "Windows emulator toolchain",
