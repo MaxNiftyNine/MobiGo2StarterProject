@@ -14,12 +14,12 @@ BUILD = ROOT / "build" / "emulator-host"
 
 
 def find(name: str) -> str:
-    found = shutil.which(name)
-    if found:
-        return found
     candidate = Path(r"C:\msys64\mingw64\bin") / (name + ".exe")
     if candidate.is_file():
         return str(candidate)
+    found = shutil.which(name)
+    if found:
+        return found
     raise SystemExit(
         f"{name} was not found. Install CMake, Ninja, GCC, and SDL2, "
         "or install the MINGW64 packages documented in docs/start/install.md."

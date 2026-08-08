@@ -477,9 +477,8 @@ def doctor(*, as_json: bool = False) -> int:
         else:
             windows_tools = []
             for name in ("cmake", "ctest", "ninja", "g++"):
-                path = shutil.which(name) or str(
-                    Path(r"C:\msys64\mingw64\bin") / f"{name}.exe"
-                )
+                candidate = Path(r"C:\msys64\mingw64\bin") / f"{name}.exe"
+                path = str(candidate) if candidate.is_file() else shutil.which(name) or ""
                 windows_tools.append((name, path, Path(path).is_file()))
             check(
                 "Windows emulator toolchain",
