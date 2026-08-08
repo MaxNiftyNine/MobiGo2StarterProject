@@ -18,7 +18,7 @@ def fail(message: str) -> "NoReturn":
 def run(command: list[str], *, env: dict[str, str]) -> None:
     result = subprocess.run(command, env=env, check=False)
     if result.returncode:
-        fail(f"{Path(command[1]).name} failed with exit code {result.returncode}")
+        fail(f"{Path(command[0]).name} failed with exit code {result.returncode}")
 
 
 def main() -> int:
@@ -115,10 +115,13 @@ def main() -> int:
         generated_font / "mobigo_clean_font_resources.c",
     ]
 
-    wine = os.environ.get("MOBIGO_WINE") or shutil.which("wine")
-    winepath = shutil.which("winepath")
-    if not wine or not winepath:
-        fail("Wine and winepath are required")
+    native_windows = os.name == "nt"
+    wine = None if native_windows else (
+        os.environ.get("MOBIGO_WINE") or shutil.which("wine")
+    )
+    winepath = None if native_windows else shutil.which("winepath")
+    if not native_windows and (not wine or not winepath):
+        fail("Wine and winepath are required on macOS and Linux")
     required = [
         toolchain / "udocc.exe",
         toolchain / "xasm16.exe",
@@ -135,28 +138,37 @@ def main() -> int:
     env.setdefault("MVK_CONFIG_LOG_LEVEL", "0")
 
     requested = [toolchain, include, build, *sources]
-    translated = None
-    for attempt in range(3):
-        result = subprocess.run(
-            [winepath, "-w", *(str(path) for path in requested)],
-            env=env,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
-        if result.returncode == 0 and len(lines) == len(requested):
-            translated = lines
-            break
-        if attempt < 2:
-            time.sleep(1)
-    if translated is None:
-        fail("winepath could not translate the SDK paths")
+    translated = [str(path) for path in requested] if native_windows else None
+    if not native_windows:
+        for attempt in range(3):
+            result = subprocess.run(
+                [str(winepath), "-w", *(str(path) for path in requested)],
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            lines = [line.strip() for line in result.stdout.splitlines() if line.strip()]
+            if result.returncode == 0 and len(lines) == len(requested):
+                translated = lines
+                break
+            if attempt < 2:
+                time.sleep(1)
+        if translated is None:
+            fail("winepath could not translate the SDK paths")
 
     toolchain_w, include_w, build_w, *sources_w = translated
-    env["WINEPATH"] = toolchain_w + (
-        ";" + env["WINEPATH"] if env.get("WINEPATH") else ""
-    )
+    if native_windows:
+        env["PATH"] = toolchain_w + os.pathsep + env.get("PATH", "")
+    else:
+        env["WINEPATH"] = toolchain_w + (
+            ";" + env["WINEPATH"] if env.get("WINEPATH") else ""
+        )
+
+    def tool_command(executable: Path, *arguments: str) -> list[str]:
+        if native_windows:
+            return [str(executable), *arguments]
+        return [str(wine), str(executable), *arguments]
 
     for source, source_w in zip(sources, sources_w):
         stem = source.stem
@@ -164,9 +176,8 @@ def main() -> int:
         obj_w = f"{build_w}\\{stem}.obj"
         print(f"[u'nSP C] {source.name}")
         run(
-            [
-                wine,
-                str(toolchain / "udocc.exe"),
+            tool_command(
+                toolchain / "udocc.exe",
                 "-S",
                 "-O2",
                 "-ffast-math",
@@ -179,14 +190,13 @@ def main() -> int:
                 "-o",
                 asm_w,
                 source_w,
-            ],
+            ),
             env=env,
         )
         print(f"[u'nSP ASM] {stem}.asm")
         run(
-            [
-                wine,
-                str(toolchain / "xasm16.exe"),
+            tool_command(
+                toolchain / "xasm16.exe",
                 "-t4",
                 "-sr",
                 "-wpop",
@@ -194,7 +204,7 @@ def main() -> int:
                 "-o",
                 obj_w,
                 asm_w,
-            ],
+            ),
             env=env,
         )
 
