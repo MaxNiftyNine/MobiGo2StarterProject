@@ -36,7 +36,7 @@ Older emulator binaries fall back to a disposable NAND copy.
 | [API](api/index.md) | public headers, ownership contracts, target-only surfaces |
 | [Hardware](hardware/overview.md) | CPU, memory, display, audio, input, storage, registers |
 | [Software](software/boot-slots.md) | boot flow, MBA format, resident services, resources, filesystem |
-| [Tools](tools/mobigo-cli.md) | unified CLI, emulator, asset conversion, NAND/USB, Ghidra |
+| [Tools](tools/mobigo-cli.md) | unified CLI, emulator, Homebrew Manager, assets, NAND/USB, Ghidra |
 | [Testing](testing/test-levels.md) | host, target, emulator, and physical evidence |
 | [Examples](examples/index.md) | focused probes and complete projects |
 | [Reference](reference/source-confidence.md) | matrices, terminology, limitations, licensing and safety |
@@ -53,6 +53,8 @@ Older emulator binaries fall back to a disposable NAND copy.
 - Deterministic asset generators and emulator verification tools.
 - NAND and USB workflows that discover regional slot filenames instead of
   assuming one.
+- A light-blue-wave [Homebrew Launcher](examples/homebrew-launcher.md) and a
+  backup-first [Homebrew Manager](tools/homebrew-manager.md).
 
 ## Evidence policy
 

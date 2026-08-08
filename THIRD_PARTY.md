@@ -18,8 +18,8 @@ assume that GitHub availability grants redistribution permission.
 Emulator2 includes or dynamically uses SDL2 and contains its own third-party
 license files. The Windows bundle also includes MinGW-w64's `libwinpthread` and
 the GCC `libgcc` and `libstdc++` runtime DLLs. Their MinGW, GCC, LGPL, and GCC
-Runtime Library Exception notices are adjacent to the binaries in
-`emulator/bin/windows/`. The Ghidra loader source contains an Apache-2.0 notice
+Runtime Library Exception notices are included in the standalone emulator's
+packaged Windows release. The Ghidra loader source contains an Apache-2.0 notice
 because it is built against Ghidra extension interfaces. Ghidra, ghidra-unSP,
 Wine, MkDocs, and MkDocs Material are separate projects under their own
 licenses.

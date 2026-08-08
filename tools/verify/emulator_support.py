@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import platform
+import os
 import subprocess
 import sys
 from functools import cache
@@ -10,8 +11,19 @@ from pathlib import Path
 
 
 def find_emulator(root: Path, *, build_if_missing: bool = True) -> Path:
+    override = os.environ.get("MOBIGO_EMULATOR")
+    if override:
+        executable = Path(override).expanduser().resolve()
+        if not executable.is_file():
+            raise FileNotFoundError(f"MOBIGO_EMULATOR is missing: {executable}")
+        return executable
     if platform.system() == "Windows":
-        executable = root / "emulator" / "bin" / "windows" / "mobigo2_emu.exe"
+        executable = root / "build" / "emulator-host" / "mobigo2_emu.exe"
+        if not executable.is_file() and build_if_missing:
+            subprocess.run(
+                [sys.executable, str(root / "tools" / "build" / "emulator_windows.py")],
+                check=True,
+            )
         if not executable.is_file():
             raise FileNotFoundError(f"Windows emulator executable is missing: {executable}")
         return executable

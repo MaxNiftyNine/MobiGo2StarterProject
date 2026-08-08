@@ -39,4 +39,9 @@ and MobiGo Celeste are explicit legacy G1 examples. Their renderer and asset
 techniques remain useful, but new ports must not inherit G1 merely by copying
 them.
 
+[Homebrew Launcher](homebrew-launcher.md) is the maintained SY menu example. It
+demonstrates dynamic text, standard controls, animated light-blue waves,
+validated catalog loading, and asynchronous launch of `.MBA` files below
+`/HB`.
+
 See [Complete projects](complete-projects.md).

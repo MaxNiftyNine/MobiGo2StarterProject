@@ -19,16 +19,31 @@ that working directory.
 - CMake, SDL2 development files, and `pkg-config` are needed when building
   Emulator2 from source.
 
+Clone with submodules, or initialize them in an existing checkout:
+
+```sh
+git submodule update --init --recursive
+```
+
 The Generalplus target executables run natively on Windows and through Wine on
 macOS and Linux.
 
 === "Windows"
 
     1. Install 64-bit Python 3 and enable the launcher (`py`).
-    2. Install CMake and a C/C++ build environment if rebuilding Emulator2.
-    3. The repository includes a prebuilt Windows emulator and adjacent runtime
-       DLLs. Keep those files together.
-    4. For USB device tools, install:
+    2. Install MSYS2, then install the MINGW64 packages for GCC, CMake, Ninja,
+       and SDL2:
+
+       ```text
+       mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake
+       mingw-w64-x86_64-ninja mingw-w64-x86_64-SDL2
+       ```
+
+       The unified CLI builds the emulator submodule into
+       `build/emulator-host/` when it is first needed. As an alternative,
+       download a packaged emulator release and set `MOBIGO_EMULATOR` to its
+       executable.
+    3. For USB device tools, install:
 
        ```powershell
        py -3 -m pip install -r .\tools\usb\requirements-windows.txt

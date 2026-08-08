@@ -9,6 +9,15 @@ legacy G1 compatibility profile. SY and G1 binaries are not interchangeable.
 
 ## Quick start
 
+Clone the repository with its maintained emulator and manager repositories:
+
+```sh
+git clone --recurse-submodules https://github.com/MaxNiftyNine/MobiGo2StarterProject.git
+cd MobiGo2StarterProject
+```
+
+For an existing clone, run `git submodule update --init --recursive` once.
+
 The canonical command-line entry point is:
 
 ```sh
@@ -124,8 +133,8 @@ app/             editable SY starter application
 include/, src/   public clean-room SDK and implementation
 examples/        focused probes and complete opt-in examples
 tests/           firmware-free SDK and packaging tests
-emulator/        Emulator2 source, tests, web frontend, and binaries
-tools/           unified CLI and specialist build/asset/device/RE tools
+emulator/        MobiGo2Emulator submodule
+tools/           unified CLI, specialist tools, and Homebrew Manager submodule
 scripts/         compatibility launchers for desktop workflows
 docs/            current published manual
 research/        evidence, dated notes, reports, and historical material
@@ -135,3 +144,8 @@ vendor/          third-party tools, linker profiles, and firmware inputs
 Read `THIRD_PARTY.md` before redistributing the repository or its bundled
 inputs. The project is an independent clean-room effort, not an official VTech
 or Generalplus SDK.
+
+Standalone tools and packaged releases:
+
+- [MobiGo2Emulator](https://github.com/MaxNiftyNine/MobiGo2Emulator)
+- [MobiGo2HomebrewManager](https://github.com/MaxNiftyNine/MobiGo2HomebrewManager)

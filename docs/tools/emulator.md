@@ -51,7 +51,15 @@ bash tools/build/emulator_unix.sh --test
 ```
 
 The script configures a release CMake build, compiles Emulator2, and optionally
-runs CTest. Windows normally uses the prebuilt executable and adjacent DLLs.
+runs CTest. On Windows, the unified CLI invokes the corresponding CMake/Ninja
+builder in `tools/build/emulator_windows.py` and writes the executable under
+`build/emulator-host/`.
+
+The source is maintained as the `emulator/` submodule and as the standalone
+[MobiGo2Emulator repository](https://github.com/MaxNiftyNine/MobiGo2Emulator).
+Its releases contain firmware and host runtime libraries, so a downloaded
+package starts by opening the executable; no command line is required. Set
+`MOBIGO_EMULATOR` to a standalone executable when using it with this SDK.
 
 ## Deterministic headless options
 

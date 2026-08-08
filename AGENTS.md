@@ -4,6 +4,11 @@ This file is the operational contract for automated work in this repository.
 Read it before modifying application, SDK, emulator, build, or documentation
 code.
 
+Initialize `emulator/` and `tools/homebrew-manager/` with
+`git submodule update --init --recursive`. Do not replace either gitlink with a
+copied source tree. Changes to either component belong in its standalone
+repository first, on `main`, followed by an intentional submodule update here.
+
 ## Canonical workflow
 
 Use the unified command from the repository root:

@@ -260,14 +260,17 @@ def emulator_build_is_stale(executable: Path) -> bool:
 
 
 def host_emulator(*, run_tests: bool = False) -> Path:
+    override = os.environ.get("MOBIGO_EMULATOR")
+    if override:
+        executable = Path(override).expanduser().resolve()
+        if not executable.is_file():
+            fail(f"MOBIGO_EMULATOR does not name a file: {executable}")
+        return executable
     system = platform.system()
     if system == "Windows":
-        executable = ROOT / "emulator" / "bin" / "windows" / "mobigo2_emu.exe"
-        if not executable.is_file():
-            fail(
-                "the Windows emulator is missing; see docs/start/install.md "
-                "for the source-build prerequisites"
-            )
+        executable = BUILD / "emulator-host" / "mobigo2_emu.exe"
+        if emulator_build_is_stale(executable) or run_tests:
+            run(python_command(ROOT / "tools" / "build" / "emulator_windows.py"))
         return executable
 
     executable = BUILD / "emulator-host" / "mobigo2_emu"
@@ -464,19 +467,30 @@ def doctor(*, as_json: bool = False) -> int:
             "needed only when rebuilding the emulator",
         )
     else:
-        executable = ROOT / "emulator" / "bin" / "windows" / "mobigo2_emu.exe"
-        check("Windows emulator", executable.is_file(), str(executable.relative_to(ROOT)))
-        for runtime in (
-            "SDL2.dll",
-            "libgcc_s_seh-1.dll",
-            "libstdc++-6.dll",
-            "libwinpthread-1.dll",
-        ):
-            path = executable.parent / runtime
+        override = os.environ.get("MOBIGO_EMULATOR")
+        executable = (
+            Path(override).expanduser().resolve() if override
+            else BUILD / "emulator-host" / "mobigo2_emu.exe"
+        )
+        if override:
+            check("Windows emulator", executable.is_file(), str(executable))
+        else:
+            windows_tools = []
+            for name in ("cmake", "ctest", "ninja", "g++"):
+                path = shutil.which(name) or str(
+                    Path(r"C:\msys64\mingw64\bin") / f"{name}.exe"
+                )
+                windows_tools.append((name, path, Path(path).is_file()))
             check(
-                f"Windows emulator {runtime}",
-                path.is_file(),
-                str(path.relative_to(ROOT)),
+                "Windows emulator toolchain",
+                all(item[2] for item in windows_tools),
+                ", ".join(f"{name}={path}" for name, path, _ in windows_tools),
+            )
+            check(
+                "Windows emulator build",
+                executable.is_file(),
+                str(executable.relative_to(ROOT)),
+                required=False,
             )
         if executable.is_file():
             current_options = (

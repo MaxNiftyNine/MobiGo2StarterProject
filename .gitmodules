@@ -1,0 +1,6 @@
+[submodule "emulator"]
+	path = emulator
+	url = https://github.com/MaxNiftyNine/MobiGo2Emulator.git
+[submodule "tools/homebrew-manager"]
+	path = tools/homebrew-manager
+	url = https://github.com/MaxNiftyNine/MobiGo2HomebrewManager.git

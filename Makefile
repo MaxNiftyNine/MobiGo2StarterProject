@@ -2,7 +2,7 @@ CC ?= cc
 CFLAGS ?= -std=c99 -Wall -Wextra -Werror
 CPPFLAGS ?= -Iinclude
 
-.PHONY: all test usb-test docs-check doctor target-check samples color-cycle movie-player celeste sample-emulator-check hardware-suite emulator-test emulator-check homebrew-check storage-check font-check animation-check audio-check adpcm-check music-check music-adpcm-check music-aux-check release-check
+.PHONY: all test usb-test docs-check doctor target-check samples color-cycle movie-player celeste launcher launcher-emulator-check sample-emulator-check hardware-suite emulator-test emulator-check homebrew-check storage-check font-check animation-check audio-check adpcm-check music-check music-adpcm-check music-aux-check release-check
 
 all: build/test_system_controls build/test_input build/test_audio \
 	build/test_audio_resources \
@@ -117,7 +117,7 @@ target-check:
 hardware-suite:
 	python3 examples/hardware_test_suite/build.py
 
-samples: color-cycle movie-player celeste
+samples: color-cycle movie-player celeste launcher
 
 color-cycle:
 	python3 examples/color_cycle/build.py
@@ -127,6 +127,12 @@ movie-player:
 
 celeste:
 	python3 examples/mobigo_celeste/build.py
+
+launcher:
+	python3 examples/homebrew_launcher/build.py
+
+launcher-emulator-check: launcher
+	python3 tools/verify/verify_homebrew_launcher_emulator.py
 
 sample-emulator-check: samples
 	python3 tools/verify/verify_complete_samples_emulator.py
@@ -180,5 +186,6 @@ release-check:
 	$(MAKE) music-check
 	$(MAKE) music-adpcm-check
 	$(MAKE) music-aux-check
+	$(MAKE) launcher-emulator-check
 	$(MAKE) samples sample-emulator-check
 	$(MAKE) hardware-suite

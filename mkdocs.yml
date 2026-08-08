@@ -23,9 +23,6 @@ exclude_docs: |
   reference/STATUS_MATRIX.md
   reference/mobigo2_mba_development_guide.md
   reference/mobigo2_programmers_guide.md
-  reference/mobigo2_programmers_guide.pdf
-  reference/GPL16250VAV10_ds.pdf
-  reference/unsp2.0.pdf
 
 theme:
   name: material
@@ -102,6 +99,7 @@ nav:
   - Tools:
       - Unified CLI: tools/mobigo-cli.md
       - Emulator: tools/emulator.md
+      - Homebrew Manager: tools/homebrew-manager.md
       - Asset tools: tools/assets.md
       - NAND and USB: tools/nand-usb.md
       - Ghidra and research: tools/ghidra.md
@@ -113,7 +111,9 @@ nav:
   - Examples:
       - Examples overview: examples/index.md
       - Complete projects: examples/complete-projects.md
+      - Homebrew Launcher: examples/homebrew-launcher.md
   - Reference:
+      - Archived manuals: reference/archived-manuals.md
       - Input matrix: reference/input-matrix.md
       - MBA/GAM binary format: reference/mobigo_mba_format.md
       - Source confidence: reference/source-confidence.md

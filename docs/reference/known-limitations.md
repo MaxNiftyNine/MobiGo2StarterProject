@@ -20,6 +20,8 @@ is the authoritative implementation-status ledger.
   creating a new directory entry.
 - Fresh-file publication is experimental: allocation may succeed without the
   pathname being rediscovered after close or reboot.
+- Homebrew Manager therefore refuses to replace SY unless `/HB` is observable
+  after creation and its remote backup and catalog both read back exactly.
 - All destructive tests belong on disposable copied NAND. Keep an untouched
   source image and physical-console recovery backup.
 

@@ -43,8 +43,9 @@ python3 tools/mobigo.py doctor --json
 ```
 
 Checks Python, manifest validity, firmware size/hashes, target compiler tools,
-Wine/Winepath on Unix hosts, emulator prerequisites, and the Windows prebuilt
-emulator. JSON output is suitable for editors and CI diagnosis.
+Wine/Winepath on Unix hosts, emulator source-build prerequisites, and any
+existing host emulator build. JSON output is suitable for editors and CI
+diagnosis. `MOBIGO_EMULATOR` may name a standalone release executable.
 
 ## `build`
 
