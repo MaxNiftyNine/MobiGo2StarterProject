@@ -106,14 +106,25 @@ class ProjectCliTests(unittest.TestCase):
             for path in (source, cmake, executable):
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text("test", encoding="ascii")
-            os.utime(source, ns=(1, 1))
-            os.utime(cmake, ns=(1, 1))
-            os.utime(executable, ns=(2, 2))
+            # Use realistic, widely separated times. Windows filesystems round
+            # timestamps extremely close to the Unix epoch, which can collapse
+            # 1 ns, 2 ns, and 3 ns into the same value.
+            base_time = 1_700_000_000_000_000_000
+            interval = 10_000_000_000
+            os.utime(source, ns=(base_time, base_time))
+            os.utime(cmake, ns=(base_time, base_time))
+            os.utime(
+                executable,
+                ns=(base_time + interval, base_time + interval),
+            )
             original_root = cli.ROOT
             try:
                 cli.ROOT = root
                 self.assertFalse(cli.emulator_build_is_stale(executable))
-                os.utime(source, ns=(3, 3))
+                os.utime(
+                    source,
+                    ns=(base_time + (2 * interval), base_time + (2 * interval)),
+                )
                 self.assertTrue(cli.emulator_build_is_stale(executable))
             finally:
                 cli.ROOT = original_root
