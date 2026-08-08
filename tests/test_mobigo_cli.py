@@ -73,6 +73,28 @@ class ProjectCliTests(unittest.TestCase):
             any("verify_homebrew_input_emulator.py" in command for command in flattened)
         )
 
+    def test_windows_make_gate_uses_native_emulator_integration(self) -> None:
+        cli = load_cli()
+        with (
+            mock.patch.object(sys, "argv", ["mobigo.py", "test"]),
+            mock.patch.object(cli.shutil, "which", return_value="make"),
+            mock.patch.object(cli.platform, "system", return_value="Windows"),
+            mock.patch.object(cli, "run") as run,
+            mock.patch.object(cli, "build_project") as build_project,
+        ):
+            cli.main()
+
+        commands = [call.args[0] for call in run.call_args_list]
+        self.assertIn(["make", "test"], commands)
+        self.assertIn(["make", "usb-test"], commands)
+        self.assertIn(["make", "target-check"], commands)
+        self.assertNotIn(["make", "emulator-test"], commands)
+        self.assertTrue(
+            any("verify_homebrew_input_emulator.py" in " ".join(command)
+                for command in commands)
+        )
+        build_project.assert_called_once()
+
     def test_windows_no_make_full_test_fails_instead_of_skipping(self) -> None:
         cli = load_cli()
         with (

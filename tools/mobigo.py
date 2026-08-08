@@ -49,6 +49,16 @@ QUICK_TEST_TARGETS = (
     "emulator-test",
 )
 
+WINDOWS_QUICK_TEST_TARGETS = (
+    "test",
+    "usb-test",
+    "target-check",
+)
+
+WINDOWS_FIRMWARE_TEST_SCRIPTS = (
+    ("tools/verify/verify_homebrew_input_emulator.py",),
+)
+
 # A stock Windows Python installation does not include Make. Keep its normal
 # test command useful, but name the missing coverage and never treat this
 # bounded baseline as the full release suite.
@@ -59,7 +69,7 @@ WINDOWS_NO_MAKE_TEST_SCRIPTS = (
         "-p", "test_*.py",
     ),
     ("tools/build/build_target_objects.py",),
-    ("tools/verify/verify_homebrew_input_emulator.py",),
+    *WINDOWS_FIRMWARE_TEST_SCRIPTS,
 )
 
 
@@ -547,6 +557,16 @@ def main() -> int:
         if make:
             if args.full:
                 run([make, "release-check"])
+            elif platform.system() == "Windows":
+                # A Windows runner may provide GNU Make without providing a
+                # Unix SDL/pkg-config environment. Use Make for the portable
+                # host and target gates, then exercise the checked-in native
+                # emulator through the firmware integration verifier.
+                for target in WINDOWS_QUICK_TEST_TARGETS:
+                    run([make, target])
+                for command in WINDOWS_FIRMWARE_TEST_SCRIPTS:
+                    run(python_command(*command))
+                build_project(load_project())
             else:
                 # The ordinary gate is deliberately broad enough to catch the
                 # mistakes that matter to a new title: portable SDK behavior,
