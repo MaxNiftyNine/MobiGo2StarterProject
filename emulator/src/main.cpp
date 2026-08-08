@@ -50,23 +50,33 @@ int main(int argc, char **argv) {
         }
         bus.spi.bytes = read_file_bytes(opt.spi);
         bus.nand.bytes = read_file_bytes(opt.nand);
+        std::optional<MbaOverlayReport> mba_overlay;
         if (!opt.mba.empty()) {
-            const MbaOverlayReport overlay = apply_mba_overlay(
-                bus.nand.bytes, read_file_bytes(opt.mba));
-            bus.configure_mba_watchdog_handoff(overlay.entry_address);
+            mba_overlay = apply_mba_overlay(
+                bus.nand.bytes, read_file_bytes(opt.mba), opt.mba_target);
+            const MbaOverlayReport &overlay = *mba_overlay;
+            bus.configure_mba_application_target(overlay.entry_address, true);
             std::cout << "Applied transient MBA overlay: " << opt.mba << " ("
-                      << overlay.mba_bytes << " bytes)\n";
+                      << overlay.mba_bytes << " bytes, target="
+                      << mba_target_name(overlay.target) << ", role="
+                      << (overlay.role.empty() ? "<untitled>" : overlay.role)
+                      << ", entry=0x" << std::hex << overlay.entry_address
+                      << std::dec << ")\n";
             std::cout << "Replaced ";
             for (size_t i = 0; i < overlay.paths.size(); ++i) {
                 if (i) std::cout << ", ";
                 std::cout << overlay.paths[i];
             }
-            std::cout << " in " << overlay.snapshots << " filesystem snapshots";
+            std::cout << " in " << overlay.snapshots;
+            if (overlay.snapshots != overlay.filesystem_snapshots)
+                std::cout << " of " << overlay.filesystem_snapshots;
+            std::cout << " filesystem snapshots";
             if (overlay.added_logical_blocks)
                 std::cout << " using " << overlay.added_logical_blocks
                           << " transient logical NAND blocks";
             std::cout << ".\nThe NAND file on disk will not be modified.\n";
         }
+        std::cout << "Emulation mode: " << emulator_mode_name(opt.mode) << "\n";
         if (g_log) {
             g_log << "Hardware config: E-Fuse0=0x" << std::hex << opt.efuse0
                   << " E-Fuse1=0x" << opt.efuse1
@@ -87,6 +97,11 @@ int main(int argc, char **argv) {
         cpu.trace_transitions = opt.trace_transitions;
         cpu.trace_transition_limit = opt.trace_transition_limit;
         cpu.allow_invalid_alu_nop = opt.allow_invalid_alu_nop;
+        // The history rings are diagnostic-only. Fast, unlogged execution can
+        // skip their per-instruction modulo/branch bookkeeping without
+        // changing any guest-visible CPU or MMIO state.
+        cpu.track_recent_history = opt.mode == EmulatorMode::Accurate ||
+                                   opt.log || opt.trace || opt.trace_transitions;
         if (opt.boot == "rom") {
             rom_boot(bus, cpu, opt.start_pc, opt.start_pc_set);
         } else if (opt.boot == "spi-shim") {
@@ -96,19 +111,25 @@ int main(int argc, char **argv) {
         }
 
         Video video;
-        bool window_active = opt.window && opt.open_window_at == 0;
+        const bool deferred_for_mba = opt.window && opt.open_window_on_mba;
+        bool window_active = opt.window && !deferred_for_mba && opt.open_window_at == 0;
         if (window_active) video.init(opt.vsync);
 #ifdef __EMSCRIPTEN__
         RealtimeThrottle realtime(false);
 #else
         // Headless runs are intentionally uncapped. Windowed runs follow the
-        // emulated GPL16250 clock unless --no-cap was requested.
-        RealtimeThrottle realtime(opt.window && opt.realtime_cap);
+        // emulated GPL16250 clock unless --no-cap was requested. A deferred
+        // window also defers and rebases this clock at the application entry.
+        RealtimeThrottle realtime(window_active && opt.realtime_cap);
 #endif
         Audio audio;
+        bool audio_active = false;
         // Host playback is opt-in. Headless and silent runs still advance the
         // emulated DAC/SPU without opening a host audio device.
-        if (opt.audio && opt.window) audio.init();
+        if (opt.audio && window_active) {
+            audio.init();
+            audio_active = true;
+        }
         UsbPanel usb_panel;
         if (!opt.dump_frame_dir.empty()) {
             if (opt.dump_frame_interval == 0) {
@@ -118,6 +139,7 @@ int main(int argc, char **argv) {
         }
 
         bool quit = false;
+        bool powered_off = false;
         bool logging_started = bool(g_log);
         uint64_t last_render_insn = 0;
         auto next_present = std::chrono::steady_clock::now();
@@ -141,14 +163,31 @@ int main(int argc, char **argv) {
             bus.set_touch(pressed, adc.x, adc.y);
         };
         auto open_window_if_due = [&]() {
-            if (window_active || !opt.window || opt.open_window_at == 0 || cpu.insns < opt.open_window_at) {
-                return;
-            }
+            if (window_active || !opt.window) return;
+            const bool instruction_due = opt.open_window_at != 0 &&
+                                         cpu.insns >= opt.open_window_at;
+            const bool selected_mba_due = opt.open_window_on_mba && mba_overlay &&
+                                          bus.mba_launch_count != 0 &&
+                                          bus.mba_application_entry ==
+                                              mba_overlay->entry_address;
+            if (!instruction_due && !selected_mba_due) return;
             video.init(opt.vsync);
             window_active = true;
+            if (opt.audio && !audio_active) {
+                audio.init();
+                audio_active = true;
+            }
+#ifndef __EMSCRIPTEN__
+            realtime.set_enabled(opt.realtime_cap);
+#endif
             last_render_insn = cpu.insns >= opt.render_interval ? cpu.insns - opt.render_interval : 0;
             next_present = std::chrono::steady_clock::now();
-            if (g_log) g_log << "WINDOW OPENED insns=" << cpu.insns << "\n";
+            if (g_log) {
+                g_log << "WINDOW OPENED insns=" << cpu.insns
+                      << " reason=" << (selected_mba_due ? "mba-entry" : "instruction")
+                      << " entry=0x" << std::hex << bus.mba_application_entry
+                      << std::dec << "\n";
+            }
         };
         const auto run_started = std::chrono::steady_clock::now();
         auto run_iteration = [&]() -> bool {
@@ -211,78 +250,20 @@ int main(int argc, char **argv) {
                     }
                     if ((ev.type == SDL_KEYDOWN || ev.type == SDL_KEYUP) && !ev.key.repeat) {
                         const bool pressed = ev.type == SDL_KEYDOWN;
-                        // Host arrow keys deliberately drive both the physical
-                        // D-pad matrix and the MobiGo 2 motion sensor.
+                        // The physical D-pad is independent from the motion
+                        // sensor in every mode. Home/End/PageUp/PageDown are
+                        // dedicated motion controls; arrows only close D-pad
+                        // matrix switches.
                         switch (ev.key.keysym.sym) {
-                        case SDLK_LEFT: bus.set_motion_direction(0, pressed); break;
-                        case SDLK_RIGHT: bus.set_motion_direction(1, pressed); break;
-                        case SDLK_UP: bus.set_motion_direction(2, pressed); break;
-                        case SDLK_DOWN: bus.set_motion_direction(3, pressed); break;
+                        case SDLK_HOME: bus.set_motion_direction(0, pressed); break;
+                        case SDLK_END: bus.set_motion_direction(1, pressed); break;
+                        case SDLK_PAGEUP: bus.set_motion_direction(2, pressed); break;
+                        case SDLK_PAGEDOWN: bus.set_motion_direction(3, pressed); break;
                         default: break;
                         }
-                        unsigned row = 0;
-                        unsigned column = 0;
-                        bool mapped = true;
-                        // Verified six-row by nine-column MobiGo 2 matrix.
-                        // F12 is reserved for closing the emulator; Escape is
-                        // delivered to the MobiGo Exit button.
-                        switch (ev.key.keysym.sym) {
-                        case SDLK_t: row = 0; column = 0; break;
-                        case SDLK_y: row = 0; column = 1; break;
-                        case SDLK_u: row = 0; column = 2; break;
-                        case SDLK_i: row = 0; column = 3; break;
-                        case SDLK_o: row = 0; column = 4; break;
-                        case SDLK_p: row = 0; column = 5; break;
-                        case SDLK_w: row = 0; column = 6; break;
-                        case SDLK_e: row = 0; column = 7; break;
-                        case SDLK_r: row = 0; column = 8; break;
-
-                        case SDLK_f: row = 1; column = 0; break;
-                        case SDLK_g: row = 1; column = 1; break;
-                        case SDLK_h: row = 1; column = 2; break;
-                        case SDLK_j: row = 1; column = 3; break;
-                        case SDLK_k: row = 1; column = 4; break;
-                        case SDLK_l: row = 1; column = 5; break;
-                        case SDLK_a: row = 1; column = 6; break;
-                        case SDLK_s: row = 1; column = 7; break;
-                        case SDLK_d: row = 1; column = 8; break;
-
-                        case SDLK_c: row = 2; column = 0; break;
-                        case SDLK_v: row = 2; column = 1; break;
-                        case SDLK_b: row = 2; column = 2; break;
-                        case SDLK_n: row = 2; column = 3; break;
-                        case SDLK_m: row = 2; column = 4; break;
-                        case SDLK_BACKSPACE: row = 2; column = 5; break;
-                        case SDLK_CAPSLOCK: row = 2; column = 6; break;
-                        case SDLK_z: row = 2; column = 7; break;
-                        case SDLK_x: row = 2; column = 8; break;
-
-                        case SDLK_LEFTBRACKET: row = 3; column = 0; break;
-                        case SDLK_SPACE: row = 3; column = 1; break;
-                        case SDLK_F2: row = 3; column = 2; break;
-                        case SDLK_LEFT: row = 3; column = 3; break;
-                        case SDLK_UP: row = 3; column = 4; break;
-                        case SDLK_LCTRL:
-                        case SDLK_RCTRL: row = 3; column = 5; break;
-                        case SDLK_q: row = 3; column = 6; break;
-                        case SDLK_NUMLOCKCLEAR: row = 3; column = 7; break;
-
-                        case SDLK_RIGHTBRACKET: row = 4; column = 0; break;
-                        case SDLK_RETURN:
-                        case SDLK_KP_ENTER: row = 4; column = 1; break;
-                        case SDLK_ESCAPE: row = 4; column = 2; break;
-                        case SDLK_RIGHT: row = 4; column = 3; break;
-                        case SDLK_DOWN: row = 4; column = 4; break;
-                        case SDLK_F1: row = 4; column = 5; break;
-                        case SDLK_F6: row = 4; column = 6; break;
-                        case SDLK_F7: row = 4; column = 7; break;
-                        case SDLK_F8: row = 4; column = 8; break;
-
-                        case SDLK_SLASH: row = 5; column = 5; break;
-                        default: mapped = false; break;
-                        }
-                        if (mapped) {
-                            bus.set_matrix_key(row, column, pressed);
+                        if (const std::optional<MatrixKey> key =
+                                matrix_key_from_sdl(ev.key.keysym.sym)) {
+                            bus.set_matrix_key(key->row, key->column, pressed);
                         }
                     }
                 }
@@ -327,14 +308,6 @@ int main(int argc, char **argv) {
                     const ScriptedKeyTransition &key =
                         opt.scripted_key_transitions[scripted_key_transition_index++];
                     bus.set_matrix_key(key.row, key.column, key.pressed);
-                    if (key.row == 3 && key.column == 3)
-                        bus.set_motion_direction(0, key.pressed);
-                    else if (key.row == 4 && key.column == 3)
-                        bus.set_motion_direction(1, key.pressed);
-                    else if (key.row == 3 && key.column == 4)
-                        bus.set_motion_direction(2, key.pressed);
-                    else if (key.row == 4 && key.column == 4)
-                        bus.set_motion_direction(3, key.pressed);
                     if (g_log) {
                         g_log << "SCRIPTED KEY " << (key.pressed ? "DOWN" : "UP")
                               << " insns=" << cpu.insns << " key=" << key.name
@@ -376,7 +349,7 @@ int main(int argc, char **argv) {
                 if (bus.ppu_go_pending && bus.cycles >= bus.ppu_go_due_cycles) {
                     video.render_ppu_to_framebuffer(bus);
                 }
-                if (bus.sleep_requested) {
+                if (bus.sleep_requested || bus.poweroff_requested) {
                     if (opt.auto_power_wake) {
                         account_pace_segment();
                         power_key_wake_reset(bus, cpu);
@@ -384,7 +357,12 @@ int main(int argc, char **argv) {
                         pace_segment_clock = bus.system_clock_hz();
                         pace_clock_generation = bus.clock_change_generation;
                     } else {
-                        if (g_log) g_log << "POWER sleeping; automatic wake disabled\n";
+                        powered_off = true;
+                        if (g_log) {
+                            g_log << "POWER OFF source="
+                                  << (bus.poweroff_requested ? "gpio-d4-latch" : "sleep")
+                                  << "; automatic wake disabled\n";
+                        }
                         cpu.halted = true;
                         break;
                     }
@@ -546,6 +524,7 @@ int main(int argc, char **argv) {
         }
         std::cout << "Stopped after " << cpu.insns << " instructions at PC=0x"
                   << std::hex << cpu.lpc() << std::dec << "\n";
+        if (powered_off) std::cout << "Power state: off\n";
         std::cout << std::fixed << std::setprecision(3)
                   << "Emulation time " << run_seconds << " s ("
                   << (run_seconds > 0.0 ? double(cpu.insns) / run_seconds / 1000000.0 : 0.0)

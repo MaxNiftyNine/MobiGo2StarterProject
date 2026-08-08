@@ -45,7 +45,7 @@ def main() -> int:
         if ("closing file failed (device status -1)" in str(exc)):
             print ("Reboot your mobigo, it should be in dev mode now")
             return 0
-        
+
         print(f"developer_mode: {exc}")
         return 1
 

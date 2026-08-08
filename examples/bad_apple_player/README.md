@@ -4,6 +4,10 @@ This G1 example is the SDK port of the original Bad Apple proof-of-concept. It
 plays a 64x48, 1-bpp XOR-delta/RLE movie scaled to 320x240 and loops an unsigned
 8-bit PCM sample through the GPL16250 SPU.
 
+The direct framebuffer/audio loop polls `direct_controls.h`. Volume,
+brightness, and Off use resident settings/power services; overlays are omitted
+because resident rendering is not active. The player has no game input.
+
 No copyrighted movie or audio is included or downloaded. A normal build uses
 an original moving-box clip and tone generated locally, so the example works
 from a clean checkout:

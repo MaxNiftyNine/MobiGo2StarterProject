@@ -10,6 +10,7 @@
  */
 
 #include "generated_media.h"
+#include "mobigo_sdk/direct_controls.h"
 
 #define REG16(a) (*(volatile unsigned short *)(a))
 #define WORD_PTR(a) ((volatile unsigned short *)(a))
@@ -220,6 +221,7 @@ int main(void)
     unsigned short fbi_high;
     unsigned short fbo_low;
     unsigned short fbo_high;
+    struct mg_sdk_direct_controls controls;
 
     /* This is an LD application callback. Preserve inherited IRQ/FIQ, stay
      * resident, and keep servicing the watchdog for the entire playback. */
@@ -229,6 +231,7 @@ int main(void)
     fbo_low = REG16(0x707a);
     fbo_high = REG16(0x707b);
     start_audio();
+    (void)mg_sdk_direct_controls_init(&controls);
 
     /* The movie is const data in the loaded MBA image. Keep the loader's
      * memory-controller mapping intact. */
@@ -237,6 +240,7 @@ int main(void)
         unsigned frame;
         clear_bitmap();
         for (frame = 0; frame < MOVIE_FRAMES; ++frame) {
+            mg_sdk_direct_controls_poll(&controls);
             movie = decode_frame(movie);
             expand_and_present(fbi_low, fbi_high, fbo_low, fbo_high);
             assert_scanout(fbi_low, fbi_high);

@@ -21,6 +21,21 @@ struct RealtimeThrottle {
     explicit RealtimeThrottle(bool should_enable)
         : enabled(should_enable) {}
 
+    // Start a new host-time epoch. Deferred presentation uses this at the
+    // exact MBA handoff so the uncapped boot is never counted as time that the
+    // foreground application must sleep or catch up against.
+    void rebase() {
+        wall_origin = Clock::now();
+        emulated_nanoseconds = 0;
+        fractional_numerator = 0;
+        fractional_clock_hz = 1;
+    }
+
+    void set_enabled(bool should_enable) {
+        enabled = should_enable;
+        rebase();
+    }
+
     void advance_cycles(uint64_t cycles, uint64_t clock_hz) {
         if (!enabled || cycles == 0) return;
         clock_hz = std::max<uint64_t>(1, clock_hz);

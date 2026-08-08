@@ -11,6 +11,8 @@ import sys
 import wave as wave_file
 from pathlib import Path
 
+from emulator_support import find_emulator, mba_overlay_arguments
+
 
 STATE_BASE = 0x59A0
 
@@ -28,13 +30,7 @@ def main() -> int:
     starter = root
     build = root / "build" / "adpcm_check"
     name = "AdpcmCheck"
-    emulator = starter / "build" / "emulator-macos" / "mobigo2_emu"
-
-    if not emulator.exists():
-        subprocess.run(
-            [str(starter / "tools" / "build" / "emulator_macos.sh")],
-            check=True,
-        )
+    emulator = find_emulator(starter)
     if build.exists():
         shutil.rmtree(build)
     generated = build / "generated_audio"
@@ -71,7 +67,6 @@ def main() -> int:
             "--without-system-ui",
             "--extra-source",
             str(generated / "clean_adpcm_adpcm36.c"),
-            "--install-nand",
         ],
         check=True,
     )
@@ -83,7 +78,7 @@ def main() -> int:
             str(emulator),
             "--rom", str(starter / "vendor" / "firmware" / "internalrom.bin"),
             "--spi", str(starter / "vendor" / "firmware" / "spi.bin"),
-            "--nand", str(build / f"nand.{name}.bin"),
+            *mba_overlay_arguments(root, build / f"{name}.MBA"),
             "--no-window",
             "--steps", "245000000",
             "--dump-memory", str(ram),

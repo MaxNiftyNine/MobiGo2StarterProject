@@ -82,6 +82,8 @@ static void test_unserviced_handoff_watchdog_resets_system() {
     require(!bus.system_reset_preserve_memory, "MBA watchdog requested a CPU-only reset");
     require((bus.mmio[0x7806 - kMmioBase] & 0x0010) != 0,
             "watchdog reset cause was not latched");
+    require(!bus.poweroff_requested,
+            "ordinary watchdog expiry was mistaken for a power-off request");
 }
 
 int main() {

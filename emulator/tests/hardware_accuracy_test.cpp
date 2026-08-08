@@ -124,7 +124,7 @@ struct MotionI2cHost {
     }
 };
 
-static void test_mobigo2_accelerometer_i2c_and_arrow_axes() {
+static void test_mobigo2_accelerometer_i2c_and_motion_axes() {
     MotionI2cHost host;
     require(host.read_register(0x00) == 0xf8,
             "BMA222E chip identification register is incorrect");
@@ -134,19 +134,43 @@ static void test_mobigo2_accelerometer_i2c_and_arrow_axes() {
 
     host.device.set_direction(1, true);
     require(host.read_register(0x03) == 0xc0 && host.read_register(0x05) == 0x00,
-            "right-arrow accelerometer vector is incorrect");
+            "right-motion accelerometer vector is incorrect");
     host.device.set_direction(1, false);
     host.device.set_direction(0, true);
     require(host.read_register(0x03) == 0x40,
-            "left-arrow accelerometer vector is incorrect");
+            "left-motion accelerometer vector is incorrect");
     host.device.set_direction(0, false);
     host.device.set_direction(2, true);
     require(host.read_register(0x07) == 0xc0,
-            "up-arrow accelerometer vector is incorrect");
+            "up-motion accelerometer vector is incorrect");
     host.device.set_direction(2, false);
     host.device.set_direction(3, true);
     require(host.read_register(0x07) == 0x40,
-            "down-arrow accelerometer vector is incorrect");
+            "down-motion accelerometer vector is incorrect");
+}
+
+static void test_gpio_d4_power_latch_falling_edge() {
+    Bus bus;
+
+    // A cold or partially configured low output is not a shutdown request.
+    bus.write(0x7879, 0x0000);
+    bus.write(0x787a, 0x0010);
+    bus.write(0x787b, 0x0010);
+    require(!bus.poweroff_requested,
+            "cold GPIO-D4 low level was mistaken for a shutdown edge");
+
+    // Resident firmware first holds board power high, then request_poweroff()
+    // releases the same active-high output through the Buffer register.
+    bus.write(0x7879, 0x0010);
+    require(bus.power_latch_seen_high,
+            "GPIO-D4 high power-hold state was not armed");
+    bus.write(0x7879, 0x0000);
+    require(bus.poweroff_requested,
+            "GPIO-D4 power-hold falling edge did not request power-off");
+
+    bus.system_reset();
+    require(!bus.power_latch_seen_high && !bus.poweroff_requested,
+            "system reset retained the GPIO power-off latch state");
 }
 
 static void test_mba_entry_return_is_an_application_exit() {
@@ -433,7 +457,8 @@ static void test_centered_sprite_coordinates_clip_without_wrapping() {
 int main() {
     test_realtime_throttle_uses_live_hardware_clock();
     test_touch_frontend_calibration_orientation();
-    test_mobigo2_accelerometer_i2c_and_arrow_axes();
+    test_mobigo2_accelerometer_i2c_and_motion_axes();
+    test_gpio_d4_power_latch_falling_edge();
     test_mba_entry_return_is_an_application_exit();
     test_mba_scanout_requires_inherited_interrupt_service();
     test_ppu_bit_zero_is_not_a_global_enable();

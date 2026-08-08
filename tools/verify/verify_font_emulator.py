@@ -9,6 +9,8 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+from emulator_support import find_emulator, mba_overlay_arguments
+
 
 def read_word(data: bytes, base: int, address: int) -> int:
     return struct.unpack_from("<H", data, (address - base) * 2)[0]
@@ -70,7 +72,6 @@ def build_app(root: Path, source: Path, out: Path, name: str) -> None:
             "--name", name,
             "--slot", "SY",
             "--with-clean-font",
-            "--install-nand",
         ],
         check=True,
     )
@@ -80,12 +81,7 @@ def run_app(
     root: Path, out: Path, name: str
 ) -> tuple[bytes, tuple[int, int, list[tuple[int, int, int]]]]:
     starter = root
-    emulator = starter / "build" / "emulator-macos" / "mobigo2_emu"
-    if not emulator.exists():
-        subprocess.run(
-            [str(starter / "tools" / "build" / "emulator_macos.sh")],
-            check=True,
-        )
+    emulator = find_emulator(starter)
 
     ram = out / "font_ram.bin"
     frame = out / "font_frame.bmp"
@@ -94,7 +90,7 @@ def run_app(
             str(emulator),
             "--rom", str(starter / "vendor" / "firmware" / "internalrom.bin"),
             "--spi", str(starter / "vendor" / "firmware" / "spi.bin"),
-            "--nand", str(out / f"nand.{name}.bin"),
+            *mba_overlay_arguments(root, out / f"{name}.MBA"),
             "--no-window",
             "--steps", "250000000",
             "--dump-memory", str(ram),

@@ -1,130 +1,137 @@
-# THIS IS AI SLOP LIKE EVERYTHING I DO, but it works
-im sorry, not sorry.
+# MobiGo 2 Homebrew SDK
 
-# MobiGo 2 SDK Starter
+Build C homebrew for the VTech MobiGo 2, package it as a donor-free MBA,
+install it into a disposable NAND image, and test it in Emulator2.
 
-A complete C homebrew starter for the VTech MobiGo 2. The project builds the
-editable application in [`app/main.c`](app/main.c) against a clean-room SDK,
-creates a complete MBA without a donor game, installs it in a copied NAND, and
-runs it in Emulator2.
-
-The emulator source already contains the recovered SPU beat and channel
-behavior required by SDK music. There is one emulator source tree and one
-normal test path—no runtime patch step.
+The supported starting point is the editable application in `app/main.c`. New
+projects target the **SY system profile** unless they deliberately opt into the
+legacy G1 compatibility profile. SY and G1 binaries are not interchangeable.
 
 ## Quick start
 
-macOS requires Python 3 and Wine:
+The canonical command-line entry point is:
 
 ```sh
-./scripts/build_and_run.command --no-audio
+python3 tools/mobigo.py doctor
+python3 tools/mobigo.py run
 ```
 
-Windows requires Python 3:
+`doctor` checks the host, target compiler, firmware inputs, and emulator.
+`run` builds the starter, applies a role-aware in-memory MBA overlay, and
+launches the emulator. Older emulator binaries automatically fall back to a
+verified copied-NAND install. Neither path changes tracked firmware inputs.
 
-```powershell
-.\scripts\build_and_run.ps1 -NoAudio
+Other common commands are:
+
+```sh
+python3 tools/mobigo.py build
+python3 tools/mobigo.py test
 ```
 
-Both commands generate:
+- `build` produces `build/MobiGo2Starter.MBA` and related artifacts without
+  launching the emulator. Add `--nand` when a persistent edited NAND is needed.
+- `test` runs host, USB, target-compiler, emulator unit, and emulator-device
+  checks. Add `--full` for all firmware integrations, sample builds, and
+  complete-sample emulator runtime checks.
 
-```text
-build/MobiGo2Starter.MBA
-build/nand.edited.bin
-```
+On stock Windows without Make, `test` labels and runs a smaller native baseline
+that still includes target compilation and a firmware/emulator integration.
+The full command fails until the documented MSYS2 test prerequisites are present;
+it never reports success after silently skipping release checks.
 
-They never modify the source NAND in `vendor/firmware/`.
+See the [installation guide](docs/start/install.md) for Windows, macOS, and
+Linux prerequisites and the [first-project guide](docs/start/first-project.md)
+for the complete workflow.
 
 ## Develop a game
 
-Edit [`app/main.c`](app/main.c). The public SDK is in
-[`include/mobigo_sdk`](include/mobigo_sdk), its implementation is in `src/`,
-and focused working examples are in [`examples`](examples).
+Edit `app/main.c` or copy the starter into a new project. Public headers are in
+`include/mobigo_sdk/`; implementations are in `src/`.
 
-Build without launching the emulator:
+Target applications are C: the bundled builder supports C99-style `.c` and
+u'nSP `.asm`/`.s` sources. It does not provide a target C++ frontend or an
+established C++ ABI. Emulator2 is independently written in host C++20.
 
-```sh
-python3 tools/build/build_sdk_app.py app/main.c \
-  --output-dir build \
-  --name MobiGo2Starter \
-  --slot SY
-```
+The SDK includes:
 
-Useful options include `--slot G1`, repeatable `--extra-source` for C or u'nSP
-assembly files,
-`--with-clean-font`, and custom `--menu-tile`/`--palette` data.
+- the resident application lifecycle;
+- logical buttons, keyboard input, touch, and motion-sensor support;
+- standard volume, brightness, and power-off handling;
+- graphics resources, sprites, animation, and text;
+- PCM8 and ADPCM36 effects plus sequenced music;
+- resident storage access;
+- donor-free SY and legacy G1 MBA packaging;
+- NAND, USB, asset, emulator, and Ghidra tools.
 
-Three complete G1 projects ported from the original toolkit are maintained in
-[`examples`](examples): Color Cycle, the monochrome movie player, and MobiGo
-Celeste. Build all three with `make samples`.
+Read [Lifecycle and memory](docs/guides/lifecycle-memory.md) before porting code.
+A direct MBA entry does not receive conventional C runtime initialization, so
+ordinary assumptions about initialized writable globals are unsafe.
 
-An MBA handoff does not run a conventional initialized-data C startup. Keep
-large immutable assets `const`, explicitly initialize mutable state, and do not
-return from a resident application. The starter demonstrates the safe pattern.
+For a substantial port, start with the
+[porting guide](docs/guides/porting.md). It is written for both human developers
+and coding agents.
 
-## Test
+## Targets and installation safety
 
-Fast host tests:
+The default starter is linked for SY. Use the role-aware emulator workflow for
+normal development and a copied NAND when validating persistent installation.
+Installing an SY application on a physical device replaces
+the system menu and requires verified recovery backups.
 
-```sh
-make test
-```
+G1 is a legacy, explicit opt-in used by several examples. A G1-linked MBA must
+be installed with the G1 target; never install the default SY artifact as G1.
+Device filenames differ by region, so use the filesystem-aware tools instead of
+embedding a numeric slot filename in code, documentation, or automation.
 
-Complete compiler, emulator, graphics, storage, input, and audio verification:
+See [Target profiles](docs/start/target-profiles.md) and
+[Deployment and recovery](docs/guides/deployment.md).
 
-```sh
-make release-check
-```
+## Test before hardware
 
-The emulator itself is tested directly with:
-
-```sh
-tools/build/emulator_macos.sh --test
-```
-
-## Hardware and Ghidra
-
-USB installation and recovery guidance is in
-[`tools/usb/README.md`](tools/usb/README.md). Install the default SY build with:
+Run:
 
 ```sh
-./scripts/usb/install_mba.command --system build/MobiGo2Starter.MBA
+python3 tools/mobigo.py test
 ```
 
-For a guided real-console check of every supported SDK subsystem, build the
-[`examples/hardware_test_suite`](examples/hardware_test_suite) project or run
-`make hardware-suite`.
-
-The MBA/GAM Ghidra extension is in
-[`tools/ghidra/loader/MobiGoMbaLoader`](tools/ghidra/loader/MobiGoMbaLoader).
-Analysis helpers are kept separately in `tools/ghidra/scripts/`.
+Every port should also receive an application-specific emulator smoke test.
+Input, rendering, system controls, audio, storage, shutdown, and relaunch paths
+that the application uses should be exercised before physical installation.
+The [testing guide](docs/testing/test-levels.md) explains the available levels
+and their evidence boundaries.
 
 ## Documentation
 
-[Click Here for docs](https://maxniftynine.github.io/MobiGo2StarterProject/)
+The published manual is at
+[maxniftynine.github.io/MobiGo2StarterProject](https://maxniftynine.github.io/MobiGo2StarterProject/).
+It separates application development, API reference, physical hardware,
+firmware/software behavior, tools, and validation evidence.
 
-The GitHub Pages source is [`docs`](docs), configured by `mkdocs.yml`. Locally:
+Build it locally with:
 
 ```sh
 python3 -m pip install -r docs/requirements.txt
 mkdocs serve
 ```
 
+Historical reverse-engineering notes remain under `research/`. They preserve
+evidence but are not the source of truth for new application paths.
 
-## Layout
+## Repository layout
 
 ```text
-app/             editable starter application
-include/, src/   public SDK and implementation
-examples/        focused probes, a hardware suite, and complete sample projects
+app/             editable SY starter application
+include/, src/   public clean-room SDK and implementation
+examples/        focused probes and complete opt-in examples
 tests/           firmware-free SDK and packaging tests
-emulator/        Emulator2 source, tests, web frontend, and platform binaries
-tools/           build, asset, NAND, USB, RE, verification, and Ghidra tools
-scripts/         user-facing macOS and Windows launchers
-docs/            published guides and technical references
-research/        RE notes, reports, archived material, and experimental probes
-vendor/          Generalplus tools/linker bodies and device firmware
+emulator/        Emulator2 source, tests, web frontend, and binaries
+tools/           unified CLI and specialist build/asset/device/RE tools
+scripts/         compatibility launchers for desktop workflows
+docs/            current published manual
+research/        evidence, dated notes, reports, and historical material
+vendor/          third-party tools, linker profiles, and firmware inputs
 ```
 
-See [`docs/project-status.md`](docs/project-status.md) for exact evidence and
-known limitations. Read [`THIRD_PARTY.md`](THIRD_PARTY.md) before redistribution.
+Read `THIRD_PARTY.md` before redistributing the repository or its bundled
+inputs. The project is an independent clean-room effort, not an official VTech
+or Generalplus SDK.

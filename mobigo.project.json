@@ -1,0 +1,9 @@
+{
+  "$schema": "schema/mobigo-project.schema.json",
+  "name": "MobiGo2Starter",
+  "source": "app/main.c",
+  "target": "system",
+  "system_ui": true,
+  "clean_font": false,
+  "extra_sources": []
+}

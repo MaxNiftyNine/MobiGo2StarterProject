@@ -85,6 +85,9 @@ def main() -> int:
     )
     sources = [
         root / "src" / "system_controls.c",
+        root / "src" / "hardware.c",
+        root / "src" / "direct_controls.c",
+        root / "src" / "standard_controls.c",
         root / "src" / "input.c",
         root / "src" / "audio.c",
         root / "src" / "audio_resources.c",

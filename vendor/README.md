@@ -1,9 +1,11 @@
-# Vendor and device-derived files
+# Third-party and device-derived inputs
 
-- `generalplus/compiler/` contains the u'nSP IDE toolchain used for target
+- `generalplus/compiler/`: u'nSP target compiler tools.
+- `generalplus/linker/`: recovered, role-specific linker bodies used by target
   builds.
-- `generalplus/linker/` contains the recovered G1/SY linker body files.
-- `firmware/` contains the ROM, SPI, and split NAND inputs used by Emulator2.
+- `firmware/`: ROM, SPI, and split NAND inputs used by Emulator2 and disposable
+  NAND workflows.
 
-These files are not covered by the SDK's MIT license. See `THIRD_PARTY.md` and
-confirm redistribution rights before publishing a fork or release archive.
+These files are outside the SDK's MIT license. Read `THIRD_PARTY.md`, preserve
+notices, and confirm redistribution rights before publishing a fork, build
+cache, documentation bundle, or release archive.

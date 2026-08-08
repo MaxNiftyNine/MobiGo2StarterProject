@@ -10,6 +10,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from emulator_support import find_emulator, mba_overlay_arguments
+
 
 STATE_BASE = 0x59D0
 
@@ -27,13 +29,7 @@ def main() -> int:
     starter = root
     build = root / "build" / "audio_check"
     name = "AudioCheck"
-    emulator = starter / "build" / "emulator-macos" / "mobigo2_emu"
-
-    if not emulator.exists():
-        subprocess.run(
-            [str(starter / "tools" / "build" / "emulator_macos.sh")],
-            check=True,
-        )
+    emulator = find_emulator(starter)
     if build.exists():
         shutil.rmtree(build)
 
@@ -46,7 +42,6 @@ def main() -> int:
             "--name", name,
             "--slot", "SY",
             "--without-system-ui",
-            "--install-nand",
         ],
         check=True,
     )
@@ -58,7 +53,7 @@ def main() -> int:
             str(emulator),
             "--rom", str(starter / "vendor" / "firmware" / "internalrom.bin"),
             "--spi", str(starter / "vendor" / "firmware" / "spi.bin"),
-            "--nand", str(build / f"nand.{name}.bin"),
+            *mba_overlay_arguments(root, build / f"{name}.MBA"),
             "--no-window",
             "--steps", "245000000",
             "--dump-memory", str(ram),

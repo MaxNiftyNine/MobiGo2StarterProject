@@ -1,0 +1,22 @@
+* text=auto
+*.sh text eol=lf
+*.command text eol=lf
+*.ps1 text eol=lf
+*.bat text eol=crlf
+*.c text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.bin binary
+*.MBA binary
+*.pdf binary
+*.docx binary
+*.dll binary
+*.exe binary
+*.lib binary
+*.dylib binary

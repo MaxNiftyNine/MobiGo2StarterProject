@@ -25,6 +25,7 @@ struct Cpu {
     uint64_t trace_limit = 0;
     uint64_t trace_lines = 0;
     bool trace_transitions = false;
+    bool track_recent_history = true;
     uint64_t trace_transition_limit = 0;
     uint64_t trace_start_insn = 0;
     uint64_t trace_transition_lines = 0;
@@ -938,7 +939,8 @@ struct Cpu {
             }
             g_log << std::dec << "\n";
         }
-        if (previous_pc != UINT32_MAX && pc0 != ((previous_pc + 1) & kAddrMask)) {
+        if (track_recent_history && previous_pc != UINT32_MAX &&
+            pc0 != ((previous_pc + 1) & kAddrMask)) {
             recent_transitions[recent_transition_pos++ % recent_transitions.size()] =
                 PcTransition{previous_pc, pc0, previous_op};
             if (trace_transitions && g_log && insns >= trace_start_insn && pc0 != previous_pc &&
@@ -960,11 +962,14 @@ struct Cpu {
                       << std::dec << "\n";
             }
         }
-        recent_pc[recent_pos++ % recent_pc.size()] = pc0;
+        if (track_recent_history)
+            recent_pc[recent_pos++ % recent_pc.size()] = pc0;
         const uint16_t op = fetch();
         current_op = op;
-        previous_pc = pc0;
-        previous_op = op;
+        if (track_recent_history) {
+            previous_pc = pc0;
+            previous_op = op;
+        }
         const bool trace_this_pc = trace && insns >= trace_start_insn &&
                                    (!trace_range || (pc0 >= trace_lo && pc0 < trace_hi)) &&
                                    (!trace_limit || trace_lines < trace_limit);

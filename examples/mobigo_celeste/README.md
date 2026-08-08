@@ -7,9 +7,16 @@ an optimized u'nSP assembly scaler plus system DMA to present a centered
 
 ## Controls
 
-- D-pad: move
-- Primary button: jump/start
-- Help or Brightness: dash
+| Action | Console controls | Keyboard alternatives | Emulator host keys |
+| --- | --- | --- | --- |
+| Move left/right | large D-pad or keyboard arrows | A / D | arrows, A / D, `[` / `]` |
+| Move up/down | large D-pad | W / S | arrows, W / S |
+| Jump/start | Primary or Enter | E | Ctrl, Return, E |
+| Dash | Help or Brightness | X or Space | F1, F6, X, Space |
+
+Brightness retains its system behavior while also triggering dash. Volume Up,
+Volume Down, Brightness, and Off are polled through `direct_controls.h`; direct
+framebuffer ownership means no resident overlay is drawn.
 
 ## Build
 

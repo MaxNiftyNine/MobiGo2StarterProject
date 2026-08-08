@@ -18,6 +18,15 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
+TOOLS = HERE.parent
+if str(TOOLS) not in sys.path:
+    sys.path.insert(0, str(TOOLS))
+
+from mba_profile import require_mba_profile
+
+
+DEFAULT_SLOT = "SY"
+DEFAULT_EDITOR = HERE / "nandfs.py"
 
 
 def load_editor(editor_path: Path):
@@ -158,20 +167,41 @@ def slot_files(editor, nand, slot: str) -> list[tuple[int, str, int]]:
     return result
 
 
-def main() -> int:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Install an MBA into all selected G1 or SY copies in a raw NAND image"
     )
-    parser.add_argument("--slot", choices=("G1", "SY"), default="G1")
+    parser.add_argument(
+        "--slot",
+        choices=("G1", "SY"),
+        default=DEFAULT_SLOT,
+        help=(
+            "launcher slot to replace (default: SY, the maintained system-app "
+            "profile; pass --slot G1 explicitly for legacy G1 titles)"
+        ),
+    )
     parser.add_argument("nand", type=Path, help="source raw NAND image")
     parser.add_argument("mba", type=Path, help="MBA file to install in the selected slot")
     parser.add_argument("output", type=Path, help="new raw NAND image to write")
     parser.add_argument(
         "--editor",
         type=Path,
-        default=HERE / "mobigo2_nandfs_editor_v2.py",
-        help="path to mobigo2_nandfs_editor_v2.py (default: beside this script)",
+        default=DEFAULT_EDITOR,
+        help="path to nandfs.py (default: maintained parser beside this script)",
     )
+    parser.add_argument(
+        "--allow-unverified-profile",
+        action="store_true",
+        help=(
+            "allow an MBA whose complete launch metadata is not a known SY/G1 "
+            "profile (cross-slot profiles are always rejected)"
+        ),
+    )
+    return parser
+
+
+def main() -> int:
+    parser = build_parser()
     args = parser.parse_args()
 
     source_nand = args.nand.expanduser().resolve()
@@ -189,6 +219,14 @@ def main() -> int:
         parser.error("MBA file is empty")
     if len(data) & 1:
         parser.error("MBA size is odd; MOBIGOFS stores sizes in 16-bit words")
+    try:
+        require_mba_profile(
+            data,
+            args.slot,
+            allow_unverified=args.allow_unverified_profile,
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
 
     editor = load_editor(editor_path)
     source = editor.RawNand(source_nand)

@@ -6,20 +6,32 @@
 /*
  * Target-only application handoff API.
  *
- * Paths use the MobiGo volume form, for example:
- *     A:\BUNDLE\SY\135800SY.MBA
+ * Paths use the packed MobiGo volume form:
+ *     <volume>:\BUNDLE\<role>\<title>.MBA
  *
- * The resident launcher copies at most 42 path bytes and at most sixteen
- * 32-bit argument values before scheduling the handoff. This call does not
+ * The resident launcher copies at most 42 path bytes (41 characters plus the
+ * required terminator) and at most sixteen 32-bit argument values before
+ * scheduling the handoff. This call does not
  * jump immediately. After calling it from a runtime frame callback, return
  * zero from that callback so runtime_step can stop and runtime_finalize can
- * complete the resident handoff, then return from the MBA entry. Official G1
- * and SY transitions normally pass one 32-bit argument with value 999.
+ * complete the resident handoff, then return from the MBA entry. The bundled
+ * verified firmware fixture uses one 32-bit argument with value 999 for its
+ * observed G1/SY transitions; that value is evidence for those call sites,
+ * not a universal application argument contract.
  */
 enum {
+    MG_SDK_LAUNCH_PATH_WORDS = 21,
     MG_SDK_LAUNCH_PATH_BYTES = 42,
+    MG_SDK_LAUNCH_PATH_MAX_CHARS = 41,
     MG_SDK_LAUNCH_MAX_ARGUMENTS = 16
 };
+
+/* Pack a launch path independently of the resident filesystem wrappers'
+ * shorter normalization buffer.  Returns zero rather than truncating when a
+ * NUL-terminated path exceeds MAX_CHARS. */
+int mg_sdk_launch_pack_path(
+    mg_sdk_u16 *destination,
+    const char *source);
 
 int mg_sdk_resident_path_exists(const char *path);
 

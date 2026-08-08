@@ -1,10 +1,11 @@
 # MobiGo MBA/GAM executable format
 
 This document describes the `bM_gbMQa` application container used by VTech
-MobiGo `.gam` files and MobiGo 2 `.MBA` files. It is based on fourteen retail
-files in the adjacent `MBAs` sample collection, cross-file comparison,
-entry-point disassembly, menu-image decoding, and the existing MobiGo 2
-homebrew research in this repository.
+MobiGo `.gam` files and MobiGo 2 `.MBA` files. It is based on fourteen reference
+files examined during clean-room research, cross-file comparison, entry-point
+disassembly, menu-image decoding, and the retained MobiGo 2 research notes in
+this repository. Those reference binaries are not distributed as part of the
+documentation tree.
 
 The format is only partly understood. Fields and rules below are marked
 **verified**, **strongly inferred**, or **unknown** so that observations are
@@ -57,7 +58,7 @@ loader code may decode, copy, bank, or overwrite later data.
 All examined files have even byte lengths. The header's file-size value also
 makes odd-byte files unrepresentable.
 
-### Worked example: `BUNDLE_G1_135800G1.MBA`
+### Worked example: G1 role sample
 
 ```text
 body load address H = 0x0c8800
@@ -279,13 +280,13 @@ CRC, and an entry that maps to plausible unSP code.
 | `58-115800-000-029_V020.gam` | `Keyboard Jam` | `0x48000` | `0x224000` | `0x224800` | `0x22b03a` | `0x00e074` |
 | `58-115800-000-030_V020.gam` | `DJ Beats` | `0x35000` | `0x224000` | `0x224800` | `0x22adc7` | `0x00db8e` |
 | `58-115800-000-031_V010.gam` | `Monkey Disco` | `0x93000` | `0x224000` | `0x224800` | `0x22d88b` | `0x013116` |
-| `BUNDLE_G1_135800G1.MBA` | `MGB_G1` | `0x214000` | `0x0c8000` | `0x0c8800` | `0x0e1a55` | `0x0334aa` |
-| `BUNDLE_G2_135800G2.MBA` | `MGB_G2` | `0x13e000` | `0x0c8000` | `0x0c8800` | `0x0cff42` | `0x00fe84` |
-| `BUNDLE_G3_135800G3.MBA` | `MGB_G3` | `0x3f0000` | `0x0c8000` | `0x0c8800` | `0x0d8445` | `0x02088a` |
-| `BUNDLE_G4_135800G4.MBA` | `MGB_G4` | `0x2e2000` | `0x0c8000` | `0x0c8800` | `0x0d83e2` | `0x0207c4` |
-| `BUNDLE_LD_135800LD.MBA` | `Loading App` | `0x1e000` | `0x0c8000` | `0x0c8800` | `0x0c889a` | `0x001134` |
-| `BUNDLE_SY_135800SY.MBA` | `MGB_SYS` | `0x174000` | `0x0c8000` | `0x0c8800` | `0x0dfc1d` | `0x02f83a` |
-| `BUNDLE_TM_135800TM.MBA` | `MGB_TM` | `0x13000` | `0x0c8000` | `0x0c8800` | `0x0ca0aa` | `0x004154` |
+| G1 role sample | `MGB_G1` | `0x214000` | `0x0c8000` | `0x0c8800` | `0x0e1a55` | `0x0334aa` |
+| G2 role sample | `MGB_G2` | `0x13e000` | `0x0c8000` | `0x0c8800` | `0x0cff42` | `0x00fe84` |
+| G3 role sample | `MGB_G3` | `0x3f0000` | `0x0c8000` | `0x0c8800` | `0x0d8445` | `0x02088a` |
+| G4 role sample | `MGB_G4` | `0x2e2000` | `0x0c8000` | `0x0c8800` | `0x0d83e2` | `0x0207c4` |
+| LD role sample | `Loading App` | `0x1e000` | `0x0c8000` | `0x0c8800` | `0x0c889a` | `0x001134` |
+| SY role sample | `MGB_SYS` | `0x174000` | `0x0c8000` | `0x0c8800` | `0x0dfc1d` | `0x02f83a` |
+| TM role sample | `MGB_TM` | `0x13000` | `0x0c8000` | `0x0c8800` | `0x0ca0aa` | `0x004154` |
 | `USENG_EBOOK.MBA` | `MGB_EBK` | `0x1d000` | `0x0c8000` | `0x0c8800` | `0x0d4908` | `0x019210` |
 | `USENG_MM.MBA` | `Main Meun` | `0x41000` | `0x224000` | `0x224800` | `0x22d8a5` | `0x01314a` |
 | `USENG_UB.MBA` | `USB APP` | `0x13000` | `0x224000` | `0x224800` | `0x226261` | `0x0044c2` |
@@ -372,6 +373,5 @@ Further runtime tracing or launcher disassembly is needed to determine:
 
 Until those questions are answered, a new builder should use a tested
 slot/firmware profile. The included generator constructs both profiles
-deterministically; SY has passed the complete normal-boot emulator path, while
-the G1 profile is structurally derived and still requires a from-scratch
-menu-launch test.
+deterministically. SY is canonical for new applications; G1 remains a tested
+legacy compatibility profile rather than a default.

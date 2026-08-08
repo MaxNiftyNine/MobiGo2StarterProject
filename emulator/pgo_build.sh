@@ -58,7 +58,7 @@ cmake -S "$SCRIPT_DIR" -B "$GENERATE_DIR" \
 cmake --build "$GENERATE_DIR" --config Release --parallel
 
 LLVM_PROFILE_FILE="$RAW_PROFILE" "$GENERATE_DIR/mobigo2_emu" \
-    --no-window --steps "$TRAIN_STEPS" \
+    --mode fast --no-window --steps "$TRAIN_STEPS" \
     --rom "$REPO_DIR/vendor/firmware/internalrom.bin" \
     --spi "$REPO_DIR/vendor/firmware/spi.bin" \
     --nand "$REPO_DIR/vendor/firmware/nand.us-stitched.bin"

@@ -24,7 +24,7 @@
 #define AUDIO_LAYOUT ((mg_sdk_u16 *)0x62e0UL)
 #define PATCH_ROOT ((mg_sdk_u16 *)0x6300UL)
 #define AUDIO_WAVES ((mg_sdk_u16 *)0x6500UL)
-#define IO_BUFFER ((mg_sdk_u16 *)0x6800UL)
+#define IO_BUFFER ((mg_sdk_u16 *)0x6700UL)
 #define MUSIC_AUX_WORD_0 (*(volatile mg_sdk_u16 *)0x0397UL)
 #define MUSIC_AUX_WORD_1 (*(volatile mg_sdk_u16 *)0x0398UL)
 #define RELAUNCH_COOKIE_0 (*(volatile mg_sdk_u16 *)0x60f0UL)
@@ -120,10 +120,18 @@ enum {
 };
 
 static const char storage_path[] = "A:DEGER\\MBASORT.LST";
-static const char self_path_800_noroot[] = "A:BUNDLE\\SY\\135800SY.MBA";
-static const char self_path_800[] = "A:\\BUNDLE\\SY\\135800SY.MBA";
-static const char self_path_804_noroot[] = "A:BUNDLE\\SY\\135804SY.MBA";
-static const char self_path_804[] = "A:\\BUNDLE\\SY\\135804SY.MBA";
+/* Target-side storage currently has no verified directory-enumeration API.
+ * Self-relaunch therefore probes only the filenames evidenced by the bundled
+ * German and US fixtures. Host NAND/USB tools perform true suffix discovery;
+ * this diagnostic fallback is deliberately narrower. */
+static const char known_german_self_path_noroot[] =
+    "A:BUNDLE\\SY\\135800SY.MBA";
+static const char known_german_self_path[] =
+    "A:\\BUNDLE\\SY\\135800SY.MBA";
+static const char known_us_self_path_noroot[] =
+    "A:BUNDLE\\SY\\135804SY.MBA";
+static const char known_us_self_path[] =
+    "A:\\BUNDLE\\SY\\135804SY.MBA";
 
 static mg_sdk_u32 state_handle(mg_sdk_u16 low_index)
 {
@@ -322,14 +330,16 @@ static void show_result(mg_sdk_u16 test, int passed, const char *detail)
         detail, "ENTER OR EXIT MENU", 0);
 }
 
-static const char *find_self_path(void)
+static const char *find_known_self_path(void)
 {
-    if (mg_sdk_resident_path_exists(self_path_800_noroot))
-        return self_path_800_noroot;
-    if (mg_sdk_resident_path_exists(self_path_800)) return self_path_800;
-    if (mg_sdk_resident_path_exists(self_path_804_noroot))
-        return self_path_804_noroot;
-    if (mg_sdk_resident_path_exists(self_path_804)) return self_path_804;
+    if (mg_sdk_resident_path_exists(known_german_self_path_noroot))
+        return known_german_self_path_noroot;
+    if (mg_sdk_resident_path_exists(known_german_self_path))
+        return known_german_self_path;
+    if (mg_sdk_resident_path_exists(known_us_self_path_noroot))
+        return known_us_self_path_noroot;
+    if (mg_sdk_resident_path_exists(known_us_self_path))
+        return known_us_self_path;
     return 0;
 }
 
@@ -841,7 +851,7 @@ static int app_frame(mg_sdk_u32 ticks)
         if (mg_sdk_resident_game_key_pressed(MG_SDK_GAME_KEY_EXIT)) show_menu();
         else if (mg_sdk_resident_game_key_pressed(MG_SDK_GAME_KEY_PRIMARY)) {
             mg_sdk_u32 arguments[1];
-            const char *path = find_self_path();
+            const char *path = find_known_self_path();
             arguments[0] = 999;
             if (path == 0) {
                 show_result(TEST_RELAUNCH, 0, "INSTALLED SY PATH NOT FOUND");

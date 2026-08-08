@@ -11,6 +11,8 @@ import sys
 import wave as wave_module
 from pathlib import Path
 
+from emulator_support import find_emulator, mba_overlay_arguments
+
 
 STATE_BASE = 0x5960
 
@@ -29,12 +31,7 @@ def main() -> int:
     build = root / "build" / "music_adpcm_check"
     generated = build / "generated_audio"
     name = "MusicAdpcmCheck"
-    emulator = root / "build" / "emulator-macos" / "mobigo2_emu"
-
-    if not emulator.exists():
-        subprocess.run(
-            [str(root / "tools" / "build" / "emulator_macos.sh")], check=True
-        )
+    emulator = find_emulator(root)
     if build.exists():
         shutil.rmtree(build)
     generated.mkdir(parents=True)
@@ -70,7 +67,6 @@ def main() -> int:
             "--name", name,
             "--slot", "SY",
             "--without-system-ui",
-            "--install-nand",
         ],
         check=True,
     )
@@ -82,7 +78,7 @@ def main() -> int:
             str(emulator),
             "--rom", str(starter / "vendor" / "firmware" / "internalrom.bin"),
             "--spi", str(starter / "vendor" / "firmware" / "spi.bin"),
-            "--nand", str(build / f"nand.{name}.bin"),
+            *mba_overlay_arguments(root, build / f"{name}.MBA"),
             "--no-window",
             "--steps", "250000000",
             "--dump-memory", str(ram),

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build the monochrome movie-player sample as a donor-free G1 MBA."""
+"""Build the movie-player legacy direct-hardware G1 profile.
+
+G1 is intentional: the player owns scanout and audio hardware and is validated
+against the legacy G1 launcher, not the maintained resident SY lifecycle.
+"""
 
 from __future__ import annotations
 

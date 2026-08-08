@@ -18,6 +18,7 @@
 #include <array>
 #include <bit>
 #include <chrono>
+#include <cctype>
 #include <cmath>
 #include <cstdint>
 #include <cstdio>
@@ -28,9 +29,11 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <optional>
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <string_view>
 #include <unordered_set>
 #include <vector>
 
@@ -172,12 +175,136 @@ struct ScriptedKeyTransition {
     std::string name;
 };
 
+enum class EmulatorMode {
+    Accurate,
+    Fast,
+};
+
+enum class MbaTarget {
+    Auto,
+    System,
+    G1,
+    Menu,
+};
+
+inline const char *emulator_mode_name(EmulatorMode mode) {
+    return mode == EmulatorMode::Accurate ? "accurate" : "fast";
+}
+
+inline const char *mba_target_name(MbaTarget target) {
+    switch (target) {
+    case MbaTarget::Auto: return "auto";
+    case MbaTarget::System: return "system";
+    case MbaTarget::G1: return "g1";
+    case MbaTarget::Menu: return "menu";
+    }
+    return "unknown";
+}
+
+inline std::string ascii_lower(std::string value) {
+    std::transform(value.begin(), value.end(), value.begin(),
+                   [](unsigned char c) { return char(std::tolower(c)); });
+    return value;
+}
+
+inline MbaTarget parse_mba_target(std::string value) {
+    value = ascii_lower(std::move(value));
+    if (value == "auto") return MbaTarget::Auto;
+    if (value == "system" || value == "sy") return MbaTarget::System;
+    if (value == "g1" || value == "game1") return MbaTarget::G1;
+    if (value == "menu" || value == "mm") return MbaTarget::Menu;
+    die("--mba-target expects auto, system/SY, g1/G1, or menu/MM");
+}
+
+inline EmulatorMode parse_emulator_mode(std::string value) {
+    value = ascii_lower(std::move(value));
+    if (value == "accurate") return EmulatorMode::Accurate;
+    if (value == "fast") return EmulatorMode::Fast;
+    die("--mode expects accurate or fast");
+}
+
+struct MatrixKey {
+    unsigned row = 0;
+    unsigned column = 0;
+
+    bool operator==(const MatrixKey &) const = default;
+};
+
+struct NamedMatrixKey {
+    std::string_view name;
+    MatrixKey key;
+};
+
+// This is the single source of truth for both scripted and SDL input. Host
+// key aliases below resolve to one of these logical MobiGo controls.
+inline constexpr std::array<NamedMatrixKey, 49> kNamedMatrixKeys{{
+    {"t", {0, 0}}, {"y", {0, 1}}, {"u", {0, 2}}, {"i", {0, 3}},
+    {"o", {0, 4}}, {"p", {0, 5}}, {"w", {0, 6}}, {"e", {0, 7}},
+    {"r", {0, 8}},
+    {"f", {1, 0}}, {"g", {1, 1}}, {"h", {1, 2}}, {"j", {1, 3}},
+    {"k", {1, 4}}, {"l", {1, 5}}, {"a", {1, 6}}, {"s", {1, 7}},
+    {"d", {1, 8}},
+    {"c", {2, 0}}, {"v", {2, 1}}, {"b", {2, 2}}, {"n", {2, 3}},
+    {"m", {2, 4}}, {"del", {2, 5}}, {"caps", {2, 6}}, {"z", {2, 7}},
+    {"x", {2, 8}},
+    {"leftarrow", {3, 0}}, {"space", {3, 1}}, {"off", {3, 2}},
+    {"left", {3, 3}}, {"up", {3, 4}}, {"primary", {3, 5}},
+    {"q", {3, 6}}, {"num", {3, 7}},
+    {"rightarrow", {4, 0}}, {"enter", {4, 1}}, {"exit", {4, 2}},
+    {"right", {4, 3}}, {"down", {4, 4}}, {"help", {4, 5}},
+    {"brightness", {4, 6}}, {"voldown", {4, 7}}, {"volup", {4, 8}},
+    {"question", {5, 5}},
+    // Useful spelling aliases. These intentionally share physical switches.
+    {"delete", {2, 5}}, {"questionmark", {5, 5}}, {"power", {3, 2}},
+}};
+
+inline std::optional<MatrixKey> matrix_key_from_name(std::string_view name) {
+    for (const NamedMatrixKey &candidate : kNamedMatrixKeys) {
+        if (candidate.name == name) return candidate.key;
+    }
+    return std::nullopt;
+}
+
+inline std::optional<MatrixKey> matrix_key_from_sdl(SDL_Keycode keycode) {
+    const char *name = nullptr;
+    switch (keycode) {
+    case SDLK_t: name = "t"; break; case SDLK_y: name = "y"; break;
+    case SDLK_u: name = "u"; break; case SDLK_i: name = "i"; break;
+    case SDLK_o: name = "o"; break; case SDLK_p: name = "p"; break;
+    case SDLK_w: name = "w"; break; case SDLK_e: name = "e"; break;
+    case SDLK_r: name = "r"; break; case SDLK_f: name = "f"; break;
+    case SDLK_g: name = "g"; break; case SDLK_h: name = "h"; break;
+    case SDLK_j: name = "j"; break; case SDLK_k: name = "k"; break;
+    case SDLK_l: name = "l"; break; case SDLK_a: name = "a"; break;
+    case SDLK_s: name = "s"; break; case SDLK_d: name = "d"; break;
+    case SDLK_c: name = "c"; break; case SDLK_v: name = "v"; break;
+    case SDLK_b: name = "b"; break; case SDLK_n: name = "n"; break;
+    case SDLK_m: name = "m"; break; case SDLK_BACKSPACE: name = "del"; break;
+    case SDLK_CAPSLOCK: name = "caps"; break; case SDLK_z: name = "z"; break;
+    case SDLK_x: name = "x"; break; case SDLK_LEFTBRACKET: name = "leftarrow"; break;
+    case SDLK_SPACE: name = "space"; break; case SDLK_F2: name = "off"; break;
+    case SDLK_LEFT: name = "left"; break; case SDLK_UP: name = "up"; break;
+    case SDLK_LCTRL: case SDLK_RCTRL: name = "primary"; break;
+    case SDLK_q: name = "q"; break; case SDLK_NUMLOCKCLEAR: name = "num"; break;
+    case SDLK_RIGHTBRACKET: name = "rightarrow"; break;
+    case SDLK_RETURN: case SDLK_KP_ENTER: name = "enter"; break;
+    case SDLK_ESCAPE: name = "exit"; break; case SDLK_RIGHT: name = "right"; break;
+    case SDLK_DOWN: name = "down"; break; case SDLK_F1: name = "help"; break;
+    case SDLK_F6: name = "brightness"; break; case SDLK_F7: name = "voldown"; break;
+    case SDLK_F8: name = "volup"; break; case SDLK_SLASH: name = "question"; break;
+    default: return std::nullopt;
+    }
+    return matrix_key_from_name(name);
+}
+
 struct Options {
     std::filesystem::path rom = "internalrom.bin";
     std::filesystem::path cart;
     std::filesystem::path spi = "spi.bin";
     std::filesystem::path nand = "nand.bin";
     std::filesystem::path mba;
+    MbaTarget mba_target = MbaTarget::Auto;
+    EmulatorMode mode = EmulatorMode::Accurate;
     std::filesystem::path dump_frame;
     std::filesystem::path dump_current_frame;
     std::filesystem::path dump_frame_dir;
@@ -191,6 +318,7 @@ struct Options {
     uint64_t render_interval = kDefaultRenderInterval;
     uint32_t max_present_hz = 60;
     uint64_t open_window_at = 0;
+    bool open_window_on_mba = false;
     uint64_t start_logging_at = 0;
     uint64_t dump_frame_interval = 0;
     uint64_t trace_limit = 0;
@@ -212,7 +340,7 @@ struct Options {
     bool rom_shadow_low = false;
     bool rom_fetch_mirror64 = false;
     bool allow_invalid_alu_nop = false;
-    bool auto_power_wake = true;
+    bool auto_power_wake = false;
     bool log = false;
     bool vsync = false;
     uint16_t efuse0 = 0;
@@ -226,6 +354,7 @@ struct Options {
     uint16_t battery_adc = 0x0500;
     bool window = true;
     bool realtime_cap = true;
+    bool realtime_cap_explicit = false;
     bool audio = false;
     bool usb = false;
     std::filesystem::path log_path = "emulator.log";
@@ -244,6 +373,9 @@ inline Options parse_args(int argc, char **argv) {
         else if (a == "--spi") opt.spi = need("--spi");
         else if (a == "--nand") opt.nand = need("--nand");
         else if (a == "--mba") opt.mba = need("--mba");
+        else if (a == "--mba-target" || a == "--mba-slot")
+            opt.mba_target = parse_mba_target(need(a.c_str()));
+        else if (a == "--mode") opt.mode = parse_emulator_mode(need("--mode"));
         else if (a == "--boot") opt.boot = need("--boot");
         else if (a == "--rom-base") opt.rom_base = uint32_t(std::stoul(need("--rom-base"), nullptr, 0));
         else if (a == "--rom-endian") opt.rom_endian = need("--rom-endian");
@@ -256,6 +388,7 @@ inline Options parse_args(int argc, char **argv) {
         else if (a == "--max-present-hz") opt.max_present_hz = uint32_t(
             std::stoul(need("--max-present-hz")));
         else if (a == "--open-window-at") opt.open_window_at = std::stoull(need("--open-window-at"));
+        else if (a == "--open-window-on-mba") opt.open_window_on_mba = true;
         else if (a == "--start-logging-at") opt.start_logging_at = std::stoull(need("--start-logging-at"));
         else if (a == "--dump-frame") opt.dump_frame = need("--dump-frame");
         else if (a == "--dump-current-frame") opt.dump_current_frame = need("--dump-current-frame");
@@ -301,60 +434,14 @@ inline Options parse_args(int argc, char **argv) {
             const uint64_t at = std::stoull(fields[0]);
             const uint64_t duration = std::stoull(fields[1]);
             if (duration == 0) die("--key-event requires nonzero duration");
-            std::string key = fields[2];
-            std::transform(key.begin(), key.end(), key.begin(),
-                           [](unsigned char c) { return char(std::tolower(c)); });
-            unsigned row = 0;
-            unsigned column = 0;
-            if (key == "t") { row = 0; column = 0; }
-            else if (key == "y") { row = 0; column = 1; }
-            else if (key == "u") { row = 0; column = 2; }
-            else if (key == "i") { row = 0; column = 3; }
-            else if (key == "o") { row = 0; column = 4; }
-            else if (key == "p") { row = 0; column = 5; }
-            else if (key == "w") { row = 0; column = 6; }
-            else if (key == "e") { row = 0; column = 7; }
-            else if (key == "r") { row = 0; column = 8; }
-            else if (key == "f") { row = 1; column = 0; }
-            else if (key == "g") { row = 1; column = 1; }
-            else if (key == "h") { row = 1; column = 2; }
-            else if (key == "j") { row = 1; column = 3; }
-            else if (key == "k") { row = 1; column = 4; }
-            else if (key == "l") { row = 1; column = 5; }
-            else if (key == "a") { row = 1; column = 6; }
-            else if (key == "s") { row = 1; column = 7; }
-            else if (key == "d") { row = 1; column = 8; }
-            else if (key == "c") { row = 2; column = 0; }
-            else if (key == "v") { row = 2; column = 1; }
-            else if (key == "b") { row = 2; column = 2; }
-            else if (key == "n") { row = 2; column = 3; }
-            else if (key == "m") { row = 2; column = 4; }
-            else if (key == "del") { row = 2; column = 5; }
-            else if (key == "caps") { row = 2; column = 6; }
-            else if (key == "z") { row = 2; column = 7; }
-            else if (key == "x") { row = 2; column = 8; }
-            else if (key == "leftarrow") { row = 3; column = 0; }
-            else if (key == "space") { row = 3; column = 1; }
-            else if (key == "off") { row = 3; column = 2; }
-            else if (key == "left") { row = 3; column = 3; }
-            else if (key == "up") { row = 3; column = 4; }
-            else if (key == "primary") { row = 3; column = 5; }
-            else if (key == "q") { row = 3; column = 6; }
-            else if (key == "num") { row = 3; column = 7; }
-            else if (key == "rightarrow") { row = 4; column = 0; }
-            else if (key == "enter") { row = 4; column = 1; }
-            else if (key == "exit") { row = 4; column = 2; }
-            else if (key == "right") { row = 4; column = 3; }
-            else if (key == "down") { row = 4; column = 4; }
-            else if (key == "help") { row = 4; column = 5; }
-            else if (key == "brightness") { row = 4; column = 6; }
-            else if (key == "voldown") { row = 4; column = 7; }
-            else if (key == "volup") { row = 4; column = 8; }
-            else if (key == "question") { row = 5; column = 5; }
-            else die("--key-event key name is not in the MobiGo 2 matrix map");
-            opt.scripted_key_transitions.push_back({at, row, column, true, key});
+            const std::string key = ascii_lower(fields[2]);
+            const std::optional<MatrixKey> matrix_key = matrix_key_from_name(key);
+            if (!matrix_key)
+                die("--key-event key name is not in the MobiGo 2 matrix map");
             opt.scripted_key_transitions.push_back(
-                {at + duration, row, column, false, key});
+                {at, matrix_key->row, matrix_key->column, true, key});
+            opt.scripted_key_transitions.push_back(
+                {at + duration, matrix_key->row, matrix_key->column, false, key});
         }
         else if (a == "--dump-memory") opt.dump_memory = need("--dump-memory");
         else if (a == "--dump-code") opt.dump_code = need("--dump-code");
@@ -391,7 +478,14 @@ inline Options parse_args(int argc, char **argv) {
         else if (a == "--log-file") { opt.log = true; opt.log_path = need("--log-file"); }
         else if (a == "--vsync") opt.vsync = true;
         else if (a == "--no-window") opt.window = false;
-        else if (a == "--no-cap") opt.realtime_cap = false;
+        else if (a == "--no-cap") {
+            opt.realtime_cap = false;
+            opt.realtime_cap_explicit = true;
+        }
+        else if (a == "--cap") {
+            opt.realtime_cap = true;
+            opt.realtime_cap_explicit = true;
+        }
         else if (a == "--audio") opt.audio = true;
         else if (a == "--usb") opt.usb = true;
         else if (a == "--rom-fetch-mirror64") opt.rom_fetch_mirror64 = true;
@@ -399,7 +493,12 @@ inline Options parse_args(int argc, char **argv) {
         else if (a == "--no-rom-shadow-low") opt.rom_shadow_low = false;
         else if (a == "--no-rom-fetch-mirror64") opt.rom_fetch_mirror64 = false;
         else if (a == "--allow-invalid-alu-nop") opt.allow_invalid_alu_nop = true;
-        else if (a == "--no-auto-power-wake") opt.auto_power_wake = false;
+        else if (a == "--auto-power-wake") {
+            opt.auto_power_wake = true;
+        }
+        else if (a == "--no-auto-power-wake") {
+            opt.auto_power_wake = false;
+        }
         else if (a == "--efuse0") opt.efuse0 = uint16_t(std::stoul(need("--efuse0"), nullptr, 0));
         else if (a == "--efuse1") opt.efuse1 = uint16_t(std::stoul(need("--efuse1"), nullptr, 0));
         else if (a == "--efuse2") opt.efuse2 = uint16_t(std::stoul(need("--efuse2"), nullptr, 0));
@@ -412,10 +511,12 @@ inline Options parse_args(int argc, char **argv) {
             std::stoul(need("--battery-adc"), nullptr, 0) & 0x0fff);
         else if (a == "--help" || a == "-h") {
             std::cout << "usage: mobigo2_emu ... [--nand path] [--mba path] "
+                         "[--mba-target auto|system|g1|menu] "
+                         "[--mode accurate|fast] [--open-window-on-mba] "
                          "[--touch-event at,duration,x,y] "
                          "[--key-event at,duration,key] [--usb] [--audio] "
                          "[--render-interval N] [--max-present-hz N] "
-                         "[--no-window] [--no-cap] "
+                         "[--no-window] [--no-cap|--cap] [--auto-power-wake] "
                          "[--open-window-at N] [--start-logging-at N] [--log] "
                          "[--log-file path] ...\n";
             std::exit(0);
@@ -423,6 +524,14 @@ inline Options parse_args(int argc, char **argv) {
             die("unknown argument: " + a);
         }
     }
+    if (opt.open_window_on_mba && opt.mba.empty())
+        die("--open-window-on-mba requires --mba");
+    if (opt.mba.empty() && opt.mba_target != MbaTarget::Auto)
+        die("--mba-target/--mba-slot requires --mba");
+    if (opt.open_window_on_mba && opt.open_window_at != 0)
+        die("--open-window-on-mba and --open-window-at are mutually exclusive");
+    if (opt.mode == EmulatorMode::Fast && !opt.realtime_cap_explicit)
+        opt.realtime_cap = false;
     std::sort(opt.scripted_touches.begin(), opt.scripted_touches.end(),
               [](const ScriptedTouch &a, const ScriptedTouch &b) { return a.at < b.at; });
     for (size_t i = 1; i < opt.scripted_touches.size(); ++i) {

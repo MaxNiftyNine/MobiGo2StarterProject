@@ -9,6 +9,7 @@
 #include "celeste.h"
 #include "frontend.h"
 #include "assets.h"
+#include "mobigo_sdk/direct_controls.h"
 
 #define REG16(address) (*(volatile unsigned short *)(address))
 #define WORD_PTR(address) ((volatile unsigned short *)(address))
@@ -42,9 +43,9 @@
  *
  * The PICO-8 image is packed as four 4-bit palette indices per word, occupying
  * 0x5000..0x5fff.  Two expanded RGB565 rows use 0x6100..0x637f, below the
- * inherited firmware stack observed above 0x6a00. The SDK's standard G1
- * linker body caps linker-owned RAM at 0x4fff, so compiler globals cannot
- * overlap the scratch blocks.
+ * inherited firmware stack observed above 0x6a00.  This port keeps mutable
+ * state in explicit fixed arenas and const data in flash; do not add ordinary
+ * writable globals that could make the linker allocate inside these blocks.
  */
 #if PICO_BUFFER_ADDRESS + PICO_BUFFER_WORDS > ROW_BUFFER_ADDRESS
 #error render scratch buffers overlap
@@ -71,6 +72,7 @@ static unsigned short palette_identity;
 static int camera_x;
 static int camera_y;
 static unsigned buttons_state;
+static struct mg_sdk_direct_controls direct_controls;
 
 extern void expand_row_fast(int source_y, unsigned short row_address);
 
@@ -103,28 +105,9 @@ static void service_watchdog(void)
     REG16(0x780b) = 0xa005;
 }
 
-static void assert_scanout(unsigned short low, unsigned short high)
-{
-    REG16(0x7078) = low & 0xfff0u;
-    REG16(0x7079) = high & 0x07ffu;
-    REG16(0x707a) = low & 0xfff0u;
-    REG16(0x707b) = high & 0x07ffu;
-    REG16(0x707f) = 0x0088u;
-}
-
-/*
- * The retail launcher owns IRQ5 and can rotate FBI/FBO behind an LD
- * application. Take ownership of the video source only, while leaving CPU
- * IRQ/FIQ enabled for the rest of the inherited runtime. This makes one
- * framebuffer sufficient and removes a full 76800-word copy every frame.
- */
-static void take_video_ownership(unsigned short low, unsigned short high)
-{
-    REG16(0x7062) = 0;
-    REG16(0x7063) = 0xffffu;
-    assert_scanout(low, high);
-}
-
+/* Kept local only for the hot scanline pipeline: start_dma is followed by CPU
+ * row expansion before wait_dma, and both helpers run hundreds of times per
+ * frame.  Framebuffer ownership, fills, and matrix input use the SDK API. */
 static void start_dma(unsigned channel, unsigned long source,
                       unsigned long destination, unsigned long count,
                       unsigned short control)
@@ -154,67 +137,13 @@ static void wait_dma(unsigned channel)
     REG16(0x7abf) = flag;
 }
 
-static void fill_words(unsigned short value, unsigned long destination,
-                       unsigned long count)
-{
-    *WORD_PTR(destination) = value;
-    /* Source step field 0x80 means fixed source; destination increments. */
-    start_dma(0, destination, destination, count, 0x0089u);
-    wait_dma(0);
-}
-
-static void deactivate_rows(void)
-{
-    REG16(0x7870) &= (unsigned short)~0x06e0u;
-    REG16(0x7880) &= (unsigned short)~0x0004u;
-}
-
-static unsigned short read_matrix_columns(void)
-{
-    unsigned short b = REG16(0x7868);
-    unsigned short a = REG16(0x7860);
-    return (unsigned short)(((b >> 10) & 0x003fu) |
-                            ((a >> 5) & 0x01c0u));
-}
-
-static unsigned short scan_row(unsigned row)
-{
-    volatile unsigned settle;
-    unsigned short bit;
-    deactivate_rows();
-    if (row == 0) bit = 0x0080u;
-    else if (row == 1) bit = 0x0040u;
-    else if (row == 2) bit = 0x0400u;
-    else if (row == 3) bit = 0x0200u;
-    else if (row == 4) bit = 0x0020u;
-    else bit = 0;
-    if (row < 5) {
-        REG16(0x7873) |= bit;
-        REG16(0x7872) |= bit;
-        REG16(0x7870) |= bit;
-    } else {
-        REG16(0x7883) |= 0x0004u;
-        REG16(0x7882) |= 0x0004u;
-        REG16(0x7880) |= 0x0004u;
-    }
-    for (settle = 0; settle < 16u; ++settle) { }
-    return read_matrix_columns();
-}
-
-static void input_init(void)
-{
-    REG16(0x7862) &= (unsigned short)~0x3800u;
-    REG16(0x786a) &= (unsigned short)~0xfc00u;
-    deactivate_rows();
-}
-
 static unsigned read_buttons(void)
 {
-    unsigned short r0 = scan_row(0);
-    unsigned short r1 = scan_row(1);
-    unsigned short r2 = scan_row(2);
-    unsigned short r3 = scan_row(3);
-    unsigned short r4 = scan_row(4);
+    unsigned short r0 = direct_controls.matrix.row[0];
+    unsigned short r1 = direct_controls.matrix.row[1];
+    unsigned short r2 = direct_controls.matrix.row[2];
+    unsigned short r3 = direct_controls.matrix.row[3];
+    unsigned short r4 = direct_controls.matrix.row[4];
     unsigned result = 0;
 
     if ((r1 & (1u << 6)) || (r3 & (1u << 3)) ||
@@ -227,7 +156,6 @@ static unsigned read_buttons(void)
         (r4 & (1u << 1))) result |= 1u << 4;
     if ((r2 & (1u << 8)) || (r3 & (1u << 1)) ||
         (r4 & (1u << 5)) || (r4 & (1u << 6))) result |= 1u << 5;
-    deactivate_rows();
     return result;
 }
 
@@ -422,7 +350,8 @@ void mg_rectfill(int x0, int y0, int x1, int y1, int color)
                               (mapped << 8) | (mapped << 12));
     if (x0 == 0 && y0 == 0 &&
         x1 == PICO_WIDTH - 1 && y1 == PICO_HEIGHT - 1) {
-        fill_words(packed, PICO_BUFFER_ADDRESS, PICO_BUFFER_WORDS);
+        (void)mg_sdk_dma_fill_words(
+            0, packed, PICO_BUFFER_ADDRESS, PICO_BUFFER_WORDS);
         return;
     }
     for (y = y0; y <= y1; y++) {
@@ -572,11 +501,9 @@ static void init_rgb_table(void)
  * select that source row. Two staging rows let the CPU expand row N+1 while
  * the real DMA controller transfers row N to SDRAM.
  */
-static void present_frame(unsigned short fbi_low, unsigned short fbi_high)
+static void present_frame(mg_sdk_u32 framebuffer)
 {
-    unsigned long destination =
-        ((unsigned long)(fbi_high & 0x07ffu) << 16) |
-        (unsigned long)(fbi_low & 0xfff0u);
+    unsigned long destination = (unsigned long)framebuffer;
     unsigned long current_address = ROW_BUFFER_ADDRESS;
     unsigned long next_address = ROW_BUFFER_ALT_ADDRESS;
     int source_y;
@@ -610,19 +537,19 @@ static void present_frame(unsigned short fbi_low, unsigned short fbi_high)
         }
         service_watchdog();
     }
-    assert_scanout(fbi_low, fbi_high);
+    mg_sdk_framebuffer_present(framebuffer);
 }
 
 int main(void)
 {
-    unsigned short fbi_low;
-    unsigned short fbi_high;
+    struct mg_sdk_framebuffers framebuffers;
 
     service_watchdog();
-    fbi_low = REG16(0x7078);
-    fbi_high = REG16(0x7079);
-    take_video_ownership(fbi_low, fbi_high);
-    input_init();
+    if (mg_sdk_framebuffers_capture(&framebuffers) == 0) {
+        for (;;) service_watchdog();
+    }
+    mg_sdk_framebuffer_take_ownership(framebuffers.front_word_address);
+    (void)mg_sdk_direct_controls_init(&direct_controls);
     mg_pal_reset();
     camera_x = 0;
     camera_y = 0;
@@ -636,9 +563,10 @@ int main(void)
 
     for (;;) {
         service_watchdog();
+        mg_sdk_direct_controls_poll(&direct_controls);
         buttons_state = read_buttons();
         Celeste_P8_update();
         Celeste_P8_draw();
-        present_frame(fbi_low, fbi_high);
+        present_frame(framebuffers.front_word_address);
     }
 }

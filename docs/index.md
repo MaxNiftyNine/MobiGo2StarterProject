@@ -1,44 +1,82 @@
-# WARNING THIS IS ALL AI GENERATED AND MAY BE WRONG!!!
-have fun
-
 # MobiGo 2 Homebrew SDK
 
-This project turns `app/main.c` into a complete MobiGo 2 MBA and runs it in an
-emulator. The starter is linked against a clean-room SDK reconstructed from the
-common runtime behavior shared by official games.
+This manual is the current developer reference for building homebrew that runs
+through the MobiGo 2 resident firmware and for understanding the hardware below
+it. The project is an independent clean-room effort.
 
-It includes resident lifecycle, input, touch, system controls, storage,
-graphics resources, UI animation, PCM/ADPCM effects, sequenced music, a
-from-scratch MBA packager, NAND and USB tools, and a Ghidra MBA/GAM loader.
+## Start here
 
-No donor game is used by the builder. The resulting MBA format has been
-reported working on physical MobiGo 2 hardware.
+From a repository checkout:
 
-## First build
+```sh
+python3 tools/mobigo.py doctor
+python3 tools/mobigo.py run
+```
 
-=== "macOS"
+The first command explains missing prerequisites. The second builds the default
+SY application and boots it through a role-aware in-memory overlay in Emulator2.
+Older emulator binaries fall back to a disposable NAND copy.
 
-    ```sh
-    ./scripts/build_and_run.command --no-audio
-    ```
+[Install the prerequisites](start/install.md) or follow the
+[first-project walkthrough](start/first-project.md).
 
-=== "Windows"
+!!! warning "SY is the default target"
 
-    ```powershell
-    .\build_and_run.ps1 -NoAudio
-    ```
+    G1 is a legacy opt-in profile used by several historical examples. Do not
+    copy a G1 entry address, linker profile, device path, or install command
+    into a new project. Read [Target profiles](start/target-profiles.md) before
+    changing the default.
 
-Then edit `app/main.c` and repeat. Read [Getting started](getting-started.md)
-before changing memory allocation or the application lifecycle.
+## Manual map
 
-## What is verified
+| Section | Use it for |
+| --- | --- |
+| [Start](start/install.md) | host setup, first build, repository layout, target choice |
+| [Guides](guides/porting.md) | application lifecycle, system behavior, graphics, audio, deployment |
+| [API](api/index.md) | public headers, ownership contracts, target-only surfaces |
+| [Hardware](hardware/overview.md) | CPU, memory, display, audio, input, storage, registers |
+| [Software](software/boot-slots.md) | boot flow, MBA format, resident services, resources, filesystem |
+| [Tools](tools/mobigo-cli.md) | unified CLI, emulator, asset conversion, NAND/USB, Ghidra |
+| [Testing](testing/test-levels.md) | host, target, emulator, and physical evidence |
+| [Examples](examples/index.md) | focused probes and complete projects |
+| [Reference](reference/source-confidence.md) | matrices, terminology, limitations, licensing and safety |
 
-- Clean-room C components have host regression tests.
-- SDK sources compile with the bundled Generalplus compiler.
-- Complete SY and G1 MBAs are generated from source and format metadata.
-- The resident lifecycle, system UI, storage, font, animation, and audio paths
-  have end-to-end emulator checks.
-- The Ghidra loader maps compacted MBA pages, GAM variants, firmware services,
-  and known MMIO registers.
+## What the SDK supplies
 
-See [Project status](status.md) for the evidence boundary and remaining work.
+- Donor-free MBA construction for the supported SY and legacy G1 profiles.
+- A C API for the resident lifecycle, input, touch, storage, UI resources, and
+  audio services.
+- Near-automatic Volume, Brightness, and Off behavior through
+  `standard_controls.h`.
+- A small target-only `hardware.h` layer for high-performance ports that need
+  inherited framebuffer, watchdog, DMA, or raw matrix access.
+- Deterministic asset generators and emulator verification tools.
+- NAND and USB workflows that discover regional slot filenames instead of
+  assuming one.
+
+## Evidence policy
+
+Statements are labeled when their evidence boundary matters:
+
+- **Verified** means a named repeatable test or physical observation supports
+  the behavior.
+- **Emulator-inferred** means source, firmware, or related-chip evidence supports
+  it, but physical behavior is not independently established.
+- **Unknown** means applications must not depend on an invented answer.
+
+The [capability matrix](testing/capability-matrix.md) is the single current
+status ledger. Dated material under `research/` is useful provenance, not the
+development source of truth.
+
+## Safe development loop
+
+1. Edit application source.
+2. Run `python3 tools/mobigo.py build`.
+3. Run `python3 tools/mobigo.py test` when changing shared behavior.
+4. Boot through `python3 tools/mobigo.py run`; use `--mode accurate` for
+   real-time pacing, diagnostic history, and reference comparison.
+5. Exercise rendering, every consumed input, system controls, and any audio or
+   storage path.
+6. Install on hardware only after copied-NAND tests and recovery preparation.
+
+For a large existing codebase, use the [porting guide](guides/porting.md).

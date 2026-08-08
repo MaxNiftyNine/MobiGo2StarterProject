@@ -804,7 +804,9 @@ struct UsbPanel {
     std::string address = "00000000";
     std::string length = "00000200";
     std::string path = "usb_file.bin";
-    std::string remote_path = "A:\\BUNDLE\\G1\\135800G1.MBA";
+    // Neutral device-root example.  Installers discover any firmware-specific
+    // bundle path instead of baking a regional filename into the UI.
+    std::string remote_path = "A:\\MyHomebrew.MBA";
     int active_field = 4;
     std::chrono::steady_clock::time_point next_render{};
 

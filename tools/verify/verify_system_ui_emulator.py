@@ -9,6 +9,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from emulator_support import find_emulator, mba_overlay_arguments
+
 
 def read_word(data: bytes, base: int, address: int) -> int:
     return struct.unpack_from("<H", data, (address - base) * 2)[0]
@@ -44,9 +46,7 @@ def main() -> int:
     build = root / "build" / "system_ui_demo"
     generated = build / "generated_system_ui"
     name = "SystemUiDemo"
-    emulator = starter / "build" / "emulator-macos" / "mobigo2_emu"
-    if not emulator.exists():
-        subprocess.run([str(starter / "tools" / "build" / "emulator_macos.sh")], check=True)
+    emulator = find_emulator(starter)
 
     if build.exists():
         shutil.rmtree(build)
@@ -70,7 +70,6 @@ def main() -> int:
             "--name", name,
             "--slot", "SY",
             "--without-system-ui",
-            "--install-nand",
         ],
         check=True,
     )
@@ -83,7 +82,7 @@ def main() -> int:
             str(emulator),
             "--rom", str(starter / "vendor" / "firmware" / "internalrom.bin"),
             "--spi", str(starter / "vendor" / "firmware" / "spi.bin"),
-            "--nand", str(build / f"nand.{name}.bin"),
+            *mba_overlay_arguments(root, build / f"{name}.MBA"),
             "--no-window",
             "--steps", "245000000",
             "--dump-frame", str(frame),
@@ -128,7 +127,10 @@ def main() -> int:
     unique = sorted({item[2] for item in nonblack})
     if (width, height) != (320, 240):
         raise SystemExit(f"FAIL frame dimensions={(width, height)}")
-    if bbox != (77, 107, 234, 229):
+    # The corrected brightness placement is x=138.  Power-off now owns the
+    # combined image's left edge; the former x=77 expectation encoded the
+    # accidentally swapped volume/brightness positions.
+    if bbox != (83, 107, 234, 229):
         raise SystemExit(f"FAIL combined UI bbox={bbox}")
     if len(nonblack) != 1161:
         raise SystemExit(f"FAIL nonblack pixels={len(nonblack)}")

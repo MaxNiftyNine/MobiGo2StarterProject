@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/MaxNiftyNine/MobiGo2StarterProject/main/schema/mobigo-project.schema.json",
+  "title": "MobiGo 2 homebrew project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "source", "target"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Za-z_][A-Za-z0-9_]{0,47}$",
+      "description": "C identifier used for linker and MBA output names."
+    },
+    "source": {
+      "type": "string",
+      "description": "Project-relative C entry source."
+    },
+    "target": {
+      "type": "string",
+      "enum": ["system", "game1"],
+      "default": "system",
+      "description": "Application role. game1 is a legacy opt-in replacement profile."
+    },
+    "system_ui": {
+      "type": "boolean",
+      "default": true
+    },
+    "clean_font": {
+      "type": "boolean",
+      "default": false
+    },
+    "extra_sources": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true,
+      "default": []
+    },
+    "menu_tile": {
+      "type": ["string", "null"]
+    },
+    "palette": {
+      "type": ["string", "null"]
+    }
+  }
+}

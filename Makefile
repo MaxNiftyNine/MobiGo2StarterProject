@@ -2,7 +2,7 @@ CC ?= cc
 CFLAGS ?= -std=c99 -Wall -Wextra -Werror
 CPPFLAGS ?= -Iinclude
 
-.PHONY: all test target-check samples color-cycle movie-player celeste hardware-suite emulator-test emulator-check homebrew-check storage-check font-check animation-check audio-check adpcm-check music-check music-adpcm-check music-aux-check release-check
+.PHONY: all test usb-test docs-check doctor target-check samples color-cycle movie-player celeste sample-emulator-check hardware-suite emulator-test emulator-check homebrew-check storage-check font-check animation-check audio-check adpcm-check music-check music-adpcm-check music-aux-check release-check
 
 all: build/test_system_controls build/test_input build/test_audio \
 	build/test_audio_resources \
@@ -102,6 +102,15 @@ test: build/test_system_controls build/test_input build/test_audio \
 	./build/test_hardware_suite_self
 	python3 -m unittest discover -s tests -p 'test_*.py'
 
+usb-test:
+	python3 -m unittest discover -s tools/usb -p 'test_*.py'
+
+docs-check:
+	python3 tools/docs/check_docs.py
+
+doctor:
+	python3 tools/mobigo.py doctor
+
 target-check:
 	python3 tools/build/build_target_objects.py
 
@@ -119,8 +128,11 @@ movie-player:
 celeste:
 	python3 examples/mobigo_celeste/build.py
 
+sample-emulator-check: samples
+	python3 tools/verify/verify_complete_samples_emulator.py
+
 emulator-test:
-	tools/build/emulator_macos.sh --test
+	bash tools/build/emulator_unix.sh --test
 
 emulator-check:
 	python3 tools/verify/verify_system_ui_emulator.py
@@ -154,6 +166,8 @@ music-aux-check:
 
 release-check:
 	$(MAKE) test
+	$(MAKE) usb-test
+	$(MAKE) docs-check
 	$(MAKE) target-check
 	$(MAKE) emulator-test
 	$(MAKE) emulator-check
@@ -166,3 +180,5 @@ release-check:
 	$(MAKE) music-check
 	$(MAKE) music-adpcm-check
 	$(MAKE) music-aux-check
+	$(MAKE) samples sample-emulator-check
+	$(MAKE) hardware-suite

@@ -1,118 +1,77 @@
-# MobiGo 2 USB tools
+# MobiGo 2 physical USB tools
 
-These scripts manage a connected MobiGo 2 without Learning Lodge. They support
-macOS and Windows and provide three intentionally small workflows:
+These guarded tools use the console's filesystem mailbox without Learning
+Lodge. They can toggle developer mode, inspect storage, install an MBA at the
+discovered SY/G1/root destination, and delete an explicitly named file.
 
-- enable or disable developer mode by creating or deleting the blank
-  `/ETC/DMODE` file;
-- install an MBA over USB as G1 (Hamster Highway), as the SY system menu, or at
-  the filesystem root for developer-mode launching;
-- delete a named remote file;
-- report total, used, and free device storage.
+They support **macOS and Windows**. Linux supports the SDK build, emulator,
+tests, and copied-NAND tools, but the physical raw-device discovery/dismount
+backend is not implemented there.
 
-The scripts auto-detect the VTech `USB-MSDC DISK A` device and refuse unrelated
-disks. They temporarily dismount its normal volume while talking to the
-filesystem mailbox. Do not unplug the console while a write is running.
+## Safety contract
 
-## macOS setup
+- The transport accepts only the expected `USB-MSDC DISK A` layout.
+- Keep a verified recovery backup before writing the system slot.
+- Do not unplug or power off during a write/read-back operation.
+- Let the installer discover the existing regional slot pathname.
+- Match the linked MBA role to the selected install role.
+- Close Learning Lodge, AgentMonitor, and other software that may own the
+  device.
 
-Install Python 3. Grant **Full Disk Access** to Terminal (or the app launching
-the command) in **System Settings → Privacy & Security → Full Disk Access**.
-The `.command` launchers ask for an administrator password because raw USB disk
-access requires it.
+The default project is SY. Replacing physical SY is high risk even though SY is
+the canonical development target. G1 installation is only for a G1-linked
+legacy project.
 
-Double-click a launcher and answer its question:
+Before an SY/G1 write, the installer validates the MBA's complete launch
+metadata. It always rejects a known cross-slot profile. An unknown profile also
+fails closed unless a developer who has independently reviewed it supplies
+`--allow-unverified-profile`; that flag never permits a known SY↔G1 mismatch.
 
-```text
-scripts/usb/developer_mode.command
-scripts/usb/install_mba.command
-scripts/usb/storage.command
-```
+## macOS
 
-They can also be run non-interactively:
+Install Python 3 and grant the launching terminal **Full Disk Access**. The
+`.command` launchers request administrator access for the raw disk:
 
 ```sh
 ./scripts/usb/developer_mode.command --enable
-./scripts/usb/developer_mode.command --disable
-./scripts/usb/install_mba.command --g1 build/MobiGo2Starter.MBA
 ./scripts/usb/install_mba.command --system build/MobiGo2Starter.MBA
-./scripts/usb/install_mba.command --root build/MobiGo2Starter.MBA
 ./scripts/usb/storage.command --check
 ```
 
-`--sy` is an alias for `--system`. Install and developer-mode action flags skip
-questions. Deletion always requires a `y` or `n` safety answer.
+Interactive use is available by double-clicking the same launchers. `--sy` is
+an alias for `--system`.
 
-## Windows setup
+## Windows
 
-Install Python 3, then install the one Windows USB dependency from an
-Administrator PowerShell:
-
-```powershell
-py -3 -m pip install -r .\tools\mobigo_usb\requirements-windows.txt
-```
-
-Run the `.bat` launchers as Administrator:
-
-```text
-scripts\usb\developer_mode.bat
-scripts\usb\install_mba.bat
-scripts\usb\storage.bat
-```
-
-Non-interactive examples:
+Install Python 3, then install the raw-volume dependency from an Administrator
+PowerShell:
 
 ```powershell
-.\scripts\usb\developer_mode.bat --disable
-.\scripts\usb\install_mba.bat --g1 .\build\MobiGo2Starter.MBA
+py -3 -m pip install -r .\tools\usb\requirements-windows.txt
+```
+
+Run the launchers as Administrator:
+
+```powershell
+.\scripts\usb\developer_mode.bat --enable
 .\scripts\usb\install_mba.bat --system .\build\MobiGo2Starter.MBA
-.\scripts\usb\install_mba.bat --root .\build\MobiGo2Starter.MBA
 .\scripts\usb\storage.bat --check
 ```
 
-Close VTech AgentMonitor, DownloadManager, and Learning Lodge before using the
-Windows scripts so they do not compete for the device.
+## Legacy G1 and root installs
 
-## Install targets and safety
+Use `--g1` only with an artifact built for `target: "game1"`. Use `--root` for
+a deliberately configured developer-mode workflow. Neither option converts an
+SY-linked MBA into another role.
 
-The G1 and SY filenames differ between firmware regions. The installer lists
-the applicable directory and replaces the single existing file ending in
-`G1.MBA` or `SY.MBA`; it does not hard-code `135800` or `135804`.
-For example, it finds `135800SY.MBA` on a US model when that is the existing
-filename, while the included emulator NAND currently contains `135804SY.MBA`.
+## Deletion
 
-- `--g1` replaces Hamster Highway. Use it only with a G1-linked MBA.
-  Learning Lodge may restore the retail game later.
-- `--system` replaces the system menu. A broken MBA here can prevent normal
-  startup, so use it only with recovery backups and a payload designed for the
-  SY slot.
-- `--root` writes the MBA at `/NAME.MBA`. Enable developer mode separately to
-  make developer-mode launch paths available.
-
-The included starter MBA is built for the SY entry at `0x0DFC1D`; install it
-with `--system`. It is not interchangeable with a G1-linked MBA. Always keep
-device recovery dumps, and test in the emulator first.
-
-## Delete a MBA
-
-To remove a MBA later, provide its absolute device path:
+Deletion is destructive and always asks for confirmation. Supply only an
+absolute device path that you intentionally installed:
 
 ```sh
-./scripts/usb/install_mba.command --delete /MobiGo2Starter.MBA
+./scripts/usb/install_mba.command --delete /MyHomebrew.MBA
 ```
 
-The command checks that the file exists and deletes it. Every deletion, including `--delete`, prints the warning and requires an
-explicit `y` confirmation:
-
-> **WARNING:** deleting the wrong MobiGo file can brick the console.
-
-Delete only a file you intentionally installed. In particular, do not delete
-system, boot, or recovery files to experiment.
-
-For manual or diagnostic use, the Python entry points accept `--help`:
-
-```sh
-python3 tools/usb/developer_mode.py --help
-python3 tools/usb/install_mba.py --help
-python3 tools/usb/storage.py --help
-```
+Never delete a boot, system, recovery, or unknown file. For complete Python
+options, run `python3 tools/usb/install_mba.py --help`.

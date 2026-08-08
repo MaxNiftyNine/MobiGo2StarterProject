@@ -4,7 +4,15 @@ This file records evidence, implementation choices, and uncertainty while buildi
 the emulator. Anything marked `ASSUMPTION` or `TODO` should be treated as
 incomplete hardware knowledge, not as verified behavior.
 
-## Workspace inventory
+This is a chronological evidence log, not an application or emulator usage
+guide. Current commands live in [`emulator/README.md`](README.md); current
+support boundaries live in the
+[capability matrix](../docs/testing/capability-matrix.md). Bare capture names
+below are historical labels. Maintained firmware paths are under
+`vendor/firmware/`, and the assembled NAND is
+`vendor/firmware/nand.us-stitched.bin`.
+
+## Evidence inventory
 
 - `spi.bin`: 2 MiB SPI flash image. Starts with bytes spelling a `PGpssiipp`
   style signature, then unSP-looking 16-bit code begins around offset `0x40`.
@@ -59,7 +67,7 @@ incomplete hardware knowledge, not as verified behavior.
 - `docs/`: GPL16250 datasheet, unSP ISA/programming manuals, a related GPL16200
   code reference, and unofficial links to prior emulator/reference work.
 
-## Board observations supplied by owner
+## Board observations
 
 - SoC: Generalplus GPL16250, unSP-based.
 - External RAM: EtronTech `EM638165TS-6G`.
@@ -99,10 +107,10 @@ incomplete hardware knowledge, not as verified behavior.
 - With `mobigo2_pinstream_a_first512_128k.bin` present, the emulator now defaults to internal-ROM
   reset-vector boot instead of the synthetic SPI copy. The old synthetic copy remains
   available as `--boot spi-shim` only for comparison/debugging.
-- `Assets/internalrom.bin` currently matches the verified pinstream ROM
+- `vendor/firmware/internalrom.bin` currently matches the verified pinstream ROM
   SHA-256 (`883e2d2111bf978af1b98fcf34f577c46739da8778c1cec592be79a6f6b4d5d5`),
-  so `Emulator2` defaults to `../Assets/internalrom.bin` rather than a stale
-  local filename.
+  and the maintained launcher supplies that repository path explicitly rather
+  than depending on a process-local firmware filename.
 - `--auto-app-handoff` and `--auto-menu-handoff` are debug-only control-flow
   shortcuts. They are disabled by default because the retail boot should advance
   by emulating the firmware-visible hardware state, not by forcing the PC.
@@ -489,7 +497,7 @@ incomplete hardware knowledge, not as verified behavior.
 
 ## Documentation limitations
 
-- `docs/GPL16250VAV10_ds.pdf` is encrypted with copy disabled, but current
+- `docs/reference/GPL16250VAV10_ds.pdf` is encrypted with copy disabled, but current
   `pypdf` plus AES support can extract its text locally. It provides high-level
   peripheral and boot-pin behavior, not full register-level PPU semantics.
 - The supplied unSP 2.0 programmer's guide confirms that GPL16250-era ISA 1.3
@@ -711,10 +719,12 @@ incomplete hardware knowledge, not as verified behavior.
 - Deterministic integration runs now advance Guest to the title screen and the
   saved profile into the following animated scene.
 
-- Remaining accuracy work: exact E-Fuse meanings, complete timer/counter slot
-  behavior, row-zoom/transform effects, exact SPU ADPCM36/envelope edge
-  behavior and analog output characteristics, controls, and touchscreen are
-  still incomplete.
+- Remaining accuracy work includes exact E-Fuse meanings, complete
+  timer/counter slot behavior, row-zoom/transform effects, exact SPU
+  ADPCM36/envelope edge behavior, analog output characteristics, physical touch
+  calibration, and hardware-revision coverage. Standard matrix controls and
+  scripted touch behavior are modeled; their present evidence boundaries are
+  tracked in the capability matrix rather than this chronology.
 
 ## Uncertainty policy
 

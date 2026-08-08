@@ -1,32 +1,20 @@
-# Clean-room runtime
+# SDK implementation
 
-Original homebrew implementations:
+This directory contains original clean-room implementations corresponding to
+the headers under `include/mobigo_sdk/`.
 
-- `system_controls.c`: portable implementation of the recovered system-control
-  behavior.
-- `resident_backend.c`: target-only fixed-address service adapter; currently
-  excludes unverified resident overlay and feedback-sound calls and uses the
-  centralized constants in `include/mobigo_sdk/resident_addresses.h`.
-- `application.c`: target-only wrappers for resident path testing and MBA
-  handoff.
-- `input.c`: portable implementation of the recovered input-event pump.
-- `resident_input.c`: target-side resident adapter for buffered/special input
-  codes, key pressed edges, and framework event `0x1005`.
-- `resident_keys.c`: direct target wrappers for key masks and
-  down/pressed/released edge queries.
-- `touch.c`: portable dispatcher for the verified four-word touch records.
-- `resident_touch.c`: target-side touch queue pointer/count adapter.
-- `resident_runtime.c`: target wrappers and loop for the resident
-  setup/step/finalize lifecycle.
-- `audio.c`: portable playback-state interpretation.
-- `resident_audio.c`: target-side raw sound playback and state query.
-- `resource_bundle.c`: portable word-pair and relative word-address helpers
-  for authoring and inspecting linked bundles.
-- `resource_graphics.c`: portable accessors for recovered bitmap and chunk
-  dimensions.
-- `settings_overlay.c`: portable setters for the verified family-B settings
-  object mode, record, position, and visibility fields.
-- `resident_resources.c`: target-side bundle registration and UI-family
-  service wrappers.
+- Portable policy/authoring: `system_controls.c`, `input.c`, `touch.c`,
+  `audio.c`, `audio_resources.c`, `resource_bundle.c`, `resource_graphics.c`,
+  `settings_overlay.c`, `ui_family_b.c`, and `ui_family_b_animation.c`.
+- Resident target adapters: `resident_backend.c`, `resident_input.c`,
+  `resident_keys.c`, `resident_touch.c`, `resident_runtime.c`,
+  `resident_audio.c`, `resident_storage.c`, `resident_resources.c`, and
+  `application.c`.
+- High-level controls: `standard_controls.c` for resident rendering and
+  `direct_controls.c` for a framebuffer-owned loop.
+- Low-level target helpers: `hardware.c` for watchdog, inherited buffers, DMA,
+  and matrix access.
 
-No retail machine code or extracted proprietary assets belong in this tree.
+Portable modules must remain host-testable. Target adapters may use the fixed
+resident surface exposed by public headers, but raw firmware code, retail
+assets, and guessed calls do not belong here.

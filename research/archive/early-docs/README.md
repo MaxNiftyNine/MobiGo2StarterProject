@@ -1,14 +1,15 @@
-# Historical material
+# Archived early documentation
 
-These files record an earlier stage of the MobiGo 2 work. They are retained
-because they contain useful register and architecture context, but they predate
-the real-hardware G1 callback, watchdog, live-framebuffer, and retail audio-gate
-discoveries.
+Material in this directory predates the current resident lifecycle, SY-first
+workflow, hardware helpers, standard/direct controls, and emulator validation.
+It is preserved as historical evidence, not current developer guidance.
 
-Do not treat statements here about implementation status as current. For new
-work, use:
+Use these maintained pages instead:
 
-- `../../QUICKSTART.md`
-- `../CONFIRMED_HARDWARE_RULES.md`
-- `../STATUS_MATRIX.md`
-- `../mobigo2_mba_development_guide.md`
+- [`docs/start/first-project.md`](../../../docs/start/first-project.md)
+- [`docs/guides/porting.md`](../../../docs/guides/porting.md)
+- [`docs/api/index.md`](../../../docs/api/index.md)
+- [`docs/testing/capability-matrix.md`](../../../docs/testing/capability-matrix.md)
+
+Never copy an archived command or target assumption without checking the
+current CLI, manifest, public headers, and tests.

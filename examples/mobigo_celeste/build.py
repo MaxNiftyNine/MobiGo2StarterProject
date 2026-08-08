@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Build the MobiGo Celeste sample as a donor-free G1 MBA."""
+"""Build the MobiGo Celeste legacy direct-hardware G1 profile.
+
+G1 is intentional here: this performance-sensitive port has been validated in
+the G1 launch path and still contains an in-file DMA/watchdog fast path.  It is
+not the default SDK lifecycle profile.
+"""
 
 from __future__ import annotations
 

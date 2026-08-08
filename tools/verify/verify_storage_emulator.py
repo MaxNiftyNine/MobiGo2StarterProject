@@ -9,6 +9,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from emulator_support import find_emulator, mba_overlay_arguments
+
 
 def read_word(data: bytes, base: int, address: int) -> int:
     return struct.unpack_from("<H", data, (address - base) * 2)[0]
@@ -21,9 +23,7 @@ def read_u32(data: bytes, base: int, address: int) -> int:
 def build_and_run(root: Path, source: Path, name: str, dump_base: int, dump_words: int) -> bytes:
     starter = root
     build = root / "build" / name
-    emulator = starter / "build" / "emulator-macos" / "mobigo2_emu"
-    if not emulator.exists():
-        subprocess.run([str(starter / "tools" / "build" / "emulator_macos.sh")], check=True)
+    emulator = find_emulator(starter)
     if build.exists():
         shutil.rmtree(build)
 
@@ -35,7 +35,6 @@ def build_and_run(root: Path, source: Path, name: str, dump_base: int, dump_word
             "--output-dir", str(build),
             "--name", name,
             "--slot", "SY",
-            "--install-nand",
         ],
         check=True,
     )
@@ -46,7 +45,7 @@ def build_and_run(root: Path, source: Path, name: str, dump_base: int, dump_word
             str(emulator),
             "--rom", str(starter / "vendor" / "firmware" / "internalrom.bin"),
             "--spi", str(starter / "vendor" / "firmware" / "spi.bin"),
-            "--nand", str(build / f"nand.{name}.bin"),
+            *mba_overlay_arguments(root, build / f"{name}.MBA"),
             "--no-window",
             "--steps", "225000000",
             "--dump-memory", str(ram),

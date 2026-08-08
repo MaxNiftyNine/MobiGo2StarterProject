@@ -10,10 +10,128 @@ namespace mobigo {
 struct MbaOverlayReport {
     size_t mba_bytes = 0;
     size_t snapshots = 0;
+    size_t filesystem_snapshots = 0;
     size_t added_logical_blocks = 0;
     uint32_t entry_address = 0;
+    MbaTarget target = MbaTarget::Auto;
+    std::string role;
     std::vector<std::string> paths;
 };
+
+struct MbaMetadata {
+    uint32_t declared_words = 0;
+    uint32_t profile_field_0c = 0;
+    uint32_t compatibility_address = 0;
+    uint32_t entry_address = 0;
+    uint32_t body_load_address = 0;
+    std::string role;
+    std::optional<MbaTarget> detected_target;
+};
+
+inline bool ascii_folded_starts_with(std::string_view value, std::string_view prefix) {
+    if (value.size() < prefix.size()) return false;
+    for (size_t i = 0; i < prefix.size(); ++i) {
+        const auto fold = [](unsigned char c) {
+            return char(c >= 'a' && c <= 'z' ? c - ('a' - 'A') : c);
+        };
+        if (fold(static_cast<unsigned char>(value[i])) !=
+            fold(static_cast<unsigned char>(prefix[i]))) return false;
+    }
+    return true;
+}
+
+inline bool ascii_folded_ends_with(std::string_view value, std::string_view suffix) {
+    return value.size() >= suffix.size() &&
+           ascii_folded_starts_with(value.substr(value.size() - suffix.size()), suffix);
+}
+
+inline bool mba_target_matches_path(MbaTarget target, std::string_view path) {
+    switch (target) {
+    case MbaTarget::System:
+        return ascii_folded_starts_with(path, "/BUNDLE/SY/") &&
+               ascii_folded_ends_with(path, "SY.MBA");
+    case MbaTarget::G1:
+        return ascii_folded_starts_with(path, "/BUNDLE/G1/") &&
+               ascii_folded_ends_with(path, "G1.MBA");
+    case MbaTarget::Menu:
+        return ascii_folded_ends_with(path, "/MM.MBA");
+    case MbaTarget::Auto:
+        return false;
+    }
+    return false;
+}
+
+inline MbaMetadata inspect_mba_metadata(const std::vector<uint8_t> &mba) {
+    if (mba.empty()) die("MBA overlay: supplied MBA is empty");
+    if (mba.size() & 1) die("MBA overlay: supplied MBA has an odd byte size");
+    static constexpr std::array<uint8_t, 8> magic{
+        'b', 'M', '_', 'g', 'b', 'M', 'Q', 'a'
+    };
+    if (mba.size() < 0xa0 || !std::equal(magic.begin(), magic.end(), mba.begin()))
+        die("MBA overlay: supplied file does not have a supported MBA header");
+    auto read32 = [&](size_t offset) {
+        return uint32_t(mba[offset]) |
+               (uint32_t(mba[offset + 1]) << 8) |
+               (uint32_t(mba[offset + 2]) << 16) |
+               (uint32_t(mba[offset + 3]) << 24);
+    };
+
+    MbaMetadata metadata;
+    metadata.declared_words = read32(0x08);
+    metadata.profile_field_0c = read32(0x0c);
+    metadata.compatibility_address = read32(0x10) & kAddrMask;
+    metadata.entry_address = read32(0x14) & kAddrMask;
+    metadata.body_load_address = read32(0x18) & kAddrMask;
+    if (metadata.declared_words != mba.size() / 2)
+        die("MBA overlay: header word count does not match the supplied file size");
+    if (metadata.entry_address == 0)
+        die("MBA overlay: header entry address is zero");
+    for (size_t offset = 0x80; offset < 0xa0 && mba[offset] != 0; ++offset) {
+        const uint8_t value = mba[offset];
+        if (value < 0x20 || value > 0x7e)
+            die("MBA overlay: header role/title is not printable ASCII");
+        metadata.role.push_back(char(value));
+    }
+    if (metadata.role.size() == 0x20)
+        die("MBA overlay: header role/title is not NUL terminated");
+
+    const std::string folded = ascii_lower(metadata.role);
+    if (folded == "mgb_sys") {
+        if (mba.size() != 0x174000 || metadata.profile_field_0c != 0x5387a ||
+            metadata.compatibility_address != 0x0f3e60 ||
+            metadata.entry_address != 0x0dfc1d ||
+            metadata.body_load_address != 0x0c8800) {
+            die("MBA overlay: MGB_SYS title conflicts with the validated SY profile");
+        }
+        metadata.detected_target = MbaTarget::System;
+    } else if (folded == "mgb_g1") {
+        if (mba.size() != 0x214000 || metadata.profile_field_0c != 0x3bc0b ||
+            metadata.compatibility_address != 0x0f3e5c ||
+            metadata.entry_address != 0x0e1a55 ||
+            metadata.body_load_address != 0x0c8800) {
+            die("MBA overlay: MGB_G1 title conflicts with the validated G1 profile");
+        }
+        metadata.detected_target = MbaTarget::G1;
+    }
+    return metadata;
+}
+
+inline MbaTarget resolve_mba_target(const MbaMetadata &metadata,
+                                    MbaTarget requested) {
+    if (requested == MbaTarget::Auto) {
+        if (!metadata.detected_target) {
+            die("MBA overlay: automatic target selection requires validated "
+                "MGB_SYS or MGB_G1 profile metadata; use "
+                "--mba-target explicitly for a verified nonstandard MBA");
+        }
+        return *metadata.detected_target;
+    }
+    if (metadata.detected_target && *metadata.detected_target != requested) {
+        die(std::string("MBA overlay: header role ") + metadata.role +
+            " conflicts with requested target " + mba_target_name(requested));
+    }
+    return requested;
+}
 
 namespace mba_overlay_detail {
 
@@ -285,18 +403,19 @@ inline std::vector<DirectoryEntry> read_directory(const std::vector<uint8_t> &lo
     return entries;
 }
 
-inline void collect_mm_files(const std::vector<uint8_t> &logical, size_t snapshot_base,
-                             uint32_t directory, const std::string &path,
-                             std::set<uint32_t> &seen_directories,
-                             std::map<uint32_t, std::set<std::string>> &targets) {
+inline void collect_target_files(const std::vector<uint8_t> &logical,
+                                 size_t snapshot_base, uint32_t directory,
+                                 const std::string &path, MbaTarget selected_target,
+                                 std::set<uint32_t> &seen_directories,
+                                 std::map<uint32_t, std::set<std::string>> &targets) {
     if (!seen_directories.insert(directory).second)
         die("MBA overlay: directory cycle detected");
     for (const DirectoryEntry &entry : read_directory(logical, snapshot_base, directory)) {
         const std::string child = path == "/" ? "/" + entry.name : path + "/" + entry.name;
         if (entry.is_directory) {
-            collect_mm_files(logical, snapshot_base, entry.target, child,
-                             seen_directories, targets);
-        } else if (equal_ascii_folded(entry.name, "MM.MBA")) {
+            collect_target_files(logical, snapshot_base, entry.target, child,
+                                 selected_target, seen_directories, targets);
+        } else if (mba_target_matches_path(selected_target, child)) {
             targets[entry.target].insert(child);
         }
     }
@@ -312,7 +431,7 @@ inline FileLayout read_layout(const std::vector<uint8_t> &logical, uint32_t inde
     const size_t index_offset = size_t(index_block) * kFsBlock;
     require_range(logical, index_offset, kFsBlock, "file index");
     if (get32(logical, index_offset + 8) != 0)
-        die("MBA overlay: chained MM.MBA indexes are not supported");
+        die("MBA overlay: chained file indexes are not supported");
     FileLayout layout;
     layout.index_block = index_block;
     for (size_t sector = 0; sector < kHalfRecords; ++sector) {
@@ -322,7 +441,7 @@ inline FileLayout read_layout(const std::vector<uint8_t> &logical, uint32_t inde
             const uint32_t block = get32(logical, payload + offset);
             if (block == 0) break;
             if (size_t(block) * kFsBlock >= logical.size())
-                die("MBA overlay: MM.MBA index references an invalid data block");
+                die("MBA overlay: file index references an invalid data block");
             layout.data_blocks.push_back(block);
         }
     }
@@ -383,7 +502,7 @@ inline void write_file(std::vector<uint8_t> &logical, const FileLayout &original
     blocks.insert(blocks.end(), new_blocks.begin(), new_blocks.end());
     const std::vector<size_t> slots = index_slots(original.index_block);
     if (blocks.size() >= slots.size())
-        die("MBA overlay: MM.MBA is too large for one file index");
+        die("MBA overlay: selected MBA is too large for one file index");
     for (size_t slot : slots) put32(logical, slot, 0);
     for (size_t i = 0; i < blocks.size(); ++i) put32(logical, slots[i], blocks[i]);
 
@@ -434,24 +553,29 @@ inline std::vector<uint8_t> read_file(const std::vector<uint8_t> &logical,
 } // namespace mba_overlay_detail
 
 inline MbaOverlayReport apply_mba_overlay(std::vector<uint8_t> &raw_nand,
-                                          const std::vector<uint8_t> &mba) {
+                                          const std::vector<uint8_t> &mba,
+                                          MbaTarget requested_target = MbaTarget::Auto) {
     using namespace mba_overlay_detail;
-    if (mba.empty()) die("MBA overlay: supplied MBA is empty");
-    if (mba.size() & 1) die("MBA overlay: supplied MBA has an odd byte size");
-    static constexpr std::array<uint8_t, 8> magic{
-        'b', 'M', '_', 'g', 'b', 'M', 'Q', 'a'
-    };
-    if (mba.size() < 0x18 || !std::equal(magic.begin(), magic.end(), mba.begin()))
-        die("MBA overlay: supplied file does not have a supported MBA header");
+    const MbaMetadata metadata = inspect_mba_metadata(mba);
+    const MbaTarget selected_target = resolve_mba_target(metadata, requested_target);
 
     RawNand nand(raw_nand);
     const std::vector<Snapshot> snapshots = find_snapshots(nand.logical);
     std::map<uint32_t, std::set<std::string>> targets;
+    size_t matched_snapshots = 0;
     for (const Snapshot &snapshot : snapshots) {
         std::set<uint32_t> seen;
-        collect_mm_files(nand.logical, snapshot.base, 2, "/", seen, targets);
+        std::map<uint32_t, std::set<std::string>> snapshot_targets;
+        collect_target_files(nand.logical, snapshot.base, 2, "/", selected_target,
+                             seen, snapshot_targets);
+        if (!snapshot_targets.empty()) ++matched_snapshots;
+        for (auto &[target, paths] : snapshot_targets)
+            targets[target].insert(paths.begin(), paths.end());
     }
-    if (targets.empty()) die("MBA overlay: no MM.MBA files were found in the NAND");
+    if (targets.empty()) {
+        die(std::string("MBA overlay: no files matching target ") +
+            mba_target_name(selected_target) + " were found in the NAND");
+    }
 
     struct Work {
         uint32_t target = 0;
@@ -489,9 +613,12 @@ inline MbaOverlayReport apply_mba_overlay(std::vector<uint8_t> &raw_nand,
 
     MbaOverlayReport report;
     report.mba_bytes = mba.size();
-    report.snapshots = snapshots.size();
+    report.snapshots = matched_snapshots;
+    report.filesystem_snapshots = snapshots.size();
     report.added_logical_blocks = logical_blocks_needed;
-    report.entry_address = get32(mba, 0x14) & kAddrMask;
+    report.entry_address = metadata.entry_address;
+    report.target = selected_target;
+    report.role = metadata.role;
     for (const auto &[target, paths] : targets) {
         (void)target;
         report.paths.insert(report.paths.end(), paths.begin(), paths.end());

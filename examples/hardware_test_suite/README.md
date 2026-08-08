@@ -50,12 +50,15 @@ ordering while keeping every other screen readable.
 The final two tests are terminal operations:
 
 - **Application relaunch** launches the installed SY MBA through the resident's
-  asynchronous handoff API. It tests rooted and normalized forms of both known
-  `135800SY.MBA` and `135804SY.MBA` paths. A volatile title-RAM cookie records
-  pass when that RAM survives the handoff; in every case, seeing the suite
-  restart is the authoritative hardware result. The suite ends its current
-  frame, finalizes the runtime, and returns from its MBA entry after scheduling
-  the request with SY's verified single argument `999`.
+  asynchronous handoff API. The target-side resident API has no known directory
+  enumeration or current-application-path service, so the suite probes the two
+  bundled, verified region fixtures. Other regional pathnames are **Unknown**
+  and the relaunch test reports unsupported rather than inventing a path. A
+  volatile title-RAM cookie records pass when that RAM survives the handoff; in
+  every case, seeing the suite restart is the authoritative hardware result.
+  The suite ends its current frame, finalizes the runtime, and returns from its
+  MBA entry after scheduling the request with SY's verified single argument
+  `999`.
 - **Power off** calls the terminal resident power request. The console shutting
   down is the pass condition; no post-power-cycle marker is required.
 
@@ -70,6 +73,10 @@ A:DEGER\MBASORT.LST
 This deliberately keeps physical diagnostics non-destructive. Write,
 truncate, and remove remain covered against disposable copied NAND by
 `make storage-check`; missing-file publication still needs more FTL research.
+
+This target-side relaunch limitation is separate from the host NAND/USB
+installers, which enumerate the filesystem and discover slot suffixes without a
+numeric regional filename.
 
 ## Coverage
 

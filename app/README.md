@@ -1,23 +1,26 @@
-# Starter application
+# Editable starter application
 
-Edit [`main.c`](main.c) to build your game. The checked-in example uses the
-SDK lifecycle and generated system UI, including volume, brightness, and Off
-button handling.
+`app/main.c` is the canonical SY starter. It uses the resident
+setup/step/finalize lifecycle and `standard_controls.h`, so Volume Up, Volume
+Down, Brightness, and Off work when the control object is initialized and
+polled each frame.
 
-Build an MBA without launching the emulator:
+The starter deliberately draws no game artwork, so a clean black application
+screen is expected. In the emulator, press F8 (Volume Up) or F6 (Brightness) to
+confirm the generated system overlay before adding your own scene.
+
+From the repository root:
 
 ```sh
-python3 tools/build/build_sdk_app.py app/main.c \
-  --output-dir build \
-  --name MobiGo2Starter \
-  --slot SY
+python3 tools/mobigo.py doctor
+python3 tools/mobigo.py run
 ```
 
-Add `--install-nand --nand-output build/nand.edited.bin` to install the MBA in
-a copy of the development NAND. The builder accepts repeatable
-`--extra-source` arguments for generated assets and `--with-clean-font` for the
-built-in 5x7 ASCII font.
+Project metadata belongs in `mobigo.project.json`; the schema is
+`schema/mobigo-project.schema.json`. Use `python3 tools/mobigo.py build --nand`
+only when a persistent copied-NAND artifact is required.
 
-The direct MBA handoff does not perform a normal initialized-data CRT copy.
-Keep immutable graphics and audio `const`, and explicitly initialize mutable
-state in a known title-RAM arena. The starter demonstrates that pattern.
+The MBA handoff does not perform a conventional initialized-data/BSS startup.
+Keep immutable data `const`, explicitly initialize writable state, and reserve
+non-overlapping title RAM for generated mutable resource graphs. See
+[`docs/guides/lifecycle-memory.md`](../docs/guides/lifecycle-memory.md).

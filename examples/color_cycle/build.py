@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the color-cycle sample as a donor-free G1 MBA."""
+"""Build the color-cycle sample as a donor-free system-slot MBA."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ def main() -> int:
         "--output-dir",
         str(args.output_dir.resolve()),
         "--slot",
-        "G1",
+        "SY",
         "--name",
         "ColorCycle",
         "--without-system-ui",

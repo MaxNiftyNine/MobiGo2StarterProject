@@ -115,6 +115,11 @@ struct Bus {
     uint32_t usb_dma_programmed_bytes = 0;
     uint32_t usb_dma_transferred_bytes = 0;
     bool sleep_requested = false;
+    // The MobiGo 2 board keeps its external power latch asserted through
+    // GPIO-D4. Resident request_poweroff() leaves D4 configured as a normal
+    // output and drops its buffer bit from high to low.
+    bool power_latch_seen_high = false;
+    bool poweroff_requested = false;
     bool system_reset_requested = false;
     bool system_reset_preserve_memory = false;
     bool watchdog_enabled = false;
@@ -123,6 +128,7 @@ struct Bus {
     uint32_t mba_watchdog_entry = UINT32_MAX;
     bool mba_watchdog_handoff_pending = false;
     uint32_t mba_application_entry = UINT32_MAX;
+    bool mba_application_entry_pinned = false;
     bool mba_application_handoff_pending = false;
     bool mba_application_active = false;
     bool mba_entry_stack_valid = false;
@@ -609,6 +615,8 @@ struct Bus {
         usb_dma_programmed_bytes = 0;
         usb_dma_transferred_bytes = 0;
         sleep_requested = false;
+        power_latch_seen_high = false;
+        poweroff_requested = false;
         system_reset_requested = false;
         system_reset_preserve_memory = false;
         watchdog_enabled = false;
@@ -715,6 +723,36 @@ struct Bus {
     bool is_gpio_data_register(uint32_t addr) const {
         return addr == 0x7860 || addr == 0x7868 || addr == 0x7870 ||
                addr == 0x7878 || addr == 0x7880;
+    }
+
+    void update_power_latch() {
+        static constexpr uint16_t kPowerLatch = 0x0010; // GPIO-D4
+        const bool output = (mmio[0x787a - kMmioBase] & kPowerLatch) != 0;
+        const bool normal_polarity =
+            (mmio[0x787b - kMmioBase] & kPowerLatch) != 0;
+        const bool high = (mmio[0x7879 - kMmioBase] & kPowerLatch) != 0;
+
+        // Ignore a cold/unconfigured low level. The physical shutdown edge is
+        // only meaningful after firmware has established D4 as the active-high
+        // power-hold output.
+        if (output && normal_polarity && high) {
+            power_latch_seen_high = true;
+            return;
+        }
+        if (!power_latch_seen_high || !output || !normal_polarity || high ||
+            poweroff_requested) {
+            return;
+        }
+
+        poweroff_requested = true;
+        if (g_log) {
+            g_log << "POWER GPIO-D4 latch released pc=0x" << std::hex
+                  << pc_for_log << " buffer=0x"
+                  << mmio[0x7879 - kMmioBase] << " dir=0x"
+                  << mmio[0x787a - kMmioBase] << " attr=0x"
+                  << mmio[0x787b - kMmioBase] << " cycles=0x" << cycles
+                  << std::dec << "\n";
+        }
     }
 
     bool trace_a6fa_bus() const {
@@ -1754,9 +1792,20 @@ struct Bus {
     }
 
     void configure_mba_watchdog_handoff(uint32_t entry_address) {
+        configure_mba_application_target(entry_address, true);
+    }
+
+    void configure_mba_application_target(uint32_t entry_address,
+                                          bool arm_watchdog) {
+        mba_application_entry_pinned = true;
+        observe_mba_application_entry(entry_address);
+        if (!arm_watchdog) {
+            mba_watchdog_entry = UINT32_MAX;
+            mba_watchdog_handoff_pending = false;
+            return;
+        }
         mba_watchdog_entry = entry_address & kAddrMask;
         mba_watchdog_handoff_pending = true;
-        observe_mba_application_entry(entry_address);
     }
 
     void observe_mba_application_entry(uint32_t entry_address) {
@@ -2912,6 +2961,7 @@ struct Bus {
             // external pad state, while BUFFER reads back the last written data.
             mmio[addr + 1 - kMmioBase] = value;
         }
+        if (addr >= 0x7878 && addr <= 0x787b) update_power_latch();
         if (addr >= 0x7880 && addr <= 0x7883) update_accelerometer_i2c();
         switch (addr) {
         case 0x7000: case 0x7001: case 0x7002: case 0x7003:
@@ -3372,8 +3422,15 @@ struct Bus {
             if (magic0 == 0x675f4d62 && magic1 == 0x61514d62) {
                 const uint32_t entry = read32(dst + 0x0a) & kAddrMask;
                 const uint32_t base_addr = read32(dst + 0x0c) & kAddrMask;
-                if (entry != 0 && entry != mba_application_entry)
-                    observe_mba_application_entry(entry);
+                if (entry != 0 && entry != mba_application_entry) {
+                    if (!mba_application_entry_pinned) {
+                        observe_mba_application_entry(entry);
+                    } else if (g_log) {
+                        g_log << "MBA DMA header ignored for selected target entry=0x"
+                              << std::hex << entry << " expected=0x"
+                              << mba_application_entry << std::dec << "\n";
+                    }
+                }
                 if (g_log) {
                     g_log << "MBA DMA header magic0=0x" << std::hex << magic0
                           << " magic1=0x" << magic1 << " entry=0x" << entry

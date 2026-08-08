@@ -1046,8 +1046,8 @@ static unsigned short read_matrix_columns(void)
 ## 15.4 Emulator-mapped keys
 
 This archived guide originally contained an incomplete and incorrect five-key
-table. Use `../INPUT_MATRIX.md` for the complete corrected matrix and current
-emulator host bindings.
+table. Use the [current input matrix](../../../docs/reference/input-matrix.md)
+for the complete corrected matrix and emulator host bindings.
 
 ## 15.5 Complete scan routine
 
@@ -1846,7 +1846,8 @@ Remember that dumped memory writes each 16-bit word as low byte then high byte. 
 - Focus loss releases all keys and touch.
 - Arrow keys drive the large D-pad; Control drives Primary.
 - Escape drives the physical Exit button; F12 closes the emulator.
-- `../INPUT_MATRIX.md` lists every host binding and physical matrix cell.
+- The [current input matrix](../../../docs/reference/input-matrix.md) lists
+  every host binding and physical matrix cell.
 
 # 29. Suggested homebrew software architecture
 
@@ -2179,7 +2180,8 @@ Use this order for a new program:
 5. Fill the live framebuffer with a known RGB565 color.
 6. Preserve inherited IRQ/FIQ, service the watchdog, and use display mode `0x0088`.
 7. Verify a frame dump before adding input.
-8. Add matrix scanning and verify the cells in `../INPUT_MATRIX.md`.
+8. Add matrix scanning and verify the cells in the
+   [current input matrix](../../../docs/reference/input-matrix.md).
 9. Add contact detection and manual ADC channels 3 and 2.
 10. Add frame polling or IRQ5.
 11. Add double buffering.

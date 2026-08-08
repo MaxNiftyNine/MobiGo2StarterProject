@@ -1,63 +1,7 @@
 #!/bin/zsh
 set -euo pipefail
-
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-audio_choice=""
-chmod -R +x "$ROOT"
-for argument in "$@"; do
-    case "$argument" in
-        --audio) audio_choice="enabled" ;;
-        --no-audio) audio_choice="disabled" ;;
-        *)
-            echo "Unknown option: $argument"
-            echo "Usage: $0 [--audio | --no-audio]"
-            exit 2
-            ;;
-    esac
-done
-
-echo "Building app/main.c against the MobiGo 2 SDK ..."
-python3 "$ROOT/tools/build/build_sdk_app.py" \
-    "$ROOT/app/main.c" \
-    --output-dir "$ROOT/build" \
-    --slot SY \
-    --name MobiGo2Starter \
-    --install-nand \
-    --nand-output "$ROOT/build/nand.edited.bin"
-
 if [[ "${MOBIGO_NO_LAUNCH:-0}" == "1" ]]; then
-    echo "PASS build, from-scratch SY MBA packaging, and NAND installation completed."
-    exit 0
+    exec python3 "$ROOT/tools/mobigo.py" build
 fi
-
-EMU="$ROOT/emulator/bin/macos/mobigo2_emu"
-if [[ ! -x "$EMU" ]] || ! file "$EMU" | grep -q "$(uname -m)"; then
-    "$ROOT/tools/build/emulator_macos.sh"
-    EMU="$ROOT/build/emulator-macos/mobigo2_emu"
-fi
-
-echo "Starting Emulator2; the SY homebrew launches automatically during boot."
-echo "The window opens as soon as the SY handoff completes. Press F12 to quit."
-if [[ -z "$audio_choice" ]]; then
-    read -r "audio_reply?Emulate host audio? This makes the emulator run slower. [y/N] "
-    if [[ "${audio_reply:l}" == "y" || "${audio_reply:l}" == "yes" ]]; then
-        audio_choice="enabled"
-    else
-        audio_choice="disabled"
-    fi
-fi
-
-emu_args=(
-    --rom "$ROOT/vendor/firmware/internalrom.bin"
-    --spi "$ROOT/vendor/firmware/spi.bin"
-    --nand "$ROOT/build/nand.edited.bin"
-    --open-window-at 220000000
-)
-if [[ "$audio_choice" == "enabled" ]]; then
-    emu_args+=(--audio)
-    echo "Host audio emulation enabled."
-else
-    echo "Host audio emulation disabled for faster execution."
-fi
-
-exec "$EMU" "${emu_args[@]}"
+exec python3 "$ROOT/tools/mobigo.py" run "$@"

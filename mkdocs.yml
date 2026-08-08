@@ -1,43 +1,122 @@
 site_name: MobiGo 2 Homebrew SDK
-site_description: Build, test, reverse engineer, and install MobiGo 2 homebrew.
-site_url: https://maxniftynine.github.io/mobigo/
+site_description: Build, test, understand, and install MobiGo 2 homebrew.
+site_url: https://maxniftynine.github.io/MobiGo2StarterProject/
 repo_url: https://github.com/MaxNiftyNine/MobiGo2StarterProject
 repo_name: MaxNiftyNine/MobiGo2StarterProject
 docs_dir: docs
+
+exclude_docs: |
+  requirements.txt
+  assets-audio.md
+  emulator-hardware.md
+  getting-started.md
+  hardware-test-suite.md
+  mba.md
+  project-status.md
+  reverse-engineering.md
+  samples.md
+  sdk.md
+  status.md
+  reference/CONFIRMED_HARDWARE_RULES.md
+  reference/INPUT_MATRIX.md
+  reference/SHARING_NOTES.md
+  reference/STATUS_MATRIX.md
+  reference/mobigo2_mba_development_guide.md
+  reference/mobigo2_programmers_guide.md
+  reference/mobigo2_programmers_guide.pdf
+  reference/GPL16250VAV10_ds.pdf
+  reference/unsp2.0.pdf
+
 theme:
   name: material
   features:
-    - navigation.instant
+    - navigation.tabs
     - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
     - content.code.copy
+    - content.tabs.link
   palette:
     primary: deep purple
     accent: cyan
+
+plugins:
+  - search
+
 markdown_extensions:
   - admonition
   - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+
 nav:
   - Home: index.md
-  - Getting started: getting-started.md
-  - SDK guide: sdk.md
-  - Sample projects: samples.md
-  - Graphics and audio: assets-audio.md
-  - MBA and GAM: mba.md
-  - Emulator and hardware: emulator-hardware.md
-  - Hardware test suite: hardware-test-suite.md
-  - Reverse engineering: reverse-engineering.md
-  - Project status: status.md
-  - Detailed evidence ledger: project-status.md
-  - Technical reference:
-      - MBA format: reference/mobigo_mba_format.md
-      - Development guide: reference/mobigo2_mba_development_guide.md
-      - Programmer guide: reference/mobigo2_programmers_guide.md
-      - Hardware rules: reference/CONFIRMED_HARDWARE_RULES.md
-      - Input matrix: reference/INPUT_MATRIX.md
-      - Status matrix: reference/STATUS_MATRIX.md
-      - Sharing and licensing: reference/SHARING_NOTES.md
+  - Start:
+      - Install: start/install.md
+      - First project: start/first-project.md
+      - Project layout: start/project-layout.md
+      - Target profiles: start/target-profiles.md
+  - Guides:
+      - Porting a game: guides/porting.md
+      - Lifecycle and memory: guides/lifecycle-memory.md
+      - System controls: guides/system-controls.md
+      - Input and touch: guides/input-touch.md
+      - Graphics and assets: guides/graphics-assets.md
+      - Audio and storage: guides/audio-storage.md
+      - Deployment and recovery: guides/deployment.md
+  - API:
+      - API overview: api/index.md
+      - Complete callable reference: api/callable-reference.md
+      - Runtime, input, and controls callables: api/callables-runtime-input.md
+      - Graphics and resource callables: api/callables-graphics.md
+      - Audio and storage callables: api/callables-audio-storage.md
+      - Core and runtime: api/core-runtime.md
+      - Input and system: api/input-system.md
+      - Graphics and resources: api/graphics-resources.md
+      - Audio and storage: api/audio-storage.md
+      - Low-level hardware: api/hardware.md
+  - Hardware:
+      - Platform overview: hardware/overview.md
+      - CPU and memory: hardware/cpu-memory.md
+      - Display and graphics: hardware/display-graphics.md
+      - Audio: hardware/audio.md
+      - Input, touch, and motion: hardware/input-touch-motion.md
+      - Timing, DMA, and power: hardware/timing-dma-power.md
+      - Storage and USB: hardware/storage-usb.md
+  - Software:
+      - Boot and slots: software/boot-slots.md
+      - MBA and GAM format: software/mba-gam.md
+      - Resident runtime: software/resident-runtime.md
+      - Resources and audio formats: software/resources-audio.md
+      - Filesystem and paths: software/filesystem.md
+  - Tools:
+      - Unified CLI: tools/mobigo-cli.md
+      - Emulator: tools/emulator.md
+      - Asset tools: tools/assets.md
+      - NAND and USB: tools/nand-usb.md
+      - Ghidra and research: tools/ghidra.md
+  - Testing:
+      - Test levels: testing/test-levels.md
+      - Emulator validation: testing/emulator-validation.md
+      - Hardware suite: testing/hardware-suite.md
+      - Capability matrix: testing/capability-matrix.md
+  - Examples:
+      - Examples overview: examples/index.md
+      - Complete projects: examples/complete-projects.md
+  - Reference:
+      - Input matrix: reference/input-matrix.md
+      - MBA/GAM binary format: reference/mobigo_mba_format.md
+      - Source confidence: reference/source-confidence.md
+      - Known limitations: reference/known-limitations.md
+      - Glossary: reference/glossary.md
+      - Licensing and safety: reference/licensing-safety.md

@@ -5,8 +5,16 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+import sys
 
 from device import DeviceSession, MobiGoError
+
+
+TOOLS = Path(__file__).resolve().parents[1]
+if str(TOOLS) not in sys.path:
+    sys.path.insert(0, str(TOOLS))
+
+from mba_profile import require_mba_profile
 
 
 def choose_install_interactively(parser: argparse.ArgumentParser) -> tuple[str, Path]:
@@ -50,6 +58,14 @@ def main() -> int:
         help="delete one remote file after a y/n safety confirmation",
     )
     parser.add_argument("--device", help="device override (normally auto-detected)")
+    parser.add_argument(
+        "--allow-unverified-profile",
+        action="store_true",
+        help=(
+            "allow unknown launch metadata for an SY/G1 install after manual "
+            "verification; a known cross-slot profile is still rejected"
+        ),
+    )
     args = parser.parse_args()
 
     delete_path: str | None = None
@@ -88,7 +104,7 @@ def main() -> int:
                 if size is None:
                     raise MobiGoError(f"remote file does not exist: {delete_path}")
                 fs.delete(delete_path)
-                
+
                 print(f"deleted {delete_path} ({size} bytes)")
             return 0
         except (MobiGoError, OSError, UnicodeError, ValueError) as exc:
@@ -103,6 +119,15 @@ def main() -> int:
     data = source.read_bytes()
     if not data.startswith(b"bM_gbMQa"):
         parser.error("input does not have a recognized MBA header")
+    if selected in {"g1", "system"}:
+        try:
+            require_mba_profile(
+                data,
+                "G1" if selected == "g1" else "SY",
+                allow_unverified=args.allow_unverified_profile,
+            )
+        except ValueError as exc:
+            parser.error(str(exc))
 
     try:
         with DeviceSession(args.device) as fs:

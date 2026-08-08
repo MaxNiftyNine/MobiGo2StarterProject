@@ -17,12 +17,15 @@ verified const-template + writable-bundle-copy model.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import os
 import re
 import shutil
 import struct
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path, PureWindowsPath
 
@@ -40,6 +43,8 @@ SLOT_PROFILES = {
 
 CORE_SOURCES = (
     "system_controls.c",
+    "hardware.c",
+    "direct_controls.c",
     "input.c",
     "audio.c",
     "audio_resources.c",
@@ -59,6 +64,300 @@ CORE_SOURCES = (
     "resident_touch.c",
     "application.c",
 )
+
+# Only repository-owned SDK sources are eligible for this cache. The project
+# entrypoint, extra, and generated sources compile on every invocation.
+SDK_OBJECT_CACHE_VERSION = 1
+C_COMPILE_FLAGS = (
+    "-S",
+    "-O2",
+    "-ffast-math",
+    "-fomit-frame-pointer",
+    "-funsigned-char",
+    "-Wall",
+    "-mglobal-var-iram",
+    "-mISA=2.0",
+)
+ASSEMBLER_FLAGS = ("-t4", "-sr", "-wpop")
+_INCLUDE_DIRECTIVE = re.compile(r"^\s*#\s*include\s+(.+?)\s*$", re.MULTILINE)
+_QUOTED_INCLUDE = re.compile(r'^"([^"]+)"$')
+_ANGLE_INCLUDE = re.compile(r"^<([^>]+)>$")
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _path_is_within(path: Path, roots: tuple[Path, ...]) -> bool:
+    for root in roots:
+        try:
+            path.relative_to(root)
+            return True
+        except ValueError:
+            pass
+    return False
+
+
+def discover_sdk_dependencies(
+    source: Path,
+    *,
+    include_roots: tuple[Path, ...],
+    allowed_roots: tuple[Path, ...],
+) -> tuple[Path, ...] | None:
+    """Return conservative local dependencies or ``None`` if cache-unsafe.
+
+    Every literal include is followed transitively. A macro include, missing
+    include, or include outside the SDK source/header roots disables caching
+    for that object. This lets cacheable SDK objects compile with only the SDK
+    include directory, so project headers cannot silently affect them.
+    """
+
+    include_roots = tuple(path.resolve() for path in include_roots)
+    allowed_roots = tuple(path.resolve() for path in allowed_roots)
+    pending = [source.resolve()]
+    dependencies: set[Path] = set()
+
+    while pending:
+        current = pending.pop()
+        if current in dependencies:
+            continue
+        if not current.is_file() or not _path_is_within(current, allowed_roots):
+            return None
+        dependencies.add(current)
+        try:
+            text = current.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            return None
+        # Includes inside comments are not compiler dependencies. Stripping
+        # comments also avoids disabling the cache because of documentation
+        # examples in headers.
+        text = re.sub(r"/\*.*?\*/", "", text, flags=re.DOTALL)
+        text = re.sub(r"//[^\r\n]*", "", text)
+        for match in _INCLUDE_DIRECTIVE.finditer(text):
+            operand = match.group(1).strip()
+            quoted = _QUOTED_INCLUDE.fullmatch(operand)
+            angled = _ANGLE_INCLUDE.fullmatch(operand)
+            if quoted is None and angled is None:
+                return None
+            opener = '"' if quoted is not None else "<"
+            name = (quoted or angled).group(1)
+            search_roots = (
+                (current.parent, *include_roots)
+                if opener == '"'
+                else include_roots
+            )
+            resolved = None
+            for directory in search_roots:
+                candidate = (directory / name).resolve()
+                if candidate.is_file():
+                    resolved = candidate
+                    break
+            if resolved is None or not _path_is_within(resolved, allowed_roots):
+                return None
+            pending.append(resolved)
+
+    return tuple(sorted(dependencies, key=lambda path: path.as_posix()))
+
+
+def cacheable_sdk_dependencies(
+    source: Path,
+    *,
+    sdk_sources: set[Path],
+    include_root: Path,
+    source_root: Path,
+) -> tuple[Path, ...] | None:
+    """Gate dependency discovery to the builder's explicit SDK source set."""
+
+    source = source.resolve()
+    if source not in {path.resolve() for path in sdk_sources}:
+        return None
+    return discover_sdk_dependencies(
+        source,
+        include_roots=(include_root,),
+        allowed_roots=(source_root.resolve(), include_root.resolve()),
+    )
+
+
+def sdk_cache_context_digest(
+    *,
+    compiler: Path,
+    assembler: Path,
+    include_root: Path,
+    compiler_flags: tuple[str, ...],
+    assembler_flags: tuple[str, ...],
+    runner_identity: str,
+) -> str:
+    """Hash all build-global inputs that can affect an SDK object."""
+
+    context = {
+        "version": SDK_OBJECT_CACHE_VERSION,
+        "compiler_sha256": _sha256_file(compiler),
+        "assembler_sha256": _sha256_file(assembler),
+        "include_root": str(include_root.resolve()),
+        "compiler_flags": list(compiler_flags),
+        "assembler_flags": list(assembler_flags),
+        "runner": runner_identity,
+    }
+    encoded = json.dumps(
+        context, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def sdk_object_cache_key(
+    source: Path,
+    dependencies: tuple[Path, ...],
+    *,
+    root: Path,
+    stem: str,
+    context_digest: str,
+    source_argument: str,
+    include_arguments: tuple[str, ...],
+) -> str:
+    """Create a content-addressed key for one SDK source object."""
+
+    digest = hashlib.sha256()
+    metadata = {
+        "version": SDK_OBJECT_CACHE_VERSION,
+        "context": context_digest,
+        "source": str(source.resolve()),
+        "source_argument": source_argument,
+        "stem": stem,
+        "include_arguments": list(include_arguments),
+    }
+    digest.update(
+        json.dumps(metadata, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    )
+    root = root.resolve()
+    for dependency in dependencies:
+        dependency = dependency.resolve()
+        try:
+            label = dependency.relative_to(root).as_posix()
+        except ValueError:
+            label = dependency.as_posix()
+        digest.update(b"\0path\0")
+        digest.update(label.encode("utf-8"))
+        digest.update(b"\0sha256\0")
+        digest.update(_sha256_file(dependency).encode("ascii"))
+    return digest.hexdigest()
+
+
+def _cache_entry(cache_root: Path, key: str) -> Path:
+    return cache_root / key[:2] / key
+
+
+def _valid_cache_entry(entry: Path, key: str) -> bool:
+    try:
+        manifest = json.loads((entry / "manifest.json").read_text(encoding="utf-8"))
+        assembly = entry / "source.asm"
+        object_file = entry / "object.obj"
+        return (
+            manifest.get("version") == SDK_OBJECT_CACHE_VERSION
+            and manifest.get("key") == key
+            and assembly.is_file()
+            and object_file.is_file()
+            and manifest.get("assembly_sha256") == _sha256_file(assembly)
+            and manifest.get("object_sha256") == _sha256_file(object_file)
+        )
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        return False
+
+
+def _atomic_copy(source: Path, destination: Path) -> None:
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    temporary = destination.with_name(
+        f".{destination.name}.tmp-{os.getpid()}-{time.time_ns()}"
+    )
+    try:
+        shutil.copyfile(source, temporary)
+        os.replace(temporary, destination)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def restore_sdk_object(
+    cache_root: Path,
+    key: str,
+    *,
+    assembly_output: Path,
+    object_output: Path,
+) -> bool:
+    """Validate and atomically restore an SDK object cache entry."""
+
+    entry = _cache_entry(cache_root, key)
+    if not _valid_cache_entry(entry, key):
+        return False
+    try:
+        _atomic_copy(entry / "source.asm", assembly_output)
+        _atomic_copy(entry / "object.obj", object_output)
+    except OSError:
+        return False
+    return True
+
+
+def store_sdk_object(
+    cache_root: Path,
+    key: str,
+    *,
+    assembly_output: Path,
+    object_output: Path,
+) -> None:
+    """Publish a complete cache entry with an atomic directory rename."""
+
+    entry = _cache_entry(cache_root, key)
+    parent = entry.parent
+    temporary = None
+    try:
+        parent.mkdir(parents=True, exist_ok=True)
+        if _valid_cache_entry(entry, key):
+            return
+        temporary = Path(tempfile.mkdtemp(prefix=f".{key}.tmp-", dir=parent))
+        assembly = temporary / "source.asm"
+        object_file = temporary / "object.obj"
+        shutil.copyfile(assembly_output, assembly)
+        shutil.copyfile(object_output, object_file)
+        manifest = {
+            "version": SDK_OBJECT_CACHE_VERSION,
+            "key": key,
+            "assembly_sha256": _sha256_file(assembly),
+            "object_sha256": _sha256_file(object_file),
+        }
+        (temporary / "manifest.json").write_text(
+            json.dumps(manifest, sort_keys=True, separators=(",", ":")) + "\n",
+            encoding="utf-8",
+        )
+        try:
+            os.replace(temporary, entry)
+            temporary = None
+        except OSError:
+            # Another build may have published the same content-addressed
+            # entry. Keep its valid result and discard ours.
+            if _valid_cache_entry(entry, key):
+                return
+            quarantine = entry.with_name(
+                f".{entry.name}.invalid-{os.getpid()}-{time.time_ns()}"
+            )
+            try:
+                os.replace(entry, quarantine)
+                os.replace(temporary, entry)
+                temporary = None
+            except OSError:
+                # Cache publication is an optimization. A race or unwritable
+                # cache must never turn a successful target build into a fail.
+                pass
+            finally:
+                shutil.rmtree(quarantine, ignore_errors=True)
+    except OSError:
+        # An unavailable cache must never turn a successful target build into
+        # a failure. The just-built object remains in the output directory.
+        return
+    finally:
+        if temporary is not None:
+            shutil.rmtree(temporary, ignore_errors=True)
 
 
 def fail(message: str) -> "NoReturn":
@@ -143,6 +442,19 @@ def main() -> int:
         type=Path,
         help="optional raw 0x20-byte launcher RGB555 palette",
     )
+    parser.add_argument(
+        "--no-sdk-cache",
+        action="store_true",
+        help="compile SDK objects instead of using the shared content cache",
+    )
+    parser.add_argument(
+        "--sdk-cache-dir",
+        type=Path,
+        help=(
+            "shared SDK object cache directory "
+            "(default: build/cache/sdk-objects-v1)"
+        ),
+    )
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parents[2]
@@ -170,7 +482,8 @@ def main() -> int:
         fail("source files must be unique")
     build.mkdir(parents=True, exist_ok=True)
 
-    sources = [root / "src" / name for name in CORE_SOURCES]
+    sdk_sources = [root / "src" / name for name in CORE_SOURCES]
+    sources = list(sdk_sources)
     if not args.without_system_ui:
         subprocess.run(
             [
@@ -182,6 +495,9 @@ def main() -> int:
             ],
             check=True,
         )
+        standard_controls = root / "src" / "standard_controls.c"
+        sdk_sources.append(standard_controls)
+        sources.append(standard_controls)
         sources.append(generated / "mobigo_clean_system_ui_resources.c")
     if args.with_clean_font:
         subprocess.run(
@@ -234,6 +550,21 @@ def main() -> int:
     env.setdefault("WINEDEBUG", "-all")
     env.setdefault("MVK_CONFIG_LOG_LEVEL", "0")
 
+    cache_disabled_by_env = os.environ.get(
+        "MOBIGO_DISABLE_SDK_CACHE", ""
+    ).strip().lower() in {"1", "true", "yes", "on"}
+    cache_enabled = not args.no_sdk_cache and not cache_disabled_by_env
+    cache_root = (
+        args.sdk_cache_dir.expanduser().resolve()
+        if args.sdk_cache_dir is not None
+        else Path(
+            os.environ.get(
+                "MOBIGO_SDK_CACHE_DIR",
+                str(root / "build" / "cache" / "sdk-objects-v1"),
+            )
+        ).expanduser().resolve()
+    )
+
     requested = [root, ide, toolchain, library, body, include, build]
     if not args.without_system_ui:
         requested.append(generated)
@@ -270,6 +601,28 @@ def main() -> int:
             ";" + env["WINEPATH"] if env.get("WINEPATH") else ""
         )
 
+    runner_identity = "native-windows"
+    if not native_windows:
+        wine_version = subprocess.run(
+            [str(wine), "--version"],
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        version_text = (wine_version.stdout or wine_version.stderr).strip()
+        runner_identity = f"wine:{version_text or 'unknown'}"
+    cache_context = None
+    if cache_enabled:
+        cache_context = sdk_cache_context_digest(
+            compiler=toolchain / "udocc.exe",
+            assembler=toolchain / "xasm16.exe",
+            include_root=include,
+            compiler_flags=C_COMPILE_FLAGS,
+            assembler_flags=ASSEMBLER_FLAGS,
+            runner_identity=runner_identity,
+        )
+
     def tool_command(executable: Path, *arguments: str) -> list[str]:
         if native_windows:
             return [str(executable), *arguments]
@@ -277,6 +630,9 @@ def main() -> int:
 
     object_paths: list[str] = []
     used_stems: dict[str, int] = {}
+    sdk_source_set = {path.resolve() for path in sdk_sources}
+    cache_hits = 0
+    cache_misses = 0
     for source_path, source_w in zip(sources, sources_w):
         stem = source_path.stem
         count = used_stems.get(stem, 0)
@@ -285,6 +641,8 @@ def main() -> int:
             stem = f"{stem}_{count}"
         asm_w = f"{build_w}\\{stem}.asm"
         obj_w = f"{build_w}\\{stem}.obj"
+        asm_path = build / f"{stem}.asm"
+        obj_path = build / f"{stem}.obj"
         object_paths.append(obj_w)
         include_args = [f"-I{include_w}"]
         if generated_w is not None:
@@ -293,18 +651,44 @@ def main() -> int:
             include_args.append(f"-I{generated_font_w}")
         include_args.extend(f"-I{directory}" for directory in extra_include_w)
         if source_path.suffix.lower() == ".c":
+            cache_key = None
+            if cache_context is not None and source_path.resolve() in sdk_source_set:
+                dependencies = cacheable_sdk_dependencies(
+                    source_path,
+                    sdk_sources=sdk_source_set,
+                    include_root=include,
+                    source_root=root / "src",
+                )
+                if dependencies is not None:
+                    # A verified SDK-only dependency graph deliberately omits
+                    # project/generated include paths. This makes entries
+                    # reusable across independent application output trees.
+                    include_args = [f"-I{include_w}"]
+                    cache_key = sdk_object_cache_key(
+                        source_path,
+                        dependencies,
+                        root=root,
+                        stem=stem,
+                        context_digest=cache_context,
+                        source_argument=source_w,
+                        include_arguments=tuple(include_args),
+                    )
+                    if restore_sdk_object(
+                        cache_root,
+                        cache_key,
+                        assembly_output=asm_path,
+                        object_output=obj_path,
+                    ):
+                        cache_hits += 1
+                        print(f"[u'nSP CACHE HIT] {source_path.name}")
+                        continue
+                    cache_misses += 1
+                    print(f"[u'nSP CACHE MISS] {source_path.name}")
             print(f"[u'nSP C] {source_path.name}")
             run(
                 tool_command(
                     toolchain / "udocc.exe",
-                    "-S",
-                    "-O2",
-                    "-ffast-math",
-                    "-fomit-frame-pointer",
-                    "-funsigned-char",
-                    "-Wall",
-                    "-mglobal-var-iram",
-                    "-mISA=2.0",
+                    *C_COMPILE_FLAGS,
                     *include_args,
                     "-o",
                     asm_w,
@@ -321,9 +705,7 @@ def main() -> int:
         run(
             tool_command(
                 toolchain / "xasm16.exe",
-                "-t4",
-                "-sr",
-                "-wpop",
+                *ASSEMBLER_FLAGS,
                 *include_args,
                 "-o",
                 obj_w,
@@ -331,6 +713,13 @@ def main() -> int:
             ),
             env=env,
         )
+        if source_path.suffix.lower() == ".c" and cache_key is not None:
+            store_sdk_object(
+                cache_root,
+                cache_key,
+                assembly_output=asm_path,
+                object_output=obj_path,
+            )
 
     ary = build / f"{project}.ary"
     # The resident graphics path expects generated resource data to retain the
@@ -479,6 +868,12 @@ def main() -> int:
     )
     if nand is not None:
         summary += f" nand={nand}"
+    if cache_enabled:
+        summary += (
+            f" sdk_cache_hits={cache_hits} sdk_cache_misses={cache_misses}"
+        )
+    else:
+        summary += " sdk_cache=disabled"
     print(summary)
     return 0
 

@@ -53,6 +53,16 @@ BRIGHTNESS_MODE = 0
 VOLUME_MODE = 1
 POWEROFF_MODE = 0
 POWEROFF_RECORD = 0
+BRIGHTNESS_X = 138
+VOLUME_X = 109
+SETTINGS_Y = 214
+
+# Recovered system-controls policy and UI placement must agree.  These were
+# once accidentally swapped in the generated adapter, so keep the invariant
+# explicit beside the generator rather than relying only on visual tests.
+assert BRIGHTNESS_X == 138
+assert VOLUME_X == 109
+assert BRIGHTNESS_X != VOLUME_X
 
 
 def add_setting_record(
@@ -258,8 +268,11 @@ def build_resources() -> tuple[list[int], list[int], dict[str, object]]:
             "descriptor": SETTINGS_DESCRIPTOR,
             "brightness_mode": BRIGHTNESS_MODE,
             "brightness_record_count": BRIGHTNESS_LEVELS,
+            "brightness_x": BRIGHTNESS_X,
             "volume_mode": VOLUME_MODE,
             "volume_record_count": VOLUME_LEVELS,
+            "volume_x": VOLUME_X,
+            "y": SETTINGS_Y,
         },
         "poweroff": {
             "descriptor": POWEROFF_DESCRIPTOR,
@@ -331,6 +344,7 @@ void {symbol}_show_brightness(mg_sdk_ui_handle handle, unsigned short level);
 void {symbol}_show_volume(mg_sdk_ui_handle handle, unsigned short level);
 void {symbol}_hide_settings(mg_sdk_ui_handle handle);
 void {symbol}_show_poweroff(mg_sdk_ui_handle handle);
+void {symbol}_hide_poweroff(mg_sdk_ui_handle handle);
 
 #endif
 """
@@ -384,8 +398,13 @@ void {symbol}_show_brightness(mg_sdk_ui_handle handle, unsigned short level)
     if (level >= {BRIGHTNESS_LEVELS}) {{
         level = {BRIGHTNESS_LEVELS - 1};
     }}
-    mg_sdk_ui_b_object_prepare(object, 0x6d, 0xd6, 0);
-    mg_sdk_ui_b_object_show(object, {upper}_BRIGHTNESS_MODE, level, 0x6d, 0xd6);
+    mg_sdk_ui_b_object_prepare(object, {BRIGHTNESS_X}, {SETTINGS_Y}, 0);
+    mg_sdk_ui_b_object_show(
+        object,
+        {upper}_BRIGHTNESS_MODE,
+        level,
+        {BRIGHTNESS_X},
+        {SETTINGS_Y});
 }}
 
 void {symbol}_show_volume(mg_sdk_ui_handle handle, unsigned short level)
@@ -397,8 +416,13 @@ void {symbol}_show_volume(mg_sdk_ui_handle handle, unsigned short level)
     if (level >= {VOLUME_LEVELS}) {{
         level = {VOLUME_LEVELS - 1};
     }}
-    mg_sdk_ui_b_object_prepare(object, 0x8a, 0xd6, 0);
-    mg_sdk_ui_b_object_show(object, {upper}_VOLUME_MODE, level, 0x8a, 0xd6);
+    mg_sdk_ui_b_object_prepare(object, {VOLUME_X}, {SETTINGS_Y}, 0);
+    mg_sdk_ui_b_object_show(
+        object,
+        {upper}_VOLUME_MODE,
+        level,
+        {VOLUME_X},
+        {SETTINGS_Y});
 }}
 
 void {symbol}_hide_settings(mg_sdk_ui_handle handle)
@@ -422,6 +446,14 @@ void {symbol}_show_poweroff(mg_sdk_ui_handle handle)
         {upper}_POWEROFF_RECORD,
         160,
         120);
+}}
+
+void {symbol}_hide_poweroff(mg_sdk_ui_handle handle)
+{{
+    struct mg_sdk_ui_b_object *object = {symbol}_object(handle);
+    if (object != (struct mg_sdk_ui_b_object *)0) {{
+        mg_sdk_ui_b_object_hide(object);
+    }}
 }}
 """
     (output / f"{prefix}_resources.h").write_text(header, encoding="ascii")
