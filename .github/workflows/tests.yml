@@ -48,6 +48,7 @@ jobs:
           python-version: "3.12"
       - uses: msys2/setup-msys2@v2
         with:
+          location: C:\msys64
           update: true
           install: >-
             mingw-w64-x86_64-toolchain
