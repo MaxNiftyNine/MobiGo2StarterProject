@@ -47,6 +47,7 @@ jobs:
         with:
           python-version: "3.12"
       - uses: msys2/setup-msys2@v2
+        id: msys2
         with:
           location: C:\msys64
           update: true
@@ -59,6 +60,8 @@ jobs:
         shell: pwsh
         run: .\scripts\build_and_run.ps1 -NoLaunch
       - name: Run the canonical native-Windows test baseline
+        env:
+          MOBIGO_MSYS2_ROOT: ${{ steps.msys2.outputs.msys2-location }}
         run: python tools/mobigo.py test
 
   documentation:

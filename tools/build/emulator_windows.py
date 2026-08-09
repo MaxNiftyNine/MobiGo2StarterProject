@@ -14,7 +14,12 @@ BUILD = ROOT / "build" / "emulator-host"
 
 
 def find(name: str) -> str:
-    for directory in (Path(r"C:\msys64\mingw64\bin"), Path(r"C:\mingw64\bin")):
+    directories = []
+    configured_root = os.environ.get("MOBIGO_MSYS2_ROOT")
+    if configured_root:
+        directories.append(Path(configured_root) / "mingw64" / "bin")
+    directories.extend((Path(r"C:\msys64\mingw64\bin"), Path(r"C:\mingw64\bin")))
+    for directory in directories:
         candidate = directory / (name + ".exe")
         if candidate.is_file():
             return str(candidate)

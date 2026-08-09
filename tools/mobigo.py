@@ -476,10 +476,14 @@ def doctor(*, as_json: bool = False) -> int:
             check("Windows emulator", executable.is_file(), str(executable))
         else:
             windows_tools = []
-            mingw_directories = (
+            mingw_directories = []
+            configured_root = os.environ.get("MOBIGO_MSYS2_ROOT")
+            if configured_root:
+                mingw_directories.append(Path(configured_root) / "mingw64" / "bin")
+            mingw_directories.extend((
                 Path(r"C:\msys64\mingw64\bin"),
                 Path(r"C:\mingw64\bin"),
-            )
+            ))
             for name in ("cmake", "ctest", "ninja", "g++"):
                 candidates = [directory / f"{name}.exe" for directory in mingw_directories]
                 candidate = next((item for item in candidates if item.is_file()), None)
