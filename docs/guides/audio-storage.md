@@ -25,6 +25,19 @@ python3 tools/assets/build_adpcm36_audio.py \
 Listen to the generated decoded preview and run the corresponding emulator
 check before linking it into a game.
 
+For the simpler physically established PCM8 W-resource path used by Homebrew
+Launcher:
+
+```sh
+python3 tools/assets/build_pcm8_audio.py \
+  input.wav build/audio-pcm --sample-rate 1800
+```
+
+The output stream is unsigned mono PCM8 with the resident/SPU terminator. Use
+the manifest's byte, sample, and word counts when preparing the W record, and
+set the resident `repeat` argument once for looping; do not continuously
+retrigger a playing channel from the frame callback.
+
 ## Music timing
 
 Sequenced M resources rely on the resident SPU beat scheduler. Applications

@@ -126,7 +126,9 @@ def read_u32(words: list[int], offset: int) -> int:
     return words[offset] | (words[offset + 1] << 16)
 
 
-def validate_bundle(bundle: list[int], primary: list[int], glyph_count: int) -> None:
+def validate_bundle(
+    bundle: list[int], primary: list[int], glyph_count: int, record_count: int
+) -> None:
     if read_u32(bundle, 0) != 0x80000002:
         raise ValueError("font bundle is not version 2")
     if bundle[0x0A] != glyph_count:
@@ -138,11 +140,11 @@ def validate_bundle(bundle: list[int], primary: list[int], glyph_count: int) -> 
     if read_u32(bundle, modes) != 1:
         raise ValueError("font descriptor must expose exactly one mode")
     records = HEADER_WORDS + read_u32(bundle, modes + 2)
-    if read_u32(bundle, records) != FONT_RECORD_COUNT:
+    if read_u32(bundle, records) != record_count:
         raise ValueError("font record count mismatch")
     if len(primary) < PALETTE_SOURCE_WORDS * 2:
         raise ValueError("font primary image is missing palette windows")
-    for code in range(FONT_RECORD_COUNT):
+    for code in range(record_count):
         record = records + 2 + code * 14
         component = HEADER_WORDS + read_u32(bundle, record + 10)
         slot = HEADER_WORDS + read_u32(bundle, record + 12)
@@ -152,7 +154,11 @@ def validate_bundle(bundle: list[int], primary: list[int], glyph_count: int) -> 
             raise ValueError(f"font record {code} runtime slot is not clear")
 
 
-def build_resources() -> tuple[list[int], list[int], dict[str, object], dict[str, Canvas]]:
+def build_resources(
+    record_count: int = FONT_RECORD_COUNT,
+) -> tuple[list[int], list[int], dict[str, object], dict[str, Canvas]]:
+    if record_count < 64 or record_count > FONT_RECORD_COUNT:
+        raise ValueError("record_count must be in range 64..128")
     glyphs = {key: draw_glyph(key) for key in [" ", *sorted(PATTERNS)]}
 
     # Dynamic slots do not reload the global hardware palette. These palette
@@ -189,8 +195,8 @@ def build_resources() -> tuple[list[int], list[int], dict[str, object], dict[str
     graph.label("font_modes")
     mode_root = graph.add(*u32_words(1), 0, 0)
     graph.label("font_records")
-    records = graph.add(*u32_words(FONT_RECORD_COUNT))
-    graph.reserve(FONT_RECORD_COUNT * 14)
+    records = graph.add(*u32_words(record_count))
+    graph.reserve(record_count * 14)
 
     component_labels: dict[str, str] = {}
     for index, (key, canvas) in enumerate(glyphs.items()):
@@ -215,7 +221,7 @@ def build_resources() -> tuple[list[int], list[int], dict[str, object], dict[str
         graph.set_u32(lookup_entry + 2, PRIMARY_TAG + image_offsets[key])
 
     runtime_labels: list[str] = []
-    for code in range(FONT_RECORD_COUNT):
+    for code in range(record_count):
         label = f"glyph_record_{code:03d}_slot"
         runtime_labels.append(label)
         graph.label(label)
@@ -238,7 +244,7 @@ def build_resources() -> tuple[list[int], list[int], dict[str, object], dict[str
     add_family_b_descriptor(graph, descriptor_offset, "font_modes")
     graph.set_relative(mode_root + 2, "font_records")
 
-    for code in range(FONT_RECORD_COUNT):
+    for code in range(record_count):
         key = glyph_key(code)
         offset = records + 2 + code * 14
         graph.words[offset : offset + 10] = [
@@ -249,7 +255,7 @@ def build_resources() -> tuple[list[int], list[int], dict[str, object], dict[str
         graph.set_relative(offset + 10, component_labels[key])
         graph.set_relative(offset + 12, runtime_labels[code])
 
-    validate_bundle(graph.words, primary, len(glyphs))
+    validate_bundle(graph.words, primary, len(glyphs), record_count)
     manifest: dict[str, object] = {
         "schema": 1,
         "provenance": "Clean-room graph and original 5x7 glyph artwork; no retail font bytes are consumed.",
@@ -258,7 +264,7 @@ def build_resources() -> tuple[list[int], list[int], dict[str, object], dict[str
         "primary_word_count": len(primary),
         "descriptor": FONT_DESCRIPTOR,
         "mode": FONT_MODE,
-        "record_count": FONT_RECORD_COUNT,
+        "record_count": record_count,
         "cell_width": FONT_CELL_WIDTH,
         "cell_height": FONT_CELL_HEIGHT,
         "glyph_width": FONT_GLYPH_WIDTH,
@@ -290,7 +296,13 @@ def build_resources() -> tuple[list[int], list[int], dict[str, object], dict[str
     return graph.words, primary, manifest, glyphs
 
 
-def write_c_output(output: Path, prefix: str, bundle: list[int], primary: list[int]) -> None:
+def write_c_output(
+    output: Path,
+    prefix: str,
+    bundle: list[int],
+    primary: list[int],
+    record_count: int,
+) -> None:
     symbol = c_identifier(prefix)
     upper = symbol.upper()
     guard = f"{upper}_RESOURCES_H"
@@ -302,7 +314,7 @@ def write_c_output(output: Path, prefix: str, bundle: list[int], primary: list[i
 enum {{
     {upper}_DESCRIPTOR = {FONT_DESCRIPTOR},
     {upper}_MODE = {FONT_MODE},
-    {upper}_RECORD_COUNT = {FONT_RECORD_COUNT},
+    {upper}_RECORD_COUNT = {record_count},
     {upper}_CELL_WIDTH = {FONT_CELL_WIDTH},
     {upper}_CELL_HEIGHT = {FONT_CELL_HEIGHT},
     {upper}_GLYPH_WIDTH = {FONT_GLYPH_WIDTH},
@@ -370,6 +382,9 @@ mg_sdk_ui_handle {symbol}_create_glyph(
 {{
     mg_sdk_ui_handle handle;
     unsigned short *object;
+    if (character >= (mg_sdk_u16)'a' && character <= (mg_sdk_u16)'z') {{
+        character = (mg_sdk_u16)(character - 32U);
+    }}
     if (character >= {upper}_RECORD_COUNT) {{
         character = (mg_sdk_u16)'?';
     }}
@@ -457,8 +472,10 @@ void {symbol}_destroy_text(
     (output / f"{prefix}_resources.c").write_text(source)
 
 
-def write_outputs(output: Path, prefix: str) -> dict[str, object]:
-    bundle, primary, manifest, glyphs = build_resources()
+def write_outputs(
+    output: Path, prefix: str, record_count: int = FONT_RECORD_COUNT
+) -> dict[str, object]:
+    bundle, primary, manifest, glyphs = build_resources(record_count)
     output.mkdir(parents=True, exist_ok=True)
     previews = output / "previews"
     previews.mkdir(exist_ok=True)
@@ -467,7 +484,7 @@ def write_outputs(output: Path, prefix: str) -> dict[str, object]:
     for key, canvas in glyphs.items():
         safe = "space" if key == " " else f"u{ord(key):04x}"
         (previews / f"{safe}.pgm").write_bytes(pgm_bytes(canvas))
-    write_c_output(output, prefix, bundle, primary)
+    write_c_output(output, prefix, bundle, primary, record_count)
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     return manifest
 
@@ -476,8 +493,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("--prefix", default="mobigo_clean_font")
+    parser.add_argument(
+        "--record-count",
+        type=int,
+        default=FONT_RECORD_COUNT,
+        help="record table size (64..128); 96 covers printable ASCII",
+    )
     args = parser.parse_args()
-    manifest = write_outputs(args.output, args.prefix)
+    manifest = write_outputs(args.output, args.prefix, args.record_count)
     print(
         f"PASS font bundle_words={manifest['bundle_word_count']} "
         f"primary_words={manifest['primary_word_count']} output={args.output}"

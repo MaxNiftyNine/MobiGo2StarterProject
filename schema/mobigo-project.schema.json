@@ -38,11 +38,37 @@
       "uniqueItems": true,
       "default": []
     },
+    "menu_icon": {
+      "type": ["string", "null"],
+      "description": "Project-relative P6 PPM icon; magenta pixels become transparent."
+    },
     "menu_tile": {
       "type": ["string", "null"]
     },
     "palette": {
       "type": ["string", "null"]
+    },
+    "homebrew": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 17
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 21
+        },
+        "author": {
+          "type": "string",
+          "maxLength": 9
+        },
+        "icon": {
+          "type": "string",
+          "enum": ["default", "game", "puzzle", "media", "tool", "system"]
+        }
+      }
     }
   }
 }

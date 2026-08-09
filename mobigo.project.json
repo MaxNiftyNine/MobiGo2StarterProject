@@ -5,5 +5,9 @@
   "target": "system",
   "system_ui": true,
   "clean_font": false,
-  "extra_sources": []
+  "extra_sources": [],
+  "menu_icon": "assets/menu_icon.ppm",
+  "homebrew": {
+    "title": "My Homebrew"
+  }
 }

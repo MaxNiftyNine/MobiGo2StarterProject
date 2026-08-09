@@ -17,8 +17,16 @@ downloaded and verified. Homebrew Manager performs that backup-first flow.
 
 Controls:
 
-- Up/Down: select an application
+- Left/Right: select the previous or next application
+- Touch a side icon: select it
+- Touch the center icon: launch it
 - Primary/Enter: launch it
-- Left/Right: previous/next page
 - Volume, Brightness, and Off retain standard system behavior
 
+The current launcher shows only names and a three-item horizontal carousel over
+a fast light-blue wave background. It reads every icon directly from the
+palette and 64×104 menu-art fields baked into that `.MBA`; no built-in launcher
+icons are used. It accepts `HB02` and legacy `HB01` catalogs and loops the
+checked-in low-rate PCM8 menu music. Starter builds bake menu artwork into the
+MBA and emit a same-stem `.HBI` companion carrying its display title. The
+special `/HB/System.MBA` recovery entry is text-only by design.

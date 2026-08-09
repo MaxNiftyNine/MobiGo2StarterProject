@@ -59,8 +59,12 @@ checks in a compiler-ready asset for licensing or reproducibility reasons.
 `mobigo.project.json` is the canonical project manifest. It references
 `schema/mobigo-project.schema.json` and declares the output name, entry source,
 target (`system` or legacy `game1`), standard UI/font choices, extra sources,
-and optional launcher art. All paths are project-relative; absolute and escaping
-paths are rejected.
+optional baked launcher art, and the Homebrew Launcher display title. A
+successful build emits both the `.MBA` and its same-stem `.HBI` title companion.
+The launcher's icon is always decoded from the MBA header generated from
+`menu_icon` (or the advanced raw `menu_tile`/`palette` fields), never from a
+catalog icon ID. All paths are project-relative;
+absolute and escaping paths are rejected.
 
 See the [unified CLI reference](../tools/mobigo-cli.md) for every field.
 

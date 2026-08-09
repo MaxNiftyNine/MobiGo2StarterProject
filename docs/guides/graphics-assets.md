@@ -48,10 +48,19 @@ animations, and audio resources. Examples:
 python3 tools/assets/build_system_ui_bundle.py build/system-ui
 python3 tools/assets/build_clean_font_bundle.py build/font
 python3 tools/assets/build_family_a_background_bundle.py build/background
+python3 tools/assets/build_menu_art.py build/menu-icon \
+  --source assets/menu_icon.ppm
 ```
 
 Generated outputs normally include C, a header, binary data, and a manifest.
 Link the generated C source through the project build.
+
+`build_menu_art.py` is the Starter-specific exception: it fits a P6 PPM source
+inside 64×104, treats `#ff00ff` as transparent, quantizes it to 15 visible
+colors, and writes the 32-byte RGB555 palette plus 3,328-byte packed menu tile.
+The normal `menu_icon` project field runs this step automatically. Those bytes
+are baked into the MBA header, which is also where Homebrew Launcher reads the
+application's carousel icon.
 
 ## Asset ownership
 

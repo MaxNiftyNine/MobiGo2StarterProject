@@ -45,6 +45,8 @@ class ProjectCliTests(unittest.TestCase):
     def test_checked_in_project_uses_system_target(self) -> None:
         raw = json.loads((ROOT / "mobigo.project.json").read_text(encoding="utf-8"))
         self.assertEqual(raw["target"], "system")
+        self.assertEqual(raw["homebrew"]["title"], "My Homebrew")
+        self.assertEqual(raw["menu_icon"], "assets/menu_icon.ppm")
         self.assertTrue((ROOT / raw["$schema"]).is_file())
 
     def test_target_aliases_never_make_g1_the_default(self) -> None:
@@ -52,7 +54,16 @@ class ProjectCliTests(unittest.TestCase):
         project = cli.load_project()
         self.assertEqual(project.target, "system")
         self.assertEqual(project.slot, "SY")
+        self.assertEqual(project.menu_icon, ROOT / "assets/menu_icon.ppm")
         self.assertEqual(cli.TARGETS["game1"], "G1")
+        self.assertEqual(project.homebrew["schema"], 1)
+
+    def test_homebrew_metadata_rejects_target_incompatible_text(self) -> None:
+        cli = load_cli()
+        with self.assertRaisesRegex(ValueError, "ASCII"):
+            cli.normalize_homebrew({"title": "Café"}, fallback_title="App")
+        with self.assertRaisesRegex(ValueError, "at most 17"):
+            cli.normalize_homebrew({"title": "X" * 18}, fallback_title="App")
 
     def test_project_paths_remain_inside_repository(self) -> None:
         cli = load_cli()

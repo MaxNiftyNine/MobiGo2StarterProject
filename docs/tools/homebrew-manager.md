@@ -9,6 +9,13 @@ dragging them into the window or selecting them with the file picker; existing
 applications can be downloaded or removed. Application names retain the
 `.MBA` suffix shown by the launcher.
 
+When a same-stem `.HBI` file accompanies an upload, the Manager imports its
+title into `/HB/INDEX.HB`. The launcher's picture comes from the palette and
+menu-art bytes already embedded in the `.MBA`, not from Manager metadata.
+Titles are preserved across rename, delete, refresh, and launcher updates. An
+older launcher can be updated without overwriting `/HB/System.MBA`; that file
+always remains the original recovery menu.
+
 On first use, the manager offers a guarded SY installation:
 
 1. discover the device's actual SY entry rather than guessing a regional name;

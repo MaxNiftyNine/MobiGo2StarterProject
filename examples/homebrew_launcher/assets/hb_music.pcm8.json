@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "provenance": "Unsigned mono PCM8 conversion for the physically verified W-resource path.",
+  "source": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "sample_width": 2,
+    "sample_count": 1606531
+  },
+  "output": {
+    "sample_rate": 1800,
+    "sample_count": 60245,
+    "byte_count": 60250,
+    "word_count": 30125
+  }
+}

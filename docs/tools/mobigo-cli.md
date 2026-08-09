@@ -17,7 +17,11 @@ editor completion and validation:
   "target": "system",
   "system_ui": true,
   "clean_font": false,
-  "extra_sources": []
+  "extra_sources": [],
+  "homebrew": {
+    "title": "My Homebrew"
+  },
+  "menu_icon": "assets/menu_icon.ppm"
 }
 ```
 
@@ -29,8 +33,10 @@ editor completion and validation:
 | `system_ui` | generate/link the clean standard UI resources |
 | `clean_font` | generate/link the clean ASCII font |
 | `extra_sources` | project-relative C or u'nSP assembly sources |
-| `menu_tile` | optional project-relative custom launcher tile |
-| `palette` | optional project-relative custom launcher palette |
+| `menu_icon` | project-relative P6 PPM image; magenta is transparent; fitted and baked automatically |
+| `menu_tile` | advanced raw 3,328-byte indexed launcher tile alternative |
+| `palette` | advanced raw 32-byte RGB555 launcher palette alternative |
+| `homebrew` | launcher display title written to the companion `.HBI` |
 
 Unknown fields, absolute paths, paths escaping the project root, invalid names,
 and missing configured files are rejected.
@@ -57,6 +63,15 @@ python3 tools/mobigo.py build --nand
 The first command builds the configured MBA. `--nand` also assembles the source
 NAND when needed and writes a verified edited copy to
 `build/nand.edited.bin`.
+
+Every build also writes `build/<name>.HBI`. Keep that small JSON companion next
+to the `.MBA` when sharing it. Homebrew Manager imports its title into the
+launcher catalog. The displayed icon comes from `menu_icon`, which the build
+automatically fits to 64×104, quantizes to 15 colors plus transparency, and
+writes into the executable's standard menu-art header fields. Replace
+`assets/menu_icon.ppm` with any P6 PPM image to choose the icon. Use solid
+magenta (`#ff00ff`) for transparent pixels.
+The `.MBA` remains the executable and keeps its filename.
 
 The low-level builder keeps a content-addressed cache of repository SDK
 objects under `build/cache/sdk-objects-v1`. Application, extra, and generated

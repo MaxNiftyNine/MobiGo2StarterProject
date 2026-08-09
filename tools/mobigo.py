@@ -28,6 +28,7 @@ if str(TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(TOOLS_DIR))
 
 from mba_profile import PROFILES as MBA_PROFILES, require_mba_profile
+from homebrew_metadata import normalize as normalize_homebrew, write as write_hbi
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -109,8 +110,10 @@ class Project:
     system_ui: bool
     clean_font: bool
     extra_sources: tuple[Path, ...]
+    menu_icon: Path | None
     menu_tile: Path | None
     palette: Path | None
+    homebrew: dict[str, object]
 
     @property
     def slot(self) -> str:
@@ -134,7 +137,8 @@ def load_project(target_override: str | None = None) -> Project:
     allowed = {
         "$schema",
         "name", "source", "target", "system_ui", "clean_font",
-        "extra_sources", "menu_tile", "palette",
+        "extra_sources", "menu_icon", "menu_tile", "palette",
+        "homebrew",
     }
     unknown = sorted(set(raw) - allowed)
     if unknown:
@@ -178,14 +182,22 @@ def load_project(target_override: str | None = None) -> Project:
         extra_sources=tuple(
             resolve_project_path(value, "extra_sources") for value in extra_values
         ),
+        menu_icon=optional_path("menu_icon"),
         menu_tile=optional_path("menu_tile"),
         palette=optional_path("palette"),
+        homebrew=normalize_homebrew(raw.get("homebrew"), fallback_title=name),
     )
     required = [project.source, *project.extra_sources]
+    if project.menu_icon is not None:
+        required.append(project.menu_icon)
     if project.menu_tile is not None:
         required.append(project.menu_tile)
     if project.palette is not None:
         required.append(project.palette)
+    if project.menu_icon is not None and (
+        project.menu_tile is not None or project.palette is not None
+    ):
+        fail("menu_icon cannot be combined with raw menu_tile or palette")
     missing = [path for path in required if not path.is_file()]
     if missing:
         fail(f"configured file does not exist: {missing[0]}")
@@ -200,6 +212,17 @@ def ensure_nand() -> Path:
 
 def build_project(project: Project, *, install_nand: bool = False) -> Path:
     BUILD.mkdir(parents=True, exist_ok=True)
+    menu_tile = project.menu_tile
+    palette = project.palette
+    if project.menu_icon is not None:
+        icon_output = BUILD / "generated-menu-icon"
+        run(python_command(
+            ROOT / "tools" / "assets" / "build_menu_art.py",
+            icon_output,
+            "--source", project.menu_icon,
+        ))
+        menu_tile = icon_output / "menu_tile.bin"
+        palette = icon_output / "menu_palette.bin"
     command = python_command(
         ROOT / "tools" / "build" / "build_sdk_app.py",
         project.source,
@@ -213,10 +236,10 @@ def build_project(project: Project, *, install_nand: bool = False) -> Path:
         command.append("--with-clean-font")
     for source in project.extra_sources:
         command.extend(("--extra-source", str(source)))
-    if project.menu_tile is not None:
-        command.extend(("--menu-tile", str(project.menu_tile)))
-    if project.palette is not None:
-        command.extend(("--palette", str(project.palette)))
+    if menu_tile is not None:
+        command.extend(("--menu-tile", str(menu_tile)))
+    if palette is not None:
+        command.extend(("--palette", str(palette)))
     if install_nand:
         command.extend(
             (
@@ -227,6 +250,7 @@ def build_project(project: Project, *, install_nand: bool = False) -> Path:
     run(command)
     if not project.mba.is_file():
         fail(f"builder did not create the expected MBA: {project.mba}")
+    write_hbi(BUILD / f"{project.name}.HBI", project.homebrew)
     return project.mba
 
 
