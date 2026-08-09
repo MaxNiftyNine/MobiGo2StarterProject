@@ -9,7 +9,7 @@ The retail application API does not expose verified directory enumeration.
 Homebrew Manager therefore writes `/HB/INDEX.HB` as a compact catalog whenever
 an application is added, renamed, or removed. The launcher validates that
 catalog before displaying up to 16 applications. The original system menu is
-listed as `SystemMenu.MBA` after a manager installation.
+listed as `System.MBA` after a manager installation.
 
 Build it from source:
 

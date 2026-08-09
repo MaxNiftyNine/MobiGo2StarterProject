@@ -16,12 +16,12 @@ is the authoritative implementation-status ledger.
 
 ## Storage
 
-- Reads and updates to packed existing files have stronger evidence than
-  creating a new directory entry.
-- Fresh-file publication is experimental: allocation may succeed without the
-  pathname being rediscovered after close or reboot.
-- Homebrew Manager therefore refuses to replace SY unless `/HB` is observable
-  after creation and its remote backup and catalog both read back exactly.
+- The Manager's fresh-file publication, `/HB` creation/rediscovery, and empty
+  directory removal are verified on one US retail unit. Other firmware regions
+  and hardware revisions remain less certain than packed existing-file access.
+- Homebrew Manager refuses to replace SY unless `/HB` is observable after
+  creation and its recovery file and catalog both read back exactly. Complete
+  uninstall restores and verifies the original SY before deleting `/HB`.
 - All destructive tests belong on disposable copied NAND. Keep an untouched
   source image and physical-console recovery backup.
 

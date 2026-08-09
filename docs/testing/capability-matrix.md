@@ -28,16 +28,17 @@ into an official platform guarantee.
 | Low-level framebuffer/watchdog/DMA | Target-only API and target build | Hardware accuracy/watchdog tests plus sample use | Core inherited framebuffer/watchdog/DMA path observed | Supported for deliberate low-level ports |
 | Raw matrix helpers | Target-only API and target build | Matrix model/scripted checks | Matrix cells based on physical/firmware evidence | Prefer resident keys |
 | Complete sample projects | Reproducible SY/G1 target builds | Color Cycle, movie player, and Celeste boot through real firmware; role, payload progress, input, changing frames, Off, and transient NAND are checked | Prior project-specific runs exist; current automated gate is emulator-only | Run `make sample-emulator-check` |
-| Homebrew Launcher | SY target build and catalog codec tests | Catalog, wave UI, multiple `.MBA` handoffs, and transient NAND invariance checked | Launcher installation not yet performed by this release | Run `make launcher-emulator-check`; keep physical SY untouched until `/HB` publication is proven |
+| Homebrew Launcher | SY target build and catalog codec tests | Catalog, wave UI, multiple `.MBA` handoffs, and transient NAND invariance checked | Backup-first installation, catalog, recovery launch entry, and restore/remove transaction verified on a US unit | Run `make launcher-emulator-check`; install only through the Manager's verified transaction |
 | Emulator accurate mode | Configuration tests | Real-time pacing plus diagnostic history; globally separate D-pad/motion mapping | Comparison mode, not proof of all silicon | Use for release comparison |
 | Emulator fast mode | Configuration tests | Uncapped run and reduced history bookkeeping with identical guest input/peripherals | N/A | Use for iteration |
-| Homebrew Manager | Transaction/rollback, catalog, mounted-filesystem, and mailbox tests; packaged on three hosts | Disposable filesystem protocol checks | Existing-file mailbox operations detected; fresh `/HB` publication remains unverified | Hardware preview; abort before SY unless `/HB` is rediscovered |
+| Homebrew Manager | Transaction/rollback, catalog, mounted-filesystem, and mailbox tests on Windows/macOS/Linux | Disposable filesystem protocol checks | `/HB` publication, `.MBA` lifecycle, full-tree access, D-mode, install, rollback ordering, restore, and directory removal verified on a US unit | Python-source GUI; preserve a separate recovery image and require byte-for-byte read-back |
 | USB mailbox model | USB tests/tooling | Enumeration, transport, firmware-mediated read/write and read-back | Manager backends cover macOS, Windows, and Linux; legacy CLI covers macOS/Windows | Advanced; preserve recovery data |
 | Ghidra MBA/GAM loader | Extension build/import evidence | N/A | N/A | Supported analysis tool |
 
 ## Open evidence boundaries
 
-- Fresh-file directory publication and complete NAND/FTL behavior.
+- Fresh-file and directory behavior across untested firmware regions/revisions,
+  plus complete NAND/FTL behavior outside the verified mailbox workflow.
 - Exact analog audio output, envelope, and ADPCM36 edge behavior.
 - Complete row-zoom/transform PPU behavior and TFT electrical fields.
 - Every timer/counter selector, rare descriptor field, and secondary resource
