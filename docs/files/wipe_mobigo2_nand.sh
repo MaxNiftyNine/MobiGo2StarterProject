@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DEV="${1:-/dev/sg2}"
+
+if [[ $EUID -ne 0 ]]; then exec sudo "$0" "$@"; fi
+for c in sg_inq sg_raw base64 cmp dd tr; do command -v "$c" >/dev/null || { echo "Missing: $c" >&2; exit 1; }; done
+
+inq=$(sg_inq "$DEV" 2>&1 || true)
+printf '%s\n' "$inq"
+if ! grep -q 'GENPLUS' <<<"$inq" || ! grep -q 'USB-MSDC DISK A' <<<"$inq"; then
+  echo "REFUSING: $DEV is not GENPLUS / USB-MSDC DISK A" >&2
+  exit 2
+fi
+
+tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
+cat <<'B64' | base64 -d >"$tmp/enable.bin"
+CZM/ABnTQXgRk3p4RKIZ03p4EZN7eESiGdN7eBGTQHgJs/v/GdNAeBGTeXhEohnTeXiQmgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+B64
+cat <<'B64' | base64 -d >"$tmp/disable.bin"
+EZN5eAmz+/8Z03l4kJoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+B64
+
+# Enable Generalplus vendor commands and preload SRAM helpers.
+sg_raw "$DEV" ff ee 00 00 00 00 00 00 00 00 01 00 00 00 47 50
+sg_raw --send=512 --infile="$tmp/enable.bin"  "$DEV" ff 2a 00 00 30 00 03 00 01 00 00 00 00 00 47 50
+sg_raw --send=512 --infile="$tmp/disable.bin" "$DEV" ff 2a 00 00 32 00 03 00 01 00 00 00 00 00 47 50
+
+# ROM-observed NAND board setup: P_Addr_Ctrl + GPIO-D2 high.
+sg_raw "$DEV" ff fe 00 00 30 00 00 00 00 00 00 00 00 00 47 50
+
+erase() {
+  local b=$1 hi lo
+  printf -v hi '%02x' $(((b >> 8) & 255)); printf -v lo '%02x' $((b & 255))
+  printf '\rErasing %4d/1023' "$b"
+  sg_raw "$DEV" ff 20 00 00 "$hi" "$lo" 01 00 00 00 00 00 00 00 47 50 >/dev/null
+}
+for ((b=1;b<1024;b++)); do erase "$b"; done
+erase 0; echo
+
+# Restore GPIO-D2 low.
+sg_raw "$DEV" ff fe 00 00 32 00 00 00 00 00 00 00 00 00 47 50 >/dev/null
+
+# Verify first 512 bytes of every 128 KiB erase block.
+dd if=/dev/zero bs=512 count=1 status=none | tr '\000' '\377' >"$tmp/ff"
+for ((b=0;b<1024;b++)); do
+  lba=$((b*256))
+  b2=$(printf '%02x' $(((lba>>24)&255))); b3=$(printf '%02x' $(((lba>>16)&255)))
+  b4=$(printf '%02x' $(((lba>>8)&255)));  b5=$(printf '%02x' $((lba&255)))
+  sg_raw --readonly --request=512 --outfile="$tmp/r" "$DEV" ff 28 "$b2" "$b3" "$b4" "$b5" 01 00 01 00 00 00 00 00 47 50 >/dev/null
+  cmp -s "$tmp/r" "$tmp/ff" || { echo; echo "VERIFY FAILED at erase block $b" >&2; exit 3; }
+  printf '\rVerified %4d/1023' "$b"
+done
+echo
+echo 'PASS: all 1024 NAND erase blocks sampled as 0xFF.'
+echo 'Power-cycle + re-enter recovery and rerun a read if you need persistence proof; SPI may restore block 0.'
