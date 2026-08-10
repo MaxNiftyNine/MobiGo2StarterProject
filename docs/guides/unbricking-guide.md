@@ -5,7 +5,7 @@ you need a 3.3v source and a linux machine/vm with usb and a windows machine wit
 
 so heres what to do if you brick your mobigo 2 (dont ask me how i know)
 
-1. open your mobigo
+open your mobigo
 Theres 8 screw in the back, 4 of them are under caps, 4 are under the batteries.
 i recommend to not open it too much because its really easy to break stuff. (dont ask me how i know)
 just like have the back case *slightly* off (if you pull to fast the speaker wire will break) enough that you can take out the plastic panel with the volume button and covers the usb port. You need to partaly close it again to get the batteries back in.
