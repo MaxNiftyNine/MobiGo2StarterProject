@@ -120,3 +120,5 @@ nav:
       - Known limitations: reference/known-limitations.md
       - Glossary: reference/glossary.md
       - Licensing and safety: reference/licensing-safety.md
+  - Unbrick Guide:
+        - Unbrick guide: unbrick-guide.md
