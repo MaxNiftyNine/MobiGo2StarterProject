@@ -17,11 +17,11 @@ and then hold the 3.3v wire touching this side of this resistor (on the left of 
 
 while you have both wires connected. press on. if it shows a white screen then it worked, if it shows anything else like the mobigo logo then probably not.
 
-![Resistor C136](images/resistor.jpg)
+![Resistor C136](../images/resistor.jpg)
 
 Alternativly theres also a pad but its harder to reach
 
-![Recovery Pad](images/pad.jpg)
+![Recovery Pad](../images/pad.jpg)
 
 Now on the linux machine open terminal and type
 
@@ -35,7 +35,7 @@ you should see something like
 ```drwxr-xr-x 3 root root 0 Aug  9 18:13 sg2```
 for me it shows "sg2" but for you that can be anything, for the next command replace "sg2" with what you have there instead.
 
-[download this script](files/wipe_mobigo2_nand.sh)
+[download this script](../files/wipe_mobigo2_nand.sh)
 run
 ```
 chmod +x wipe_mobigo2_nand.sh
