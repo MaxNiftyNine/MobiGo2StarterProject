@@ -308,22 +308,6 @@ def host_emulator(*, run_tests: bool = False) -> Path:
     return executable
 
 
-def install_nand_copy(project: Project, mba: Path) -> Path:
-    source_nand = ensure_nand()
-    output = BUILD / "nand.edited.bin"
-    run(
-        python_command(
-            ROOT / "tools" / "nand" / "install_mba.py",
-            source_nand,
-            mba,
-            output,
-            "--slot", project.slot,
-            "--editor", ROOT / "tools" / "nand" / "nandfs.py",
-        )
-    )
-    return output
-
-
 def validate_project_mba(project: Project, mba: Path) -> None:
     """Reject an invalid or cross-target artifact before emulation."""
 
@@ -353,29 +337,24 @@ def run_emulator(
         "--nand", str(nand),
     ]
 
-    # New emulators can select the correct application role from the MBA header,
-    # apply it only in memory, and open the window on the observed entry event.
-    # The fallback keeps older distributed Windows builds usable without ever
-    # cross-installing a system MBA into G1.
-    if emulator_supports(emulator, "--mba-target"):
-        command.extend(
-            (
-                "--mba", str(mba),
-                "--mba-target", "auto",
-                "--open-window-on-mba",
-                "--mode", mode,
-            )
+    required_options = ("--mba", "--mba-target", "--open-window-on-mba")
+    missing = [option for option in required_options
+               if not emulator_supports(emulator, option)]
+    if missing:
+        fail(
+            "emulator does not support transient MBA launching (missing "
+            + ", ".join(missing)
+            + "); update the emulator instead of creating an edited NAND"
         )
-    else:
-        print(
-            "NOTE emulator predates transient role-aware MBA loading; "
-            "creating a verified copied NAND instead."
+    command.extend(
+        (
+            "--mba", str(mba),
+            "--mba-target", "auto",
+            "--open-window-on-mba",
         )
-        edited = install_nand_copy(project, mba)
-        command[command.index(str(nand))] = str(edited)
-        command.extend(("--open-window-at", "220000000"))
-        if mode == "fast":
-            command.extend(("--no-cap", "--max-present-hz", "30"))
+    )
+    if mode == "fast":
+        command.extend(("--no-cap", "--max-present-hz", "30"))
     if audio:
         command.append("--audio")
     run(command)
@@ -527,7 +506,8 @@ def doctor(*, as_json: bool = False) -> int:
         if executable.is_file():
             current_options = (
                 emulator_supports(executable, "--mba-target")
-                and emulator_supports(executable, "--mode")
+                and emulator_supports(executable, "--open-window-on-mba")
+                and emulator_supports(executable, "--speed-percent")
                 and emulator_supports(executable, "--no-window")
             )
             check(

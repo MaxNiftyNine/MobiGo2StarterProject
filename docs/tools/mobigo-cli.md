@@ -97,13 +97,12 @@ python3 tools/mobigo.py run --mode accurate
 python3 tools/mobigo.py run --mode fast --no-audio
 ```
 
-Current emulator builds use role-aware transient MBA loading and open the window
-when the selected application is reached. Older distributed builds fall back
-to a copied NAND without cross-installing SY into G1.
+The current emulator uses role-aware transient MBA loading and opens the window
+when the selected application is reached. An outdated emulator is rejected;
+the CLI never creates a copied NAND as a launch fallback.
 
-- `accurate` preserves real-time pacing and recent diagnostic history unless
-  explicitly changed.
-- `fast` removes the real-time cap and unnecessary history bookkeeping. It
+- `accurate` preserves real-time pacing.
+- `fast` removes the real-time cap and limits host presentation overhead. It
   does not change guest input mappings or peripheral execution.
 
 In both modes, arrows drive only the D-pad; Home, End, Page Up, and Page Down

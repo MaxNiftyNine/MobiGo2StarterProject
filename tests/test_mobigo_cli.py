@@ -162,6 +162,33 @@ class ProjectCliTests(unittest.TestCase):
             finally:
                 cli.ROOT = original_root
 
+    def test_run_uses_emulator_overlay_without_copied_nand_fallback(self) -> None:
+        cli = load_cli()
+        project = cli.load_project()
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_path = Path(temporary)
+            mba = temporary_path / "application.MBA"
+            mba.write_bytes(self.profile_bytes(cli.MBA_PROFILES["SY"]))
+            emulator = temporary_path / "mobigo2_emu"
+            emulator.write_bytes(b"")
+            nand = temporary_path / "nand.bin"
+            nand.write_bytes(b"")
+            with (
+                mock.patch.object(cli, "host_emulator", return_value=emulator),
+                mock.patch.object(cli, "ensure_nand", return_value=nand),
+                mock.patch.object(cli, "emulator_supports", return_value=True),
+                mock.patch.object(cli, "run") as run,
+            ):
+                cli.run_emulator(project, mba, mode="fast", audio=False)
+
+            command = run.call_args.args[0]
+            self.assertIn("--mba", command)
+            self.assertIn("--mba-target", command)
+            self.assertIn("--open-window-on-mba", command)
+            self.assertIn("--no-cap", command)
+            self.assertNotIn("--mode", command)
+            self.assertNotIn("nand.edited.bin", " ".join(map(str, command)))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -34,8 +34,8 @@ python3 tools/mobigo.py run
 ```
 
 Current Emulator2 builds apply the MBA in memory according to its role and open
-the window when that application is reached. If the installed emulator is older,
-the CLI creates and uses a verified copied NAND instead. Use
+the window when that application is reached. The CLI requires that built-in
+launch path and reports an actionable error for an outdated emulator. Use
 `python3 tools/mobigo.py build --nand` when testing persistent filesystem
 installation itself.
 

@@ -23,7 +23,7 @@ diagnostic history, timing observation, and release smoke tests.
 ### Fast mode
 
 - disables the real-time cap by default;
-- disables recent-history tracking unless logging/tracing needs it;
+- limits host presentation overhead during uncapped execution;
 - does not skip CPU instructions or disable peripheral state advancement.
 
 Both modes map arrows only to the D-pad. Home, End, Page Up, and Page Down are

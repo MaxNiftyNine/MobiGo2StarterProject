@@ -110,9 +110,9 @@ python3 tools/nand/assemble_nand.py
 ```
 
 The result is `vendor/firmware/nand.us-stitched.bin`. It is ignored by Git. Run
-normally uses an in-memory overlay. `build --nand` and an older-emulator
-fallback create a separate edited image under `build/`; no workflow modifies
-the source image.
+uses the emulator's in-memory overlay. It never creates an edited NAND as a
+compatibility fallback. `build --nand` remains an explicit persistent-filesystem
+validation tool; no workflow modifies the source image.
 
 ## Documentation environment
 
